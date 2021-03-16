@@ -18,6 +18,10 @@
   },
   "homepage": "https://github.com/TheCoaxial/Final-Project#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "sequelize": "^6.5.1"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
   }
 }
