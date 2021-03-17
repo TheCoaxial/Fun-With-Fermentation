@@ -2,10 +2,11 @@
   "name": "final-project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd brew-view && npm run start"
+    "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
     "sequelize": "^6.5.1"
   },
   "devDependencies": {
+    "concurrently": "^6.0.0",
+    "nodemon": "^2.0.7",
     "sequelize-cli": "^6.2.0"
   }
 }
