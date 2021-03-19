@@ -8,6 +8,9 @@ const db = require("./models");
 
 const PORT = process.env.EXPRESS_PORT || 3001;
 
+const apiRoutes = require("./controller/api-routes");
+apiRoutes(app);
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

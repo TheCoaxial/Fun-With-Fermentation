@@ -35,6 +35,13 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
+    User.associate = (models) => {
+
+        User.hasMany(models.Brew);
+        User.belongsToMany(models.Brew, { through: 'Favorites' });
+
+    }
+
     return User;
 
 };

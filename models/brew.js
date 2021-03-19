@@ -8,7 +8,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         name:{
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         description: {
             type: DataTypes.STRING,
@@ -19,6 +19,10 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: "{}"
+        },
+        author:{
+            type: DataTypes.STRING,
+            allowNull: false
         }
 
     });
@@ -26,6 +30,7 @@ module.exports = function (sequelize, DataTypes) {
     Brew.associate = (models) => {
        Brew.hasMany(models.Comment);
        Brew.belongsTo(models.User);
+       Brew.belongsToMany(models.User ,{through: 'Favorites'});
     };
 
     return Brew;

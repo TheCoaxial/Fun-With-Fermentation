@@ -1,13 +1,14 @@
 import React from "react";
-import { FacebookButton, TwitterButton } from "react-social";
+import { TwitterButton } from "react-social";
 import "./style.css";
 
-const FacebookShare = () => {
+const TwitterShare = () => {
     return (
-        <TwitterButton appId={1481059635420740}>
-            {" Share to Facebook "}
+        <TwitterButton>
+{/*             replace with twitter icon */}
+            {" Share to Twitter "}
         </TwitterButton>
     );
 };
 
-export default FacebookShare;
+export default TwitterShare;
