@@ -5,11 +5,11 @@ module.exports = function(app) {
     // GET ROUTES
 
     // User Data
-    app.get("/api/user/:username", (req, res) => {
+    app.get("/api/user/:userId", (req, res) => {
         db.User
         .findAll({
             where: {
-                username: req.params.username
+                id: req.params.userId
             }
         })
         .then(data => {
@@ -24,11 +24,11 @@ module.exports = function(app) {
     });
 
     // User Brews
-    app.get("/api/user/:username/brews", (req, res) => {
+    app.get("/api/user/:userId/brews", (req, res) => {
         db.Brew
         .findAll({
             where: {
-                username: req.params.username
+                id: req.params.userId
             }
         })
         .then(data => {
@@ -64,13 +64,13 @@ module.exports = function(app) {
     // POST ROUTES
 
     // New Brew
-    app.post("/api/:username/newBrew", (req, res) => {
+    app.post("/api/:userId/newBrew", (req, res) => {
         db.Brew
         .create({
             name: req.body.brewName,
             description: req.body.description,
             ingredients: req.body.ingredients,
-            UserId: req.params.username
+            UserId: req.params.userId
         })
         .then(newBrew => res.json(newBrew))
         .catch(err => {
@@ -82,10 +82,10 @@ module.exports = function(app) {
     });
 
     // New Comment
-    app.post("/api/:username/:brewId/newComment", (req, res) => {
+    app.post("/api/:userId/:brewId/newComment", (req, res) => {
         db.Comment
         .create({
-            UserId: req.params.username,
+            author: req.params.userId,
             BrewId: req.params.brewId,
             body: req.body.body
         })
