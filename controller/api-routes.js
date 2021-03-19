@@ -64,7 +64,7 @@ module.exports = function (app) {
     // POST ROUTES
 
     // New Brew
-    app.post("/api/:userId/newBrew", (req, res) => {
+    app.post("/api/:userId/new-brew", (req, res) => {
         db.Brew
             .create({
                 name: req.body.brewName,
@@ -82,7 +82,7 @@ module.exports = function (app) {
     });
 
     // New Comment
-    app.post("/api/:userId/:brewId/newComment", (req, res) => {
+    app.post("/api/:userId/:brewId/new-comment", (req, res) => {
         db.Comment
             .create({
                 author: req.params.name,
@@ -98,7 +98,7 @@ module.exports = function (app) {
             });
     });
 
-    app.post("/api/newUser", (req, res) => {
+    app.post("/api/new-user", (req, res) => {
         console.log(req.body);
         db.User.create({
             name: req.body.name,
