@@ -117,7 +117,7 @@ module.exports = function (app) {
     });
 
     // New Favorite
-    app.post("/api/favorites/:brewId/:userId", (req, res) => {
+    app.post("/api/favorite/:brewId/:userId", (req, res) => {
         db.Favorites
             .create({
                 BrewId: req.params.brewId,
@@ -153,6 +153,22 @@ module.exports = function (app) {
             .destroy({
                 where: {
                     id: req.params.commentId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Favorite
+    app.delete("/api/delete-favorite/:brewId/:userId", (req, res) => {
+        db.Favorites
+            .destory({
+                where: {
+                    BrewId: req.params.brewId,
+                    UserId: req.params.userId
                 }
             })
             .then(data => res.json(data))
