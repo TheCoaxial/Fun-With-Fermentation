@@ -18,32 +18,33 @@ const required = value => {
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
 
-    this.state = {
-      username: "",
-      password: "",
-      loading: false,
-      message: ""
-    };
-  }
+        this.state = {
+            username: "",
+            password: "",
+            loading: false,
+            message: ""
+        };
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
-  }
+        this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
+    }
 
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
+  onChangeUsername(event) {
+        this.setState({
+            username: event.target.value
+        });
+    }
 
-  handleLogin(e) {
-    e.preventDefault();
+  onChangePassword(event) {
+        this.setState({
+            password: event.target.value
+        });
+    }
+
+  handleLogin(event) {
+    event.preventDefault();
 
     this.setState({
       message: "",
@@ -61,45 +62,44 @@ export default class Login extends Component {
         error => {
           const resMessage =
             (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
+            error.response.data &&
+            error.response.data.message) ||
             error.toString();
 
           this.setState({
-            loading: false,
-            message: resMessage
-          });
+                loading: false,
+                message: resMessage
+            });
         }
       );
     } else {
       this.setState({
-        loading: false
-      });
+            loading: false
+        });
     }
   }
 
   render() {
     return (
-      <div className="col-md-12">
-        <div className="card card-container">
+      <div className="">
+        <div className="">
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
             alt="profile-img"
-            className="profile-img-card"
+            className=""
           />
 
           <Form
             onSubmit={this.handleLogin}
-            ref={c => {
-              this.form = c;
+            ref={check => {
+              this.form = check;
             }}
           >
-            <div className="form-group">
+            <div className="">
               <label htmlFor="username">Username</label>
               <Input
                 type="text"
-                className="form-control"
+                className=""
                 name="username"
                 value={this.state.username}
                 onChange={this.onChangeUsername}
@@ -107,11 +107,11 @@ export default class Login extends Component {
               />
             </div>
 
-            <div className="form-group">
+            <div className="">
               <label htmlFor="password">Password</label>
               <Input
                 type="password"
-                className="form-control"
+                className=""
                 name="password"
                 value={this.state.password}
                 onChange={this.onChangePassword}
@@ -119,29 +119,29 @@ export default class Login extends Component {
               />
             </div>
 
-            <div className="form-group">
+            <div className="">
               <button
-                className="btn btn-primary btn-block"
-                disabled={this.state.loading}
-              >
-                {this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span>
-              </button>
+                    className=""
+                    disabled={this.state.loading}
+                >
+                    {this.state.loading && (
+                    <span className=""></span>
+                    )}
+                    <span>Login</span>
+                </button>
             </div>
 
             {this.state.message && (
-              <div className="form-group">
-                <div className="alert alert-danger" role="alert">
-                  {this.state.message}
+                <div className="">
+                    <div className="" role="alert">
+                    {this.state.message}
+                    </div>
                 </div>
-              </div>
             )}
             <CheckButton
               style={{ display: "none" }}
-              ref={c => {
-                this.checkBtn = c;
+              ref={check => {
+                this.checkBtn = check;
               }}
             />
           </Form>
