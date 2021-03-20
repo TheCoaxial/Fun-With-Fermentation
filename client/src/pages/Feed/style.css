@@ -28,6 +28,8 @@
     background-color:black;
     height:40vh;
     overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
 }
 
 #Feed .mainFeed {
@@ -35,6 +37,16 @@
     padding:1rem;
     height:70vh;
     overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+
+#Feed .mainFeed::-webkit-scrollbar {
+    display:none;
+}
+
+#Feed .sidebarWrap::-webkit-scrollbar {
+    display:none;
 }
 
 /* -------------------------- */

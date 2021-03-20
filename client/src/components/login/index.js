@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import Footer from "../Footer/index";
+import { Link } from 'react-router-dom';
+import "./style.css";
 
 import AuthService from "../../services/auth.service";
 
@@ -81,12 +84,12 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div className="">
+      <div className="flexWrap" id="Login">
         <div className="">
           <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className=""
+            src="./logo.png"
+            alt="logo"
+            className="logo"
           />
 
           <Form
@@ -96,11 +99,11 @@ export default class Login extends Component {
             }}
           >
             <div className="">
-              <label htmlFor="username">Username</label>
               <Input
                 type="text"
                 className=""
                 name="username"
+                placeholder="username"
                 value={this.state.username}
                 onChange={this.onChangeUsername}
                 validations={[required]}
@@ -108,11 +111,11 @@ export default class Login extends Component {
             </div>
 
             <div className="">
-              <label htmlFor="password">Password</label>
               <Input
                 type="password"
                 className=""
                 name="password"
+                placeholder="password"
                 value={this.state.password}
                 onChange={this.onChangePassword}
                 validations={[required]}
@@ -145,6 +148,13 @@ export default class Login extends Component {
               }}
             />
           </Form>
+
+          <p>
+            Don't have an account? <Link to="/register">Sign Up</Link>
+          </p>
+
+          <Footer />
+
         </div>
       </div>
     );
