@@ -62,6 +62,41 @@ module.exports = function (app) {
             });
     });
 
+    // Get Favorites
+    app.get("/api/favorite/:userId", (req, res) => {
+        db.Favorites
+            .findAll({
+                where: {
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get Favorite
+    app.get("/api/favorite/:brewId/:userId", (req, res) => {
+        db.Favorites
+            .findAll({
+                where: {
+                    BrewId: req.params.brewId,
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
     // POST ROUTES
 
     // New Brew
