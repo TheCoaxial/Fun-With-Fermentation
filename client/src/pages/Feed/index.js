@@ -1,10 +1,13 @@
 import React from "react";
+import Header from "../../components/Header/Header";
 import "./style.css";
+import "../../App.css";
 
-const Feed = () => {
+export default function Feed() {
     return(
-        <div>Feed Page</div>
-    );
-};
-
-export default Feed;
+        <div>
+            <Header />
+            <div>Feed Page</div>
+        </div>
+    )
+}

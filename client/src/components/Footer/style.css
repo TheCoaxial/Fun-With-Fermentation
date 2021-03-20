@@ -1,0 +1,14 @@
+footer {
+    position:fixed;
+    bottom:0;
+    background-color:#5e6668;
+    color:white;
+    text-align:center;
+    width:90%;
+    padding:0 5% 0 5%;
+}
+
+footer h4 {
+    font-weight:300;
+    font-size:0.8rem;
+}
