@@ -98,23 +98,6 @@ module.exports = function (app) {
             });
     });
 
-    // New User
-    app.post("/api/new-user", (req, res) => {
-        console.log(req.body);
-        db.User
-            .create({
-                name: req.body.name,
-                //Todo: make sure password is hashed
-                password: req.body.password,
-                email: req.body.email,
-            })
-            .then(newUser => res.json(newUser))
-            .catch(err => {
-                res.sendStatus(500);
-                throw err;
-            });
-    });
-
     // New Favorite
     app.post("/api/favorite/:brewId/:userId", (req, res) => {
         db.Favorites
