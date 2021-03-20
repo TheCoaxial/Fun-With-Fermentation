@@ -18,9 +18,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-// app.use(passport.initialize());
-// Passport config
-// passport.use( require("./config/jwtPassportStrategy") );
 
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to bezkoder application." });
@@ -37,23 +34,7 @@ db.sequelize.sync({force: true}).then(()=>{
     app.listen(PORT,()=>{
         console.log(`server is listening http://localhost:${PORT}`);
     });
-    // initial();
+    
 });
 
 
-// function initial() {
-//     Role.create({
-//       id: 1,
-//       name: "user"
-//     });
-   
-//     Role.create({
-//       id: 2,
-//       name: "moderator"
-//     });
-   
-//     Role.create({
-//       id: 3,
-//       name: "admin"
-//     });
-//   }

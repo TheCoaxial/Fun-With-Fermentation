@@ -1,12 +1,14 @@
 const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
-const Role = db.role;
 
-// const Op = db.Sequelize.Op;
+
+
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
+
+//Routes to create a new user and sign in as a new user
 
 exports.signup = (req, res) => {
   // Save User to Database

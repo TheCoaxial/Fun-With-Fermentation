@@ -10,8 +10,8 @@ module.exports = function(app) {
     next();
   });
 
+  //Test Routes
   app.get("/api/test/all", controller.allAccess);
-
   app.get(
     "/api/test/user",
     [authJwt.verifyToken],
