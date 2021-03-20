@@ -1,10 +1,13 @@
 import React from "react";
+import Header from "../../components/Header/Header";
 import "./style.css";
+import "../../App.css";
 
-const Profile = () => {
+export default function Profile() {
     return(
-        <div>Profile Page</div>
-    );
-};
-
-export default Profile;
+        <div>
+            <Header />
+            <div>Profile</div>
+        </div>
+    )
+}

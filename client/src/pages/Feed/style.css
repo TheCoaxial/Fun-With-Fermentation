@@ -1,0 +1,89 @@
+/* -------------------------- */
+/* ----- general styles ----- */
+/* -------------------------- */
+
+#Feed .feedWrap {
+    display:flex;
+    flex-direction:row-reverse;
+    padding:1%;
+}
+
+#Feed .mainFeed .recipeCard {
+    border:1px solid black;
+    background-color:white;
+    padding:1rem;
+    margin-bottom:1rem;
+}
+
+/* -------------------------- */
+/* - feed / overflow styles - */
+/* -------------------------- */
+
+#Feed .sidebarWrap {
+    display:flex;
+    flex-direction:column;
+    width:30%;
+    padding:1rem;
+    border:1px solid black;
+    background-color:black;
+    height:40vh;
+    overflow-y: scroll;
+}
+
+#Feed .mainFeed {
+    width:70%;
+    padding:1rem;
+    height:70vh;
+    overflow-y: scroll;
+}
+
+/* -------------------------- */
+/*   ellipses sidebar styles  */
+/* -------------------------- */
+
+#Feed .sidebarWrap .recipeCard {
+    border:1px solid black;
+    background-color:white;
+    padding:1rem;
+    margin-bottom:1rem;
+    --max-lines: 3;
+    max-height: 10rem;
+    /* overflow: hidden; */
+}
+
+#Feed .sidebarWrap .recipeCard::before {
+    content: "...";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  #Feed .sidebarWrap .recipeCard::after {
+    content: "";
+    position: absolute;
+    right: 0; /* note: not using bottom */
+    width: 1rem;
+    height: 1rem;
+    background: white;
+    display: none;
+  }
+  
+  #Feed .sidebarWrap {
+    line-height: var(--lh);
+    --lh: 1.4rem;
+}
+  
+.sidebarWrap .truncate-overflow {
+    --max-lines: 3;
+    position: relative;
+    max-height: calc(var(--lh) * var(--max-lines));
+    overflow: hidden;
+    padding-right: 1rem; /* space for ellipsis */
+  }
+
+.sidebarWrap .truncate-overflow::before {
+    position: absolute;
+    content: "...";
+    bottom: 0;
+    right: 0;
+  }
