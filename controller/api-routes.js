@@ -1,4 +1,4 @@
-const { regexp } = require("sequelize/types/lib/operators");
+// const { regexp } = require("sequelize/types/lib/operators");
 const db = require("../models");
 
 module.exports = function (app) {
