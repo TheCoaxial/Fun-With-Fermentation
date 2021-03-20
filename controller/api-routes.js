@@ -103,9 +103,8 @@ module.exports = function (app) {
     app.post("/api/:userId/new-brew", (req, res) => {
         db.Brew
             .create({
-                name: req.body.brewName,
-                description: req.body.description,
-                ingredients: req.body.ingredients,
+                name: req.body.name,
+                author: req.body.author,
                 UserId: req.params.userId
             })
             .then(newBrew => res.json(newBrew))
@@ -131,23 +130,6 @@ module.exports = function (app) {
                     res.sendStatus(500);
                     console.error(err);
                 }
-            });
-    });
-
-    // New User
-    app.post("/api/new-user", (req, res) => {
-        console.log(req.body);
-        db.User
-            .create({
-                name: req.body.name,
-                //Todo: make sure password is hashed
-                password: req.body.password,
-                email: req.body.email,
-            })
-            .then(newUser => res.json(newUser))
-            .catch(err => {
-                res.sendStatus(500);
-                throw err;
             });
     });
 
