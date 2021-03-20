@@ -109,7 +109,21 @@ module.exports = function (app) {
                 password: req.body.password,
                 email: req.body.email,
             })
-            .then(newUser => res.Json(newUser))
+            .then(newUser => res.json(newUser))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // New Favorite
+    app.post("/api/favorites/:brewId/:userId", (req, res) => {
+        db.Favorites
+            .create({
+                BrewId: req.params.brewId,
+                UserId: req.params.userId
+            })
+            .then(newFav => res.json(newFav))
             .catch(err => {
                 res.sendStatus(500);
                 throw err;
@@ -147,4 +161,8 @@ module.exports = function (app) {
                 throw err;
             });
     });
+
+    // UPDATE ROUTES
+
+
 }
