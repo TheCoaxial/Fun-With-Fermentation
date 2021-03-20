@@ -15,6 +15,12 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             defaultValue: ""
         },
+        //Possible to create models
+        ingredients: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "{}"
+        },
         author: {
             type: DataTypes.STRING,
             allowNull: false
@@ -23,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     Brew.associate = (models) => {
-        Brew.hasMany(models.Ingredient);
+        // Brew.hasMany(models.Ingredient);
         Brew.hasMany(models.Comment);
         Brew.belongsTo(models.User);
         Brew.belongsToMany(models.User, { through: 'Favorites' });

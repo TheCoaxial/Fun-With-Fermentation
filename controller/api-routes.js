@@ -67,9 +67,8 @@ module.exports = function (app) {
     app.post("/api/:userId/new-brew", (req, res) => {
         db.Brew
             .create({
-                name: req.body.brewName,
-                description: req.body.description,
-                ingredients: req.body.ingredients,
+                name: req.body.name,
+                author: req.body.author,
                 UserId: req.params.userId
             })
             .then(newBrew => res.json(newBrew))
