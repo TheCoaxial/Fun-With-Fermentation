@@ -1,0 +1,93 @@
+
+
+/* -------------------------- */
+/* ----- general styles ----- */
+/* -------------------------- */
+
+.flexWrap#Login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:65vh;
+    text-align:center;
+    overflow: hidden;
+}
+
+
+/* -------------------------- */
+/* ------ image styles ------ */
+/* -------------------------- */
+
+#Login .logo {
+    width:9rem;
+    border:1px solid #be8c60;
+    border-radius:50%;
+    background-color:#d49c6b;
+    padding:0 0.5rem;
+    display:block;
+    margin:0px auto;
+    margin-bottom:1rem;
+}
+
+
+/* -------------------------- */
+/* ------- text styles ------ */
+/* -------------------------- */
+
+#Login h1 {
+    margin:0;
+    color:#252b31;
+}
+
+
+/* -------------------------- */
+/* ------- form styles ------ */
+/* -------------------------- */
+
+#Login form input {
+    display:block;
+    margin:0px auto;
+    margin-top:1rem;
+    padding:0.5rem;
+}
+
+#Login button {
+    background-color:#d49c6b;
+    color:#252b31;
+    display:block;
+    margin:0px auto;
+    margin-top:1rem;
+    padding:0.5rem;
+    width:5rem;
+    border-color:#be8c60;
+    border-radius:10%;
+}
+
+
+
+/* ------------------------------- */
+/* ------- animation styles ------ */
+/* ------------------------------- */
+
+  .beer-wave {
+    background-color: #d49c6b;
+    position: absolute;
+    top: 0;
+    height: 300%;
+    width: 300%;
+    border-radius: 40%;
+    left: -50%;
+    /* animation: wave 10s ease-in-out; */
+    animation-name: wave;
+    animation-delay: 2s;
+    animation-duration: 10s;
+    animation-fill-mode: forwards;
+    animation-iteration-count:infinite;
+    animation-timing-function: ease-in-out;
+  }
+
+
+  @keyframes wave {
+    0% { transform: rotate(0deg); top: 0%; }
+    100% { transform: rotate(360deg); top: 100%; }
+  }
