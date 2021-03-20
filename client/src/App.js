@@ -7,7 +7,6 @@ import Feed from "../src/pages/Feed";
 import Footer from "../src/components/Footer";
 import Login from "./pages/Login/Login";
 import SignUp from "./pages/SignUp/SignUp"
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
