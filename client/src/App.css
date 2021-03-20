@@ -1,3 +1,16 @@
+#root {
+  background-color:#f6fafb;
+  height:100vh;
+  width:100vw;
+  overflow: hidden;
+}
+
+.App-body {
+  height:100vh;
+  width:100vw;
+  overflow: hidden;
+}
+
 .App {
   text-align: center;
 }
