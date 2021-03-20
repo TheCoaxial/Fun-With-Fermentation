@@ -180,5 +180,22 @@ module.exports = function (app) {
 
     // UPDATE ROUTES
 
-
+    // Update Comment
+    app.put("/api/update-comment/:commentId", (req, res) => {
+        db.Comment
+            .update({
+                body: req.body.body
+            },
+            {
+                where: {
+                    id: req.params.commentId
+                }
+            })
+            .then(updatedComment => res.json(updatedComment))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+    
 }
