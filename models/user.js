@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true,
             allowNull: false
         },
-        name: {
+        username: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true
@@ -33,6 +33,7 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             defaultValue: 0
         }
+        
     });
 
     User.associate = (models) => {
