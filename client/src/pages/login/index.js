@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import Footer from "../Footer/index";
+import Footer from "../../components/Footer/index";
 import { Link } from 'react-router-dom';
 import "./style.css";
 
