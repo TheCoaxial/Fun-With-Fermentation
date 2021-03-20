@@ -4,11 +4,11 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
-            // allowNull: false
+            allowNull: false
         },
         username: {
             type: DataTypes.STRING,
-            // allowNull: false,
+            allowNull: false,
             unique: true
         },
         password: {
@@ -17,7 +17,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         email: {
             type: DataTypes.STRING,
-            // allowNull: false,
+            allowNull: false,
             unique: true,
             validate: {
                 isEmail: true
@@ -25,12 +25,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         bio: {
             type: DataTypes.STRING,
-            // allowNull: false,
+            allowNull: false,
             defaultValue: ""
         },
         contributionScore: {
             type: DataTypes.INTEGER,
-            // allowNull: false,
+            allowNull: false,
             defaultValue: 0
         }
         

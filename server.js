@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Simple test route
 app.get("/", (req, res) => {
     res.json({ message: "Test route" });
   });
