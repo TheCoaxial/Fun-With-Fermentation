@@ -14,10 +14,10 @@ export default class Home extends Component {
   componentDidMount() {
     UserService.getPublicContent().then(
       response => {
-        this.setState({
-          content: response.data
-        });
-      },
+            this.setState({
+            content: response.data
+            });
+        },
       error => {
         this.setState({
           content:
@@ -31,11 +31,11 @@ export default class Home extends Component {
 
   render() {
     return (
-      <div className="container">
-        <header className="jumbotron">
-          <h3>{this.state.content}</h3>
-        </header>
-      </div>
+        <div className="">
+            <header className="">
+            <h3>{this.state.content}</h3>
+            </header>
+        </div>
     );
   }
 }
