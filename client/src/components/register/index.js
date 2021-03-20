@@ -9,7 +9,7 @@ import AuthService from "../../services/auth.service";
 const required = value => {
   if (!value) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="" role="alert">
         This field is required!
       </div>
     );
@@ -19,7 +19,7 @@ const required = value => {
 const email = value => {
   if (!isEmail(value)) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="" role="alert">
         This is not a valid email.
       </div>
     );
@@ -27,9 +27,9 @@ const email = value => {
 };
 
 const vusername = value => {
-  if (value.length < 3 || value.length > 20) {
+  if (value.length < 4 || value.length > 20) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="" role="alert">
         The username must be between 3 and 20 characters.
       </div>
     );
@@ -39,7 +39,7 @@ const vusername = value => {
 const vpassword = value => {
   if (value.length < 6 || value.length > 40) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className="" role="alert">
         The password must be between 6 and 40 characters.
       </div>
     );
@@ -49,40 +49,47 @@ const vpassword = value => {
 export default class Register extends Component {
   constructor(props) {
     super(props);
-    this.handleRegister = this.handleRegister.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
-      username: "",
-      email: "",
-      password: "",
-      successful: false,
-      message: ""
+        username: "",
+        email: "",
+        password: "",
+        successful: false,
+        message: ""
     };
+
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+
+    this.handleRegister = this.handleRegister.bind(this);
+
+    this.onChangePassword = this.onChangePassword.bind(this);
+
+    this.onChangeEmail = this.onChangeEmail.bind(this);
+    
+
+   
   }
 
-  onChangeUsername(e) {
+  onChangeUsername(event) {
     this.setState({
-      username: e.target.value
+      username: event.target.value
     });
   }
 
-  onChangeEmail(e) {
+  onChangeEmail(event) {
     this.setState({
-      email: e.target.value
+      email: event.target.value
     });
   }
 
-  onChangePassword(e) {
+  onChangePassword(event) {
     this.setState({
-      password: e.target.value
+      password: event.target.value
     });
   }
 
-  handleRegister(e) {
-    e.preventDefault();
+  handleRegister(event) {
+    event.preventDefault();
 
     this.setState({
       message: "",
@@ -105,9 +112,6 @@ export default class Register extends Component {
         },
         error => {
           const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
             error.message ||
             error.toString();
 
@@ -122,27 +126,27 @@ export default class Register extends Component {
 
   render() {
     return (
-      <div className="col-md-12">
-        <div className="card card-container">
+      <div>
+        <div>
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile-img"
-            className="profile-img-card"
+            alt="profile image"
+            className=""
           />
 
           <Form
             onSubmit={this.handleRegister}
-            ref={c => {
-              this.form = c;
+            ref={check => {
+              this.form = check;
             }}
           >
             {!this.state.successful && (
               <div>
-                <div className="form-group">
+                <div>
                   <label htmlFor="username">Username</label>
                   <Input
                     type="text"
-                    className="form-control"
+                    className=""
                     name="username"
                     value={this.state.username}
                     onChange={this.onChangeUsername}
@@ -150,11 +154,11 @@ export default class Register extends Component {
                   />
                 </div>
 
-                <div className="form-group">
+                <div>
                   <label htmlFor="email">Email</label>
                   <Input
                     type="text"
-                    className="form-control"
+                    className=""
                     name="email"
                     value={this.state.email}
                     onChange={this.onChangeEmail}
@@ -162,11 +166,11 @@ export default class Register extends Component {
                   />
                 </div>
 
-                <div className="form-group">
+                <div>
                   <label htmlFor="password">Password</label>
                   <Input
                     type="password"
-                    className="form-control"
+                    className=""
                     name="password"
                     value={this.state.password}
                     onChange={this.onChangePassword}
@@ -175,7 +179,7 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <button className="btn btn-primary btn-block">Sign Up</button>
+                  <button className="btn">Sign Up</button>
                 </div>
               </div>
             )}
@@ -185,8 +189,8 @@ export default class Register extends Component {
                 <div
                   className={
                     this.state.successful
-                      ? "alert alert-success"
-                      : "alert alert-danger"
+                      ? "alert"
+                      : "alert"
                   }
                   role="alert"
                 >
@@ -196,8 +200,8 @@ export default class Register extends Component {
             )}
             <CheckButton
               style={{ display: "none" }}
-              ref={c => {
-                this.checkBtn = c;
+              ref={check => {
+                this.checkBtn = check;
               }}
             />
           </Form>
