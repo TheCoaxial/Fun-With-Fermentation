@@ -1,3 +1,4 @@
+const { regexp } = require("sequelize/types/lib/operators");
 const db = require("../models");
 
 module.exports = function (app) {
@@ -98,19 +99,52 @@ module.exports = function (app) {
             });
     });
 
+    // New User
     app.post("/api/new-user", (req, res) => {
         console.log(req.body);
-        db.User.create({
-            name: req.body.name,
-            //Todo: make sure password is hashed
-            password: req.body.password,
-            email: req.body.email,
-        })
+        db.User
+            .create({
+                name: req.body.name,
+                //Todo: make sure password is hashed
+                password: req.body.password,
+                email: req.body.email,
+            })
             .then(newUser => res.Json(newUser))
             .catch(err => {
                 res.sendStatus(500);
                 throw err;
-            })
+            });
     });
 
+    // DELETE ROUTES
+
+    // Delete Brew
+    app.delete("/api/delete-brew/:brewId", (req, res) => {
+        db.Brew
+            .destroy({
+                where: {
+                    id: req.params.brewId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Comment
+    app.delete("/api/delete-comment/:commentId", (req, res) => {
+        db.Comment
+            .destroy({
+                where: {
+                    id: req.params.commentId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
 }
