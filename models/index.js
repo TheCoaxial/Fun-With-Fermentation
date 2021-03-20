@@ -31,9 +31,33 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
+db.user = require("../models/user.js")(sequelize, Sequelize);
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
 
 
+
+// const config = require("../config/config.js");
+
+// const Sequelize = require("sequelize");
+// const sequelize = new Sequelize(
+//   config.DB,
+//   config.USER,
+//   config.PASSWORD,
+//   {
+//     host: config.HOST,
+//     dialect: config.dialect,
+//   }
+// );
+
+// const db = {};
+
+// db.Sequelize = Sequelize;
+// db.sequelize = sequelize;
+
+
+
+// module.exports = db;
