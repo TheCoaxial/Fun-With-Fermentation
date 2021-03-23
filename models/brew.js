@@ -6,31 +6,33 @@ module.exports = function (sequelize, DataTypes) {
             autoIncrement: true,
             allowNull: false
         },
-        name:{
+        name: {
             type: DataTypes.STRING,
-            allowNull: false
+            // allowNull: false
         },
         description: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: ""
+            // defaultValue: ""
         },
-        ingredients:{
+        //Possible to create models
+        ingredients: {
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: "{}"
         },
-        author:{
+        author: {
             type: DataTypes.STRING,
-            allowNull: false
+            // allowNull: false
         }
 
     });
 
     Brew.associate = (models) => {
-       Brew.hasMany(models.Comment);
-       Brew.belongsTo(models.User);
-       Brew.belongsToMany(models.User ,{through: 'Favorites'});
+        // Brew.hasMany(models.Ingredient);
+        Brew.hasMany(models.Comment);
+        Brew.belongsTo(models.User);
+        Brew.belongsToMany(models.User, { through: 'Favorites' });
     };
 
     return Brew;

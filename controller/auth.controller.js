@@ -8,7 +8,7 @@ const User = db.user;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
-//Routes to create a new user and sign in as a new user
+//Routes to create a new user and sign in as an existing user
 
 exports.signup = (req, res) => {
   // Save User to Database
@@ -17,12 +17,16 @@ exports.signup = (req, res) => {
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8)
   })
+    .then(data => {
+      res.send(data);
+    })
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
 };
 
 exports.signin = (req, res) => {
+
   User.findOne({
     where: {
       username: req.body.username
@@ -39,24 +43,24 @@ exports.signin = (req, res) => {
       );
 
       if (!passwordIsValid) {
-            return res.status(401).send({
-            accessToken: null,
-            message: "Invalid Password!"
-            });
-        }
+        return res.status(401).send({
+          accessToken: null,
+          message: "Invalid Password!"
+        });
+      }
 
       var token = jwt.sign({ id: user.id }, config.secret, {
         expiresIn: 86400 // 24 hours
-    });
+      });
 
-    
-    res.status(200).send({
+
+      res.status(200).send({
         id: user.id,
         username: user.username,
         email: user.email,
         accessToken: token
-    });
- 
+      });
+
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
