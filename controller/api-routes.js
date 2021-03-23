@@ -168,16 +168,69 @@ module.exports = function (app) {
             .update({
                 body: req.body.body
             },
-            {
-                where: {
-                    id: req.params.commentId
-                }
-            })
+                {
+                    where: {
+                        id: req.params.commentId
+                    }
+                })
             .then(updatedComment => res.json(updatedComment))
             .catch(err => {
                 res.sendStatus(500);
                 throw err;
             });
     });
-    
+
+    //update User
+    app.put("/api/update-user/:userId", (req, res) => {
+
+        let body = {};
+
+        if (req.body["bio"]) {
+            body["bio"] = req.body["bio"];
+        }
+        if (req.body["contributionScore"]) {
+            body["contributionScore"] = req.body["contributionScore"];
+        }
+
+        db.User.update(body,
+            {
+                where: {
+                    id: req.params.userId
+                }
+            })
+            .then(() => res.sendStatus(200))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    //update Brew
+    app.put("/api/update-brew/:brewId", (req, res) => {
+
+        let body = {};
+
+        if (req.body["name"]) {
+            body["name"] = req.body["name"];
+        }
+        if (req.body["description"]) {
+            body["description"] = req.body["description"];
+        }
+        if (req.body["ingredients"]) {
+            body["ingredients"] = req.body["ingredients"];
+        }
+
+        db.Brew.update(body,
+            {
+                where: {
+                    id: req.params.brewId
+                }
+            })
+            .then(() => res.sendStatus(200))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
 }
