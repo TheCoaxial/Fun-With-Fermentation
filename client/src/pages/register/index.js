@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+import Footer from "../../components/Footer/index";
+import { Link } from 'react-router-dom';
 import { isEmail } from "validator";
+import "./style.css";
 
 import AuthService from "../../services/auth.service";
 
@@ -126,12 +129,12 @@ export default class Register extends Component {
 
   render() {
     return (
-      <div>
+      <div className="flexWrap" id="Register">
         <div>
           <img
-            src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile"
-            className=""
+            src="./logo.png"
+            alt="logo"
+            className="logo"
           />
 
           <Form
@@ -143,11 +146,11 @@ export default class Register extends Component {
             {!this.state.successful && (
               <div>
                 <div>
-                  <label htmlFor="username">Username</label>
                   <Input
                     type="text"
                     className=""
                     name="username"
+                    placeholder="username"
                     value={this.state.username}
                     onChange={this.onChangeUsername}
                     validations={[required, vusername]}
@@ -155,11 +158,11 @@ export default class Register extends Component {
                 </div>
 
                 <div>
-                  <label htmlFor="email">Email</label>
                   <Input
                     type="text"
                     className=""
                     name="email"
+                    placeholder="email"
                     value={this.state.email}
                     onChange={this.onChangeEmail}
                     validations={[required, email]}
@@ -167,11 +170,11 @@ export default class Register extends Component {
                 </div>
 
                 <div>
-                  <label htmlFor="password">Password</label>
                   <Input
                     type="password"
                     className=""
                     name="password"
+                    placeholder="password"
                     value={this.state.password}
                     onChange={this.onChangePassword}
                     validations={[required, vpassword]}
@@ -205,6 +208,13 @@ export default class Register extends Component {
               }}
             />
           </Form>
+
+          <p>
+            Already have an account? <Link to="/login">Log In</Link>
+          </p>
+
+          <Footer />
+
         </div>
       </div>
     );
