@@ -25,11 +25,11 @@ module.exports = function (app) {
     });
 
     // User Brews
-    app.get("/api/user/:userId/brews", (req, res) => {
+    app.get("/api/brew/:userId", (req, res) => {
         db.Brew
             .findAll({
                 where: {
-                    id: req.params.userId
+                    UserId: req.params.userId
                 }
             })
             .then(data => {
@@ -104,7 +104,7 @@ module.exports = function (app) {
         console.log(req.body);
         db.User
             .create({
-                username: req.body.username,
+                username: req.body.name,
                 //Todo: make sure password is hashed
                 password: req.body.password,
                 email: req.body.email,
