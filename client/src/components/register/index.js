@@ -130,7 +130,7 @@ export default class Register extends Component {
         <div>
           <img
             src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-            alt="profile image"
+            alt="profile"
             className=""
           />
 

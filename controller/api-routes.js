@@ -104,7 +104,7 @@ module.exports = function (app) {
         console.log(req.body);
         db.User
             .create({
-                name: req.body.name,
+                username: req.body.username,
                 //Todo: make sure password is hashed
                 password: req.body.password,
                 email: req.body.email,
