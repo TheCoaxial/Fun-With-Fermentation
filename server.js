@@ -14,8 +14,6 @@ var corsOptions = {
 const db = require("./models");
 
 app.use(cors(corsOptions));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -31,7 +29,7 @@ require("./controller/api-routes")(app);
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
 
-db.sequelize.sync({force: true}).then(()=>{
+db.sequelize.sync({}).then(()=>{
     app.listen(PORT,()=>{
         console.log(`server is listening http://localhost:${PORT}`);
     });
