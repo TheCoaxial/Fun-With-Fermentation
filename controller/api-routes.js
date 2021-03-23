@@ -62,15 +62,49 @@ module.exports = function (app) {
             });
     });
 
+    // Get Favorites
+    app.get("/api/favorite/:userId", (req, res) => {
+        db.Favorites
+            .findAll({
+                where: {
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get Favorite
+    app.get("/api/favorite/:brewId/:userId", (req, res) => {
+        db.Favorites
+            .findAll({
+                where: {
+                    BrewId: req.params.brewId,
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
     // POST ROUTES
 
     // New Brew
     app.post("/api/:userId/new-brew", (req, res) => {
         db.Brew
             .create({
-                name: req.body.brewName,
-                description: req.body.description,
-                ingredients: req.body.ingredients,
+                name: req.body.name,
+                author: req.body.author,
                 UserId: req.params.userId
             })
             .then(newBrew => res.json(newBrew))
@@ -96,23 +130,6 @@ module.exports = function (app) {
                     res.sendStatus(500);
                     console.error(err);
                 }
-            });
-    });
-
-    // New User
-    app.post("/api/new-user", (req, res) => {
-        console.log(req.body);
-        db.User
-            .create({
-                username: req.body.name,
-                //Todo: make sure password is hashed
-                password: req.body.password,
-                email: req.body.email,
-            })
-            .then(newUser => res.json(newUser))
-            .catch(err => {
-                res.sendStatus(500);
-                throw err;
             });
     });
 
@@ -186,16 +203,69 @@ module.exports = function (app) {
             .update({
                 body: req.body.body
             },
-            {
-                where: {
-                    id: req.params.commentId
-                }
-            })
+                {
+                    where: {
+                        id: req.params.commentId
+                    }
+                })
             .then(updatedComment => res.json(updatedComment))
             .catch(err => {
                 res.sendStatus(500);
                 throw err;
             });
     });
-    
+
+    //update User
+    app.put("/api/update-user/:userId", (req, res) => {
+
+        let body = {};
+
+        if (req.body["bio"]) {
+            body["bio"] = req.body["bio"];
+        }
+        if (req.body["contributionScore"]) {
+            body["contributionScore"] = req.body["contributionScore"];
+        }
+
+        db.User.update(body,
+            {
+                where: {
+                    id: req.params.userId
+                }
+            })
+            .then(() => res.sendStatus(200))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    //update Brew
+    app.put("/api/update-brew/:brewId", (req, res) => {
+
+        let body = {};
+
+        if (req.body["name"]) {
+            body["name"] = req.body["name"];
+        }
+        if (req.body["description"]) {
+            body["description"] = req.body["description"];
+        }
+        if (req.body["ingredients"]) {
+            body["ingredients"] = req.body["ingredients"];
+        }
+
+        db.Brew.update(body,
+            {
+                where: {
+                    id: req.params.brewId
+                }
+            })
+            .then(() => res.sendStatus(200))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
 }
