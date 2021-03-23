@@ -12,10 +12,10 @@ import './App.css';
 import AuthService from "./services/auth.service";
 
 import Feed from "../src/pages/Feed/Feed";
-import Login from "./components/login/index";
-import Register from "./components/register/index";
-import Home from "./components/home/index";
-import Profile from "./components/profile/index";
+import Login from "./pages/login/index";
+import Register from "./pages/register/index";
+import Home from "./pages/home/index";
+import Profile from "./pages/profile/index";
 import BoardUser from "./components/userpage/index";
 
 
