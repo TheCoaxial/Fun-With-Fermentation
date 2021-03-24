@@ -11,7 +11,7 @@ export default function RecipeCard(props) {
             return ingredients.map(ingredient => {
                 return(
                     <li>
-                        {ingredient}
+                        { ingredient }
                     </li>
                 )
             });
