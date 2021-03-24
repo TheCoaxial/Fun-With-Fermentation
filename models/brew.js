@@ -8,12 +8,12 @@ module.exports = function (sequelize, DataTypes) {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            // allowNull: false
         },
         description: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: ""
+            // defaultValue: ""
         },
         //Possible to create models
         ingredients: {
@@ -23,7 +23,7 @@ module.exports = function (sequelize, DataTypes) {
         },
         author: {
             type: DataTypes.STRING,
-            allowNull: false
+            // allowNull: false
         }
 
     });

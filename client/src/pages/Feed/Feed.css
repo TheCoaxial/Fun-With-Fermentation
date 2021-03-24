@@ -44,8 +44,8 @@
 
 #Feed .sidebarWrap .sidebarFooter {
     position:sticky;
-    bottom:0;
-    height:5%;
+    bottom:-1%;
+    height:6%;
     background-color:black;
 }
 

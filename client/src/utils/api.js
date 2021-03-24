@@ -59,6 +59,51 @@ class API {
 
     }
 
+    postBrew(userID){
+
+        return this.axios.post("/api/" + userID + "/new-brew");
+    }
+
+    saveNewFavorite(brewID, userID) {
+
+        return this.axios.post("/api/favorite/" + brewID + "/" + userID );
+    }
+
+    getUserProfile(userId) {
+        
+        return this.axios.get("/api/user/" + userId);
+    }
+
+    getUserBrews(userId) {
+
+        return this.axios.get("/api/brew/" + userId);
+    }
+
+    getSpecificBrew(brewID) {
+
+        return this.axios.get("/api/brew/" + brewID);
+    }
+
+    deleteBrew(brewID) {
+
+        return this.axios.delete("/api/delete-brew/" + brewID);
+    }
+
+    deleteComment(commentID) {
+
+        return this.axios.delete("/api/delete-comment/" + commentID);
+    }
+
+    deleteFavorite(brewID, userID) {
+
+        return this.axios.delete("/api/delete-favorite/" + brewID + "/" + userID);
+    }
+
+    updateComment(commentID){
+        
+        return this.axios.put("/api/update-comment/" + commentID);
+    }
+
 }
 
 export default new API();

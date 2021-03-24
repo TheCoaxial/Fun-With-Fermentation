@@ -25,11 +25,11 @@ module.exports = function (app) {
     });
 
     // User Brews
-    app.get("/api/user/:userId/brews", (req, res) => {
+    app.get("/api/brew/:userId", (req, res) => {
         db.Brew
             .findAll({
                 where: {
-                    id: req.params.userId
+                    UserId: req.params.userId
                 }
             })
             .then(data => {
