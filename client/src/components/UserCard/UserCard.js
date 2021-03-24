@@ -13,7 +13,7 @@ export default function UserCard() {
                     </h3>
                 </div>
 
-                <p className="bio">
+                <p className="external-bio">
                 Lorem ipsum dolor sit amet
                 </p>
             </div>
@@ -26,7 +26,7 @@ export default function UserCard() {
                     </h3>
                 </div>
 
-                <p className="bio">
+                <p className="external-bio">
                     Lorem ipsum dolor sit amet
                 </p>
             </div>
