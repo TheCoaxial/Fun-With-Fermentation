@@ -8,18 +8,18 @@ module.exports = function (sequelize, DataTypes) {
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                len: [0, 60]
+            }
         },
         description: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: ""
-        },
-        //Possible to create models
-        ingredients: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: "{}"
+            defaultValue: "",
+            validate: {
+                len: [0, 500]
+            }
         },
         author: {
             type: DataTypes.STRING,
@@ -29,7 +29,7 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     Brew.associate = (models) => {
-        // Brew.hasMany(models.Ingredient);
+        Brew.hasMany(models.Ingredient);
         Brew.hasMany(models.Comment);
         Brew.belongsTo(models.User);
         Brew.belongsToMany(models.User, { through: 'Favorites' });

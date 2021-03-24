@@ -9,7 +9,10 @@ module.exports = function(sequelize, DataTypes) {
         body: {
             type: DataTypes.TEXT,
             length: "long",
-            allowNull: false
+            allowNull: false,
+            validate:{
+                len:[1,200]
+            }
         },
         author: {
             type: DataTypes.STRING,
