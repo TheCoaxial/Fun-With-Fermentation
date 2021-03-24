@@ -8,6 +8,12 @@
     padding:1%;
 }
 
+#Feed .sidebarWrap {
+    display:flex;
+    flex-direction:column;
+    width:30%;
+}
+
 #Feed .mainFeed .recipeCard {
     border:1px solid black;
     background-color:white;
@@ -15,19 +21,52 @@
     margin-bottom:1rem;
 }
 
+#Feed .sidebarWrap .recipeCard,
+#Feed .sidebarWrap .userCard {
+    border:1px solid black;
+    background-color:white;
+    padding:1rem;
+    margin-bottom:1rem;
+}
+
+
+#Feed .sidebarWrap .recipeCard h3,
+#Feed .sidebarWrap .userCard h3 {
+    margin:0;
+}
+
+#Feed .sidebarWrap .sidebarHeader {
+    position:sticky;
+    top:0;
+    height:5%;
+    background-color:black;
+}
+
+#Feed .sidebarWrap .sidebarFooter {
+    position:sticky;
+    bottom:-1%;
+    height:6%;
+    background-color:black;
+}
+
 /* -------------------------- */
 /* - feed / overflow styles - */
 /* -------------------------- */
 
-#Feed .sidebarWrap {
-    display:flex;
-    flex-direction:column;
-    width:30%;
-    padding:1rem;
-    border:1px solid black;
-    background-color:black;
-    height:40vh;
+#Feed .sidebarWrap .popularRecipesFeed, 
+#Feed .sidebarWrap .popularUsersFeed {
+    height:35vh;
     overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+    background-color:black;
+    border:1px solid black;
+    padding:0 5% 0 5%;
+    position:relative;
+}
+
+#Feed .sidebarWrap .popularUsersFeed {
+    margin-top:3vh;
 }
 
 #Feed .mainFeed {
@@ -35,6 +74,17 @@
     padding:1rem;
     height:70vh;
     overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+}
+
+#Feed .mainFeed::-webkit-scrollbar {
+    display:none;
+}
+
+#Feed .sidebarWrap .popularRecipesFeed::-webkit-scrollbar,
+#Feed .sidebarWrap .popularUsersFeed::-webkit-scrollbar {
+    display:none;
 }
 
 /* -------------------------- */
@@ -42,10 +92,6 @@
 /* -------------------------- */
 
 #Feed .sidebarWrap .recipeCard {
-    border:1px solid black;
-    background-color:white;
-    padding:1rem;
-    margin-bottom:1rem;
     --max-lines: 3;
     max-height: 10rem;
     /* overflow: hidden; */
@@ -87,3 +133,9 @@
     bottom: 0;
     right: 0;
   }
+
+
+/* -------------------------- */
+/* ---- user card styles ---- */
+/* -------------------------- */
+

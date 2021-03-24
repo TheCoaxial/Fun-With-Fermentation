@@ -21,10 +21,11 @@ export default class BoardUser extends Component {
       error => {
         this.setState({
           content:
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
+            ("How did you get here?")||
+            // (error.response &&
+            //   error.response.data &&
+            //   error.response.data.message) ||
+            // error.message ||
             error.toString()
         });
       }

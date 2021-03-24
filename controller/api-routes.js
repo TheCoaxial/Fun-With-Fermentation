@@ -25,11 +25,11 @@ module.exports = function (app) {
     });
 
     // User Brews
-    app.get("/api/user/:userId/brews", (req, res) => {
+    app.get("/api/brew/:userId", (req, res) => {
         db.Brew
             .findAll({
                 where: {
-                    id: req.params.userId
+                    UserId: req.params.userId
                 }
             })
             .then(data => {
@@ -54,6 +54,41 @@ module.exports = function (app) {
             .then(data => {
                 res.json(data);
             })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get Favorites
+    app.get("/api/favorite/:userId", (req, res) => {
+        db.Favorites
+            .findAll({
+                where: {
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get Favorite
+    app.get("/api/favorite/:brewId/:userId", (req, res) => {
+        db.Favorites
+            .findAll({
+                where: {
+                    BrewId: req.params.brewId,
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
             .catch(err => {
                 if (err) {
                     res.sendStatus(500);

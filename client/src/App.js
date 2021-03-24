@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 // import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Switch, Route, Link, BrowserRouter as Router  } from "react-router-dom";
+
 // import Container from "../src/components/Container";
 // import Brew from "../src/pages/Brew";
 // import Profile from "../src/pages/Profile";
-// import Feed from "../src/pages/Feed";
 // import Footer from "../src/components/Footer";
 // import logo from './logo.svg';
 import './App.css';
 
 import AuthService from "./services/auth.service";
 
-import Login from "./components/login/index";
-import Register from "./components/register/index";
-import Home from "./components/home/index";
-import Profile from "./components/profile/index";
+import Feed from "../src/pages/Feed/Feed";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import Home from "./pages/home";
+import Profile from "./pages/Profile";
 import BoardUser from "./components/userpage/index";
 
 
@@ -83,6 +84,11 @@ class App extends Component {
                     LogOut
                   </a>
                 </li>
+                <li className="nav-item">
+                <Link to={"/feed"} className="nav-link">
+                  Feed
+                </Link>
+              </li>
               </div>
             ) : (
               <div className="navbar-nav ml-auto">
@@ -109,6 +115,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/feed" component={Feed} />
               <Route path="/user" component={BoardUser} />
               
             </Switch>
