@@ -24,6 +24,21 @@ module.exports = function (app) {
             });
     });
 
+    // All Brews
+    app.get("/api/brew/all", (req, res) => {
+        db.Brew
+            .findAll({})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
     // User Brews
     app.get("/api/brew/:userId", (req, res) => {
         db.Brew

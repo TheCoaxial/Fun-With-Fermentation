@@ -2,29 +2,38 @@ import React from "react";
 import "./RecipeCard";
 import "../../App.css";
 
-export default function RecipeCard() {
+export default function RecipeCard(props) {
+
+    const { name, description, author, ingredients } = props;
+    
+    const ingredientMap = () => {
+        if (ingredients.length) {
+            return ingredients.map(ingredient => {
+                return(
+                    <li>
+                        { ingredient }
+                    </li>
+                )
+            });
+        } else {
+            return(
+                <p>"No Ingredients Found"</p>
+            );
+        }
+    };
+
     return(
-        <div>
-            <div className="recipeCard">
+        <div className="recipeCard">
             <h3 className="title">
-                Sample Recipe Card
+                { name }
             </h3>
-
+            <h6>Created by { author }</h6>
+            <ul>
+                {ingredientMap()}
+            </ul>
             <p className="description truncate-overflow">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            </div>
-
-            <div className="recipeCard">
-            <h3 className="title">
-                Sample Recipe Card
-            </h3>
-
-            <p className="description truncate-overflow">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-            </div>
+                { description }
+            </p>
         </div>
-        
-    )
-}
+    );
+};
