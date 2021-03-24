@@ -9,7 +9,10 @@ module.exports = function (sequelize, DataTypes) {
         username: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
+            unique: true,
+            validate: {
+                len: [3, 20]
+            }
         },
         password: {
             type: DataTypes.STRING,
@@ -26,14 +29,20 @@ module.exports = function (sequelize, DataTypes) {
         bio: {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: ""
+            defaultValue: "",
+            validate: {
+                len: [0, 500]
+            }
         },
         contributionScore: {
             type: DataTypes.INTEGER,
             allowNull: false,
-            defaultValue: 0
+            defaultValue: 0,
+            validate: {
+                min: 0
+            }
         }
-        
+
     });
 
     User.associate = (models) => {

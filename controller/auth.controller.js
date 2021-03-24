@@ -8,7 +8,7 @@ const User = db.user;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
-//Routes to create a new user and sign in as a new user
+//Routes to create a new user and sign in as an existing user
 
 exports.signup = (req, res) => {
   // Save User to Database

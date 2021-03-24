@@ -12,10 +12,10 @@ import './App.css';
 import AuthService from "./services/auth.service";
 
 import Feed from "../src/pages/Feed/Feed";
-import Login from "./pages/login/index";
-import Register from "./pages/register/index";
-import Home from "./pages/home/index";
-import Profile from "./pages/profile/index";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import Home from "./pages/home";
+import Profile from "./pages/Profile";
 import BoardUser from "./components/userpage/index";
 
 
@@ -84,6 +84,11 @@ class App extends Component {
                     LogOut
                   </a>
                 </li>
+                <li className="nav-item">
+                <Link to={"/feed"} className="nav-link">
+                  Feed
+                </Link>
+              </li>
               </div>
             ) : (
               <div className="navbar-nav ml-auto">
