@@ -7,9 +7,9 @@ async function insertData() {
     /**
      * Users
      */
-    let user1Token = await insertUser("Username1", "username1@email.com", "hashedpassword");
-    let user2Token = await insertUser("Username2", "username2@email.com", "hashedpassword");
-    let user3Token = await insertUser("Username3", "username3@email.com", "hashedpassword");
+    let user1Token = await insertUser("Username1", "username1@email.com", "unhashedpassword");
+    let user2Token = await insertUser("Username2", "username2@email.com", "unhashedpassword");
+    let user3Token = await insertUser("Username3", "username3@email.com", "unhashedpassword");
 
 
     console.log(user1Token);
@@ -24,9 +24,9 @@ async function insertData() {
     /**
    * Comments
    */
-    // await insertComment("WOW INCREDIBLE", "Username1", 1, 3);
-    // await insertComment("This Is my brew", "Username1", 1, 2);
-    // await insertComment("This Is Username3's comment", "Username3", 3, 1);
+    await insertComment("WOW INCREDIBLE", "Username1", 1, 3);
+    await insertComment("This Is my brew", "Username1", 1, 2);
+    await insertComment("This Is Username3's comment", "Username3", 3, 1);
 
 
     return;
