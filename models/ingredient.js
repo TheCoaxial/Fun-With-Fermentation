@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
     const Ingredient = sequelize.define("Ingredient", {
         id: {
             type: DataTypes.INTEGER,
@@ -9,9 +9,16 @@ module.exports = function(sequelize, DataTypes) {
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true
+            unique: true,
+            validate: {
+                len: [2, 50]
+            }
         }
     });
+
+    Ingredient.associate = (models) => {
+        Ingredient.belongsTo(models.Brew);
+    };
 
     return Ingredient;
 };
