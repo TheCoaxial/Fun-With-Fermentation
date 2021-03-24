@@ -102,11 +102,7 @@ module.exports = function (app) {
     // New Brew
     app.post("/api/:userId/new-brew", (req, res) => {
         db.Brew
-            .create({
-                name: req.body.name,
-                author: req.body.author,
-                UserId: req.params.userId
-            })
+            .create(req.body)
             .then(newBrew => res.json(newBrew))
             .catch(err => {
                 if (err) {
