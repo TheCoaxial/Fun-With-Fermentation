@@ -372,4 +372,30 @@ module.exports = function (app) {
             });
     });
 
+    // Update Step
+    app.put("/api/update-step/:stepId", (req, res) => {
+
+        let body = {};
+
+        if (req.body["duration"]) {
+            body["duration"] = req.body["duration"];
+        }
+        if (req.body["instructions"]) {
+            body["instructions"] = req.body["instructions"];
+        }
+
+        db.Step
+            .update(body,
+                {
+                    where: {
+                        id: req.params.stepId
+                    }
+            })
+            .then(() => res.sendStatus(200))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
 };
