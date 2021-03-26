@@ -53,6 +53,21 @@ async function insertData() {
     await insertComment("This Is my brew", "Username1", 1, 2);
     await insertComment("This Is Username3's comment", "Username3", 3, 1);
 
+    /**
+    * Ingredients
+    */
+    await insertIngredient("ingredient1", 5, "Oz", 1);
+    await insertIngredient("ingredient2", 10, "lb", 1);
+    await insertIngredient("ingredient3", 13, "teaspoon", 1);
+
+    await insertIngredient("ingredient1", 6, "cups", 2);
+    await insertIngredient("ingredient2", 11, "ml", 2);
+    await insertIngredient("ingredient3", 14, "pinch", 2);
+
+    await insertIngredient("ingredient1", 7, "pint", 3);
+    await insertIngredient("ingredient2", 13, "fluid ounce", 3);
+    await insertIngredient("ingredient3", 17, "gallon", 3);
+
 
     return;
 }
@@ -146,6 +161,22 @@ async function insertComment(body, author, UserId, BrewId) {
         }
     });
 
+    return;
+}
+
+async function insertIngredient(name, quantity, quantityUnits, BrewId) {
+    await fetch(`http://localhost:3001/api/${BrewId}/new-ingredient`, {
+        method: "POST",
+        body: JSON.stringify({
+            name: name,
+            quantity: quantity,
+            quantityUnits: quantityUnits
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    
     return;
 }
 
