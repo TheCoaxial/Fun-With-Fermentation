@@ -1,6 +1,6 @@
 import React from "react";
 import "../../App.css";
-import './UserCard.css'
+import './FollowingList.css'
 
 export default function UserCard(props) {
     const people = props.people.map((person)=> 

@@ -57,7 +57,7 @@ export default function Feed() {
 
                     <div className="popularUsersFeed">
                         <div className="sidebarHeader"></div>
-                        <UserCard />
+                        <UserCard /> 
                         <div className="sidebarFooter"></div>
                     </div>
                 </div>

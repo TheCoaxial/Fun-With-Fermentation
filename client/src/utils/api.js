@@ -84,6 +84,11 @@ class API {
         return this.axios.get("/api/brew/" + brewID);
     }
 
+    getUserFavorite(brewID,userID) {
+
+        return this.axios.get("/api/favorite/" + brewID + userID);
+    }
+
     deleteBrew(brewID) {
 
         return this.axios.delete("/api/delete-brew/" + brewID);
