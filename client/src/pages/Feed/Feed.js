@@ -12,7 +12,7 @@ export default function Feed() {
     const [brews, setBrews] = useState([]);
     // const [currentUser, authCurrentUser] = useState([[currentUser = JSON.parse(localStorage.getItem('user'))]]);
 
-   
+
 
 
     const [topUsers, setTopUsers] = useState([]);
@@ -40,7 +40,7 @@ export default function Feed() {
             });
     }, []);
 
-   let sortedUsers = topUsers.sort((a, b) => {
+    let sortedUsers = topUsers.sort((a, b) => {
         return b.contributionScore - a.contributionScore;
     });
 

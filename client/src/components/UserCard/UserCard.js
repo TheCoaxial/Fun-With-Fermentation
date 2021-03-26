@@ -2,36 +2,26 @@ import React from "react";
 import "../../App.css";
 import './UserCard.css'
 
-export default function UserCard(props) {
-    const people = props.people.map((person)=> 
+export default function UserCard({ username, bio, newBrew, score }) {
 
-        [
-        <div className="userCard">
+
+
+    return (
+        <div>
+            <div className="userCard">
                 <div className="userFlex">
-                    <img src ="./sample-avatar.png" alt="sample avatar" className="avatar" />
+                    <img src="./sample-avatar.png" alt="sample avatar" className="avatar" />
                     <h3 className="title">
-                       
-                        {person.name}
+                        {username}  <span id="score">Score: {score}</span>
                     </h3>
 
                 </div>
 
-            <p className="external-bio">
-            
-            {person.bio}
-            </p>
-        </div>
-        ]
+                <p className="bio">
+                    {bio || <p>NO BIO</p>}
+                </p>
 
-    );
-
-    // console.log(props.people);
-
-    return(
-        <div>
-
-        { people }
-
+            </div>
         </div>
 
     )
