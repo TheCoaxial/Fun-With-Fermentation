@@ -2,9 +2,7 @@ import React from "react";
 import "./RecipeCard";
 import "../../App.css";
 
-export default function RecipeCard(props) {
-
-    const { name, description, author} = props;
+export default function RecipeCard({ name, description, author}) {
     
     // const ingredientMap = () => {
     //     if (ingredients.length) {

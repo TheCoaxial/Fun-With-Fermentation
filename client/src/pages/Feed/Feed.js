@@ -14,6 +14,9 @@ export default function Feed() {
     const [topUsers, setTopUsers] = useState([]);
     let topUsersJSX;
 
+    let feedBrewsJSX;
+
+
     useEffect(() => {
         API.getBrews()
             .then(data => {
@@ -33,22 +36,9 @@ export default function Feed() {
             });
     }, []);
 
-
-
-    const brewMap = () => {
-        if (brews.length) {
-            return brews.map(brew => {
-                return (
-                    <RecipeCard
-                        name={brew.name}
-                        description={brew.description}
-                        author={brew.author}
-                        ingredients={brew.ingredients}
-                    />
-                );
-            });
-        }
-    };
+    feedBrewsJSX = brews.map(brew => <RecipeCard name={brew.name}
+        description={brew.description}
+        author={brew.author} />);
 
     topUsersJSX = topUsers.map(user => <UserCard username={user.username}
         bio={user.bio} />);
@@ -60,14 +50,13 @@ export default function Feed() {
 
             <div className="feedWrap">
                 <div className="mainFeed">
-                    {brewMap()}
-                    <RecipeCard />
+                    {feedBrewsJSX}
                 </div>
 
                 <div className="sidebarWrap">
                     <div className="popularRecipesFeed">
                         <div className="sidebarHeader"></div>
-                        <RecipeCard />
+                        {feedBrewsJSX}
                         <div className="sidebarFooter"></div>
                     </div>
 
