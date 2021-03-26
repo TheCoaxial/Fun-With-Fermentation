@@ -38,6 +38,22 @@ module.exports = function (app) {
                 }
             });
     });
+    
+    //For Feed Page
+    //TODO:// Get top contributors
+    app.get("/api/users/feed", (req, res) => {
+        db.User
+            .findAll({})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
 
     // User Brews
     app.get("/api/brew/:userId", (req, res) => {

@@ -13,7 +13,6 @@ class API {
      * @param {String} value 
      */
     setHeader(name, value) {
-
         if(value)
             this.axios.defaults.headers.common[name] = value;
         else

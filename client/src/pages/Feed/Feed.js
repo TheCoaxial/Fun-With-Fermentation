@@ -1,59 +1,68 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Header from "../../components/Header/Header";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import UserCard from "../../components/UserCard/UserCard"
+import API from "../../utils/api";
 import "./Feed.css";
 import "../../App.css";
+import axios from 'axios';
 
 export default function Feed() {
 
     const [brews, setBrews] = useState([]);
 
+    const [topUsers, setTopUsers] = useState([]);
+    let topUsersJSX;
+
+    let feedBrewsJSX;
+
+
     useEffect(() => {
-        getBrews();
+        API.getBrews()
+            .then(data => {
+                console.log(data.data);
+                setBrews(data.data);
+            })
+            .catch(err => {
+                console.err(err);
+            });
+
+        API.getTopUsers()
+            .then(data => {
+                setTopUsers(data.data)
+            })
+            .catch(err => {
+                console.err(err);
+            });
     }, []);
 
-    const getBrews = async() => {
-        const gottenBrews = await axios.get("/api/brew/all");
-        setBrews(gottenBrews);
-    };
+    feedBrewsJSX = brews.map(brew => <RecipeCard name={brew.name}
+        description={brew.description}
+        author={brew.author} />);
 
-    const brewMap = () => {
-        if (brews.length) {
-            return brews.map(brew => {
-                return(
-                    <RecipeCard
-                        name={brew.name}
-                        description={brew.description}
-                        author={brew.author}
-                        ingredients={brew.ingredients}
-                    />
-                );
-            });
-        }
-    };
+    topUsersJSX = topUsers.map(user => <UserCard username={user.username}
+        bio={user.bio} />);
 
-    return(
+
+    return (
         <div id="Feed">
             <Header />
 
             <div className="feedWrap">
                 <div className="mainFeed">
-                    {brewMap()}
-                    <RecipeCard />
+                    {feedBrewsJSX}
                 </div>
 
                 <div className="sidebarWrap">
                     <div className="popularRecipesFeed">
                         <div className="sidebarHeader"></div>
-                        <RecipeCard />
+                        {feedBrewsJSX}
                         <div className="sidebarFooter"></div>
                     </div>
 
                     <div className="popularUsersFeed">
                         <div className="sidebarHeader"></div>
-                        <UserCard />
+                        {topUsersJSX}
                         <div className="sidebarFooter"></div>
                     </div>
                 </div>
