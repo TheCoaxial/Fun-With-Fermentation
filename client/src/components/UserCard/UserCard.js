@@ -12,13 +12,15 @@ export default function UserCard({ username, bio, newBrew, score }) {
                 <div className="userFlex">
                     <img src="./sample-avatar.png" alt="sample avatar" className="avatar" />
                     <h3 className="title">
-                        {username}
+                        {username}  <span id="score">Score: {score}</span>
                     </h3>
+
                 </div>
-                
+
                 <p className="bio">
-                    {bio}
+                    {bio || <p>NO BIO</p>}
                 </p>
+
             </div>
         </div>
 
