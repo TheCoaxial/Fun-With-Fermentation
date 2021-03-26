@@ -112,6 +112,47 @@ module.exports = function (app) {
             });
     });
 
+    // Get Brews with Tag
+    app.get("/api/brewTags/:tagId", (req, res) => {
+        db.BrewTags
+            .findAll({
+                where: {
+                    TagId: req.params.tagId
+                }
+            })
+            .then(data => {
+                console.log(data);
+                db.Brew
+                    .findAll({
+                        where: {
+                            id: data.BrewId
+                        }
+                    })
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    //For Feed Page
+    //TODO:// Get top contributors
+    app.get("/api/users/feed", (req, res) => {
+        db.User
+            .findAll({})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
     // POST ROUTES
 
     // New Brew
@@ -190,6 +231,20 @@ module.exports = function (app) {
             });
     });
 
+    // New Tag
+    app.post("/api/:brewId/new-tag", (req, res) => {
+        db.Tag
+            .create({
+                BrewId: req.params.brewId,
+                name: req.body.name
+            })
+            .then(newTag => res.json(newTag))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
     // DELETE ROUTES
 
     // Delete Brew
@@ -259,6 +314,21 @@ module.exports = function (app) {
             .destory({
                 where: {
                     id: req.params.stepId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Tag
+    app.delete("/api/delete-tag/:tagId", (req, res) => {
+        db.Tag
+            .destroy({
+                where: {
+                    id: req.params.tagId
                 }
             })
             .then(data => res.json(data))
