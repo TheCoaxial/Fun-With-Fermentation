@@ -7,6 +7,7 @@ import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
 import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
+import RecipeCardFav from "../../components/RecipeCardFav/RecipeCardFav";
 
 export default class Profile extends Component {
   constructor(props) {
@@ -37,8 +38,9 @@ export default class Profile extends Component {
 
       // An api call to favorites will go here
 
-      api.getUserFavorite(5,1).then(res =>{
+      api.getBrews().then(res =>{
         console.log(res);
+        this.setState({ userFav: res.data });
       })
 
       // An api call to retrieve following will go here
@@ -70,6 +72,7 @@ export default class Profile extends Component {
     const score = this.state.contributionScore;
     const person = this.state;
     const brews = this.state.brews;
+    const userFav = this.state.userFav;
     
    
 
@@ -123,7 +126,6 @@ export default class Profile extends Component {
 
           <div className="mainFlexWrap">
               <div className="currentBrews">
-                  What is this?
                   <CurrentBrews />
               </div>
 
@@ -131,6 +133,7 @@ export default class Profile extends Component {
                 <div className="vertical-flex">
                   <div className="popularRecipesFeed">
                       <div className="sidebarHeader"><h3 className="white header">Top Recipes</h3></div>
+                      {console.log(" Inside profile",brews)}
                       <RecipeCard brews = { brews } />
                       <div className="sidebarFooter"></div>
                   </div>
@@ -145,7 +148,7 @@ export default class Profile extends Component {
 
                   <div className="favoriteRecipesFeed">
                       <div className="sidebarHeader"><h3 className="white header">Favorite Recipes</h3></div>
-                      <RecipeCard brews = { brews }/>
+                      <RecipeCardFav brews = { userFav }/>
                       <div className="sidebarFooter"></div>
                   </div>
               </div>
