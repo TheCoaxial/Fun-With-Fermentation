@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Switch, Route, Link, BrowserRouter as Router  } from "react-router-dom";
 
 // import Container from "../src/components/Container";
-// import Brew from "../src/pages/Brew";
+import Brew from "../src/pages/Brew";
 // import Profile from "../src/pages/Profile";
 // import Footer from "../src/components/Footer";
 // import logo from './logo.svg';
@@ -16,8 +16,6 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Home from "./pages/home";
 import Profile from "./pages/Profile";
-import BoardUser from "./components/userpage/index";
-
 
 class App extends Component {
     constructor(props) {
@@ -62,14 +60,6 @@ class App extends Component {
                   Home
                 </Link>
               </li>
-  
-              {currentUser && (
-                <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    User
-                  </Link>
-                </li>
-              )}
             </div>
   
             {currentUser ? (
@@ -88,7 +78,12 @@ class App extends Component {
                 <Link to={"/feed"} className="nav-link">
                   Feed
                 </Link>
-              </li>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/brew"} className="nav-link">
+                    Brew
+                  </Link>
+                </li>
               </div>
             ) : (
               <div className="navbar-nav ml-auto">
@@ -106,8 +101,6 @@ class App extends Component {
               </div>
             )}
             </nav>
-            
-          
   
           <div className="container mt-3">
             <Switch>
@@ -116,15 +109,14 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/feed" component={Feed} />
-              <Route path="/user" component={BoardUser} />
-              
+              <Route exact path="/brew" component={Brew} />      
             </Switch>
           </div>
           </Router>
         </div>
       );
     }
-  }
+};
 
 
 // function App() {
