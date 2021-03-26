@@ -76,13 +76,9 @@ module.exports = function (app) {
     });
 
     // Specific Brew
-    app.get("/api/brew/:brewId", (req, res) => {
+    app.get("/api/brew/specific/:brewId", (req, res) => {
         db.Brew
-            .findAll({
-                where: {
-                    id: req.params.brewId
-                }
-            })
+            .findByPk(Number(req.params.brewId))
             .then(data => {
                 res.json(data);
             })
