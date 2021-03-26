@@ -175,6 +175,21 @@ module.exports = function (app) {
             });
     });
 
+    // New Step
+    app.post("/api/:brewId/new-step", (req, res) => {
+        db.Step
+            .create({
+                BrewId: req.params.brewId,
+                duration: req.body.duration,
+                instructions: req.body.instructions
+            })
+            .then(newStep => res.json(newStep))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
     // DELETE ROUTES
 
     // Delete Brew
