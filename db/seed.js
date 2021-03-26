@@ -80,6 +80,12 @@ async function insertData() {
     await insertIngredient("ingredient2", 13, "fluid ounce", 3);
     await insertIngredient("ingredient3", 17, "gallon", 3);
 
+    await editIngredient({
+        name: "edited ingredient2",
+        quantity: 48,
+        quantityUnits: "edited units"
+    }, 2);
+
     /**
     * Steps
     */
@@ -168,6 +174,24 @@ async function editUser(body, userId) {
  */
 async function editComment(body, commentId) {
     await fetch(`http://localhost:3001/api/update-comment/${commentId}`, {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    return;
+}
+
+/**
+ * 
+ * @param body {[name:], [quantity:], [quantityUnits:]} 
+ * @param ingredientId  
+ * @returns 
+ */
+async function editIngredient(body, ingredientId) {
+    await fetch(`http://localhost:3001/api/update-ingredient/${ingredientId}`, {
         method: "PUT",
         body: JSON.stringify(body),
         headers: {
