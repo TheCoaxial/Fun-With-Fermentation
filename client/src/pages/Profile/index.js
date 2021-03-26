@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
 // import Header from "../profile/index";
-import FollowingCard from "../../components/FollowingList/FollowingList";
+// import FollowingCard from "../../components/FollowingList/FollowingList";
 import api from "../../utils/api";
 import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
 import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
-import RecipeCardFav from "../../components/RecipeCardFav/RecipeCardFav";
+
 
 export default class Profile extends Component {
   constructor(props) {
@@ -82,34 +82,25 @@ export default class Profile extends Component {
 
     let FollowingJSX;
 
-    FollowingJSX = recentlyVisited.map(person => <UserCard username={person.name}
+    FollowingJSX = following.map(person => <UserCard username={person.name}
       bio={person.bio}
-      score={person.score}
+      score={person.score} />)
 
-    />)
+    let LastViewedJSX;
+
+    LastViewedJSX =  recentlyVisited.map(person => <UserCard username={person.name}
+      bio={person.bio}
+      score={person.score} />)
+
+    let FavBrewsJSX = userFav.map(brew => <RecipeCard name={brew.name}
+      description={brew.description}
+      author={brew.author} />);
+
+    
 
 
     // Currently just displays Info about the user from the DB
     return (
-      // <div className="">
-      //       <header className="">
-      //           <h3>
-      //               <strong>{currentUser.username}</strong> Profile
-      //           </h3>
-      //       </header>
-      //       <p>
-      //           <strong>Web Token:</strong>{" "}
-      //           {currentUser.accessToken}
-      //       </p>
-      //       <p>
-      //           <strong>User Id in DB:</strong>{" "}
-      //           {currentUser.id}
-      //       </p>
-      //       <p>
-      //           <strong>User Email:</strong>{" "}
-      //           {currentUser.email}
-      //       </p>
-      // </div>
       <div id="Profile">
         <div className="leftColumn">
           {/* {console.log("Love", brews)} */}
@@ -124,8 +115,7 @@ export default class Profile extends Component {
             <div className="popularUsersFeed">
               <div className="sidebarHeader"><h3 className="white header">Following:</h3></div>
               {/* {console.log("Inside Profile",person)} */}
-              <FollowingCard
-                people={following} />
+                {LastViewedJSX}
               <div className="sidebarFooter"></div>
             </div>
 
@@ -159,7 +149,7 @@ export default class Profile extends Component {
 
             <div className="favoriteRecipesFeed">
               <div className="sidebarHeader"><h3 className="white header">Favorite Recipes</h3></div>
-              <RecipeCardFav brews={userFav} />
+              {FavBrewsJSX}
               <div className="sidebarFooter"></div>
             </div>
           </div>
