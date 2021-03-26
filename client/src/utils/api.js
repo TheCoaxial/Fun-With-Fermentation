@@ -121,6 +121,10 @@ class API {
         return this.axios.delete("/api/delete-step/" + stepID);
     }
 
+    deleteTag(tagID) {
+        return this.axios.delete("/api/delete-tag/" + tagID);
+    }
+
     // UPDATE
 
     updateComment(commentID) {
