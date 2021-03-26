@@ -38,7 +38,7 @@ module.exports = function (app) {
                 }
             });
     });
-    
+
     //For Feed Page
     //TODO:// Get top contributors
     app.get("/api/users/feed", (req, res) => {
@@ -75,13 +75,9 @@ module.exports = function (app) {
     });
 
     // Specific Brew
-    app.get("/api/brew/:brewId", (req, res) => {
+    app.get("/api/brew/specific/:brewId", (req, res) => {
         db.Brew
-            .findAll({
-                where: {
-                    id: req.params.brewId
-                }
-            })
+            .findByPk(Number(req.params.brewId))
             .then(data => {
                 res.json(data);
             })
@@ -130,29 +126,29 @@ module.exports = function (app) {
 
     // Get Brews with Tag
     // not sure if i did this right
-/*     app.get("/api/brewTags/:tagId", (req, res) => {
-        db.BrewTags
-            .findAll({
-                where: {
-                    TagId: req.params.tagId
-                }
-            })
-            .then(data => {
-                console.log(data);
-                db.Brew
-                    .findAll({
-                        where: {
-                            id: data.BrewId
-                        }
-                    })
-            })
-            .catch(err => {
-                if (err) {
-                    res.sendStatus(500);
-                    console.error(err);
-                }
-            });
-    }); */
+    /*     app.get("/api/brewTags/:tagId", (req, res) => {
+            db.BrewTags
+                .findAll({
+                    where: {
+                        TagId: req.params.tagId
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                    db.Brew
+                        .findAll({
+                            where: {
+                                id: data.BrewId
+                            }
+                        })
+                })
+                .catch(err => {
+                    if (err) {
+                        res.sendStatus(500);
+                        console.error(err);
+                    }
+                });
+        }); */
 
     //For Feed Page
     //TODO:// Get top contributors
@@ -389,11 +385,11 @@ module.exports = function (app) {
 
         db.User
             .update(body,
-            {
-                where: {
-                    id: req.params.userId
-                }
-            })
+                {
+                    where: {
+                        id: req.params.userId
+                    }
+                })
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.sendStatus(500);
@@ -418,11 +414,11 @@ module.exports = function (app) {
 
         db.Brew
             .update(body,
-            {
-                where: {
-                    id: req.params.brewId
-                }
-            })
+                {
+                    where: {
+                        id: req.params.brewId
+                    }
+                })
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.sendStatus(500);
@@ -451,7 +447,7 @@ module.exports = function (app) {
                     where: {
                         id: req.params.ingredientId
                     }
-            })
+                })
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.sendStatus(500);
@@ -477,7 +473,7 @@ module.exports = function (app) {
                     where: {
                         id: req.params.stepId
                     }
-            })
+                })
             .then(() => res.sendStatus(200))
             .catch(err => {
                 res.sendStatus(500);
