@@ -15,7 +15,7 @@ import Feed from "../src/pages/Feed/Feed.js";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Home from "./pages/home";
-import Profile from "./pages/profile/";
+import Profile from "./pages/Profile/index";
 
 
 
