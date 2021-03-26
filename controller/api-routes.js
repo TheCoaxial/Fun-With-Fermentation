@@ -159,6 +159,22 @@ module.exports = function (app) {
             });
     });
 
+    // New Ingredient
+    app.post("/api/:brewId/new-ingredient", (req, res) => {
+        db.Ingredient
+            .create({
+                BrewId: req.params.brewId,
+                name: req.body.name,
+                quantity: req.body.quantity,
+                quantityUnits: req.body.quantityUnits
+            })
+            .then(newIngredient => res.json(newIngredient))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
     // DELETE ROUTES
 
     // Delete Brew
@@ -198,6 +214,21 @@ module.exports = function (app) {
                 where: {
                     BrewId: req.params.brewId,
                     UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Ingredient
+    app.delete("/api/delete-ingredient/:ingredientId", (req, res) => {
+        db.Ingredient
+            .destroy({
+                where: {
+                    id: req.params.ingredientId
                 }
             })
             .then(data => res.json(data))

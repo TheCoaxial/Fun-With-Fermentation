@@ -15,7 +15,10 @@ module.exports = function (sequelize, DataTypes) {
             }
         },
         quantity: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.INTEGER
+        },
+        quantityUnits: {
+            type: DataTypes.STRING
         }
     });
 
