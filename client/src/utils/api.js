@@ -79,8 +79,20 @@ class API {
         return this.axios.post("/api/" + userID + "/new-brew");
     }
 
+    postComment(userID, brewID) {
+        return this.axios.post("/api/" + userID + "/" + brewID + "/new-comment") ;
+    }
+
     saveNewFavorite(brewID, userID) {
         return this.axios.post("/api/favorite/" + brewID + "/" + userID );
+    }
+
+    postIngredient(brewID) {
+        return this.axios.post("/api/" + brewID + "/new-ingredient");
+    }
+
+    postStep(brewID) {
+        return this.axios.post("/api/" + brewID + "/new-step");
     }
 
     // DELETE
