@@ -106,6 +106,13 @@ async function insertData() {
         instructions: "the duration for this instructions is over 9000!"
     }, 6);
 
+    /**
+    * Tags
+    */
+    await insertTag("Expert", 1);
+    await insertTag("Beginner", 2);
+    await insertTag("Intermediate", 3);
+
     return;
 }
 
@@ -230,7 +237,8 @@ async function insertBrew(brewName, author, UserId) {
         method: "POST",
         body: JSON.stringify({
             name: brewName,
-            author: author
+            author: author,
+            UserId: UserId
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -277,6 +285,20 @@ async function insertStep(duration, instructions, BrewId) {
         body: JSON.stringify({
             duration: duration,
             instructions: instructions,
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    
+    return;
+}
+
+async function insertTag(name, BrewId) {
+    await fetch(`http://localhost:3001/api/${BrewId}/new-tag`, {
+        method: "POST",
+        body: JSON.stringify({
+            name: name
         }),
         headers: {
             'Content-Type': 'application/json'
