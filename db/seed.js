@@ -101,6 +101,11 @@ async function insertData() {
     await insertStep(200, "instruction 2 brew 3", 3);
     await insertStep(50, "instruction 3 brew 3", 3);
 
+    await editStep({
+        duration: 9000,
+        instructions: "the duration for this instructions is over 9000!"
+    }, 6);
+
     return;
 }
 
@@ -192,6 +197,24 @@ async function editComment(body, commentId) {
  */
 async function editIngredient(body, ingredientId) {
     await fetch(`http://localhost:3001/api/update-ingredient/${ingredientId}`, {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    return;
+}
+
+/**
+ * 
+ * @param body {[duration:], [instructions:]} 
+ * @param stepId
+ * @returns 
+ */
+async function editStep(body, stepId) {
+    await fetch(`http://localhost:3001/api/update-step/${stepId}`, {
         method: "PUT",
         body: JSON.stringify(body),
         headers: {
