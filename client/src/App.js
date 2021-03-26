@@ -11,12 +11,13 @@ import './App.css';
 
 import AuthService from "./services/auth.service";
 
-import Feed from "../src/pages/Feed/Feed";
+import Feed from "../src/pages/Feed/Feed.js";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Home from "./pages/home";
-import Profile from "./pages/Profile";
+import Profile from "./pages/profile/index.js";
 import BoardUser from "./components/userpage/index";
+import Brew from "../src/pages/Brew/index.js"
 
 
 class App extends Component {
@@ -117,7 +118,7 @@ class App extends Component {
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/feed" component={Feed} />
               <Route path="/user" component={BoardUser} />
-              
+              <Route path="/brew" component={Brew} />
             </Switch>
           </div>
           </Router>
