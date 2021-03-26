@@ -6,7 +6,7 @@ export default function RecipeCard(props) {
 
     const { name, description, author, ingredients } = props;
     
-    const ingredientMap = () => {
+/*     const ingredientMap = () => {
         if (ingredients.length) {
             return ingredients.map(ingredient => {
                 return(
@@ -20,7 +20,7 @@ export default function RecipeCard(props) {
                 <p>"No Ingredients Found"</p>
             );
         }
-    };
+    }; */
 
     return(
         <div className="recipeCard">
@@ -29,7 +29,7 @@ export default function RecipeCard(props) {
             </h3>
             <h6>Created by { author }</h6>
             <ul>
-                {ingredientMap()}
+{/*                 {ingredientMap()} */}
             </ul>
             <p className="description truncate-overflow">
                 { description }

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
-import Header from "../profile/index";
+import Header from "../../components/Header/Header";
 import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
