@@ -18,7 +18,7 @@ export default function UserDisplay() {
     }, []);
 
     return (<div id="userDisplay">
-        <h2>{userData.username} <span id="score"> Score: {userData.contributionScore}</span></h2>
+        <h2 class="title">{userData.username} <span id="score"> Score: {userData.contributionScore}</span></h2>
         <p>{userData.bio || "No Bio"}</p>
     </div>);
 

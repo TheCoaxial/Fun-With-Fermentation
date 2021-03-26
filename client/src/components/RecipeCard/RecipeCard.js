@@ -2,8 +2,8 @@ import React from "react";
 import "./RecipeCard";
 import "../../App.css";
 
-export default function RecipeCard({ name, description, author}) {
-    
+export default function RecipeCard({ id, UserId, name, description, author }) {
+
     // const ingredientMap = () => {
     //     if (ingredients.length) {
     //         return ingredients.map(ingredient => {
@@ -20,17 +20,17 @@ export default function RecipeCard({ name, description, author}) {
     //     }
     // };
 
-    return(
+    return (
         <div className="recipeCard">
             <h3 className="title">
-                { name }
+                <a href={`/brews/${id}`}>{name}</a>
             </h3>
-            <h6>Created by { author }</h6>
+            <h6>Created by <a href={`/user/${UserId}`}>{author}</a></h6>
             <ul>
                 {/* {ingredientMap()} */}
             </ul>
             <p className="description truncate-overflow">
-                { description }
+                {description}
             </p>
         </div>
     );

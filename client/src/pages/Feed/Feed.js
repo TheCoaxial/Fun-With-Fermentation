@@ -5,7 +5,6 @@ import UserCard from "../../components/UserCard/UserCard"
 import API from "../../utils/api";
 import "./Feed.css";
 import "../../App.css";
-import axios from 'axios';
 
 export default function Feed() {
 
@@ -29,6 +28,7 @@ export default function Feed() {
 
         API.getTopUsers()
             .then(data => {
+                console.log(data.data);
                 setTopUsers(data.data)
             })
             .catch(err => {
@@ -36,18 +36,21 @@ export default function Feed() {
             });
     }, []);
 
-   let sortedUsers = topUsers.sort((a, b) => {
+    let sortedUsers = topUsers.sort((a, b) => {
         return b.contributionScore - a.contributionScore;
     });
 
     feedBrewsJSX = brews.map(brew => <RecipeCard name={brew.name}
         description={brew.description}
-        author={brew.author} />);
+        author={brew.author}
+        id={brew.id} 
+        UserId={brew.UserId}/>);
 
     topUsersJSX = sortedUsers.map(user => <UserCard
         username={user.username}
         bio={user.bio}
-        score={user.contributionScore} />);
+        score={user.contributionScore}
+        id={user.id} />);
 
 
     return (
