@@ -1,9 +1,31 @@
 import React from "react";
-import "./RecipeCard";
+// import "./RecipeCard";
 import "../../App.css";
 
-export default function RecipeCard({ name, description, author}) {
+export default function RecipeCard(props) {
+    console.log(props.brews)
+    const favorites = props.brews.map((brew) => 
     
+        [
+            <div className="recipeCard">
+                <h3 className="title">
+                    {console.log(" recipe return",props.brews)}
+                    { brew.name }
+                </h3>
+                <h6>Created by {brew.author} </h6>
+                <ul>
+                    {/* {ingredientMap()} */}
+                </ul>
+                <p className="description truncate-overflow">
+                    {brew.description}
+                </p>
+            </div>
+        ]
+
+    );
+
+    
+   
     // const ingredientMap = () => {
     //     if (ingredients.length) {
     //         return ingredients.map(ingredient => {
@@ -21,17 +43,8 @@ export default function RecipeCard({ name, description, author}) {
     // };
 
     return(
-        <div className="recipeCard">
-            <h3 className="title">
-                {/* { name } */}
-            </h3>
-            <h6>Created by { author }</h6>
-            <ul>
-                {/* {ingredientMap()} */}
-            </ul>
-            <p className="description truncate-overflow">
-                { description }
-            </p>
+        <div>
+            { favorites }
         </div>
     );
 };
