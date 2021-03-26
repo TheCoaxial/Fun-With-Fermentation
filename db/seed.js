@@ -53,6 +53,18 @@ async function insertData() {
     await insertComment("This Is my brew", "Username1", 1, 2);
     await insertComment("This Is Username3's comment", "Username3", 3, 1);
 
+    await editComment({
+        body: "new comment 1"
+    }, 1);
+
+    await editComment({
+        body: "new comment 2"
+    }, 2);
+    
+    await editComment({
+        body: "new comment 3"
+    }, 3);
+
     /**
     * Ingredients
     */
@@ -138,6 +150,24 @@ async function editBrew(body, brewId) {
  */
 async function editUser(body, userId) {
     await fetch(`http://localhost:3001/api/update-user/${userId}`, {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    return;
+}
+
+/**
+ * 
+ * @param body {[body:]} 
+ * @param commentId  
+ * @returns 
+ */
+async function editComment(body, commentId) {
+    await fetch(`http://localhost:3001/api/update-comment/${commentId}`, {
         method: "PUT",
         body: JSON.stringify(body),
         headers: {
