@@ -1,8 +1,13 @@
 import React, {Component} from 'react';
 import AddInput from "../../components/AddInput/AddInput.js";
+import AuthService from "../../services/auth.service.js";
+import axios from "axios";
 import "./style.css";
 
-class Brew extends Component {
+class NewBrew extends Component {
+
+    axios;
+
     constructor(){
         super();
 
@@ -10,8 +15,20 @@ class Brew extends Component {
             ingredients: [],
             instructions: [],
             classVar: "",
-            placeholderVar: ""
+            placeholderVar: "",
+            currentUser: AuthService.getCurrentUser(),
+            name: "",
+            description: "",
+            title: ""
         }
+
+        this.axios = axios.create();
+        
+    }
+
+
+    postBrew(userID) {
+        return this.axios.post("/api/" + userID + "/new-brew");
     }
 
     append(type) {
@@ -43,6 +60,37 @@ class Brew extends Component {
         }
     }
 
+    // onSubmit() {
+    //     axios.post(`/api/${this.state.classVar}/new-brew`{
+    //         id: this.state.currentUser,
+    //         name: 'Williams'
+    //       }).then(res => {
+    //       const persons = res.data;
+    //       this.setState({ persons });
+    //     })
+    // }
+
+    onChange = (e) => {
+        this.setState({ [e.target.id]: e.target.value });
+      }
+
+      onSubmit = (e) => {
+        e.preventDefault();
+        console.log(this.state.currentUser);
+        console.log(AuthService.getCurrentUser());
+        const { name, description, author: currentUser } = this.state;
+
+        axios.post(`/api/${this.state.currentUser}/new-brew`, { name, description, author: currentUser })
+          .then((res) => {
+            console.log(res)
+            console.log(this.state.id);
+            console.log(this.state.name);
+            console.log(this.state.description);
+            console.log(this.state.author)
+
+          });
+      }
+
     
 
     render(){
@@ -50,10 +98,16 @@ class Brew extends Component {
         const ingredientArg = "ingredient";
         const instructionArg = "instruction";
 
+        
+        const { name, description, author: currentUser } = this.state;
+
         return(
             <div id="brewPage">
 
-                    <input type="text" placeholder="Brew Name" alt="enter the name of your brew" id="brewName"/>
+                <form onSubmit={this.onSubmit}>
+                    
+
+                    <input type="text" placeholder="Brew Name" alt="enter the name of your brew" id="brewName" name="name" value={name} onChange={this.onChange}/>
 
                     <div className="formGroup">
 
@@ -80,21 +134,21 @@ class Brew extends Component {
                         
                     </div>
 
-                    <label for="difficulty">Select the difficulty level of your brew:</label>
-                    <select name="difficulty" id="difficultyDropdown" name="difficulty">
+                    <label htmlFor="difficulty">Select the difficulty level of your brew:</label>
+                    <select name="difficulty" id="difficultyDropdown">
                         <option value="volvo">beginner</option>
                         <option value="saab">intermediate</option>
                         <option value="mercedes">expert</option>
                         <option value="audi">unknown</option>
                     </select>
 
-                    <textarea alt="enter other notes about the brew" name="notes" id="notes" placeholder="Enter any other notes about your brew (optional)"></textarea>
+                    <textarea alt="enter other description about the brew" id="description" placeholder="Enter any additional description about your brew (optional)" name="description" value={description} onChange={this.onChange}></textarea>
 
                     <button type="submit" id="submit">Submit</button>
-
+                </form>
             </div>
         );
     }
 }
 
-export default Brew;
+export default NewBrew;

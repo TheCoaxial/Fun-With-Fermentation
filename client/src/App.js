@@ -12,9 +12,8 @@ import AuthService from "./services/auth.service";
 import Feed from "./pages/Feed/Feed";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import Profile from "./pages/Profile";
-import Brew from "./pages/Brew";
-
+import Profile from "./pages/profile/index.js";
+import Brew from "./pages//NewBrew/index.js";
 class App extends Component {
     constructor(props) {
         super(props);

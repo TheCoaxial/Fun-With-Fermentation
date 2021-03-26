@@ -4,7 +4,7 @@
     justify-content: flex-start;
     width:75%;
     margin:0px auto;
-    height:90vh;
+    height:75vh;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;
@@ -17,6 +17,8 @@
 }
 
 #brewPage textarea {
+    margin:0px auto;
+    display:block;
     font-size:1rem;
     padding:3%;
     height:5rem;
@@ -67,15 +69,18 @@
     margin-top:0;
     padding:2%;
     font-size:1rem;
+    width:88%;
 }
 
 #brewPage label {
     margin-top:10%;
     text-align: center;
     margin-bottom:3%;
+    display: block;
 }
 
 #brewPage #submit {
+    display:block;
     padding:3%;
     font-size:0.8rem;
     width:40%;
