@@ -32,6 +32,6 @@ export default function UserCard(props) {
         { people }
 
         </div>
-        
+
     )
 }
