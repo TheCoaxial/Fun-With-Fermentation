@@ -258,7 +258,7 @@ module.exports = function (app) {
             });
     });
 
-    //update User
+    // Update User
     app.put("/api/update-user/:userId", (req, res) => {
 
         let body = {};
@@ -270,7 +270,8 @@ module.exports = function (app) {
             body["contributionScore"] = req.body["contributionScore"];
         }
 
-        db.User.update(body,
+        db.User
+            .update(body,
             {
                 where: {
                     id: req.params.userId
@@ -283,7 +284,7 @@ module.exports = function (app) {
             });
     });
 
-    //update Brew
+    // Update Brew
     app.put("/api/update-brew/:brewId", (req, res) => {
 
         let body = {};
@@ -298,7 +299,8 @@ module.exports = function (app) {
             body["ingredients"] = req.body["ingredients"];
         }
 
-        db.Brew.update(body,
+        db.Brew
+            .update(body,
             {
                 where: {
                     id: req.params.brewId
@@ -311,4 +313,33 @@ module.exports = function (app) {
             });
     });
 
-}
+    // Update Ingredient
+    app.put("/api/update-ingredient/:ingredientId", (req, res) => {
+
+        let body = {};
+
+        if (req.body["name"]) {
+            body["name"] = req.body["name"];
+        }
+        if (req.body["quantity"]) {
+            body["quantity"] = req.body["quantity"];
+        }
+        if (req.body["quantityUnits"]) {
+            body["quantityUnits"] = req.body["quantityUnits"];
+        }
+
+        db.Ingredient
+            .update(body,
+                {
+                    where: {
+                        id: req.params.ingredientId
+                    }
+            })
+            .then(() => res.sendStatus(200))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+};
