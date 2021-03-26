@@ -31,8 +31,17 @@ module.exports = function (sequelize, DataTypes) {
     Brew.associate = (models) => {
         Brew.hasMany(models.Ingredient);
         Brew.hasMany(models.Comment);
+        Brew.hasMany(models.Step);
         Brew.belongsTo(models.User);
         Brew.belongsToMany(models.User, { through: 'Favorites' });
+    };
+
+    Brew.prototype.totalDuration = () => {
+        return Brew.findAll({
+            attributes: [[sequelize.fn('sum', sequelize.col('duration')), 'totalDuration']],
+            include: [{ model: Step }],
+            raw: true
+        });
     };
 
     return Brew;
