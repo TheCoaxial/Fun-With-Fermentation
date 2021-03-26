@@ -110,17 +110,33 @@ class API {
     }
 
     deleteIngredient(ingredientID) {
-        return this.axios.delete("/api/delete-ingredient" + ingredientID);
+        return this.axios.delete("/api/delete-ingredient/" + ingredientID);
     }
 
     deleteStep(stepID) {
-        return this.axios.delete("/api/delete-step" + stepID);
+        return this.axios.delete("/api/delete-step/" + stepID);
     }
 
     // UPDATE
 
     updateComment(commentID) {
         return this.axios.put("/api/update-comment/" + commentID);
+    }
+
+    updateUser(userID) {
+        return this.axios.put("/api/update-user/" + userID);
+    }
+
+    updateBrew(brewID) {
+        return this.axios.put("/api/update-brew/" + brewID);
+    }
+
+    updateIngredient(ingredientID) {
+        return this.axios.put("/api/update-ingredient/" + ingredientID);
+    }
+
+    updateStep(stepID) {
+        return this.axios.put("/api/update-step/" + stepID);
     }
 
 }
