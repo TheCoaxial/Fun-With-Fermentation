@@ -1,20 +1,31 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Header from "../../components/Header/Header";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import UserCard from "../../components/UserCard/UserCard"
+import API from "../../utils/api";
 import "./Feed.css";
 import "../../App.css";
+import axios from 'axios';
 
 export default function Feed() {
 
     const [brews, setBrews] = useState([]);
 
+    const [topUsers, setTopUsers] = useState([]);
+    let topUsersJSX;
+
     useEffect(() => {
         getBrews();
+        API.getTopUsers()
+            .then(data => {
+                setTopUsers(data.data)
+            })
+            .catch(err => {
+                console.err(err);
+            });
     }, []);
 
-    const getBrews = async() => {
+    const getBrews = async () => {
         const gottenBrews = await axios.get("/api/brew/all");
         setBrews(gottenBrews);
     };
@@ -22,7 +33,7 @@ export default function Feed() {
     const brewMap = () => {
         if (brews.length) {
             return brews.map(brew => {
-                return(
+                return (
                     <RecipeCard
                         name={brew.name}
                         description={brew.description}
@@ -34,7 +45,11 @@ export default function Feed() {
         }
     };
 
-    return(
+    topUsersJSX = topUsers.map(user => <UserCard username={user.username}
+        bio={user.bio} />);
+
+
+    return (
         <div id="Feed">
             <Header />
 
@@ -53,7 +68,7 @@ export default function Feed() {
 
                     <div className="popularUsersFeed">
                         <div className="sidebarHeader"></div>
-                        <UserCard />
+                        {topUsersJSX}
                         <div className="sidebarFooter"></div>
                     </div>
                 </div>
