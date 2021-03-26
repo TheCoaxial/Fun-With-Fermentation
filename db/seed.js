@@ -11,14 +11,39 @@ async function insertData() {
     let user2Token = await insertUser("Username2", "username2@email.com", "unhashedpassword");
     let user3Token = await insertUser("Username3", "username3@email.com", "unhashedpassword");
 
-
-    console.log(user1Token);
     /**
      * Brews
      */
     await insertBrew("Username1's first Brew", "Username1", 1);
     await insertBrew("Username1's second Brew", "Username1", 1);
     await insertBrew("Username2's first Brew", "Username2", 2);
+
+    await editUser({
+        bio: "Hello I am the first user.",
+        contributionScore: 100
+    }, 1);
+    await editUser({
+        bio: "Hello I am the second user, but have the highest contribution.",
+        contributionScore: 200
+    }, 2);
+    await editUser({
+        contributionScore: 5
+    }, 3);
+
+
+    await editBrew({
+        description: "This is my brew description.",
+        name: "Brew 1"
+    }, 1);
+    await editBrew({
+        description: "This is my brew description.",
+        name: "Brew 2"
+    }, 2);
+    await editBrew({
+        description: "This is my brew description.",
+        name: "Brew 3"
+    }, 3);
+
 
 
     /**
@@ -58,6 +83,40 @@ async function insertUser(userName, email, password) {
     });
 
     return res;
+}
+
+/**
+ * 
+ * @param body {[description:], [name:]} 
+ * @param brewId  
+ * @returns 
+ */
+async function editBrew(body, brewId) {
+    await fetch(`http://localhost:3001/api/update-brew/${brewId}`, {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+}
+
+/**
+ * 
+ * @param body {[contributionScore:], [bio:]} 
+ * @param userId  
+ * @returns 
+ */
+async function editUser(body, userId) {
+    await fetch(`http://localhost:3001/api/update-user/${userId}`, {
+        method: "PUT",
+        body: JSON.stringify(body),
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    });
+
+    return;
 }
 
 async function insertBrew(brewName, author, UserId) {

@@ -36,12 +36,18 @@ export default function Feed() {
             });
     }, []);
 
+   let sortedUsers = topUsers.sort((a, b) => {
+        return b.contributionScore - a.contributionScore;
+    });
+
     feedBrewsJSX = brews.map(brew => <RecipeCard name={brew.name}
         description={brew.description}
         author={brew.author} />);
 
-    topUsersJSX = topUsers.map(user => <UserCard username={user.username}
-        bio={user.bio} />);
+    topUsersJSX = sortedUsers.map(user => <UserCard
+        username={user.username}
+        bio={user.bio}
+        score={user.contributionScore} />);
 
 
     return (
@@ -55,13 +61,14 @@ export default function Feed() {
 
                 <div className="sidebarWrap">
                     <div className="popularRecipesFeed">
-                        <div className="sidebarHeader"></div>
+                        <div className="sidebarHeader"><h2>Active Brews</h2></div>
                         {feedBrewsJSX}
                         <div className="sidebarFooter"></div>
                     </div>
 
                     <div className="popularUsersFeed">
-                        <div className="sidebarHeader"></div>
+
+                        <div className="sidebarHeader"><h2>Active Users</h2></div>
                         {topUsersJSX}
                         <div className="sidebarFooter"></div>
                     </div>
