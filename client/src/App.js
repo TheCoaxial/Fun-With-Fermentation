@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Link, BrowserRouter as Router  } from "react-router-dom";
+import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 
 // import Container from "../src/components/Container";
 import Header from "./components/Header/Header";
@@ -14,38 +14,40 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Profile from "./pages/Profile";
 import Brew from "./pages/Brew";
+import UserDisplay from "./pages/UserDisplay";
+import BrewDisplay from "./pages/BrewDisplay";
 
 class App extends Component {
     constructor(props) {
         super(props);
-        
+
         this.logOut = this.logOut.bind(this);
-    
+
         this.state = {
             showModeratorBoard: false,
             showAdminBoard: false,
             currentUser: undefined,
         };
     };
-  
+
     componentDidMount() {
         const user = AuthService.getCurrentUser();
-    
+
         if (user) {
             this.setState({
-                currentUser: user          
+                currentUser: user
             });
         };
     };
-  
+
     logOut() {
         AuthService.logout();
     }
-  
+
     render() {
         const { currentUser } = this.state;
-  
-        return(
+
+        return (
             <Router>
                 <nav className="navbar navbar-expand navbar-dark bg-dark">
                     <Link to={"/"} className="navbar-brand">
@@ -97,11 +99,13 @@ class App extends Component {
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path={["/", "/feed"]} component={Feed} />
                         <Route exact path="/brew" component={Brew} />
+                        <Route path="/user/:userId" component={UserDisplay} />
+                        <Route path="/brews/:brewId" component={BrewDisplay} />
                     </Switch>
                 </div>
                 <Footer />
-          </Router>
-      );
+            </Router>
+        );
     }
 };
 

@@ -61,7 +61,7 @@ class API {
     }
 
     getSpecificBrew(brewID) {
-        return this.axios.get("/api/brew/" + brewID);
+        return this.axios.get("/api/brew/specific/" + brewID);
     }
 
     getUserFavorites(userID) {
