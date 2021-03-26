@@ -109,6 +109,14 @@ class API {
         return this.axios.delete("/api/delete-favorite/" + brewID + "/" + userID);
     }
 
+    deleteIngredient(ingredientID) {
+        return this.axios.delete("/api/delete-ingredient" + ingredientID);
+    }
+
+    deleteStep(stepID) {
+        return this.axios.delete("/api/delete-step" + stepID);
+    }
+
     // UPDATE
 
     updateComment(commentID) {
