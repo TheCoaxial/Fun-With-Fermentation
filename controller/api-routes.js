@@ -128,6 +128,48 @@ module.exports = function (app) {
             });
     });
 
+    // Get Brews with Tag
+    // not sure if i did this right
+/*     app.get("/api/brewTags/:tagId", (req, res) => {
+        db.BrewTags
+            .findAll({
+                where: {
+                    TagId: req.params.tagId
+                }
+            })
+            .then(data => {
+                console.log(data);
+                db.Brew
+                    .findAll({
+                        where: {
+                            id: data.BrewId
+                        }
+                    })
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    }); */
+
+    //For Feed Page
+    //TODO:// Get top contributors
+    app.get("/api/users/feed", (req, res) => {
+        db.User
+            .findAll({})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
     // POST ROUTES
 
     // New Brew
@@ -169,6 +211,51 @@ module.exports = function (app) {
                 UserId: req.params.userId
             })
             .then(newFav => res.json(newFav))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // New Ingredient
+    app.post("/api/:brewId/new-ingredient", (req, res) => {
+        db.Ingredient
+            .create({
+                BrewId: req.params.brewId,
+                name: req.body.name,
+                quantity: req.body.quantity,
+                quantityUnits: req.body.quantityUnits
+            })
+            .then(newIngredient => res.json(newIngredient))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // New Step
+    app.post("/api/:brewId/new-step", (req, res) => {
+        db.Step
+            .create({
+                BrewId: req.params.brewId,
+                duration: req.body.duration,
+                instructions: req.body.instructions
+            })
+            .then(newStep => res.json(newStep))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // New Tag
+    app.post("/api/:brewId/new-tag", (req, res) => {
+        db.Tag
+            .create({
+                BrewId: req.params.brewId,
+                name: req.body.name
+            })
+            .then(newTag => res.json(newTag))
             .catch(err => {
                 res.sendStatus(500);
                 throw err;
@@ -223,6 +310,51 @@ module.exports = function (app) {
             });
     });
 
+    // Delete Ingredient
+    app.delete("/api/delete-ingredient/:ingredientId", (req, res) => {
+        db.Ingredient
+            .destroy({
+                where: {
+                    id: req.params.ingredientId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Step
+    app.delete("/api/delete-step/:stepId", (req, res) => {
+        db.Step
+            .destory({
+                where: {
+                    id: req.params.stepId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Tag
+    app.delete("/api/delete-tag/:tagId", (req, res) => {
+        db.Tag
+            .destroy({
+                where: {
+                    id: req.params.tagId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
     // UPDATE ROUTES
 
     // Update Comment
@@ -243,7 +375,7 @@ module.exports = function (app) {
             });
     });
 
-    //update User
+    // Update User
     app.put("/api/update-user/:userId", (req, res) => {
 
         let body = {};
@@ -255,7 +387,8 @@ module.exports = function (app) {
             body["contributionScore"] = req.body["contributionScore"];
         }
 
-        db.User.update(body,
+        db.User
+            .update(body,
             {
                 where: {
                     id: req.params.userId
@@ -268,7 +401,7 @@ module.exports = function (app) {
             });
     });
 
-    //update Brew
+    // Update Brew
     app.put("/api/update-brew/:brewId", (req, res) => {
 
         let body = {};
@@ -283,7 +416,8 @@ module.exports = function (app) {
             body["ingredients"] = req.body["ingredients"];
         }
 
-        db.Brew.update(body,
+        db.Brew
+            .update(body,
             {
                 where: {
                     id: req.params.brewId
@@ -296,4 +430,59 @@ module.exports = function (app) {
             });
     });
 
-}
+    // Update Ingredient
+    app.put("/api/update-ingredient/:ingredientId", (req, res) => {
+
+        let body = {};
+
+        if (req.body["name"]) {
+            body["name"] = req.body["name"];
+        }
+        if (req.body["quantity"]) {
+            body["quantity"] = req.body["quantity"];
+        }
+        if (req.body["quantityUnits"]) {
+            body["quantityUnits"] = req.body["quantityUnits"];
+        }
+
+        db.Ingredient
+            .update(body,
+                {
+                    where: {
+                        id: req.params.ingredientId
+                    }
+            })
+            .then(() => res.sendStatus(200))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Update Step
+    app.put("/api/update-step/:stepId", (req, res) => {
+
+        let body = {};
+
+        if (req.body["duration"]) {
+            body["duration"] = req.body["duration"];
+        }
+        if (req.body["instructions"]) {
+            body["instructions"] = req.body["instructions"];
+        }
+
+        db.Step
+            .update(body,
+                {
+                    where: {
+                        id: req.params.stepId
+                    }
+            })
+            .then(() => res.sendStatus(200))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+};
