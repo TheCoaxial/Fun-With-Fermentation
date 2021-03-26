@@ -36,7 +36,6 @@ class API {
     register( userData ) {
 
         return this.axios.post("/api/register", userData);
-
     }
 
 
@@ -50,16 +49,14 @@ class API {
     login( userData ) {
 
         return this.axios.post("/api/login", userData);
-
     }
 
     authenticated() {
 
         return this.axios.post("/api/authenticated");
-
     }
 
-    postBrew(userID){
+    postBrew(userID) {
 
         return this.axios.post("/api/" + userID + "/new-brew");
     }
@@ -99,9 +96,14 @@ class API {
         return this.axios.delete("/api/delete-favorite/" + brewID + "/" + userID);
     }
 
-    updateComment(commentID){
+    updateComment(commentID) {
         
         return this.axios.put("/api/update-comment/" + commentID);
+    }
+
+    getUserFavorites(userID) {
+
+        return this.axios.get("/api/favorite/" + userID);
     }
 
 }
