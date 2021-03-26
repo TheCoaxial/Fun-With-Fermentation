@@ -9,6 +9,10 @@ import "../../App.css";
 export default function Feed() {
 
     const [brews, setBrews] = useState([]);
+    // const [currentUser, authCurrentUser] = useState([[currentUser = JSON.parse(localStorage.getItem('user'))]]);
+
+
+
 
     const [topUsers, setTopUsers] = useState([]);
     let topUsersJSX;
@@ -78,4 +82,9 @@ export default function Feed() {
             </div>
         </div>
     )
+    // } else {
+    //    <div>
+    //        <h1>No Token, No entry</h1>
+    //    </div>
+    // }
 }
