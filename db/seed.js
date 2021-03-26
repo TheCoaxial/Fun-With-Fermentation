@@ -68,6 +68,20 @@ async function insertData() {
     await insertIngredient("ingredient2", 13, "fluid ounce", 3);
     await insertIngredient("ingredient3", 17, "gallon", 3);
 
+    /**
+    * Steps
+    */
+    await insertStep(5, "stir ingredient1 into ingredient2", 1);
+    await insertStep(100, "place mixture in fermentation container, allow to sit", 1);
+    await insertStep(5, "add ingredient3 to the mixture", 1);
+
+    await insertStep(5, "instruction 1 on brew 2", 2;
+    await insertStep(150, "instruction 2 on brew 2", 2);
+    await insertStep(15, "instruction 3 on brew 2", 2);
+
+    await insertStep(25, "instruction 1 brew 3", 3);
+    await insertStep(200, "instruction 2 brew 3", 3);
+    await insertStep(50, "instruction 3 brew 3", 3);
 
     return;
 }
@@ -171,6 +185,21 @@ async function insertIngredient(name, quantity, quantityUnits, BrewId) {
             name: name,
             quantity: quantity,
             quantityUnits: quantityUnits
+        }),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    
+    return;
+}
+
+async function insertStep(duration, instructions, BrewId) {
+    await fetch(`http://localhost:3001/api/${BrewId}/new-step`, {
+        method: "POST",
+        body: JSON.stringify({
+            duration: duration,
+            instructions: instructions,
         }),
         headers: {
             'Content-Type': 'application/json'
