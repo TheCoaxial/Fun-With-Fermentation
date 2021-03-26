@@ -51,6 +51,7 @@ export default class Profile extends Component {
 
   render() {
     //hard coding a following list
+    
     const following = [{
       name: "Bob Jim",
       bio: "Moonshiner extrodonair"

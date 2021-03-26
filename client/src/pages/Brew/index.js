@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import AddInput from "../../components/AddInput/AddInput.js";
+import AuthService from "../../services/auth.service";
 import "./style.css";
 
 class Brew extends Component {
@@ -7,6 +8,7 @@ class Brew extends Component {
         super();
 
         this.state = {
+            currentUser: AuthService.getCurrentUser(),
             ingredients: [],
             instructions: [],
             classVar: "",
@@ -47,6 +49,7 @@ class Brew extends Component {
 
     render(){
 
+        console.log(this.state.currentUser);
         const ingredientArg = "ingredient";
         const instructionArg = "instruction";
 
