@@ -9,45 +9,49 @@ import "../../App.css";
 export default function Feed() {
 
     const [brews, setBrews] = useState([]);
+    // const [currentUser, authCurrentUser] = useState([[currentUser = JSON.parse(localStorage.getItem('user'))]]);
+
+   
+
 
     useEffect(() => {
-        getBrews();
+        // getBrews();
     }, []);
 
-    const getBrews = async() => {
-        const gottenBrews = await axios.get("/api/brew/all");
-        setBrews(gottenBrews);
-    };
+    // const getBrews = async() => {
+    //     const gottenBrews = await axios.get("/api/brew/all");
+    //     setBrews(gottenBrews);
+    // };
 
-    const brewMap = () => {
-        if (brews.length) {
-            return brews.map(brew => {
-                return(
-                    <RecipeCard
-                        name={brew.name}
-                        description={brew.description}
-                        author={brew.author}
-                        ingredients={brew.ingredients}
-                    />
-                );
-            });
-        }
-    };
-
+    // const brewMap = () => {
+    //     if (brews.length) {
+    //         return brews.map(brew => {
+    //             return(
+    //                 <RecipeCard
+    //                     name={brew.name}
+    //                     description={brew.description}
+    //                     author={brew.author}
+    //                     ingredients={brew.ingredients}
+    //                 />
+    //             );
+    //         });
+    //     }
+    // };
+    // if(currentUser){
     return(
         <div id="Feed">
             <Header />
 
             <div className="feedWrap">
                 <div className="mainFeed">
-                    {brewMap()}
-                    <RecipeCard />
+                    {/* {brewMap()} */}
+                    {/* <RecipeCard /> */}
                 </div>
 
                 <div className="sidebarWrap">
                     <div className="popularRecipesFeed">
                         <div className="sidebarHeader"></div>
-                        <RecipeCard />
+                        {/* <RecipeCard /> */}
                         <div className="sidebarFooter"></div>
                     </div>
 
@@ -60,4 +64,9 @@ export default function Feed() {
             </div>
         </div>
     )
+    // } else {
+    //    <div>
+    //        <h1>No Token, No entry</h1>
+    //    </div>
+    // }
 }

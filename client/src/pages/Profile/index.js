@@ -38,7 +38,7 @@ export default class Profile extends Component {
     const { currentUser } = this.state;
     // const  currentUserBrews = this.state.userBrews;
     // Currently just displays Info about the user from the DB
-    console.log(currentUser);
+    // console.log(currentUser);
     return (
       <div className="">
             <header className="">

@@ -65,8 +65,8 @@ class App extends Component {
   
               {currentUser && (
                 <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    User
+                  <Link to={"/feed"} className="nav-link">
+                    Feed
                   </Link>
                 </li>
               )}
@@ -84,11 +84,7 @@ class App extends Component {
                     LogOut
                   </a>
                 </li>
-                <li className="nav-item">
-                <Link to={"/feed"} className="nav-link">
-                  Feed
-                </Link>
-              </li>
+                
               </div>
             ) : (
               <div className="navbar-nav ml-auto">
