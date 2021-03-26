@@ -98,6 +98,12 @@ class API {
         return this.axios.post("/api/" + brewID + "/new-step");
     }
 
+    getUserFavorite(brewID,userID) {
+
+        return this.axios.get("/api/favorite/" + brewID + userID);
+    }
+
+   
     postTag(brewID) {
         return this.axios.post("/api/" + brewID + "/new-tag");
     }

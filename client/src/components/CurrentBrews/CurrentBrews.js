@@ -1,5 +1,5 @@
 import React from 'react';
-import { HorizontalBar } from 'react-chartjs-2';
+// import { HorizontalBar } from 'react-chartjs-2';
 
 const state = {
     labels: ['Brew 1', 'Brew 2', 'Brew 3'],
@@ -21,7 +21,7 @@ export default class CurrentBrews extends React.Component {
     return (
         <div>
             <h2>CurrentBrews</h2>
-            <HorizontalBar data={state} />
+            {/* <HorizontalBar data={state} /> */}
         </div>
     );
   }

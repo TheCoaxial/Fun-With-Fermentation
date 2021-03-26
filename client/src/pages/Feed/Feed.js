@@ -10,6 +10,10 @@ import axios from 'axios';
 export default function Feed() {
 
     const [brews, setBrews] = useState([]);
+    // const [currentUser, authCurrentUser] = useState([[currentUser = JSON.parse(localStorage.getItem('user'))]]);
+
+
+
 
     const [topUsers, setTopUsers] = useState([]);
     let topUsersJSX;
@@ -36,7 +40,7 @@ export default function Feed() {
             });
     }, []);
 
-   let sortedUsers = topUsers.sort((a, b) => {
+    let sortedUsers = topUsers.sort((a, b) => {
         return b.contributionScore - a.contributionScore;
     });
 
@@ -76,4 +80,9 @@ export default function Feed() {
             </div>
         </div>
     )
+    // } else {
+    //    <div>
+    //        <h1>No Token, No entry</h1>
+    //    </div>
+    // }
 }
