@@ -13,6 +13,7 @@ export default function UserCard(props) {
                        
                         {person.name}
                     </h3>
+
                 </div>
 
             <p className="external-bio">
