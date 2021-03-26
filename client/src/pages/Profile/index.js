@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
-import Header from "../profile/index";
 import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";

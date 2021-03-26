@@ -15,7 +15,15 @@ export default function Feed() {
     let topUsersJSX;
 
     useEffect(() => {
-        getBrews();
+        API.getBrews()
+            .then(data => {
+                console.log(data.data);
+                setBrews(data.data);
+            })
+            .catch(err => {
+                console.err(err);
+            });
+
         API.getTopUsers()
             .then(data => {
                 setTopUsers(data.data)
@@ -25,10 +33,7 @@ export default function Feed() {
             });
     }, []);
 
-    const getBrews = async () => {
-        const gottenBrews = await axios.get("/api/brew/all");
-        setBrews(gottenBrews);
-    };
+
 
     const brewMap = () => {
         if (brews.length) {

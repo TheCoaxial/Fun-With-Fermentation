@@ -107,6 +107,10 @@ class API {
     getTopUsers() {
         return this.axios.get("/api/users/feed");
     }
+    
+    getBrews() {
+        return this.axios.get("/api/brew/all");
+    };
 
 }
 
