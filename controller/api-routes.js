@@ -253,6 +253,21 @@ module.exports = function (app) {
             });
     });
 
+    // Delete Step
+    app.delete("/api/delete-step/:stepId", (req, res) => {
+        db.Step
+            .destory({
+                where: {
+                    id: req.params.stepId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
     // UPDATE ROUTES
 
     // Update Comment
