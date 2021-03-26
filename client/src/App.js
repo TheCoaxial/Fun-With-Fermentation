@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Switch, Route, Link, BrowserRouter as Router  } from "react-router-dom";
 
 // import Container from "../src/components/Container";
-// import Brew from "../src/pages/Brew";
+import Brew from "../src/pages/Brew";
 // import Profile from "../src/pages/Profile";
 // import Footer from "../src/components/Footer";
 // import logo from './logo.svg';
@@ -113,6 +113,7 @@ class App extends Component {
               <Route exact path="/profile" component={Profile} />
               <Route exact path="/feed" component={Feed} />
               <Route path="/user" component={BoardUser} />
+              <Route path="/brew" component={Brew} />
               
             </Switch>
           </div>
