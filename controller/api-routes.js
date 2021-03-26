@@ -113,7 +113,8 @@ module.exports = function (app) {
     });
 
     // Get Brews with Tag
-    app.get("/api/brewTags/:tagId", (req, res) => {
+    // not sure if i did this right
+/*     app.get("/api/brewTags/:tagId", (req, res) => {
         db.BrewTags
             .findAll({
                 where: {
@@ -135,7 +136,7 @@ module.exports = function (app) {
                     console.error(err);
                 }
             });
-    });
+    }); */
 
     //For Feed Page
     //TODO:// Get top contributors
