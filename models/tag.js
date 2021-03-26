@@ -15,9 +15,9 @@ module.exports = function (sequelize, DataTypes) {
 
     //throws error Add associations on fundemental components first and build outward
 
-    // Tag.associate = (models) => {
-    //     Tag.belongsToMany(models.Brew);
-    // };
+    Tag.associate = (models) => {
+        Tag.belongsToMany(models.Brew, { through: 'BrewTags' });
+    };
 
     return Tag;
 };

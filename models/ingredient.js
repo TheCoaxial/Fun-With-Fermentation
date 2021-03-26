@@ -13,6 +13,12 @@ module.exports = function (sequelize, DataTypes) {
             validate: {
                 len: [2, 50]
             }
+        },
+        quantity: {
+            type: DataTypes.INTEGER
+        },
+        quantityUnits: {
+            type: DataTypes.STRING
         }
     });
 

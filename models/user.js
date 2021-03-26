@@ -51,7 +51,11 @@ module.exports = function (sequelize, DataTypes) {
         User.hasMany(models.Brew);
         User.belongsToMany(models.Brew, { through: 'Favorites' });
 
-    }
+    };
+
+    User.prototype.incrementContributionScore = (num) => {
+        this.contributionScore += num;
+    };
 
     return User;
 
