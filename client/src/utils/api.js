@@ -95,6 +95,10 @@ class API {
         return this.axios.post("/api/" + brewID + "/new-step");
     }
 
+    postTag(brewID) {
+        return this.axios.post("/api/" + brewID + "/new-tag");
+    }
+
     // DELETE
 
     deleteBrew(brewID) {
