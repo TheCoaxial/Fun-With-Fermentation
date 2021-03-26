@@ -1,7 +1,6 @@
 // const { regexp } = require("sequelize/types/lib/operators");
 const db = require("../models");
-const brew = require("../models/brew");
-const user = require("../models/user");
+
 
 module.exports = function (app) {
 
