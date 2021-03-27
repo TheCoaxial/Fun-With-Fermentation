@@ -27,7 +27,7 @@ export default function Feed() {
                 setBrews(data.data);
             })
             .catch(err => {
-                console.err(err);
+                console.log(err);
             });
 
         API.getTopUsers()
@@ -36,7 +36,7 @@ export default function Feed() {
                 setTopUsers(data.data)
             })
             .catch(err => {
-                console.err(err);
+                console.log(err);
             });
     }, []);
 
