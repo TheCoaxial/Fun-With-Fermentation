@@ -49,4 +49,137 @@
     transform: rotate(360deg);
   }
 }
- 
+
+/* -------------------------- */
+/* ------ navbar styles ----- */
+/* -------------------------- */
+
+.navbar {
+  background-color:#282c34;
+}
+
+.navbar a {
+  color:white;
+  text-decoration: none;
+}
+
+.navbar #logo {
+  width:4rem;
+    border:1px solid #be8c60;
+    border-radius:50%;
+    background-color:#d49c6b;
+    padding:0 0.15rem;
+}
+
+.navbar .avatar {
+  width: 3rem;
+  border: 0px solid white;
+  background-color: white;
+  border-radius: 50%;
+  margin:0px auto;
+}
+
+.navbar li {
+  list-style-type: none;
+}
+
+.navbar li .nav-link {
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  margin:0px auto;
+}
+
+
+/* -------------------------- */
+/* ---- logged in navbar ---- */
+/* -------------------------- */
+
+
+.navbar-loggedIn {
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  padding:1rem 3rem 1rem 3rem;
+}
+
+.navbar .userSpecific-navWrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width:15%
+}
+
+
+
+.navbar li .nav-link.newBrew-button {
+  background-color:#d49c6b;
+  color:white;
+  padding:1rem 2rem 1rem 2rem;
+  margin-right:4rem;
+}
+
+.navbar .classicNavButton-wrap {
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+}
+
+.navbar .subMenu-wrap:hover .userMenu-showHide {
+  display:block;
+  z-index:5;
+}
+
+.navbar .subMenu-wrap .userMenu-showHide {
+  position:absolute;
+  background-color:white;
+  color:black;
+  z-index:5;
+  border:1px solid black;
+  text-align:center;
+  padding-left:0;
+  padding:1%;
+  right:0;
+  width:10rem;
+  z-index:5;
+  top:4rem;
+}
+
+.navbar .subMenu-wrap:hover .userMenu-showHide li a,
+.navbar .subMenu-wrap:hover .userMenu-showHide li {
+  color:black;
+  display:block;
+}
+
+.navbar .subMenu-wrap .userMenu-showHide {
+  display:none;
+}
+
+.userMenu-showHide li {
+  padding:5%;
+}
+
+
+/* -------------------------- */
+/* --- logged out navbar ---- */
+/* -------------------------- */
+
+.navbar-loggedOut li .nav-link.classic-button {
+  background-color:#d49c6b;
+  color:white;
+  padding:1rem 2rem 1rem 2rem;
+  width:5rem;
+  text-align: center;
+}
+
+.navbar-loggedOut {
+  display:flex;
+  flex-direction:row;
+  justify-content: flex-end;
+  padding:1rem;
+}
+
+.navbar-loggedOut li:nth-child(1) {
+  margin-right:4rem;
+}

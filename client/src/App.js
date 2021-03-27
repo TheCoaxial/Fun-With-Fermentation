@@ -56,44 +56,69 @@ class App extends Component {
                     </Link>
 
                     {currentUser ? (
-                        <div className="navbar-nav ml-auto">
-                            <li className="nav-item">
+                        <div className="navbar-nav ml-auto navbar-loggedIn">
+                             <li className="nav-item">
+                                <Link to={"/feed"} className="nav-link">
+                                <img src="./logo.png" alt="beer logo" className="logo" id="logo"/>
+                                    {/* Feed */}
+                                </Link>
+                            </li>
+
+                            <div class="userSpecific-navWrap">
+
+                            <li className="nav-item classicNavButton-wrap">
+                                <Link to={"/brew"} className="nav-link newBrew-button">
+                                    Create a New Brew
+                                </Link>
+                            </li>
+
+                            <li className="nav-item subMenu-wrap">
                                 <Link to={"/profile"} className="nav-link">
+                                <img src="./sample-avatar.png" alt="user avatar" className="avatar"/>
                                     {currentUser.username}
                                 </Link>
+
+                                <ul class="userMenu-showHide">
+                                <li className="nav-item">
+                                        <Link to={"/profile"} className="nav-link">
+                                            Profile
+                                        </Link>
+                                    </li>
+                                    
+                                    <li className="nav-item">
+                                        <a href="/login" className="nav-link" onClick={this.logOut}>
+                                            LogOut
+                                        </a>
+                                    </li>
+
+                                    
+                                </ul>
                             </li>
-                            <li className="nav-item">
-                                <a href="/login" className="nav-link" onClick={this.logOut}>
-                                    LogOut
-                                </a>
-                            </li>
-                            <li className="nav-item">
-                                <Link to={"/feed"} className="nav-link">
-                                    Feed
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to={"/brew"} className="nav-link">
-                                    Brew
-                                </Link>
-                            </li>
+
+                            </div>
+                            
+                           
+                            
+
+                            
+
                         </div>
                     ) : (
-                        <div className="navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <Link to={"/login"} className="nav-link">
+                        <div className="navbar-nav ml-auto navbar-loggedOut">
+                            <li className="nav-item classicNavButton-wrap">
+                                <Link to={"/login"} className="nav-link classic-button">
                                     Login
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link to={"/register"} className="nav-link">
+                            <li className="nav-item classicNavButton-wrap">
+                                <Link to={"/register"} className="nav-link classic-button">
                                     Sign Up
                                 </Link>
                             </li>
                         </div>
                     )}
                 </nav>
-                <Header />
+                {/* <Header /> */}
                 <div className="container mt-3">
                     <Switch>
                         <Route exact path="/login" component={Login} />

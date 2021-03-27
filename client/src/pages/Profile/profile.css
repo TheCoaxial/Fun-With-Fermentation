@@ -7,7 +7,7 @@
     flex-direction:row;
     justify-content: space-around;
     overflow-y: scroll;
-    height:90vh;
+    height:80vh;
 }
 
 #Profile .header {
