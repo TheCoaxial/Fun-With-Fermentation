@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AddInput from "../../components/AddInput/AddInput.js";
 import AuthService from "../../services/auth.service.js";
-import axios from "axios";
 import "./style.css";
 import API from '../../utils/api.js';
 
@@ -10,13 +9,10 @@ class NewBrew extends Component {
     constructor() {
         super();
 
-
-        console.log(AuthService.getCurrentUser());
-
         this.state = {
             currentUser: AuthService.getCurrentUser(),
-            ingredients: [],
-            instructions: [],
+            ingredients: [""],
+            instructions: [""],
             classVar: "",
             placeholderVar: "",
             name: "",
@@ -24,89 +20,80 @@ class NewBrew extends Component {
             title: ""
         }
 
-        this.axios = axios.create();
 
     }
 
+    handleAppend(e, type) {
+        e.preventDefault();
 
-    postBrew(userID) {
-        return this.axios.post("/api/" + userID + "/new-brew");
-    }
-
-    append(type) {
         if (type === "ingredient") {
-            this.setState({
-                ingredients: [...this.state.ingredients,
-                <AddInput className={this.state.classVar} placeholder={this.state.placeholderVar} />
-                ]
-            });
-
-
+            this.setState({ ingredients: [...this.state.ingredients, ""] });
         } else if (type === "instruction") {
-
-            this.setState({
-                instructions: [...this.state.instructions,
-                <AddInput className={this.state.classVar} placeholder={this.state.placeholderVar} />
-                ]
-            });
-
-        }
-
-    }
-
-    handleAppend(type) {
-        if (type === "ingredient") {
-            this.setState({ classVar: "ingredient", placeholderVar: "Please enter another ingredient" }, () => this.append(type));
-        } else if (type === "instruction") {
-            this.setState({ classVar: "instruction", placeholderVar: "Please enter another instruction" }, () => this.append(type));
+            this.setState({ instructions: [...this.state.instructions, ""] });
         }
     }
-
-    // onSubmit() {
-    //     axios.post(`/api/${this.state.classVar}/new-brew`{
-    //         id: this.state.currentUser,
-    //         name: 'Williams'
-    //       }).then(res => {
-    //       const persons = res.data;
-    //       this.setState({ persons });
-    //     })
-    // }
 
     onChange = (e) => {
-        this.setState({ [e.target.name]: e.target.value });
+
+        if (e.target.name == "instructions" || e.target.name == "ingredients") {
+            let id = e.target.id.split("-")[1];
+            let tempArray = this.state[e.target.name];
+            tempArray[id] = e.target.value;
+            this.setState({ [e.target.name]: tempArray });
+            console.log(tempArray);
+        } else {
+            this.setState({ [e.target.name]: e.target.value });
+        }
+
     }
 
     onSubmit = (e) => {
         e.preventDefault();
+
         const { title, description } = this.state;
 
-        let userData = AuthService.getCurrentUser()
-        console.log(userData);
+        let userData = AuthService.getCurrentUser();
 
-        axios.post(`/api/${userData.id}/new-brew`, {
-            name: title,
-            author: userData.username,
-            UserId: userData.id,
-            description: description
+        API.postBrew(userData.id, title, description, userData.username)
+            .then(data => {
+                let brewId = data.data.id;
 
-        })
-            .then((res) => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
+                this.state.ingredients.forEach(ingredient => {
+                    API.postIngredient(brewId, ingredient);
+                });
+
+                this.state.instructions.forEach(instruction => {
+                    API.postStep(brewId, instruction);
+                });
             });
-
-
     }
 
 
 
     render() {
 
-        console.log(this.state.currentUser);
         const ingredientArg = "ingredient";
         const instructionArg = "instruction";
+
+        let ingredientCount = -1;
+        let ingredientsJSX = this.state.ingredients.map(ingredient => {
+            ingredientCount += 1;
+            return (<input type="text" placeholder="Enter Ingredient Here"
+                alt="enter the first ingredient" name="ingredients" id={`ingredients-${ingredientCount}`} value={ingredient}
+                onChange={this.onChange} className="ingredient" />);
+        });
+
+
+        let instructionsCount = -1;
+        let instructionsJSX = this.state.instructions.map(instruction => {
+            instructionsCount += 1;
+            return (<input type="text" placeholder="Enter Instruction Here"
+                alt="enter the first instruction" name="instructions" id={`instructions-${instructionsCount}`} value={instruction}
+                onChange={this.onChange} className="instruction" />);
+        })
+
+
+
 
 
         return (
@@ -120,12 +107,10 @@ class NewBrew extends Component {
                     <div className="formGroup">
 
                         <div className="ingredients">
-                            <input type="text" placeholder="Enter your first ingredient here" alt="enter the first instruction" className="ingredient" />
-
-                            {this.state.ingredients.map(ingredient => ingredient)}
+                            {ingredientsJSX}
                         </div>
 
-                        <button href="#" onClick={() => this.handleAppend(ingredientArg)}>Add Another Ingredient</button>
+                        <button onClick={(e) => this.handleAppend(e, ingredientArg)}>Add Another Ingredient</button>
 
                     </div>
 
@@ -133,12 +118,10 @@ class NewBrew extends Component {
 
 
                         <div className="instructions">
-                            <input type="text" placeholder="Enter your first instruction here" alt="enter the first instruction" className="instruction" />
-
-                            {this.state.instructions.map(instruction => instruction)}
+                            {instructionsJSX}
                         </div>
 
-                        <button href="#" onClick={() => this.handleAppend(instructionArg)}>Add Another Instruction</button>
+                        <button onClick={(e) => this.handleAppend(e, instructionArg)}>Add Another Instruction</button>
 
                     </div>
 
@@ -161,4 +144,4 @@ class NewBrew extends Component {
     }
 }
 
-export default NewBrew;  
+export default NewBrew;

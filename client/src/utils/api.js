@@ -102,18 +102,15 @@ class API {
         });
     }
 
-    postIngredient(brewID, name, quantity, quantityUnits) {
+    postIngredient(brewID, name) {
         return this.axios.post("/api/" + brewID + "/new-ingredient", {
             name: name,
-            quantity: quantity,
-            quantityUnits: quantityUnits,
             BrewId: brewID
         });
     }
 
-    postStep(brewID, duration, instructions) {
+    postStep(brewID, instructions) {
         return this.axios.post("/api/" + brewID + "/new-step", {
-            duration: duration,
             instructions: instructions,
             BrewId: brewID
         });
