@@ -78,34 +78,50 @@ class API {
 
     // POST
 
-    postBrew(userID) {
-        return this.axios.post("/api/" + userID + "/new-brew");
+    postBrew(userID, name, description, username) {
+        return this.axios.post("/api/" + userID + "/new-brew", {
+            name: name,
+            description: description,
+            author: username
+        });
     }
 
-    postComment(userID, brewID) {
-        return this.axios.post("/api/" + userID + "/" + brewID + "/new-comment") ;
+    postComment(userID, brewID, username, body) {
+        return this.axios.post("/api/" + userID + "/" + brewID + "/new-comment", {
+            body: body,
+            author: username,
+            BrewId: brewID
+        });
     }
 
     saveNewFavorite(brewID, userID) {
-        return this.axios.post("/api/favorite/" + brewID + "/" + userID);
+        return this.axios.post("/api/favorite/" + brewID + "/" + userID, {
+            BrewId: brewID,
+            UserId: userID
+        });
     }
 
-    postIngredient(brewID) {
-        return this.axios.post("/api/" + brewID + "/new-ingredient");
+    postIngredient(brewID, name, quantity, quantityUnits) {
+        return this.axios.post("/api/" + brewID + "/new-ingredient", {
+            name: name,
+            quantity: quantity,
+            quantityUnits: quantityUnits,
+            BrewId: brewID
+        });
     }
 
-    postStep(brewID) {
-        return this.axios.post("/api/" + brewID + "/new-step");
+    postStep(brewID, duration, instructions) {
+        return this.axios.post("/api/" + brewID + "/new-step", {
+            duration: duration,
+            instructions: instructions,
+            BrewId: brewID
+        });
     }
-
-    getUserFavorite(brewID,userID) {
-
-        return this.axios.get("/api/favorite/" + brewID + userID);
-    }
-
    
-    postTag(brewID) {
-        return this.axios.post("/api/" + brewID + "/new-tag");
+    postTag(brewID, name) {
+        return this.axios.post("/api/" + brewID + "/new-tag", {
+            name: name
+        });
     }
 
     // DELETE
