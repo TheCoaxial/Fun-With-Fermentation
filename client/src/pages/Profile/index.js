@@ -38,7 +38,7 @@ export default class Profile extends Component {
 
     // An api call to favorites will go here
 
-    api.getBrews().then(res => {
+    api.getUserFavorites().then(res => {
       console.log(res);
       this.setState({ userFav: res.data });
     })
