@@ -43,6 +43,7 @@
     background-color:black;
     padding:2rem;
     padding-left:0;
+    z-index:5;
 }
 
 #Feed .sidebarWrap .sidebarFooter {
