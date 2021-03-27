@@ -1,4 +1,4 @@
-.userCard .avatar {
+/* .userCard .avatar {
     display: block;
     width:20%;
     margin-right:0.5rem;
@@ -14,4 +14,12 @@
     display:flex;
     flex-direction: column;
     justify-content: center;
+} */
+
+.userCard {
+    margin-top:1rem;
+}
+
+.sidebarWrap {
+    padding-left:5%;
 }
