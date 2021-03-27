@@ -13,7 +13,7 @@ class API {
      * @param {String} value 
      */
     setHeader(name, value) {
-        if(value)
+        if (value)
             this.axios.defaults.headers.common[name] = value;
         else
             delete this.axios.defaults.headers.common[name];
@@ -71,7 +71,7 @@ class API {
     getSpecificFavorite(userID, brewID) {
         return this.axios.get("/api/favorite/" + brewID + "/" + userID);
     }
-    
+
     getTopUsers() {
         return this.axios.get("/api/users/feed");
     }
@@ -90,7 +90,8 @@ class API {
         return this.axios.post("/api/" + userID + "/" + brewID + "/new-comment", {
             body: body,
             author: username,
-            BrewId: brewID
+            BrewId: brewID,
+            UserId: userID
         });
     }
 
@@ -117,7 +118,7 @@ class API {
             BrewId: brewID
         });
     }
-   
+
     postTag(brewID, name) {
         return this.axios.post("/api/" + brewID + "/new-tag", {
             name: name
