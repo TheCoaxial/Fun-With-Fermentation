@@ -64,7 +64,7 @@ class App extends Component {
                                 </Link>
                             </li>
 
-                            <div class="userSpecific-navWrap">
+                            <div className="userSpecific-navWrap">
 
                             <li className="nav-item classicNavButton-wrap">
                                 <Link to={"/brew"} className="nav-link newBrew-button">
@@ -78,7 +78,7 @@ class App extends Component {
                                     {currentUser.username}
                                 </Link>
 
-                                <ul class="userMenu-showHide">
+                                <ul className="userMenu-showHide">
                                 <li className="nav-item">
                                         <Link to={"/profile"} className="nav-link">
                                             Profile

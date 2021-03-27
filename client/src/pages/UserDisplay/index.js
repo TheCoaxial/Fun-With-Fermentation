@@ -31,7 +31,7 @@ export default function UserDisplay() {
         UserId={brew.UserId} />);
 
     return (<div id="userDisplay">
-        <h2 class="title">{userData.username} <span id="score"> Score: {userData.contributionScore}</span></h2>
+        <h2 className="title">{userData.username} <span id="score"> Score: {userData.contributionScore}</span></h2>
         <p>{userData.bio || "No Bio"}</p>
 
         <h3>Brews</h3>

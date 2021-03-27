@@ -4,7 +4,7 @@ import './styles.css';
 export default function Comment({ author, body, createdAt ,UserId}) {
 
     return (
-        <div class="comment">
+        <div className="comment">
             <p><a href={`/user/${UserId}`}>{author}</a></p>
             <p>{body}</p>
             <p>{createdAt}</p>

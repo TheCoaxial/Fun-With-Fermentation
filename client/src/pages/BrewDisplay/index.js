@@ -26,7 +26,9 @@ export default function BrewDisplay() {
             })
     }, []);
 
-    let commentsJSX = comments.map(comment => <Comment body={comment.body}
+    let commentsJSX = comments.map(comment => <Comment 
+        key={comment.createdAt}
+        body={comment.body}
         createdAt={comment.createdAt}
         author={comment.author}
         UserId={comment.UserId} />);
