@@ -12,8 +12,10 @@ import AuthService from "./services/auth.service";
 import Feed from "./pages/Feed/Feed";
 import Login from "./pages/login";
 import Register from "./pages/register";
+
+
 import Profile from "./pages/Profile";
-import Brew from "./pages/Brew";
+import NewBrew from "./pages/NewBrew";
 import UserDisplay from "./pages/UserDisplay";
 import BrewDisplay from "./pages/BrewDisplay";
 
@@ -98,7 +100,7 @@ class App extends Component {
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path={["/", "/feed"]} component={Feed} />
-                        <Route exact path="/brew" component={Brew} />
+                        <Route exact path="/brew" component={NewBrew} />
                         <Route path="/user/:userId" component={UserDisplay} />
                         <Route path="/brews/:brewId" component={BrewDisplay} />
                     </Switch>
