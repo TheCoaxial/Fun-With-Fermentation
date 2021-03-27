@@ -8,7 +8,6 @@ module.exports = function (sequelize, DataTypes) {
         },
         duration: {
             type: DataTypes.INTEGER,
-            allowNull: false,
         },
         instructions: {
             type: DataTypes.TEXT,

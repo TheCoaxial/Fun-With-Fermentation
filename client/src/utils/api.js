@@ -109,9 +109,8 @@ class API {
         });
     }
 
-    postStep(brewID, duration, instructions) {
+    postStep(brewID, instructions) {
         return this.axios.post("/api/" + brewID + "/new-step", {
-            duration: duration,
             instructions: instructions,
             BrewId: brewID
         });

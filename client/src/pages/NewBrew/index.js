@@ -9,10 +9,6 @@ class NewBrew extends Component {
     constructor() {
         super();
 
-
-
-        console.log(AuthService.getCurrentUser());
-
         this.state = {
             currentUser: AuthService.getCurrentUser(),
             ingredients: [""],
@@ -39,8 +35,7 @@ class NewBrew extends Component {
 
     onChange = (e) => {
 
-
-        if (e.target.name == "intructions" || e.target.name == "ingredients") {
+        if (e.target.name == "instructions" || e.target.name == "ingredients") {
             let id = e.target.id.split("-")[1];
             let tempArray = this.state[e.target.name];
             tempArray[id] = e.target.value;
@@ -54,6 +49,7 @@ class NewBrew extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
+
         const { title, description } = this.state;
 
         let userData = AuthService.getCurrentUser();
@@ -64,6 +60,10 @@ class NewBrew extends Component {
 
                 this.state.ingredients.forEach(ingredient => {
                     API.postIngredient(brewId, ingredient);
+                });
+
+                this.state.instructions.forEach(instruction => {
+                    API.postStep(brewId, instruction);
                 });
             });
     }
