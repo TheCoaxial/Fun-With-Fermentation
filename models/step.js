@@ -9,6 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         duration: {
             type: DataTypes.INTEGER,
         },
+        // add duration units
         instructions: {
             type: DataTypes.TEXT,
             length: "long",
