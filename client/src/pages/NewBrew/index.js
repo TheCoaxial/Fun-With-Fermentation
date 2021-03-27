@@ -38,29 +38,34 @@ class NewBrew extends Component {
     }
 
     onChange = (e) => {
-        let id = e.target.id.split("-")[1];
-        let arrayName = this.state[e.target.name];
-        arrayName[id] = e.target.value;
+
 
         if (e.target.name == "intructions" || e.target.name == "ingredients") {
-
-            this.setState({ [e.target.name]: arrayName });
-            console.log(arrayName);
+            let id = e.target.id.split("-")[1];
+            let tempArray = this.state[e.target.name];
+            tempArray[id] = e.target.value;
+            this.setState({ [e.target.name]: tempArray });
+            console.log(tempArray);
         } else {
-            this.setState({ [e.target.name]: arrayName });
-            console.log(arrayName);
+            this.setState({ [e.target.name]: e.target.value });
         }
 
     }
 
     onSubmit = (e) => {
-
+        e.preventDefault();
         const { title, description } = this.state;
 
         let userData = AuthService.getCurrentUser();
 
-        API.postBrew(userData.id, title, description, userData.username);
+        API.postBrew(userData.id, title, description, userData.username)
+            .then(data => {
+                let brewId = data.data.id;
 
+                this.state.ingredients.forEach(ingredient => {
+                    API.postIngredient(brewId, ingredient);
+                });
+            });
     }
 
 
@@ -73,7 +78,7 @@ class NewBrew extends Component {
         let ingredientCount = -1;
         let ingredientsJSX = this.state.ingredients.map(ingredient => {
             ingredientCount += 1;
-            return (<input type="text" placeholder="Enter your first ingredient here"
+            return (<input type="text" placeholder="Enter Ingredient Here"
                 alt="enter the first ingredient" name="ingredients" id={`ingredients-${ingredientCount}`} value={ingredient}
                 onChange={this.onChange} className="ingredient" />);
         });
@@ -82,7 +87,7 @@ class NewBrew extends Component {
         let instructionsCount = -1;
         let instructionsJSX = this.state.instructions.map(instruction => {
             instructionsCount += 1;
-            return (<input type="text" placeholder="Enter your first instruction here"
+            return (<input type="text" placeholder="Enter Instruction Here"
                 alt="enter the first instruction" name="instructions" id={`instructions-${instructionsCount}`} value={instruction}
                 onChange={this.onChange} className="instruction" />);
         })
