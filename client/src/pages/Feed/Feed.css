@@ -2,20 +2,19 @@
 /* ----- general styles ----- */
 /* -------------------------- */
 
-/* .sidebarWrap {
-    background-color:black;
-} */
-
-.sidebarWrap .userCard {
-    background-color:white;
-}
-
-.sidebarWrap .userCard h2,
-.sidebarWrap .userCard p {
-    text-decoration: none;
-}
-
 .MuiGrid-spacing-xs-3 > .MuiGrid-item {
     padding:2rem !important;
 }
 
+#Feed .makeStyles-root-1,
+#Feed .makeStyles-root-3 {
+    max-width:none !important;
+}
+
+#Feed .recipeCard {
+    margin-top:1rem;
+}
+
+#Feed .innerSidebarWrap {
+    margin-top:2rem;
+}
