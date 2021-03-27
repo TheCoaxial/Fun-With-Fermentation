@@ -12,6 +12,8 @@ import AuthService from "./services/auth.service";
 import Feed from "./pages/Feed/Feed";
 import Login from "./pages/login";
 import Register from "./pages/register";
+
+
 import Profile from "./pages/Profile";
 import Brew from "./pages/Brew";
 import UserDisplay from "./pages/UserDisplay";
