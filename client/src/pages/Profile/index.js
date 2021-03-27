@@ -21,8 +21,6 @@ export default class Profile extends Component {
       following: []
     };
 
-
-
   }
 
   componentDidMount() {
@@ -49,8 +47,6 @@ export default class Profile extends Component {
 
 
   };
-
-
 
   render() {
     //hard coding a following list
@@ -80,7 +76,10 @@ export default class Profile extends Component {
 
     let BrewsJSX;
 
-    BrewsJSX = brews.map(brew => <RecipeCard name={brew.name}
+    BrewsJSX = brews.map(brew => <RecipeCard 
+      UserId={brew.UserId}
+      id={brew.id}
+      name={brew.name}
       description={brew.description}
       author={brew.author}
       id={brew.id} 
@@ -88,25 +87,29 @@ export default class Profile extends Component {
 
     let FollowingJSX;
 
-    FollowingJSX = following.map(person => <UserCard username={person.name}
+    FollowingJSX = following.map(person => <UserCard
+      id={person.id}
+      username={person.name}
       bio={person.bio}
       score={person.score} />)
 
     let LastViewedJSX;
 
-    LastViewedJSX =  recentlyVisited.map(person => <UserCard username={person.name}
+    LastViewedJSX =  recentlyVisited.map(person => <UserCard
+      id={person.id}
+      username={person.name}
       bio={person.bio}
       score={person.score} />)
 
-    let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard name={Brew.name}
+    let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
+      UserId={Brew.UserId}
+      id={Brew.id}
+      name={Brew.name}
       description={Brew.description}
       author={Brew.author} 
       id={Brew.id}
       UserId={Brew.UserId}
       />);
-
-    
-
 
     // Currently just displays Info about the user from the DB
     return (
