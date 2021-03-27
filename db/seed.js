@@ -253,7 +253,8 @@ async function insertComment(body, author, UserId, BrewId) {
         method: "POST",
         body: JSON.stringify({
             author: author,
-            body: body
+            body: body,
+            UserId: UserId
         }),
         headers: {
             'Content-Type': 'application/json',

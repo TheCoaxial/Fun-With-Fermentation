@@ -4,11 +4,14 @@ import API from '../../utils/api';
 import Comment from '../../components/Comment/comment';
 
 import "./styles.css"
+import authService from '../../services/auth.service.js';
 
 export default function BrewDisplay() {
 
     let [brew, setBrew] = useState({});
     let [comments, setComments] = useState([]);
+
+    let [commentInput, setCommentInput] = useState("");
 
     let { brewId } = useParams();
 
@@ -31,6 +34,20 @@ export default function BrewDisplay() {
         <h2>{brew.name}</h2>
         <p>Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a></p>
         <p>{brew.description}</p>
+
+        <form onSubmit={(event) => {
+            let { id, username } = authService.getCurrentUser();
+
+            API.postComment(id, brewId, username, commentInput);
+        }}>
+
+            <input type="text" value={commentInput}
+                placeholder="Add Comment"
+                onChange={(e) => {
+                    setCommentInput(e.target.value)
+                }}></input>
+            <button type="submit">Add Comment</button>
+        </form>
 
         <h3>Comments</h3>
         <div id="comment-list">
