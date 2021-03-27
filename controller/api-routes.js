@@ -110,8 +110,9 @@ module.exports = function (app) {
 
     // Get Favorite
     app.get("/api/favorite/:brewId/:userId", (req, res) => {
-        db.Favorites
+        db.Favorite
             .findAll({
+                include: db.Brew,
                 where: {
                     BrewId: req.params.brewId,
                     UserId: req.params.userId
@@ -203,7 +204,7 @@ module.exports = function (app) {
 
     // New Favorite
     app.post("/api/favorite/:brewId/:userId", (req, res) => {
-        db.Favorites
+        db.Favorite
             .create({
                 BrewId: req.params.brewId,
                 UserId: req.params.userId
@@ -294,7 +295,7 @@ module.exports = function (app) {
 
     // Delete Favorite
     app.delete("/api/delete-favorite/:brewId/:userId", (req, res) => {
-        db.Favorites
+        db.Favorite
             .destory({
                 where: {
                     BrewId: req.params.brewId,
