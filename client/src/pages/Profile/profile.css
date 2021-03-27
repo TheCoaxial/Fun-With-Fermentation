@@ -37,8 +37,8 @@
     margin-bottom:1rem;
 }
 
-.recipeCard,
-.userCard {
+#Profile .recipeCard,
+#Profile .userCard {
     border:1px solid black;
     background-color:white;
     padding:1rem;
@@ -49,12 +49,12 @@
     margin-top:0;
 }
 
-.recipeCard h3,
-.userCard h3 {
+#Profile .recipeCard h3,
+#Profile .userCard h3 {
     margin:0;
 }
 
-.sidebarHeader {
+#Profile .sidebarHeader {
     position:sticky;
     top:0;
     height:5em;
@@ -111,7 +111,7 @@
 /* -------------------------- */
 
  
-.popularUsersFeed {
+#Profile .popularUsersFeed {
     height:35vh;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -151,8 +151,8 @@
 .viewedUsersFeed .sidebarHeader,
 .viewedUsersFeed .sidebarFooter {
     margin-top:1rem;
-    background-color:gray;
-    border:1px solid gray;
+    /* background-color:gray;
+    border:1px solid gray; */
 }
 
 #Profile .popularUsersFeed {
@@ -175,13 +175,13 @@
     display:none;
 }
 
-.horizontal-flex {
+#Profile .horizontal-flex {
     display:flex;
     flex-direction:row;
     justify-content: space-around;
 }
 
-.vertical-flex {
+#Profile .vertical-flex {
     display:flex;
     flex-direction:column;
     justify-content: space-around;
@@ -196,20 +196,20 @@
 /*   ellipses sidebar styles  */
 /* -------------------------- */
 
-.recipeCard {
+#Profile .recipeCard {
     --max-lines: 3;
     max-height: 10rem;
     /* overflow: hidden; */
 }
 
-.recipeCard::before {
+#Profile .recipeCard::before {
     content: "...";
     position: absolute;
     bottom: 0;
     right: 0;
   }
 
-  .recipeCard::after {
+  #Profile .recipeCard::after {
     content: "";
     position: absolute;
     right: 0; /* note: not using bottom */

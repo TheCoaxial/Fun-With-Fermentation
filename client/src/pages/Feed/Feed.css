@@ -41,6 +41,8 @@
     top:0;
     height:5%;
     background-color:black;
+    padding:2rem;
+    padding-left:0;
 }
 
 #Feed .sidebarWrap .sidebarFooter {
@@ -120,7 +122,7 @@
     --lh: 1.4rem;
 }
   
-.sidebarWrap .truncate-overflow {
+#Feed .sidebarWrap .truncate-overflow {
     --max-lines: 3;
     position: relative;
     max-height: calc(var(--lh) * var(--max-lines));
@@ -128,7 +130,7 @@
     padding-right: 1rem; /* space for ellipsis */
   }
 
-.sidebarWrap .truncate-overflow::before {
+#Feed .sidebarWrap .truncate-overflow::before {
     position: absolute;
     content: "...";
     bottom: 0;
@@ -140,6 +142,8 @@
 /* ---- user card styles ---- */
 /* -------------------------- */
 
-h2 {
+#Feed h2 {
     color: white;
+    margin-top:0;
+    margin-left:0;
 }
