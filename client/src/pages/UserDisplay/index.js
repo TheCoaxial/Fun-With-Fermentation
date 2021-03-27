@@ -3,20 +3,30 @@ import { useParams } from 'react-router';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import API from '../../utils/api';
 import "./styles.css"
+import ls from 'local-storage'
 
 export default function UserDisplay() {
 
     let [userData, setUserData] = useState({});
     let [brews, setBrews] = useState([]);
-
     let { userId } = useParams([]);
+
+    let ids = [];
+    //const [visited, setVisited] = useState([]);
+
 
     useEffect(() => {
         API.getUserProfile(userId)
             .then((data) => {
-                console.log(data.data[0]);
+                //console.log(data.data[0]);
                 setUserData(data.data[0]);
             })
+
+        ids.push(userId);
+        //setVisited(userId);
+        ls.set('visited', JSON.stringify(ids))
+        console.log("ids?",ids);
+
 
         API.getUserBrews(userId)
             .then(data => {

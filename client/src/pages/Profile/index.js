@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
+import ls from 'local-storage';
 // import Header from "../profile/index";
 // import FollowingCard from "../../components/FollowingList/FollowingList";
 import api from "../../utils/api";
@@ -18,28 +19,34 @@ export default class Profile extends Component {
       userFav: [],
       contributionScore: "",
       brews: [],
-      following: []
+      following: [],
+      vistedIds: ls.get('visited') || [],
+      visitedPages: []
     };
 
   }
 
   componentDidMount() {
+    const parsedIds = this.state.vistedIds;
 
     api.getUserProfile(this.state.currentUser.id).then(res => {
       this.setState({ contributionScore: res.data[0].contributionScore });
     })
 
     api.getUserFavorites(this.state.currentUser.id).then(res => {
-      console.log("Favorites ",res.data);
+      //console.log("Favorites ",res.data);
       this.setState({ userFav: res.data });
     })
 
     api.getUserBrews(this.state.currentUser.id).then(res => {
-      console.log(" userBrews", res.data);
+      //console.log(" userBrews", res.data);
       this.setState({ brews: res.data });
     })
 
-    // An api call to favorites will go here
+    api.getUserProfile(JSON.parse(parsedIds)).then(res => {
+      //console.log("pages", res.data[0]);
+      this.setState({ visitedPages: res.data });
+    })
 
     
 
@@ -51,7 +58,8 @@ export default class Profile extends Component {
   render() {
     //hard coding a following list
     
-    const following = [{
+    const following = 
+    [{
       name: "Bob Jim",
       bio: "Moonshiner extrodonair"
     },
@@ -60,17 +68,8 @@ export default class Profile extends Component {
       bio: "Moonshiner extra extrodonair"
     }];
 
-    const recentlyVisited = [{
-      name: "Billy Joe",
-      bio: "Home Brewer"
-    },
-    {
-      name: "Mary Sue",
-      bio: "Professional home brewer"
-    }];
-
     const score = this.state.contributionScore;
-
+    const pages = this.state.visitedPages;
     const brews = this.state.brews;
     const userFav = this.state.userFav;
 
@@ -95,11 +94,12 @@ export default class Profile extends Component {
 
     let LastViewedJSX;
 
-    LastViewedJSX =  recentlyVisited.map(person => <UserCard
+    LastViewedJSX =  pages.map(person => <UserCard
       id={person.id}
-      username={person.name}
+      username={person.username}
       bio={person.bio}
-      score={person.score} />)
+      //score={person.score} 
+      />)
 
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       UserId={Brew.UserId}
@@ -115,19 +115,19 @@ export default class Profile extends Component {
     return (
       <div id="Profile">
         <div className="leftColumn">
-          {console.log("Love", userFav)}
+          {console.log("Love", this.state.visitedPages)}
           <img src="./sample-avatar.png" alt="user avatar" className="profile-avatar" />
 
           <div className="bio">
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
           </div>
 
-          {console.log(userFav)}
+          {/* {console.log(userFav)} */}
           <div className="sidebarWrap">
             <div className="popularUsersFeed">
               <div className="sidebarHeader"><h3 className="white header">Following:</h3></div>
               {/* {console.log("Inside Profile",person)} */}
-                {LastViewedJSX}
+                {FollowingJSX}
               <div className="sidebarFooter"></div>
             </div>
 
@@ -154,7 +154,7 @@ export default class Profile extends Component {
 
               <div className="viewedUsersFeed">
                 <div className="sidebarHeader"><h3 className="white header">Last View Profiles:</h3></div>
-                {FollowingJSX}
+                {LastViewedJSX}
                 <div className="sidebarFooter"></div>
               </div>
             </div>

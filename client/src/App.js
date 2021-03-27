@@ -6,7 +6,7 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 // import logo from './logo.svg';
 import './App.css';
-
+import ls from 'local-storage'
 import AuthService from "./services/auth.service";
 
 import Feed from "./pages/Feed/Feed";
@@ -31,13 +31,15 @@ class App extends Component {
             currentUser: undefined,
         };
     };
-
+    
     componentDidMount() {
         const user = AuthService.getCurrentUser();
-
+        // ls('foo', 'bar');
+        // console.log(ls('foo'));
         if (user) {
             this.setState({
-                currentUser: user
+                currentUser: user,
+                visited: ls.get('visited') || []
             });
         };
     };
