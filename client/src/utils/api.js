@@ -152,24 +152,39 @@ class API {
 
     // UPDATE
 
-    updateComment(commentID) {
-        return this.axios.put("/api/update-comment/" + commentID);
+    updateComment(commentID, body) {
+        return this.axios.put("/api/update-comment/" + commentID, {
+            body: body
+        });
     }
 
-    updateUser(userID) {
-        return this.axios.put("/api/update-user/" + userID);
+    updateUser(userID, bio, contributionScore) {
+        return this.axios.put("/api/update-user/" + userID, {
+            bio: bio,
+            contributionScore: contributionScore
+        });
     }
 
-    updateBrew(brewID) {
-        return this.axios.put("/api/update-brew/" + brewID);
+    updateBrew(brewID, name, description) {
+        return this.axios.put("/api/update-brew/" + brewID, {
+            name: name,
+            description: description
+        });
     }
 
-    updateIngredient(ingredientID) {
-        return this.axios.put("/api/update-ingredient/" + ingredientID);
+    updateIngredient(ingredientID, name, quantity, quantityUnits) {
+        return this.axios.put("/api/update-ingredient/" + ingredientID, {
+            name: name,
+            quantity: quantity,
+            quantityUnits: quantityUnits
+        });
     }
 
-    updateStep(stepID) {
-        return this.axios.put("/api/update-step/" + stepID);
+    updateStep(stepID, duration, instructions) {
+        return this.axios.put("/api/update-step/" + stepID, {
+            duration: duration,
+            instructions: instructions
+        });
     }
 
 }
