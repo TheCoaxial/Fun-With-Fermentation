@@ -56,6 +56,12 @@
 
 .navbar {
   background-color:#282c34;
+  padding:0.5rem 3rem 0.5rem 3rem;
+  height:5rem;
+}
+
+.navbar .navbar-nav {
+  height:5rem;
 }
 
 .navbar a {
@@ -100,7 +106,13 @@
   display:flex;
   flex-direction:row;
   justify-content: space-between;
-  padding:1rem 3rem 1rem 3rem;
+  
+}
+
+.navbar .navbar-loggedIn .nav-item {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .navbar .userSpecific-navWrap {
@@ -109,8 +121,6 @@
   justify-content: space-between;
   min-width:15%
 }
-
-
 
 .navbar li .nav-link.newBrew-button {
   background-color:#d49c6b;
@@ -124,6 +134,12 @@
   display:flex;
   flex-direction:column;
   justify-content: center;
+}
+
+
+.navbar .subMenu-wrap {
+  padding-bottom:1.5rem;
+  margin-bottom:-1.5rem;
 }
 
 .navbar .subMenu-wrap:hover .userMenu-showHide {
@@ -143,7 +159,7 @@
   right:0;
   width:10rem;
   z-index:5;
-  top:4rem;
+  top:5rem;
 }
 
 .navbar .subMenu-wrap:hover .userMenu-showHide li a,
@@ -177,7 +193,6 @@
   display:flex;
   flex-direction:row;
   justify-content: flex-end;
-  padding:1rem;
 }
 
 .navbar-loggedOut li:nth-child(1) {

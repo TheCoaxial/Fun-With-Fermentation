@@ -87,7 +87,7 @@ class App extends Component {
                                     
                                     <li className="nav-item">
                                         <a href="/login" className="nav-link" onClick={this.logOut}>
-                                            LogOut
+                                            Log Out
                                         </a>
                                     </li>
 
