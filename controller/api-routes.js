@@ -196,6 +196,7 @@ module.exports = function (app) {
             .create({
                 author: req.body.author,
                 BrewId: req.params.brewId,
+                UserId: req.body.UserId,
                 body: req.body.body
             })
             .then(newComment => res.json(newComment))

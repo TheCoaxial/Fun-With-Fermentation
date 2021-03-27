@@ -29,7 +29,7 @@ export default function BrewDisplay() {
     let commentsJSX = comments.map(comment => <Comment body={comment.body}
         createdAt={comment.createdAt}
         author={comment.author}
-        userId={comment.UserId} />);
+        UserId={comment.UserId} />);
 
     return (<div>
         <h2>{brew.name}</h2>
