@@ -17,9 +17,9 @@ export default function UserCard({ id ,username, bio, newBrew, score }) {
 
                 </div>
 
-                <p className="bio">
+                <div className="bio">
                     {bio || <p>NO BIO</p>}
-                </p>
+                </div>
 
             </div>
         </div>

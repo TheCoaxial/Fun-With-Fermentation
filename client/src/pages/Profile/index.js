@@ -76,7 +76,8 @@ export default class Profile extends Component {
 
     let BrewsJSX;
 
-    BrewsJSX = brews.map(brew => <RecipeCard 
+    BrewsJSX = brews.map(brew => <RecipeCard
+      key={brew.id}
       UserId={brew.UserId}
       id={brew.id}
       name={brew.name}
@@ -86,6 +87,7 @@ export default class Profile extends Component {
     let FollowingJSX;
 
     FollowingJSX = following.map(person => <UserCard
+      key={person.id}
       id={person.id}
       username={person.name}
       bio={person.bio}
@@ -94,12 +96,14 @@ export default class Profile extends Component {
     let LastViewedJSX;
 
     LastViewedJSX =  recentlyVisited.map(person => <UserCard
+      key={person.id}
       id={person.id}
       username={person.name}
       bio={person.bio}
       score={person.score} />)
 
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
+      key={Brew.id}
       UserId={Brew.UserId}
       id={Brew.id}
       name={Brew.name}

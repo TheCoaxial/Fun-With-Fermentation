@@ -44,13 +44,16 @@ export default function Feed() {
         return b.contributionScore - a.contributionScore;
     });
 
-    feedBrewsJSX = brews.map(brew => <RecipeCard name={brew.name}
+    feedBrewsJSX = brews.map(brew => <RecipeCard
+        key={brew.id}
+        name={brew.name}
         description={brew.description}
         author={brew.author}
         id={brew.id} 
         UserId={brew.UserId}/>);
 
     topUsersJSX = sortedUsers.map(user => <UserCard
+        key={user.id}
         username={user.username}
         bio={user.bio}
         score={user.contributionScore}
