@@ -11,7 +11,7 @@ export default function UserDisplay() {
     let [brews, setBrews] = useState([]);
     let { userId } = useParams([]);
 
-    let ids = [];
+    let ids = JSON.parse(ls.get('visited')) || [];
     //const [visited, setVisited] = useState([]);
 
 

@@ -17,7 +17,7 @@ export default class Profile extends Component {
     this.state = {
       currentUser: AuthService.getCurrentUser(),
       userFav: [],
-      contributionScore: "",
+      userData: [],
       brews: [],
       following: [],
       vistedIds: ls.get('visited') || [],
@@ -27,10 +27,13 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
-    const parsedIds = this.state.vistedIds;
+    const parsedIds = JSON.parse(this.state.vistedIds);
+    const uniqueIds = [... new Set(parsedIds)];
+    
 
     api.getUserProfile(this.state.currentUser.id).then(res => {
-      this.setState({ contributionScore: res.data[0].contributionScore });
+      console.log("user", res)
+      this.setState({ userData: res.data[0] });
     })
 
     api.getUserFavorites(this.state.currentUser.id).then(res => {
@@ -42,12 +45,20 @@ export default class Profile extends Component {
       //console.log(" userBrews", res.data);
       this.setState({ brews: res.data });
     })
-
-    api.getUserProfile(JSON.parse(parsedIds)).then(res => {
-      //console.log("pages", res.data[0]);
-      this.setState({ visitedPages: res.data });
-    })
-
+    let collectedData = [];
+    uniqueIds.forEach(Ids => {
+      console.log("ids",uniqueIds);
+      api.getUserProfile(Ids)
+        .then(res => {
+          
+        collectedData.push(res);
+        console.log("data",collectedData)
+        this.setState({ visitedPages: collectedData })
+      });
+     })
+    // 
+      
+      
     
 
     // An api call to retrieve following will go here
@@ -68,11 +79,13 @@ export default class Profile extends Component {
       bio: "Moonshiner extra extrodonair"
     }];
 
-    const score = this.state.contributionScore;
-    const pages = this.state.visitedPages;
+    //const score = this.state.contributionScore;
+    const pages = this.state.visitedPages
     const brews = this.state.brews;
     const userFav = this.state.userFav;
-
+    const currentUser = this.state.userData;
+    
+  
     let BrewsJSX;
 
     BrewsJSX = brews.map(brew => <RecipeCard 
@@ -90,15 +103,16 @@ export default class Profile extends Component {
       id={person.id}
       username={person.name}
       bio={person.bio}
-      score={person.score} />)
+      score={person.score} 
+      />)
 
     let LastViewedJSX;
 
     LastViewedJSX =  pages.map(person => <UserCard
-      id={person.id}
-      username={person.username}
-      bio={person.bio}
-      //score={person.score} 
+      id={person.data[0].id}
+      username={person.data[0].username}
+      bio={person.data[0].bio}
+      score={person.data[0].contributionScore} 
       />)
 
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
@@ -115,11 +129,11 @@ export default class Profile extends Component {
     return (
       <div id="Profile">
         <div className="leftColumn">
-          {console.log("Love", this.state.visitedPages)}
+          {/* {console.log("Love", LastViewedJSX)} */}
           <img src="./sample-avatar.png" alt="user avatar" className="profile-avatar" />
 
           <div className="bio">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+            <p>{currentUser.bio}</p>
           </div>
 
           {/* {console.log(userFav)} */}
@@ -133,7 +147,7 @@ export default class Profile extends Component {
 
             <div className="profileBlock community-points">
               <p>Community Points</p>
-              <h3>{score}</h3>
+              <h3>{currentUser.contributionScore}</h3>
             </div>
           </div>
         </div>
