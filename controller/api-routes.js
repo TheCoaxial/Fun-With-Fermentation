@@ -1,6 +1,7 @@
 // const { regexp } = require("sequelize/types/lib/operators");
 const db = require("../models");
 
+
 module.exports = function (app) {
 
     // GET ROUTES
@@ -89,13 +90,13 @@ module.exports = function (app) {
             });
     });
 
-    // Get Favorites
+    //Get Favorites
     app.get("/api/favorite/:userId", (req, res) => {
-        db.Favorites
+        db.Favorite
             .findAll({
-                where: {
-                    UserId: req.params.userId
-                }
+                include: db.Brew,
+                where: { UserId: req.params.userId },
+
             })
             .then(data => res.json(data))
             .catch(err => {
@@ -105,6 +106,7 @@ module.exports = function (app) {
                 }
             });
     });
+
 
     // Get Favorite
     app.get("/api/favorite/:brewId/:userId", (req, res) => {

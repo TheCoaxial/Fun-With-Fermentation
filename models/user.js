@@ -49,7 +49,7 @@ module.exports = function (sequelize, DataTypes) {
 
         User.hasMany(models.Comment);
         User.hasMany(models.Brew);
-        User.belongsToMany(models.Brew, { through: 'Favorites' });
+        User.belongsToMany(models.Brew, { through: models.Favorite });
 
     };
 

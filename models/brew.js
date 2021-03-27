@@ -33,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
         Brew.hasMany(models.Comment);
         Brew.hasMany(models.Step);
         Brew.belongsTo(models.User);
-        Brew.belongsToMany(models.User, { through: 'Favorites' });
+        Brew.belongsToMany(models.User, { through: models.Favorite });
         Brew.belongsToMany(models.Tag, { through: 'BrewTags' });
     };
 

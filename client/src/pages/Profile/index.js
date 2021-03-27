@@ -31,19 +31,22 @@ export default class Profile extends Component {
       this.setState({ contributionScore: res.data[0].contributionScore });
     })
 
-    api.getUserBrews(this.state.currentUser.id).then(res => {
+    api.getUserFavorites(this.state.currentUser.id).then(res => {
+      console.log("Favorites ",res.data);
+      this.setState({ userFav: res.data });
+    })
 
+    api.getUserBrews(this.state.currentUser.id).then(res => {
+      console.log(" userBrews", res.data);
       this.setState({ brews: res.data });
     })
 
     // An api call to favorites will go here
 
-    api.getBrews().then(res => {
-      console.log(res);
-      this.setState({ userFav: res.data });
-    })
+    
 
     // An api call to retrieve following will go here
+
 
   };
 
@@ -51,6 +54,7 @@ export default class Profile extends Component {
 
   render() {
     //hard coding a following list
+    
     const following = [{
       name: "Bob Jim",
       bio: "Moonshiner extrodonair"
@@ -92,9 +96,9 @@ export default class Profile extends Component {
       bio={person.bio}
       score={person.score} />)
 
-    let FavBrewsJSX = userFav.map(brew => <RecipeCard name={brew.name}
-      description={brew.description}
-      author={brew.author} />);
+    let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard name={Brew.author}
+      description={Brew.description}
+      author={Brew.author} />);
 
     
 
@@ -103,7 +107,7 @@ export default class Profile extends Component {
     return (
       <div id="Profile">
         <div className="leftColumn">
-          {/* {console.log("Love", brews)} */}
+          {console.log("Love", userFav)}
           <img src="./sample-avatar.png" alt="user avatar" className="profile-avatar" />
 
           <div className="bio">
@@ -149,6 +153,7 @@ export default class Profile extends Component {
 
             <div className="favoriteRecipesFeed">
               <div className="sidebarHeader"><h3 className="white header">Favorite Recipes</h3></div>
+              {console.log(" Why?",FavBrewsJSX)}
               {FavBrewsJSX}
               <div className="sidebarFooter"></div>
             </div>
