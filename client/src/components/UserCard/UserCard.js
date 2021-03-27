@@ -2,7 +2,7 @@ import React from "react";
 import "../../App.css";
 import './UserCard.css'
 
-export default function UserCard({ username, bio, newBrew, score }) {
+export default function UserCard({ id ,username, bio, newBrew, score }) {
 
 
 
@@ -12,7 +12,7 @@ export default function UserCard({ username, bio, newBrew, score }) {
                 <div className="userFlex">
                     <img src="./sample-avatar.png" alt="sample avatar" className="avatar" />
                     <h3 className="title">
-                        {username}  <span id="score">Score: {score}</span>
+                        <a href={`/user/${id}`}>{username}</a>  <span id="score">Score: {score}</span>
                     </h3>
 
                 </div>

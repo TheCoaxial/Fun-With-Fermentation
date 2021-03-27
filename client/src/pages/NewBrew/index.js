@@ -14,6 +14,7 @@ class NewBrew extends Component {
         console.log(AuthService.getCurrentUser());
 
         this.state = {
+            currentUser: AuthService.getCurrentUser(),
             ingredients: [],
             instructions: [],
             classVar: "",
@@ -103,6 +104,7 @@ class NewBrew extends Component {
 
     render() {
 
+        console.log(this.state.currentUser);
         const ingredientArg = "ingredient";
         const instructionArg = "instruction";
 
@@ -159,4 +161,4 @@ class NewBrew extends Component {
     }
 }
 
-export default NewBrew; 
+export default NewBrew;  

@@ -60,7 +60,7 @@ async function insertData() {
     await editComment({
         body: "new comment 2"
     }, 2);
-    
+
     await editComment({
         body: "new comment 3"
     }, 3);
@@ -93,7 +93,7 @@ async function insertData() {
     await insertStep(100, "place mixture in fermentation container, allow to sit", 1);
     await insertStep(5, "add ingredient3 to the mixture", 1);
 
-    await insertStep(5, "instruction 1 on brew 2", 2;
+    await insertStep(5, "instruction 1 on brew 2", 2);
     await insertStep(150, "instruction 2 on brew 2", 2);
     await insertStep(15, "instruction 3 on brew 2", 2);
 
@@ -253,7 +253,8 @@ async function insertComment(body, author, UserId, BrewId) {
         method: "POST",
         body: JSON.stringify({
             author: author,
-            body: body
+            body: body,
+            UserId: UserId
         }),
         headers: {
             'Content-Type': 'application/json',
@@ -275,7 +276,7 @@ async function insertIngredient(name, quantity, quantityUnits, BrewId) {
             'Content-Type': 'application/json'
         }
     });
-    
+
     return;
 }
 
@@ -290,7 +291,7 @@ async function insertStep(duration, instructions, BrewId) {
             'Content-Type': 'application/json'
         }
     });
-    
+
     return;
 }
 
@@ -304,7 +305,7 @@ async function insertTag(name, BrewId) {
             'Content-Type': 'application/json'
         }
     });
-    
+
     return;
 }
 

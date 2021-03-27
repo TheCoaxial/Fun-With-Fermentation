@@ -5,7 +5,6 @@ import UserCard from "../../components/UserCard/UserCard"
 import API from "../../utils/api";
 import "./Feed.css";
 import "../../App.css";
-import axios from 'axios';
 
 export default function Feed() {
 
@@ -28,15 +27,16 @@ export default function Feed() {
                 setBrews(data.data);
             })
             .catch(err => {
-                console.err(err);
+                console.log(err);
             });
 
         API.getTopUsers()
             .then(data => {
+                console.log(data.data);
                 setTopUsers(data.data)
             })
             .catch(err => {
-                console.err(err);
+                console.log(err);
             });
     }, []);
 
@@ -46,17 +46,19 @@ export default function Feed() {
 
     feedBrewsJSX = brews.map(brew => <RecipeCard name={brew.name}
         description={brew.description}
-        author={brew.author} />);
+        author={brew.author}
+        id={brew.id} 
+        UserId={brew.UserId}/>);
 
     topUsersJSX = sortedUsers.map(user => <UserCard
         username={user.username}
         bio={user.bio}
-        score={user.contributionScore} />);
+        score={user.contributionScore}
+        id={user.id} />);
 
 
     return (
         <div id="Feed">
-            <Header />
 
             <div className="feedWrap">
                 <div className="mainFeed">
