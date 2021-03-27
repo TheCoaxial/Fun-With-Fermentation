@@ -12,7 +12,7 @@ export default function UserDisplay() {
     let { userId } = useParams([]);
 
     let ids = JSON.parse(ls.get('visited')) || [];
-    //const [visited, setVisited] = useState([]);
+    
 
 
     useEffect(() => {
@@ -23,7 +23,7 @@ export default function UserDisplay() {
             })
 
         ids.push(userId);
-        //setVisited(userId);
+       
         ls.set('visited', JSON.stringify(ids))
         console.log("ids?",ids);
 

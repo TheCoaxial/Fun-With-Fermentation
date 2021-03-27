@@ -29,7 +29,13 @@ export default class Profile extends Component {
   componentDidMount() {
     const parsedIds = JSON.parse(this.state.vistedIds);
     const uniqueIds = [... new Set(parsedIds)];
-    
+    const removeCurrentUser = uniqueIds.indexOf(JSON.stringify(this.state.currentUser.id));
+    if (removeCurrentUser > -1 ) {
+      uniqueIds.splice(removeCurrentUser, 1);
+    }
+
+    //this.setState({ vis })
+    console.log(" removed userId",this.state.visitedPages);
 
     api.getUserProfile(this.state.currentUser.id).then(res => {
       console.log("user", res)
@@ -56,7 +62,7 @@ export default class Profile extends Component {
         this.setState({ visitedPages: collectedData })
       });
      })
-    // 
+    
       
       
     
@@ -176,7 +182,7 @@ export default class Profile extends Component {
             <div className="favoriteRecipesFeed">
               <div className="sidebarHeader"><h3 className="white header">Favorite Recipes</h3></div>
               {/* {console.log(" Why?",FavBrewsJSX)} */}
-              {FavBrewsJSX}
+              {FavBrewsJSX || "No one viewed yet"} 
               <div className="sidebarFooter"></div>
             </div>
           </div>
