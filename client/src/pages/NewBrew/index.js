@@ -13,8 +13,6 @@ class NewBrew extends Component {
             currentUser: AuthService.getCurrentUser(),
             ingredients: [""],
             instructions: [""],
-            classVar: "",
-            placeholderVar: "",
             name: "",
             description: "",
             title: ""
@@ -26,11 +24,8 @@ class NewBrew extends Component {
     handleAppend(e, type) {
         e.preventDefault();
 
-        if (type === "ingredient") {
-            this.setState({ ingredients: [...this.state.ingredients, ""] });
-        } else if (type === "instruction") {
-            this.setState({ instructions: [...this.state.instructions, ""] });
-        }
+        this.setState({ [type]: [...this.state[type], ""] });
+
     }
 
     onChange = (e) => {
@@ -65,6 +60,8 @@ class NewBrew extends Component {
                 this.state.instructions.forEach(instruction => {
                     API.postStep(brewId, instruction);
                 });
+
+                window.location.reload();
             });
     }
 
@@ -72,8 +69,8 @@ class NewBrew extends Component {
 
     render() {
 
-        const ingredientArg = "ingredient";
-        const instructionArg = "instruction";
+        const ingredientArg = "ingredients";
+        const instructionArg = "instructions";
 
         let ingredientCount = -1;
         let ingredientsJSX = this.state.ingredients.map(ingredient => {
