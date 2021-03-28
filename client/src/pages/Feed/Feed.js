@@ -5,14 +5,13 @@ import UserCard from "../../components/UserCard/UserCard"
 import API from "../../utils/api";
 import "./Feed.css";
 import "../../App.css";
+import Grid from "@material-ui/core/Grid";
+import Typography from '@material-ui/core/Typography';
 
 export default function Feed() {
 
     const [brews, setBrews] = useState([]);
     // const [currentUser, authCurrentUser] = useState([[currentUser = JSON.parse(localStorage.getItem('user'))]]);
-
-
-
 
     const [topUsers, setTopUsers] = useState([]);
     let topUsersJSX;
@@ -61,28 +60,56 @@ export default function Feed() {
 
 
     return (
+        // <div id="Feed">
+
+        //     <div className="feedWrap">
+        //         <div className="mainFeed">
+        //             {feedBrewsJSX}
+        //         </div>
+
+        //         <div className="sidebarWrap">
+        //             <div className="popularRecipesFeed">
+        //                 <div className="sidebarHeader"><h2>Active Brews</h2></div>
+        //                 {feedBrewsJSX}
+        //                 <div className="sidebarFooter"></div>
+        //             </div>
+
+        //             <div className="popularUsersFeed">
+
+        //                 <div className="sidebarHeader"><h2>Active Users</h2></div>
+        //                 {topUsersJSX}
+        //                 <div className="sidebarFooter"></div>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </div>
+
         <div id="Feed">
 
-            <div className="feedWrap">
-                <div className="mainFeed">
-                    {feedBrewsJSX}
-                </div>
-
-                <div className="sidebarWrap">
-                    <div className="popularRecipesFeed">
-                        <div className="sidebarHeader"><h2>Active Brews</h2></div>
-                        {feedBrewsJSX}
-                        <div className="sidebarFooter"></div>
-                    </div>
-
-                    <div className="popularUsersFeed">
-
-                        <div className="sidebarHeader"><h2>Active Users</h2></div>
+            <Grid container spacing={3}>
+                <Grid item xs={4} className="sidebarWrap">
+                    <div className="innerSidebarWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                            Top Users
+                        </Typography>
                         {topUsersJSX}
-                        <div className="sidebarFooter"></div>
                     </div>
-                </div>
-            </div>
+
+                    <div className="innerSidebarWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                            Top Recipes
+                        </Typography>
+                        {feedBrewsJSX}
+                    </div>
+                </Grid>
+                <Grid item xs={8}>
+                    {feedBrewsJSX}
+                </Grid>
+
+
+            </Grid>
+            
+
         </div>
     )
     // } else {

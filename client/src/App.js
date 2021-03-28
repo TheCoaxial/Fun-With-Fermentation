@@ -74,7 +74,7 @@ class App extends Component {
 
                             <li className="nav-item subMenu-wrap">
                                 <Link to={"/profile"} className="nav-link">
-                                <img src="./sample-avatar.png" alt="user avatar" className="avatar"/>
+                                <img src="./sample-avatar-2.png" alt="user avatar" className="avatar"/>
                                     {currentUser.username}
                                 </Link>
 
