@@ -61,7 +61,7 @@ class NewBrew extends Component {
                     API.postStep(brewId, instruction);
                 });
 
-                window.location.reload();
+                window.location.assign("/feed");
             });
     }
 
