@@ -50,6 +50,8 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
         setExpanded(!expanded);
       };
 
+    let brewLink = <a href={`/brews/${id}`}>{name}</a>;
+
     let userLink = <span>Created by <a href={`/user/${UserId}`}>{author}</a></span>;
       
 
@@ -70,22 +72,10 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
     // };
 
     return (
-        // <div className="recipeCard">
-        //     <h3 className="title">
-        //         <a href={`/brews/${id}`}>{name}</a>
-        //     </h3>
-        //     <h6>Created by <a href={`/user/${UserId}`}>{author}</a></h6>
-        //     <ul>
-        //         {/* {ingredientMap()} */}
-        //     </ul>
-        //     <p className="description truncate-overflow">
-        //         {description}
-        //     </p>
-        // </div>
         <div>
             <Card className={`recipeCard ${classes.root}`}>
             <CardHeader
-            title={name}
+            title={brewLink}
             subheader={userLink}
             />
             <CardContent>

@@ -6,6 +6,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -14,7 +15,7 @@ const useStyles = makeStyles({
     },
     media: {
       height: 140,
-    },
+    }
   });
 
 export default function UserCard({ id ,username, bio, newBrew, score }) {
@@ -24,35 +25,24 @@ export default function UserCard({ id ,username, bio, newBrew, score }) {
 
 
     return (
-        // <div>
-        //     <div className="userCard">
-        //         <div className="userFlex">
-        //             <img src="./sample-avatar.png" alt="sample avatar" className="avatar" />
-        //             <h3 className="title">
-        //                 <a href={`/user/${id}`}>{username}</a>  <span id="score">Score: {score}</span>
-        //             </h3>
-
-        //         </div>
-
-        //         <div className="bio">
-        //             {bio || <p>NO BIO</p>}
-        //         </div>
-
-        //     </div>
-        // </div>
 
         <div>
             <Link to={`/user/${id}`}>
                 <Card className={`userCard ${classes.root}`}>
                         <CardMedia
                             className={classes.media}
-                            image="./brewImage.jpg"
+                            image="./sample-avatar.jpg"
                             title="User Avatar"
                         />
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {username}
-                            </Typography>
+                            <div className="flexWrap-horizontal">
+                                <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" />
+                                <div className="text-verticalAlign">
+                                    <Typography gutterBottom variant="h5" component="h2">
+                                        {username}
+                                    </Typography>
+                                </div>
+                            </div>
                             <Typography variant="body2" color="textSecondary" component="p">
                                 Score: {score}
                             </Typography>

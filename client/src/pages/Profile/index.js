@@ -7,6 +7,9 @@ import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
 import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
+import Grid from "@material-ui/core/Grid";
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 
 
 export default class Profile extends Component {
@@ -112,61 +115,99 @@ export default class Profile extends Component {
 
     // Currently just displays Info about the user from the DB
     return (
-      <div id="Profile">
-        <div className="leftColumn">
-          {console.log("Love", userFav)}
-          <img src="./sample-avatar.png" alt="user avatar" className="profile-avatar" />
+      // <div id="Profile">
+      //   <div className="leftColumn">
+      //     {console.log("Love", userFav)}
+      //     <img src="./sample-avatar-2.png" alt="user avatar" className="profile-avatar" />
 
-          <div className="bio">
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+      //     <div className="bio">
+      //       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
+      //     </div>
+
+
+      //         <h3 className="white header">Following:</h3>
+      //         {/* {console.log("Inside Profile",person)} */}
+      //           {LastViewedJSX}
+
+      //       <div className="profileBlock community-points">
+      //         <p>Community Points</p>
+      //         <h3>{score}</h3>
+      //       </div>
+          
+      //   </div>
+
+      //     <div className="currentBrews">
+      //       <CurrentBrews />
+      //     </div>
+
+
+      //     <h3 className="white header">Top Recipes</h3>
+      //     {/* {console.log(" Inside profile",brews)} */}
+      //     {BrewsJSX}
+
+
+      //     <h3 className="white header">Last View Profiles:</h3>
+      //           {FollowingJSX}
+
+      //     <h3 className="white header">Favorite Recipes</h3>
+      //         {console.log(" Why?",FavBrewsJSX)}
+      //         {FavBrewsJSX}
+
+      // </div>
+
+
+
+
+
+
+              <div id="Profile">
+
+                <Grid container spacing={3}>
+                    <Grid item xs={4} className="sidebarWrap">
+
+                      <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar"/>
+
+                          <Typography gutterBottom variant="body3" component="p" id="bio">
+                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                            </Typography>
+
+                        <div className="miniFeedWrap">
+                            <Typography gutterBottom variant="h5" component="h1">
+                                Following
+                            </Typography>
+                            {FollowingJSX}
+                        </div>
+
+                    </Grid>
+                    <Grid item xs={4}>
+                        <div className="miniFeedWrap">
+                          <Typography gutterBottom variant="h5" component="h1">
+                              Last Viewed Profiles:
+                          </Typography>
+                          {LastViewedJSX}
+                        </div>
+
+                        <div className="miniFeedWrap">
+                          <Typography gutterBottom variant="h5" component="h1">
+                                  Top Recipes
+                          </Typography>
+                              {BrewsJSX}
+                        </div>
+
+                    </Grid>
+
+                    <Grid item xs={4}>
+                      <div className="miniFeedWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                                  Favorite Brews
+                                </Typography>
+                                {/* {FavBrewsJSX} */}
+                                {BrewsJSX}
+                      </div>
+                    </Grid>
+                </Grid>
+
           </div>
-
-
-          <div className="sidebarWrap">
-            <div className="popularUsersFeed">
-              <div className="sidebarHeader"><h3 className="white header">Following:</h3></div>
-              {/* {console.log("Inside Profile",person)} */}
-                {LastViewedJSX}
-              <div className="sidebarFooter"></div>
-            </div>
-
-            <div className="profileBlock community-points">
-              <p>Community Points</p>
-              <h3>{score}</h3>
-            </div>
-          </div>
-        </div>
-
-        <div className="mainFlexWrap">
-          <div className="currentBrews">
-            <CurrentBrews />
-          </div>
-
-          <div className="horizontal-flex">
-            <div className="vertical-flex">
-              <div className="popularRecipesFeed">
-                <div className="sidebarHeader"><h3 className="white header">Top Recipes</h3></div>
-                {/* {console.log(" Inside profile",brews)} */}
-                {BrewsJSX}
-                <div className="sidebarFooter"></div>
-              </div>
-
-              <div className="viewedUsersFeed">
-                <div className="sidebarHeader"><h3 className="white header">Last View Profiles:</h3></div>
-                {FollowingJSX}
-                <div className="sidebarFooter"></div>
-              </div>
-            </div>
-
-            <div className="favoriteRecipesFeed">
-              <div className="sidebarHeader"><h3 className="white header">Favorite Recipes</h3></div>
-              {console.log(" Why?",FavBrewsJSX)}
-              {FavBrewsJSX}
-              <div className="sidebarFooter"></div>
-            </div>
-          </div>
-        </div>
-      </div>
 
     );
   }

@@ -1,7 +1,16 @@
+
+#root,
+html {
+  background-color:lightgray;
+  overflow-y: auto;
+  overflow-x:hidden;
+  padding-bottom:5%;
+}
+
 .App-body {
   height:100vh;
   width:100vw;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .App {
@@ -152,7 +161,7 @@
   right:0;
   width:10rem;
   z-index:5;
-  top:5rem;
+  top:4rem;
 }
 
 .navbar .subMenu-wrap:hover .userMenu-showHide li a,
@@ -190,4 +199,9 @@
 
 .navbar-loggedOut li:nth-child(1) {
   margin-right:4rem;
+}
+
+
+a { 
+  text-decoration: none !important;
 }
