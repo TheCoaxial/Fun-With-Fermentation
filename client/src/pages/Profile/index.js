@@ -48,19 +48,19 @@ export default class Profile extends Component {
 
     this.recentlyViewed();
 
-    console.log(" ls.get",ls.get('visited'));
+    // console.log(" ls.get",ls.get('visited'));
 
   };
 
   recentlyViewed() {
-    let parsedIds = JSON.parse(this.state.visitedIds);
-    let uniqueIds = [new Set()];
-    console.log("before Ifelse", typeof (this.state.visitedIds));
-    if (typeof (this.state.visitedPages) == null) {
-      console.log("True");
-    } else { console.log("False"); }
 
-    uniqueIds = [... new Set(parsedIds)];
+    let parsedIds;
+    try {
+      parsedIds = JSON.parse(this.state.visitedIds);
+    } catch {
+      console.log("No user data to display");
+    }
+    let uniqueIds = [... new Set(parsedIds)];
 
     const removeCurrentUser = uniqueIds.indexOf(JSON.stringify(this.state.currentUser.id));
 
@@ -148,14 +148,14 @@ export default class Profile extends Component {
           <img src="./sample-avatar.png" alt="user avatar" className="profile-avatar" />
 
           <div className="bio">
-            <p>{currentUser.bio}</p>
+            <p>{currentUser.bio || "No Bio"}</p>
           </div>
 
-          {/* {console.log(userFav)} */}
+
           <div className="sidebarWrap">
             <div className="popularUsersFeed">
               <div className="sidebarHeader"><h3 className="white header">Following:</h3></div>
-              {/* {console.log("Inside Profile",person)} */}
+
               {FollowingJSX}
               <div className="sidebarFooter"></div>
             </div>
@@ -175,8 +175,7 @@ export default class Profile extends Component {
           <div className="horizontal-flex">
             <div className="vertical-flex">
               <div className="popularRecipesFeed">
-                <div className="sidebarHeader"><h3 className="white header">Top Recipes</h3></div>
-                {/* {console.log(" Inside profile",brews)} */}
+                <div className="sidebarHeader"><h3 className="white header">Top Recipes</h3></div>         
                 {BrewsJSX}
                 <div className="sidebarFooter"></div>
               </div>
@@ -190,7 +189,6 @@ export default class Profile extends Component {
 
             <div className="favoriteRecipesFeed">
               <div className="sidebarHeader"><h3 className="white header">Favorite Recipes</h3></div>
-              {/* {console.log(" Why?",FavBrewsJSX)} */}
               {FavBrewsJSX || "No one viewed yet"}
               <div className="sidebarFooter"></div>
             </div>
