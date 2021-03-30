@@ -20,22 +20,16 @@ export default class Profile extends Component {
       userData: [],
       brews: [],
       following: [],
-      vistedIds: ls.get('visited') || [],
+      visitedIds: ls.get('visited') || [],
       visitedPages: []
     };
 
   }
 
   componentDidMount() {
-    const parsedIds = JSON.parse(this.state.vistedIds);
-    const uniqueIds = [... new Set(parsedIds)];
-    const removeCurrentUser = uniqueIds.indexOf(JSON.stringify(this.state.currentUser.id));
-    if (removeCurrentUser > -1 ) {
-      uniqueIds.splice(removeCurrentUser, 1);
-    }
 
     //this.setState({ vis })
-    console.log(" removed userId",this.state.visitedPages);
+    console.log(" removed userId", this.state.visitedPages);
 
     api.getUserProfile(this.state.currentUser.id).then(res => {
       console.log("user", res)
@@ -51,56 +45,71 @@ export default class Profile extends Component {
       //console.log(" userBrews", res.data);
       this.setState({ brews: res.data });
     })
-    let collectedData = [];
-    uniqueIds.forEach(Ids => {
-      console.log("ids",uniqueIds);
-      api.getUserProfile(Ids)
-        .then(res => {
-          
-        collectedData.push(res);
-        console.log("data",collectedData)
-        this.setState({ visitedPages: collectedData })
-      });
-     })
-    
-      
-      
-    
 
-    // An api call to retrieve following will go here
+    this.recentlyViewed();
 
+    console.log(" ls.get",ls.get('visited'));
 
   };
 
+  recentlyViewed() {
+    let parsedIds = JSON.parse(this.state.visitedIds);
+    let uniqueIds = [new Set()];
+    console.log("before Ifelse", typeof (this.state.visitedIds));
+    if (typeof (this.state.visitedPages) == null) {
+      console.log("True");
+    } else { console.log("False"); }
+
+    uniqueIds = [... new Set(parsedIds)];
+
+    const removeCurrentUser = uniqueIds.indexOf(JSON.stringify(this.state.currentUser.id));
+
+    if (removeCurrentUser > -1) {
+      uniqueIds.splice(removeCurrentUser, 1);
+    }
+
+    let collectedData = [];
+    uniqueIds.forEach(Ids => {
+      console.log("ids", uniqueIds);
+      api.getUserProfile(Ids)
+        .then(res => {
+
+          collectedData.push(res);
+          console.log("data", collectedData)
+          this.setState({ visitedPages: collectedData })
+        });
+    })
+  }
+
   render() {
     //hard coding a following list
-    
-    const following = 
-    [{
-      name: "Bob Jim",
-      bio: "Moonshiner extrodonair"
-    },
-    {
-      name: "Bill Tim",
-      bio: "Moonshiner extra extrodonair"
-    }];
+
+    const following =
+      [{
+        name: "Bob Jim",
+        bio: "Moonshiner extrodonair"
+      },
+      {
+        name: "Bill Tim",
+        bio: "Moonshiner extra extrodonair"
+      }];
 
     //const score = this.state.contributionScore;
     const pages = this.state.visitedPages
     const brews = this.state.brews;
     const userFav = this.state.userFav;
     const currentUser = this.state.userData;
-    
-  
+
+
     let BrewsJSX;
 
-    BrewsJSX = brews.map(brew => <RecipeCard 
+    BrewsJSX = brews.map(brew => <RecipeCard
       UserId={brew.UserId}
       id={brew.id}
       name={brew.name}
       description={brew.description}
       author={brew.author}
-      id={brew.id} 
+      id={brew.id}
       UserId={brew.UserId} />);
 
     let FollowingJSX;
@@ -109,27 +118,27 @@ export default class Profile extends Component {
       id={person.id}
       username={person.name}
       bio={person.bio}
-      score={person.score} 
-      />)
+      score={person.score}
+    />)
 
     let LastViewedJSX;
 
-    LastViewedJSX =  pages.map(person => <UserCard
+    LastViewedJSX = pages.map(person => <UserCard
       id={person.data[0].id}
       username={person.data[0].username}
       bio={person.data[0].bio}
-      score={person.data[0].contributionScore} 
-      />)
-
+      score={person.data[0].contributionScore}
+    />)
+    console.log("lastviewed", LastViewedJSX);
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       UserId={Brew.UserId}
       id={Brew.id}
       name={Brew.name}
       description={Brew.description}
-      author={Brew.author} 
+      author={Brew.author}
       id={Brew.id}
       UserId={Brew.UserId}
-      />);
+    />);
 
     // Currently just displays Info about the user from the DB
     return (
@@ -147,7 +156,7 @@ export default class Profile extends Component {
             <div className="popularUsersFeed">
               <div className="sidebarHeader"><h3 className="white header">Following:</h3></div>
               {/* {console.log("Inside Profile",person)} */}
-                {FollowingJSX}
+              {FollowingJSX}
               <div className="sidebarFooter"></div>
             </div>
 
@@ -182,7 +191,7 @@ export default class Profile extends Component {
             <div className="favoriteRecipesFeed">
               <div className="sidebarHeader"><h3 className="white header">Favorite Recipes</h3></div>
               {/* {console.log(" Why?",FavBrewsJSX)} */}
-              {FavBrewsJSX || "No one viewed yet"} 
+              {FavBrewsJSX || "No one viewed yet"}
               <div className="sidebarFooter"></div>
             </div>
           </div>
