@@ -8,7 +8,9 @@
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "seed:dev": "node db/seed.js",
-    "start": "cd client && npm run build && cd .. && node server.js"
+    "start": "node server.js",
+    "build": "cd client && npm run build",
+    "install": "cd client && npm install"
   },
   "repository": {
     "type": "git",
