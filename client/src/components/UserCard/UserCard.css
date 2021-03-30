@@ -1,17 +1,15 @@
-.userCard .avatar {
-    display: block;
-    width:20%;
-    margin-right:0.5rem;
+.userCard {
+    margin-top:1rem;
 }
 
-.userCard .userFlex {
+.userCard .flexWrap-horizontal {
     display:flex;
     flex-direction:row;
     justify-content: flex-start;
+    margin-bottom:1rem;
 }
 
-.userCard h3 {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
+.userCard .text-verticalAlign h2 {
+    line-height:1.7;
+    margin-left:1rem;
 }

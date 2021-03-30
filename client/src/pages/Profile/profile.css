@@ -2,241 +2,33 @@
 /* ----- general styles ----- */
 /* -------------------------- */
 
-#Profile {
-    display:flex;
-    flex-direction:row;
-    justify-content: space-around;
-    overflow-y: scroll;
-    height:80vh;
-}
 
-#Profile .header {
-    text-align: center;
-    margin-bottom:0;
-}
-
-#Profile .leftColumn {
-    width:35%;
-    padding:2.5%;
-}
-
-#Profile .profile-avatar {
-    width:100%;
-    border-radius:50%;
-}
-
-#Profile .bio {
-    margin:0px auto;
-    text-align:center;
-}
-
-#Profile .recipeCard {
-    border:1px solid black;
-    background-color:white;
-    padding:1rem;
-    margin-bottom:1rem;
-}
-
-#Profile .recipeCard,
-#Profile .userCard {
-    border:1px solid black;
-    background-color:white;
-    padding:1rem;
-    margin-bottom:1rem;
-}
-
-#Profile .sidebarHeader h3 {
-    margin-top:0;
-}
-
-#Profile .recipeCard h3,
-#Profile .userCard h3 {
-    margin:0;
-}
-
-#Profile .sidebarHeader {
-    position:sticky;
-    top:0;
-    height:5em;
-    background-color:black;
-    padding:5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    z-index:5;
-}
-
-.sidebarFooter {
-    position:sticky;
-    bottom:-1%;
-    height:6%;
-    background-color:black;
-}
-
-#Profile .mainFlexWrap {
-    display:flex;
-    flex-direction:column;
-    justify-content: flex-start;
-    width:60%;
-    padding:2.5%;
-}
-
-#Profile .mainFlexWrap {
-    margin:0px auto;
-    text-align:center;
-}
-
-#Profile .profileBlock {
-    padding:2.5%;
-    border:1px solid black;
-    margin-top:1rem;
-    text-align: center;
-}
-
-#Profile .profileBlock.community-points {
-    padding:1.5em;
-    border-radius:5%;
-}
-
-#Profile .profileBlock.community-points h3 {
-    font-size:5em;
-    margin:0;
-}
-
-#Profile .profileBlock.community-points p {
-    margin:0;
-}
-
-/* -------------------------- */
-/* - feed / overflow styles - */
-/* -------------------------- */
-
- 
-#Profile .popularUsersFeed {
-    height:35vh;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;
-    background-color:black;
-    border:1px solid black;
-    padding:0 5% 0 5%;
-    position:relative;
-}
-
-
-#Profile .favoriteRecipesFeed {
-    height:100vh + 1rem;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;
-    background-color:black;
-    border:1px solid black;
-    padding:0 5% 0 5%;
-    position:relative;
-    width:35%;
-}
-
-#Profile .popularRecipesFeed,
-#Profile .viewedUsersFeed {
-    height:50vh;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;
-    background-color:black;
-    border:1px solid black;
-    padding:0 5% 0 5%;
-    position:relative;
-}
-
-#Profile .viewedUsersFeed,
-.viewedUsersFeed .sidebarHeader,
-.viewedUsersFeed .sidebarFooter {
-    margin-top:1rem;
-    /* background-color:gray;
-    border:1px solid gray; */
-}
-
-#Profile .popularUsersFeed {
-    margin-top:3vh;
-}
-
-/* #Feed .mainFeed {
-    width:70%;
-    padding:1rem;
-    height:70vh;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-} */
-
-#Profile .popularUsersFeed::-webkit-scrollbar,
-#Profile .popularRecipesFeed::-webkit-scrollbar,
-#Profile .favoriteRecipesFeed::-webkit-scrollbar,
-#Profile .viewedUsersFeed::-webkit-scrollbar {
+#Profile .userCard .MuiCardMedia-root {
     display:none;
+    height:0;
 }
 
-#Profile .horizontal-flex {
-    display:flex;
-    flex-direction:row;
-    justify-content: space-around;
+#Profile .avatar {
+    width:15rem;
+    height:15rem;
+    margin:0px auto;
 }
 
-#Profile .vertical-flex {
-    display:flex;
-    flex-direction:column;
-    justify-content: space-around;
-    width:50%;
+#Profile .makeStyles-root-1,
+#Profile .makeStyles-root-3 {
+    max-width:100%;
 }
-
-.white {
-    color:white;
-}
-
-/* -------------------------- */
-/*   ellipses sidebar styles  */
-/* -------------------------- */
 
 #Profile .recipeCard {
-    --max-lines: 3;
-    max-height: 10rem;
-    /* overflow: hidden; */
+    margin-top:1rem;
 }
 
-#Profile .recipeCard::before {
-    content: "...";
-    position: absolute;
-    bottom: 0;
-    right: 0;
-  }
-
-  #Profile .recipeCard::after {
-    content: "";
-    position: absolute;
-    right: 0; /* note: not using bottom */
-    width: 1rem;
-    height: 1rem;
-    background: white;
-    display: none;
-  }
-  
-#Profile .recipeCard,
-#Profile .userCard {
-    line-height: var(--lh);
-    --lh: 1.4rem;
+#Profile #bio {
+    margin:2rem auto 2rem auto;
+    width:90%;
+    text-align: center;
 }
-  
-#Profile .truncate-overflow {
-    --max-lines: 3;
-    position: relative;
-    max-height: calc(var(--lh) * var(--max-lines));
-    overflow: hidden;
-    padding-right: 1rem; /* space for ellipsis */
-  }
 
-#Profile .truncate-overflow::before {
-    position: absolute;
-    content: "...";
-    bottom: 0;
-    right: 0;
-  }
+#Profile .miniFeedWrap {
+    margin-top:2rem;
+}

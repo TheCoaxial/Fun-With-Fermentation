@@ -18,7 +18,7 @@ export default function Header() {
 
             <Link to="/profile">
                 <div className="vertical-align">
-                    <img src="./sample-avatar.png" alt="user avatar" className="avatar"/>
+                    <img src="./sample-avatar.jpg" alt="user avatar" className="avatar"/>
                 </div>
             </Link>
             

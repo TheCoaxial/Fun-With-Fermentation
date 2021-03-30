@@ -8,6 +8,9 @@ import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
 import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
+import Grid from "@material-ui/core/Grid";
+import Typography from '@material-ui/core/Typography';
+import Avatar from '@material-ui/core/Avatar';
 
 
 export default class Profile extends Component {
@@ -115,6 +118,7 @@ export default class Profile extends Component {
     let FollowingJSX;
 
     FollowingJSX = following.map(person => <UserCard
+      key={person.id}
       id={person.id}
       username={person.name}
       bio={person.bio}
@@ -131,70 +135,88 @@ export default class Profile extends Component {
     />)
     console.log("lastviewed", LastViewedJSX);
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
+      key={Brew.id}
       UserId={Brew.UserId}
       id={Brew.id}
       name={Brew.name}
       description={Brew.description}
       author={Brew.author}
-      id={Brew.id}
       UserId={Brew.UserId}
-    />);
+      />);
+     
 
-    // Currently just displays Info about the user from the DB
     return (
-      <div id="Profile">
-        <div className="leftColumn">
-          {/* {console.log("Love", LastViewedJSX)} */}
-          <img src="./sample-avatar.png" alt="user avatar" className="profile-avatar" />
+            <div id="Profile">
 
-          <div className="bio">
-            <p>{currentUser.bio || "No Bio"}</p>
-          </div>
+              <Grid container spacing={3}>
+                  <Grid item xs={4} className="sidebarWrap">
 
+                    <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar"/>
 
-          <div className="sidebarWrap">
-            <div className="popularUsersFeed">
-              <div className="sidebarHeader"><h3 className="white header">Following:</h3></div>
+                        <Typography gutterBottom variant="body3" component="p" id="bio">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                          </Typography>
 
-              {FollowingJSX}
+                      <div className="miniFeedWrap">
+                          <Typography gutterBottom variant="h5" component="h1">
+                              Following
+                          </Typography>
+                          {FollowingJSX}
+                      </div>
+
+                  </Grid>
+                  <Grid item xs={4}>
+                      <div className="miniFeedWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                            Last Viewed Profiles:
+                        </Typography>
+                        {LastViewedJSX}
+                      </div>
+
+                      <div className="miniFeedWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                                Top Recipes
+                        </Typography>
+                            {BrewsJSX}
+                      </div>
+
+                  </Grid>
+
+                  <Grid item xs={4}>
+                    <div className="miniFeedWrap">
+                      <Typography gutterBottom variant="h5" component="h1">
+                                Favorite Brews
+                              </Typography>
+                              {/* {FavBrewsJSX} */}
+                              {BrewsJSX}
+                    </div>
+                  </Grid>
+              </Grid>
+
+        <div className="horizontal-flex">
+          <div className="vertical-flex">
+            <div className="popularRecipesFeed">
+              <div className="sidebarHeader"><h3 className="white header">Top Recipes</h3></div>         
+              {BrewsJSX}
               <div className="sidebarFooter"></div>
             </div>
 
-            <div className="profileBlock community-points">
-              <p>Community Points</p>
-              <h3>{currentUser.contributionScore}</h3>
-            </div>
-          </div>
-        </div>
-
-        <div className="mainFlexWrap">
-          <div className="currentBrews">
-            <CurrentBrews />
-          </div>
-
-          <div className="horizontal-flex">
-            <div className="vertical-flex">
-              <div className="popularRecipesFeed">
-                <div className="sidebarHeader"><h3 className="white header">Top Recipes</h3></div>         
-                {BrewsJSX}
-                <div className="sidebarFooter"></div>
-              </div>
-
-              <div className="viewedUsersFeed">
-                <div className="sidebarHeader"><h3 className="white header">Last View Profiles:</h3></div>
-                {LastViewedJSX}
-                <div className="sidebarFooter"></div>
-              </div>
-            </div>
-
-            <div className="favoriteRecipesFeed">
-              <div className="sidebarHeader"><h3 className="white header">Favorite Recipes</h3></div>
-              {FavBrewsJSX || "No one viewed yet"}
+            <div className="viewedUsersFeed">
+              <div className="sidebarHeader"><h3 className="white header">Last View Profiles:</h3></div>
+              {LastViewedJSX}
               <div className="sidebarFooter"></div>
             </div>
+          </div>
+
+          <div className="favoriteRecipesFeed">
+            <div className="sidebarHeader"><h3 className="white header">Favorite Recipes</h3></div>
+            {FavBrewsJSX || "No one viewed yet"}
+            <div className="sidebarFooter"></div>
           </div>
         </div>
       </div>
+         
+        
 
     );
   }
