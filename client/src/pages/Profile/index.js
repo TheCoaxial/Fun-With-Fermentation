@@ -7,9 +7,10 @@ import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
 import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
-import Grid from "@material-ui/core/Grid";
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
+
+import CreateIcon from '@material-ui/icons/Create';
+import CheckIcon from '@material-ui/icons/Check';
+import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core'
 
 
 export default class Profile extends Component {
@@ -21,19 +22,26 @@ export default class Profile extends Component {
       userFav: [],
       contributionScore: "",
       brews: [],
-      following: []
+      following: [],
+      bio: "",
+      isBioEdit: false
     };
 
   }
 
   componentDidMount() {
 
+
     api.getUserProfile(this.state.currentUser.id).then(res => {
-      this.setState({ contributionScore: res.data[0].contributionScore });
+      let userData = res.data[0];
+      this.setState({
+        contributionScore: userData.contributionScore,
+        bio: userData.bio
+      });
     })
 
     api.getUserFavorites(this.state.currentUser.id).then(res => {
-      console.log("Favorites ",res.data);
+      console.log("Favorites ", res.data);
       this.setState({ userFav: res.data });
     })
 
@@ -44,7 +52,7 @@ export default class Profile extends Component {
 
     // An api call to favorites will go here
 
-    
+
 
     // An api call to retrieve following will go here
 
@@ -53,7 +61,7 @@ export default class Profile extends Component {
 
   render() {
     //hard coding a following list
-    
+
     const following = [{
       name: "Bob Jim",
       bio: "Moonshiner extrodonair"
@@ -77,9 +85,7 @@ export default class Profile extends Component {
     const brews = this.state.brews;
     const userFav = this.state.userFav;
 
-    let BrewsJSX;
-
-    BrewsJSX = brews.map(brew => <RecipeCard
+    let BrewsJSX = brews.map(brew => <RecipeCard
       key={brew.id}
       UserId={brew.UserId}
       id={brew.id}
@@ -87,23 +93,19 @@ export default class Profile extends Component {
       description={brew.description}
       author={brew.author} />);
 
-    let FollowingJSX;
-
-    FollowingJSX = following.map(person => <UserCard
+    let FollowingJSX = following.map(person => <UserCard
       key={person.id}
       id={person.id}
       username={person.name}
       bio={person.bio}
-      score={person.score} />)
+      score={person.score} />);
 
-    let LastViewedJSX;
-
-    LastViewedJSX =  recentlyVisited.map(person => <UserCard
+    let LastViewedJSX = recentlyVisited.map(person => <UserCard
       key={person.id}
       id={person.id}
       username={person.name}
       bio={person.bio}
-      score={person.score} />)
+      score={person.score} />);
 
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       key={Brew.id}
@@ -112,6 +114,39 @@ export default class Profile extends Component {
       name={Brew.name}
       description={Brew.description}
       author={Brew.author} />);
+
+    let bioJSX =
+      <div id="bio">
+        <Typography gutterBottom variant="body3" component="p" id="bio">
+          {this.state.bio || "No Bio"}
+        </Typography>
+        <IconButton
+          onClick={(event) => {
+            event.preventDefault();
+            this.setState({ isBioEdit: !this.state.isBioEdit });
+          }}
+          aria-label="create">
+          <CreateIcon />
+        </IconButton>
+      </div>;
+
+    if (this.state.isBioEdit) {
+      bioJSX = <div id="bio">
+        <Input multiline={true} value={this.state.bio} onChange={(e) => {
+          this.setState({ bio: e.target.value });
+        }}>
+        </Input>
+        <IconButton
+          onClick={(event) => {
+            event.preventDefault();
+            this.setState({ isBioEdit: !this.state.isBioEdit });
+            api.updateUser(this.state.currentUser.id, this.state.bio, false);
+          }}
+          aria-label="submit">
+          <CheckIcon />
+        </IconButton>
+      </div>
+    }
 
     // Currently just displays Info about the user from the DB
     return (
@@ -133,7 +168,7 @@ export default class Profile extends Component {
       //         <p>Community Points</p>
       //         <h3>{score}</h3>
       //       </div>
-          
+
       //   </div>
 
       //     <div className="currentBrews">
@@ -160,54 +195,54 @@ export default class Profile extends Component {
 
 
 
-              <div id="Profile">
+      <div id="Profile">
 
-                <Grid container spacing={3}>
-                    <Grid item xs={4} className="sidebarWrap">
+        <Grid container spacing={3}>
+          <Grid item xs={4} className="sidebarWrap">
 
-                      <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar"/>
+            <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
 
-                          <Typography gutterBottom variant="body3" component="p" id="bio">
-                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+            {bioJSX}
+
+
+
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+                Following
                             </Typography>
+              {FollowingJSX}
+            </div>
 
-                        <div className="miniFeedWrap">
-                            <Typography gutterBottom variant="h5" component="h1">
-                                Following
-                            </Typography>
-                            {FollowingJSX}
-                        </div>
-
-                    </Grid>
-                    <Grid item xs={4}>
-                        <div className="miniFeedWrap">
-                          <Typography gutterBottom variant="h5" component="h1">
-                              Last Viewed Profiles:
+          </Grid>
+          <Grid item xs={4}>
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+                Last Viewed Profiles:
                           </Typography>
-                          {LastViewedJSX}
-                        </div>
+              {LastViewedJSX}
+            </div>
 
-                        <div className="miniFeedWrap">
-                          <Typography gutterBottom variant="h5" component="h1">
-                                  Top Recipes
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+                Top Recipes
                           </Typography>
-                              {BrewsJSX}
-                        </div>
+              {BrewsJSX}
+            </div>
 
-                    </Grid>
+          </Grid>
 
-                    <Grid item xs={4}>
-                      <div className="miniFeedWrap">
-                        <Typography gutterBottom variant="h5" component="h1">
-                                  Favorite Brews
+          <Grid item xs={4}>
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+                Favorite Brews
                                 </Typography>
-                                {/* {FavBrewsJSX} */}
-                                {BrewsJSX}
-                      </div>
-                    </Grid>
-                </Grid>
+              {/* {FavBrewsJSX} */}
+              {BrewsJSX}
+            </div>
+          </Grid>
+        </Grid>
 
-          </div>
+      </div>
 
     );
   }

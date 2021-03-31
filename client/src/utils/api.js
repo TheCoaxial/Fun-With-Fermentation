@@ -157,6 +157,15 @@ class API {
     }
 
     updateUser(userID, bio, contributionScore) {
+        let body = {};
+
+        if (contributionScore) {
+            body.contributionScore = contributionScore;
+        }
+        if (bio) {
+            body.bio = bio;
+        }
+
         return this.axios.put("/api/update-user/" + userID, {
             bio: bio,
             contributionScore: contributionScore
