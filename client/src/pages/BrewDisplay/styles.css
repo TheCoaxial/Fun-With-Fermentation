@@ -1,0 +1,69 @@
+#brewDisplay #mainBrewDisplay {
+    width:80%;
+    margin:0px auto;
+    background-color:white;
+    border:1px solid black;
+    padding:5%;
+    padding-top:2.5%;
+    margin-top:2em;
+}
+
+#brewDisplay #mainBrewDisplay .step p {
+    display:flex;
+    flex-direction: row;
+}
+
+#brewDisplay #mainBrewDisplay .step p {
+    display: flex;
+    flex-direction: row;
+}
+
+#brewDisplay #mainBrewDisplay .step p .vertical-align {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#brewDisplay #mainBrewDisplay .step p #stepTime {
+    display: flex;
+    flex-direction: row;
+}
+
+#brewDisplay #mainBrewDisplay .step p .stepTimeSpan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 0.25em;
+}
+
+#brewDisplay #mainBrewDisplay .MuiList-root.MuiList-padding {
+    padding-left:6em;
+}
+
+#brewDisplay #mainBrewDisplay .MuiTimeline-root .MuiTimelineContent-root {
+    flex:10;
+}
+
+#brewDisplay #mainBrewDisplay .h2-header {
+    font-weight:bold;
+}
+
+#brewDisplay #mainBrewDisplay .h5-headers {
+    padding-left:6em;
+    margin-top:3em;
+    font-weight:bold;
+}
+
+#brewDisplay #mainBrewDisplay .author-header {
+    font-style: italic;
+    margin:1em;
+}
+
+#brewDisplay #mainBrewDisplay .description-header {
+    margin:2em;
+}
+
+
+#brewDisplay #mainBrewDisplay .mainHeaders {
+    text-align: center;
+}
