@@ -8,9 +8,10 @@ import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
 import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
-import Grid from "@material-ui/core/Grid";
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
+
+import CreateIcon from '@material-ui/icons/Create';
+import CheckIcon from '@material-ui/icons/Check';
+import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core'
 
 
 export default class Profile extends Component {
@@ -23,6 +24,8 @@ export default class Profile extends Component {
       userData: [],
       brews: [],
       following: [],
+      bio: "",
+      isBioEdit: false,
       visitedIds: ls.get('visited') || [],
       visitedPages: []
     };
@@ -31,16 +34,17 @@ export default class Profile extends Component {
 
   componentDidMount() {
 
-    //this.setState({ vis })
-    console.log(" removed userId", this.state.visitedPages);
 
     api.getUserProfile(this.state.currentUser.id).then(res => {
-      console.log("user", res)
-      this.setState({ userData: res.data[0] });
+      let userData = res.data[0];
+      this.setState({
+        contributionScore: userData.contributionScore,
+        bio: userData.bio,
+        userData: res.data[0]
+      });
     })
 
     api.getUserFavorites(this.state.currentUser.id).then(res => {
-      //console.log("Favorites ",res.data);
       this.setState({ userFav: res.data });
     })
 
@@ -51,7 +55,6 @@ export default class Profile extends Component {
 
     this.recentlyViewed();
 
-    // console.log(" ls.get",ls.get('visited'));
 
   };
 
@@ -104,9 +107,9 @@ export default class Profile extends Component {
     const currentUser = this.state.userData;
 
 
-    let BrewsJSX;
 
-    BrewsJSX = brews.map(brew => <RecipeCard
+
+    let BrewsJSX = brews.map(brew => <RecipeCard
       UserId={brew.UserId}
       id={brew.id}
       name={brew.name}
@@ -115,9 +118,7 @@ export default class Profile extends Component {
       id={brew.id}
       UserId={brew.UserId} />);
 
-    let FollowingJSX;
-
-    FollowingJSX = following.map(person => <UserCard
+    let FollowingJSX = following.map(person => <UserCard
       key={person.id}
       id={person.id}
       username={person.name}
@@ -125,9 +126,8 @@ export default class Profile extends Component {
       score={person.score}
     />)
 
-    let LastViewedJSX;
 
-    LastViewedJSX = pages.map(person => <UserCard
+    let LastViewedJSX = pages.map(person => <UserCard
       id={person.data[0].id}
       username={person.data[0].username}
       bio={person.data[0].bio}
@@ -142,81 +142,90 @@ export default class Profile extends Component {
       description={Brew.description}
       author={Brew.author}
       UserId={Brew.UserId}
-      />);
-     
+    />);
 
+
+    let bioJSX =
+      <div id="bio">
+        <Typography gutterBottom variant="body3" component="p" id="bio">
+          {this.state.bio || "No Bio"}
+        </Typography>
+        <IconButton
+          onClick={(event) => {
+            event.preventDefault();
+            this.setState({ isBioEdit: !this.state.isBioEdit });
+          }}
+          aria-label="create">
+          <CreateIcon />
+        </IconButton>
+      </div>;
+
+    if (this.state.isBioEdit) {
+      bioJSX = <div id="bio">
+        <Input multiline={true} value={this.state.bio} onChange={(e) => {
+          this.setState({ bio: e.target.value });
+        }}>
+        </Input>
+        <IconButton
+          onClick={(event) => {
+            event.preventDefault();
+            this.setState({ isBioEdit: !this.state.isBioEdit });
+            api.updateUser(this.state.currentUser.id, this.state.bio, false);
+          }}
+          aria-label="submit">
+          <CheckIcon />
+        </IconButton>
+      </div>
+    }
+
+    // Currently just displays Info about the user from the DB
     return (
-            <div id="Profile">
-
+      <div id="Profile">
               <Grid container spacing={3}>
                   <Grid item xs={4} className="sidebarWrap">
 
                     <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar"/>
 
-                        <Typography gutterBottom variant="body3" component="p" id="bio">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
-                          </Typography>
 
-                      <div className="miniFeedWrap">
-                          <Typography gutterBottom variant="h5" component="h1">
-                              Following
-                          </Typography>
-                          {FollowingJSX}
-                      </div>
+            {bioJSX}
 
-                  </Grid>
-                  <Grid item xs={4}>
-                      <div className="miniFeedWrap">
-                        <Typography gutterBottom variant="h5" component="h1">
-                            Last Viewed Profiles:
-                        </Typography>
-                        {LastViewedJSX}
-                      </div>
-
-                      <div className="miniFeedWrap">
-                        <Typography gutterBottom variant="h5" component="h1">
-                                Top Recipes
-                        </Typography>
-                            {BrewsJSX}
-                      </div>
-
-                  </Grid>
-
-                  <Grid item xs={4}>
-                    <div className="miniFeedWrap">
-                      <Typography gutterBottom variant="h5" component="h1">
-                                Favorite Brews
-                              </Typography>
-                              {/* {FavBrewsJSX} */}
-                              {BrewsJSX}
-                    </div>
-                  </Grid>
-              </Grid>
-
-        <div className="horizontal-flex">
-          <div className="vertical-flex">
-            <div className="popularRecipesFeed">
-              <div className="sidebarHeader"><h3 className="white header">Top Recipes</h3></div>         
-              {BrewsJSX}
-              <div className="sidebarFooter"></div>
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+              Following
+                            </Typography>
+              {FollowingJSX}
             </div>
 
-            <div className="viewedUsersFeed">
-              <div className="sidebarHeader"><h3 className="white header">Last View Profiles:</h3></div>
+          </Grid>
+          <Grid item xs={4}>
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+              Last Viewed Profiles:
+                          </Typography>
               {LastViewedJSX}
-              <div className="sidebarFooter"></div>
             </div>
-          </div>
 
-          <div className="favoriteRecipesFeed">
-            <div className="sidebarHeader"><h3 className="white header">Favorite Recipes</h3></div>
-            {FavBrewsJSX || "No one viewed yet"}
-            <div className="sidebarFooter"></div>
-          </div>
-        </div>
-      </div>
-         
-        
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+              Top Recipes
+                          </Typography>
+              {BrewsJSX}
+            </div>
+
+          </Grid>
+
+          <Grid item xs={4}>
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+              Favorite Brews
+                                </Typography>
+              {/* {FavBrewsJSX} */}
+              {BrewsJSX}
+            </div>
+          </Grid>
+        </Grid>
+
+      </div >
 
     );
   }
