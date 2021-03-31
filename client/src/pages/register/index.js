@@ -211,7 +211,7 @@ export default class Register extends Component {
           </Form>
 
           <p>
-            Already have an account? <Link to="/login">Log In</Link>
+            Great! Now click here to log in! <Link to="/login">Log In</Link>
           </p>
 
           <Footer />
