@@ -1,105 +1,89 @@
-#brewPage {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    width:75%;
-    margin:0px auto;
-    height:75vh;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;
-    padding-bottom:10%;
-}
 
-/* #brewPage form {
-    margin:0px auto;
-} */
-
-#brewPage #brewName {
-    display:flex;
-    flex-direction:row;
-    justify-content: center;
-    margin-top:2rem;
-    margin-bottom:2rem;
-}
-
-#brewPage input,
-#brewPage textarea {
-    width:88%;
-    margin:0px auto;
-}
-
-#brewPage textarea {
-    margin:0px auto;
-    display:block;
-    font-size:1rem;
-    padding:3%;
-    height:5rem;
-}
-
-#brewPage::-webkit-scrollbar {
-    display:none;
-}
-
-#brewPage input,
-#brewPage button {
-    margin:0px auto;
-    margin-bottom:1.5rem;
-    padding:2%;
-}
-
-#brewPage button {
-    margin:0px auto;
-    background-color:darkgray;
-    color:white;
-    border-radius:5%;
-}
-
-#brewPage .formGroup {
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top:1rem;
-    margin-bottom:2rem;
-}
-
-#brewPage #brewName {
-    padding:3%;
-    font-size:1.5rem;
-}
-
-
-
-#brewPage .ingredients input, 
-#brewPage .instructions input {
-    display:block;
-    
-    font-size:1rem;
-}
-
-#brewPage select {
+#newBrew #newBrewForm {
+    background-color:white;
+    border:1px solid black;
+    width:60%;
     margin:0px auto;
     margin:5%;
-    margin-top:0;
-    padding:2%;
-    font-size:1rem;
-    width:88%;
+    padding:0 5% 2% 5%;
 }
 
-#brewPage label {
-    margin-top:5rem;
-    text-align: center;
-    margin-bottom:2rem;
-    display: block;
+#newBrew .MuiFormControl-root.MuiTextField-root {
+    display:block !important;
+    margin-top:2rem !important;
 }
 
-#brewPage #submit {
-    display:block;
-    padding:3%;
-    font-size:1rem;
-    width:10rem;
-    margin:0px auto;
-    margin-top:2rem;
-    font-weight:bold;
+#newBrew #newBrewForm .MuiButton-label {
+    text-transform:capitalize !important;
 }
+
+#newBrew #newBrewForm .addInputButton {
+    margin-top:2em;
+}
+
+#newBrew #newBrewForm #selectLabel {
+    margin-top:3em;
+}
+
+#newBrew #newBrewForm #formButtonWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top:2em;
+}
+
+#newBrew #newBrewForm .MuiButton-containedPrimary {
+    background-color:black;
+}
+
+@media only screen and (min-width:700px) {
+
+    #newBrew #newBrewForm input,
+    #newBrew #newBrewForm textarea,
+    #newBrew #newBrewForm select {
+        width:23.5em !important;
+    }
+
+    #newBrew #newBrewForm .formGroup input,
+    #newBrew #newBrewForm #formButtonWrap {
+        width:25em !important;
+    }
+
+}
+
+
+@media only screen and (min-width:400px) and (max-width:699px) {
+
+    #newBrew #newBrewForm {
+        width:85%;
+        margin:0px auto;
+    }
+    
+    #newBrew #newBrewForm input,
+    #newBrew #newBrewForm textarea,
+    #newBrew #newBrewForm select {
+        width:18.5em !important;
+    }
+
+    #newBrew #newBrewForm .formGroup input,
+    #newBrew #newBrewForm #formButtonWrap {
+        width:20em !important;
+    }
+}
+
+@media only screen and (max-width:399px) {
+
+    #newBrew #newBrewForm {
+        width:85%;
+        margin:0px auto;
+    }
+
+    #newBrew #newBrewForm input,
+    #newBrew #newBrewForm textarea,
+    #newBrew #newBrewForm select,
+    #newBrew #newBrewForm #formButtonWrap  {
+        min-width:0 !important;
+    }
+
+}
+
