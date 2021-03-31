@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
+import ls from 'local-storage';
 // import Header from "../profile/index";
 // import FollowingCard from "../../components/FollowingList/FollowingList";
 import api from "../../utils/api";
@@ -20,11 +21,13 @@ export default class Profile extends Component {
     this.state = {
       currentUser: AuthService.getCurrentUser(),
       userFav: [],
-      contributionScore: "",
+      userData: [],
       brews: [],
       following: [],
       bio: "",
-      isBioEdit: false
+      isBioEdit: false,
+      visitedIds: ls.get('visited') || [],
+      visitedPages: []
     };
 
   }
@@ -36,84 +39,111 @@ export default class Profile extends Component {
       let userData = res.data[0];
       this.setState({
         contributionScore: userData.contributionScore,
-        bio: userData.bio
+        bio: userData.bio,
+        userData: res.data[0]
       });
     })
 
     api.getUserFavorites(this.state.currentUser.id).then(res => {
-      console.log("Favorites ", res.data);
       this.setState({ userFav: res.data });
     })
 
     api.getUserBrews(this.state.currentUser.id).then(res => {
-      console.log(" userBrews", res.data);
+      //console.log(" userBrews", res.data);
       this.setState({ brews: res.data });
     })
 
-    // An api call to favorites will go here
-
-
-
-    // An api call to retrieve following will go here
+    this.recentlyViewed();
 
 
   };
 
+  recentlyViewed() {
+
+    let parsedIds;
+    try {
+      parsedIds = JSON.parse(this.state.visitedIds);
+    } catch {
+      console.log("No user data to display");
+    }
+    let uniqueIds = [... new Set(parsedIds)];
+
+    const removeCurrentUser = uniqueIds.indexOf(JSON.stringify(this.state.currentUser.id));
+
+    if (removeCurrentUser > -1) {
+      uniqueIds.splice(removeCurrentUser, 1);
+    }
+
+    let collectedData = [];
+    uniqueIds.forEach(Ids => {
+      console.log("ids", uniqueIds);
+      api.getUserProfile(Ids)
+        .then(res => {
+
+          collectedData.push(res);
+          console.log("data", collectedData)
+          this.setState({ visitedPages: collectedData })
+        });
+    })
+  }
+
   render() {
     //hard coding a following list
 
-    const following = [{
-      name: "Bob Jim",
-      bio: "Moonshiner extrodonair"
-    },
-    {
-      name: "Bill Tim",
-      bio: "Moonshiner extra extrodonair"
-    }];
+    const following =
+      [{
+        name: "Bob Jim",
+        bio: "Moonshiner extrodonair"
+      },
+      {
+        name: "Bill Tim",
+        bio: "Moonshiner extra extrodonair"
+      }];
 
-    const recentlyVisited = [{
-      name: "Billy Joe",
-      bio: "Home Brewer"
-    },
-    {
-      name: "Mary Sue",
-      bio: "Professional home brewer"
-    }];
-
-    const score = this.state.contributionScore;
-
+    //const score = this.state.contributionScore;
+    const pages = this.state.visitedPages
     const brews = this.state.brews;
     const userFav = this.state.userFav;
+    const currentUser = this.state.userData;
+
+
+
 
     let BrewsJSX = brews.map(brew => <RecipeCard
-      key={brew.id}
       UserId={brew.UserId}
       id={brew.id}
       name={brew.name}
       description={brew.description}
-      author={brew.author} />);
+      author={brew.author}
+      id={brew.id}
+      UserId={brew.UserId} />);
 
     let FollowingJSX = following.map(person => <UserCard
       key={person.id}
       id={person.id}
       username={person.name}
       bio={person.bio}
-      score={person.score} />);
+      score={person.score}
+    />)
 
-    let LastViewedJSX = recentlyVisited.map(person => <UserCard
-      key={person.id}
-      id={person.id}
-      username={person.name}
-      bio={person.bio}
-      score={person.score} />);
 
+    let LastViewedJSX = pages.map(person => <UserCard
+      id={person.data[0].id}
+      username={person.data[0].username}
+      bio={person.data[0].bio}
+      score={person.data[0].contributionScore}
+    />)
+    console.log("lastviewed", LastViewedJSX);
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       key={Brew.id}
       UserId={Brew.UserId}
       id={Brew.id}
       name={Brew.name}
       description={Brew.description}
-      author={Brew.author} />);
+      author={Brew.author}
+      UserId={Brew.UserId}
+    />);
+
 
     let bioJSX =
       <div id="bio">
@@ -150,65 +180,18 @@ export default class Profile extends Component {
 
     // Currently just displays Info about the user from the DB
     return (
-      // <div id="Profile">
-      //   <div className="leftColumn">
-      //     {console.log("Love", userFav)}
-      //     <img src="./sample-avatar-2.png" alt="user avatar" className="profile-avatar" />
-
-      //     <div className="bio">
-      //       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
-      //     </div>
-
-
-      //         <h3 className="white header">Following:</h3>
-      //         {/* {console.log("Inside Profile",person)} */}
-      //           {LastViewedJSX}
-
-      //       <div className="profileBlock community-points">
-      //         <p>Community Points</p>
-      //         <h3>{score}</h3>
-      //       </div>
-
-      //   </div>
-
-      //     <div className="currentBrews">
-      //       <CurrentBrews />
-      //     </div>
-
-
-      //     <h3 className="white header">Top Recipes</h3>
-      //     {/* {console.log(" Inside profile",brews)} */}
-      //     {BrewsJSX}
-
-
-      //     <h3 className="white header">Last View Profiles:</h3>
-      //           {FollowingJSX}
-
-      //     <h3 className="white header">Favorite Recipes</h3>
-      //         {console.log(" Why?",FavBrewsJSX)}
-      //         {FavBrewsJSX}
-
-      // </div>
-
-
-
-
-
-
       <div id="Profile">
+              <Grid container spacing={3}>
+                  <Grid item xs={4} className="sidebarWrap">
 
-        <Grid container spacing={3}>
-          <Grid item xs={4} className="sidebarWrap">
+                    <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar"/>
 
-            <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
 
             {bioJSX}
 
-
-
             <div className="miniFeedWrap">
               <Typography gutterBottom variant="h5" component="h1">
-                Following
+              Following
                             </Typography>
               {FollowingJSX}
             </div>
@@ -217,14 +200,14 @@ export default class Profile extends Component {
           <Grid item xs={4}>
             <div className="miniFeedWrap">
               <Typography gutterBottom variant="h5" component="h1">
-                Last Viewed Profiles:
+              Last Viewed Profiles:
                           </Typography>
               {LastViewedJSX}
             </div>
 
             <div className="miniFeedWrap">
               <Typography gutterBottom variant="h5" component="h1">
-                Top Recipes
+              Top Recipes
                           </Typography>
               {BrewsJSX}
             </div>
@@ -234,7 +217,7 @@ export default class Profile extends Component {
           <Grid item xs={4}>
             <div className="miniFeedWrap">
               <Typography gutterBottom variant="h5" component="h1">
-                Favorite Brews
+              Favorite Brews
                                 </Typography>
               {/* {FavBrewsJSX} */}
               {BrewsJSX}
@@ -242,7 +225,7 @@ export default class Profile extends Component {
           </Grid>
         </Grid>
 
-      </div>
+      </div >
 
     );
   }
