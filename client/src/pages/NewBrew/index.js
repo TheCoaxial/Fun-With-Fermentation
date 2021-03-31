@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
-import AddInput from "../../components/AddInput/AddInput.js";
 import AuthService from "../../services/auth.service.js";
 import "./style.css";
 import API from '../../utils/api.js';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
+import NativeSelect from '@material-ui/core/NativeSelect';
+import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
+
+
 
 class NewBrew extends Component {
 
@@ -75,7 +81,7 @@ class NewBrew extends Component {
         let ingredientCount = -1;
         let ingredientsJSX = this.state.ingredients.map(ingredient => {
             ingredientCount += 1;
-            return (<input type="text" placeholder="Enter Ingredient Here"
+            return (<TextField id="standard-basic" label="Enter Ingredient"
                 alt="enter the first ingredient" name="ingredients" id={`ingredients-${ingredientCount}`} value={ingredient}
                 onChange={this.onChange} className="ingredient" />);
         });
@@ -84,7 +90,7 @@ class NewBrew extends Component {
         let instructionsCount = -1;
         let instructionsJSX = this.state.instructions.map(instruction => {
             instructionsCount += 1;
-            return (<input type="text" placeholder="Enter Instruction Here"
+            return (<TextField id="standard-basic" label="Enter Instruction"
                 alt="enter the first instruction" name="instructions" id={`instructions-${instructionsCount}`} value={instruction}
                 onChange={this.onChange} className="instruction" />);
         })
@@ -94,48 +100,124 @@ class NewBrew extends Component {
 
 
         return (
-            <div id="brewPage">
+            // <div id="brewPage">
 
-                <form onSubmit={this.onSubmit}>
-
-
-                    <input type="text" placeholder="Brew Name" alt="enter the name of your brew" id="brewName" name="title" value={this.state.title} onChange={this.onChange} />
-
-                    <div className="formGroup">
-
-                        <div className="ingredients">
-                            {ingredientsJSX}
-                        </div>
-
-                        <button onClick={(e) => this.handleAppend(e, ingredientArg)}>Add Another Ingredient</button>
-
-                    </div>
-
-                    <div className="formGroup">
+            //     <form onSubmit={this.onSubmit}>
 
 
-                        <div className="instructions">
-                            {instructionsJSX}
-                        </div>
+            //         <input type="text" placeholder="Brew Name" alt="enter the name of your brew" id="brewName" name="title" value={this.state.title} onChange={this.onChange} />
 
-                        <button onClick={(e) => this.handleAppend(e, instructionArg)}>Add Another Instruction</button>
+                    // <div className="formGroup">
 
-                    </div>
+                    //     <div className="ingredients">
+                    //         {ingredientsJSX}
+                    //     </div>
 
-                    <label htmlFor="difficulty">Select the difficulty level of your brew:</label>
-                    <select name="difficulty" id="difficultyDropdown">
-                        <option value="volvo">beginner</option>
-                        <option value="saab">intermediate</option>
-                        <option value="mercedes">expert</option>
-                        <option value="audi">unknown</option>
-                    </select>
+                    //     <button onClick={(e) => this.handleAppend(e, ingredientArg)}>Add Another Ingredient</button>
 
-                    <textarea alt="enter other description about the brew" id="description"
-                        placeholder="Enter any additional description about your brew (optional)"
-                        name="description" value={this.state.description} onChange={this.onChange}></textarea>
+                    // </div>
 
-                    <button type="submit" id="submit">Submit</button>
-                </form>
+                    // <div className="formGroup">
+
+
+                    //     <div className="instructions">
+                    //         {instructionsJSX}
+                    //     </div>
+
+                    //     <button onClick={(e) => this.handleAppend(e, instructionArg)}>Add Another Instruction</button>
+
+                    // </div>
+
+            //         <label htmlFor="difficulty">Select the difficulty level of your brew:</label>
+            //         <select name="difficulty" id="difficultyDropdown">
+            //             <option value="volvo">beginner</option>
+            //             <option value="saab">intermediate</option>
+            //             <option value="mercedes">expert</option>
+            //             <option value="audi">unknown</option>
+            //         </select>
+
+            //         <textarea alt="enter other description about the brew" id="description"
+            //             placeholder="Enter any additional description about your brew (optional)"
+            //             name="description" value={this.state.description} onChange={this.onChange}></textarea>
+
+            //         <button type="submit" id="submit">Submit</button>
+            //     </form>
+            // </div>
+
+            <div id="newBrew">
+                    <form id="newBrewForm" onSubmit={this.onSubmit}>
+
+                            <TextField 
+                                required 
+                                id="outlined-required brewName" 
+                                variant="outlined"
+                                label="Brew Name" 
+                                defaultValue="Brew Name" 
+                                alt="enter the name of your brew" 
+                                name="title" 
+                                value={this.state.title} 
+                                onChange={this.onChange}
+                            />
+
+                            <TextField
+                                id="outlined-multiline-static brewDescription"
+                                label="Description"
+                                multiline
+                                rows={4}
+                                defaultValue="Default Value"
+                                variant="outlined"
+                                placeholder="Enter any additional description about your brew (optional)"
+                                name="description" 
+                                value={this.state.description} 
+                                onChange={this.onChange}
+                            />
+
+                            <div className="formGroup">
+
+                                <div className="ingredients">
+                                    {ingredientsJSX}
+                                </div>
+
+                                <Button className="addInputButton" variant="outlined" onClick={(e) => this.handleAppend(e, ingredientArg)}>Add Another Ingredient</Button>
+
+
+                            </div>
+
+                            <div className="formGroup">
+
+                                <div className="instructions">
+                                    {instructionsJSX}
+                                </div>
+
+                                <Button className="addInputButton" variant="outlined" onClick={(e) => this.handleAppend(e, instructionArg)}>Add Another Instruction</Button>
+
+                            </div>
+
+                             <InputLabel htmlFor="select" id="selectLabel">Difficulty of Brew </InputLabel>
+                                <NativeSelect id="select">
+                                <option value="beginner"></option>
+                                    <option value="beginner">beginner</option>
+                                    <option value="intermediate">intermediate</option>
+                                    <option value="intermediate">expert</option>
+                                    <option value="intermediate">unknown</option>
+                                </NativeSelect>
+
+                                <div id="formButtonWrap">
+
+                                    <Button
+                                        type="submit"
+                                        id="submit"
+                                        variant="contained"
+                                        color="primary"
+                                        size="large"
+                                        startIcon={<LocalDrinkIcon />}
+                                        >
+                                        Save Brew
+                                    </Button>
+
+                                </div>
+
+                    </form>
             </div>
         );
     }
