@@ -28,6 +28,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "local-storage": "^2.0.0",
     "mysql2": "^2.2.5",
     "react-social": "^1.10.0",
     "sequelize": "^6.5.1"
