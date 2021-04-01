@@ -1,11 +1,23 @@
+
+#brewDisplay {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+
 #brewDisplay #mainBrewDisplay {
-    width:80%;
+    flex:2;
     margin:0px auto;
     background-color:white;
     border:1px solid black;
     padding:5%;
     padding-top:2.5%;
+    margin:2em;
     margin-top:2em;
+}
+
+#brewDisplay #commentSection {
+    flex:1;
 }
 
 #brewDisplay #mainBrewDisplay .step p {
