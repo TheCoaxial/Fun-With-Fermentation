@@ -53,7 +53,7 @@ class API {
     }
 
     getBrews() {
-        return this.axios.get("/api/brew/all");
+        return this.axios.get("/api/brews/all");
     }
 
     getUserBrews(userId) {

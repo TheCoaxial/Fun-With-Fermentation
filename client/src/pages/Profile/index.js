@@ -37,6 +37,7 @@ export default class Profile extends Component {
 
     api.getUserProfile(this.state.currentUser.id).then(res => {
       let userData = res.data[0];
+      console.log(userData);
       this.setState({
         contributionScore: userData.contributionScore,
         bio: userData.bio,
@@ -49,7 +50,7 @@ export default class Profile extends Component {
     })
 
     api.getUserBrews(this.state.currentUser.id).then(res => {
-      //console.log(" userBrews", res.data);
+      console.log(" userBrews", res.data);
       this.setState({ brews: res.data });
     })
 
@@ -144,6 +145,11 @@ export default class Profile extends Component {
       UserId={Brew.UserId}
     />);
 
+    let createdAtValue = this.state.userData.createdAt;
+
+    if (createdAtValue != undefined) {
+      createdAtValue = this.state.userData.createdAt.split("T")[0];
+    }
 
     let bioJSX =
       <div id="bio">
@@ -181,17 +187,29 @@ export default class Profile extends Component {
     // Currently just displays Info about the user from the DB
     return (
       <div id="Profile">
-              <Grid container spacing={3}>
-                  <Grid item xs={4} className="sidebarWrap">
+        <Grid container spacing={3}>
+          <Grid item xs={4} className="sidebarWrap">
 
-                    <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar"/>
+            <Typography variant="h1" align="center">
+              {this.state.currentUser.username}
+            </Typography>
+
+            <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
 
 
             {bioJSX}
 
+            <Typography component="p" align="center" variant="h5">
+              Joined: {createdAtValue}
+            </Typography>
+
+            <Typography align="center" component="p" variant="h5">
+              Score:  {this.state.userData.contributionScore}
+            </Typography>
+
             <div className="miniFeedWrap">
               <Typography gutterBottom variant="h5" component="h1">
-              Following
+                Following
                             </Typography>
               {FollowingJSX}
             </div>
@@ -200,14 +218,14 @@ export default class Profile extends Component {
           <Grid item xs={4}>
             <div className="miniFeedWrap">
               <Typography gutterBottom variant="h5" component="h1">
-              Last Viewed Profiles:
+                Last Viewed Profiles:
                           </Typography>
               {LastViewedJSX}
             </div>
 
             <div className="miniFeedWrap">
               <Typography gutterBottom variant="h5" component="h1">
-              Top Recipes
+                Top Recipes
                           </Typography>
               {BrewsJSX}
             </div>
@@ -217,7 +235,7 @@ export default class Profile extends Component {
           <Grid item xs={4}>
             <div className="miniFeedWrap">
               <Typography gutterBottom variant="h5" component="h1">
-              Favorite Brews
+                Favorite Brews
                                 </Typography>
               {/* {FavBrewsJSX} */}
               {BrewsJSX}
