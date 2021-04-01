@@ -1,12 +1,16 @@
 
-#brewDisplay {
+#brewDisplay #brewDisplayFlex {
     display:flex;
     flex-direction:row;
     justify-content: space-around;
 }
 
+#brewDisplay button:hover {
+    cursor:pointer;
+}
+
 #brewDisplay #mainBrewDisplay {
-    flex:2;
+    flex:1.5;
     margin:0px auto;
     background-color:white;
     border:1px solid black;
@@ -18,6 +22,55 @@
 
 #brewDisplay #commentSection {
     flex:1;
+    margin:2em;
+    margin-top:4em;
+}
+
+#brewDisplay #commentSection form,
+#brewDisplay #commentSection #comment-list {
+    margin:0px auto;
+    text-align: center;
+}
+
+#brewDisplay #commentSection form {
+    display:flex;
+    flex-direction:column;
+}
+
+#brewDisplay #commentSection #comment-list .comment,
+#brewDisplay #commentSection #comment-list .comment p,
+#brewDisplay #commentSection #comment-list .comment a {
+    background-color:black;
+    color:white;
+}
+
+#brewDisplay #commentSection #comment-list .comment {
+    margin-top:0.5em;
+}
+
+#brewDisplay #commentSection #comment-list .commentAuthor {
+    text-align:left;
+}
+
+#brewDisplay #commentSection #comment-list .commentAuthor:hover {
+    color:#d49c6b;
+}
+
+#brewDisplay #commentSection #comment-list .commentBody {
+    text-align:center;
+    margin-top:1em;
+}
+
+#brewDisplay #commentSection #submitComment {
+    border:1px solid black;
+    width:50%;
+    margin:0px auto;
+    margin-top:1em;
+    margin-bottom:2em;
+}
+
+#brewDisplay #commentSection .MuiOutlinedInput-multiline {
+    background-color:white;
 }
 
 #brewDisplay #mainBrewDisplay .step p {
@@ -78,4 +131,22 @@
 
 #brewDisplay #mainBrewDisplay .mainHeaders {
     text-align: center;
+}
+
+#brewDisplay #deleteFlex {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width:98%;
+    margin-top:5em;
+}
+
+#brewDisplay #delete {
+    width:20em;
+}
+
+#brewDisplay #deleteFlex .MuiButton-containedSecondary {
+    background-color:transparent;
+    color:#f50057;
+    border:3px solid #f50057;
 }
