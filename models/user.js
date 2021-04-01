@@ -47,8 +47,8 @@ module.exports = function (sequelize, DataTypes) {
 
     User.associate = (models) => {
 
-        User.hasMany(models.Comment);
-        User.hasMany(models.Brew);
+        User.hasMany(models.Comment, { onDelete: 'cascade' });
+        User.hasMany(models.Brew, { onDelete: 'cascade' });
         User.belongsToMany(models.Brew, { through: models.Favorite });
 
     };
