@@ -4,6 +4,9 @@ import API from '../../utils/api';
 import Comment from '../../components/Comment/comment';
 import Ingredient from "../../components/Ingredient";
 import Step from "../../components/Step";
+import RedditShare from "../../components/ShareButtons/RedditShare";
+import TwitterShare from "../../components/ShareButtons/TwitterShare";
+import FacebookShare from "../../components/ShareButtons/FacebookShare";
 
 import "./styles.css"
 import authService from '../../services/auth.service.js';
@@ -53,6 +56,9 @@ export default function BrewDisplay() {
 
     return (<div>
         <h2>{brew.name}</h2>
+        <RedditShare />
+        <TwitterShare />
+        <FacebookShare />
         <p>Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a></p>
         <p>{brew.description}</p>
 

@@ -48,7 +48,7 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
 
     const classes = useStyles();
     const [expanded, setExpanded] = useState(false);
-    const [favorite, setFavorite] = useState(69);
+    const [favorite, setFavorite] = useState(0);
 
     const user = AuthService.getCurrentUser();
 
@@ -72,7 +72,7 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
         setFavorite(0);
     };
 
-    const renderFaveButt = (isFav) => {
+    const renderFavButton = (isFav) => {
         return(
           <div>
               { isFav ? (
@@ -109,10 +109,10 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
             </Typography>
             </CardContent>
             <CardActions disableSpacing>
-            {renderFaveButt(favorite)}
-            <IconButton aria-label="share">
+            {renderFavButton(favorite)}
+{/*             <IconButton aria-label="share">
                 <ShareIcon />
-            </IconButton>
+            </IconButton> */}
             <IconButton
                 className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,

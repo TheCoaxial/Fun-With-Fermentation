@@ -22,7 +22,7 @@ export default function UserDisplay() {
             .then(data => {
                 setBrews(data.data)
             })
-    }, []);
+    }, [userId]);
 
     let brewsJSX = brews.map(brew => <RecipeCard
         key={brew.id}
