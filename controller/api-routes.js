@@ -1,5 +1,6 @@
 // const { regexp } = require("sequelize/types/lib/operators");
 const db = require("../models");
+const Sequelize = require('sequelize');
 
 
 module.exports = function (app) {
@@ -173,6 +174,72 @@ module.exports = function (app) {
                 attributes: {
                     exclude: ['password', 'email']
                 }
+            })
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    //Search Routes
+
+    //Search by user name
+    //return data in usercardable format
+    app.get("/api/search/user/:username", (req, res) => {
+        db.User
+            .findAll({
+                where: {
+                    username: { [Sequelize.Op.like]: '%' + req.params.username + '%' }
+                },
+                attributes: {
+                    exclude: ['password', 'email']
+                }
+            })
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    //Search by brew name
+    //Returns brew name in recipe cardable format
+    app.get("/api/search/brew/:name", (req, res) => {
+        db.Brew
+            .findAll({
+                where: {
+                    name: { [Sequelize.Op.like]: '%' + req.params.name + '%' }
+                }
+            })
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    //Search by ingredient
+    //returns data brew in recipe cardable format
+    app.get("/api/search/ingredient/:name", (req, res) => {
+        db.Ingredient
+            .findAll({
+                where: {
+                    name: { [Sequelize.Op.like]: '%' + req.params.name + '%' }
+                },
+                include: db.Brew
             })
             .then(data => {
                 res.json(data);
