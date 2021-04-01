@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
+import ls from 'local-storage';
 // import Header from "../profile/index";
 // import FollowingCard from "../../components/FollowingList/FollowingList";
 import api from "../../utils/api";
@@ -7,9 +8,10 @@ import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
 import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
-import Grid from "@material-ui/core/Grid";
-import Typography from '@material-ui/core/Typography';
-import Avatar from '@material-ui/core/Avatar';
+
+import CreateIcon from '@material-ui/icons/Create';
+import CheckIcon from '@material-ui/icons/Check';
+import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core'
 
 
 export default class Profile extends Component {
@@ -19,21 +21,31 @@ export default class Profile extends Component {
     this.state = {
       currentUser: AuthService.getCurrentUser(),
       userFav: [],
-      contributionScore: "",
+      userData: [],
       brews: [],
-      following: []
+      following: [],
+      bio: "",
+      isBioEdit: false,
+      visitedIds: ls.get('visited') || [],
+      visitedPages: []
     };
 
   }
 
   componentDidMount() {
 
+
     api.getUserProfile(this.state.currentUser.id).then(res => {
-      this.setState({ contributionScore: res.data[0].contributionScore });
+      let userData = res.data[0];
+      console.log(userData);
+      this.setState({
+        contributionScore: userData.contributionScore,
+        bio: userData.bio,
+        userData: res.data[0]
+      });
     })
 
     api.getUserFavorites(this.state.currentUser.id).then(res => {
-      console.log("Favorites ",res.data);
       this.setState({ userFav: res.data });
     })
 
@@ -42,172 +54,194 @@ export default class Profile extends Component {
       this.setState({ brews: res.data });
     })
 
-    // An api call to favorites will go here
-
-    
-
-    // An api call to retrieve following will go here
+    this.recentlyViewed();
 
 
   };
 
+  recentlyViewed() {
+
+    let parsedIds;
+    try {
+      parsedIds = JSON.parse(this.state.visitedIds);
+    } catch {
+      console.log("No user data to display");
+    }
+    let uniqueIds = [... new Set(parsedIds)];
+
+    const removeCurrentUser = uniqueIds.indexOf(JSON.stringify(this.state.currentUser.id));
+
+    if (removeCurrentUser > -1) {
+      uniqueIds.splice(removeCurrentUser, 1);
+    }
+
+    let collectedData = [];
+    uniqueIds.forEach(Ids => {
+      console.log("ids", uniqueIds);
+      api.getUserProfile(Ids)
+        .then(res => {
+
+          collectedData.push(res);
+          console.log("data", collectedData)
+          this.setState({ visitedPages: collectedData })
+        });
+    })
+  }
+
   render() {
     //hard coding a following list
-    
-    const following = [{
-      name: "Bob Jim",
-      bio: "Moonshiner extrodonair"
-    },
-    {
-      name: "Bill Tim",
-      bio: "Moonshiner extra extrodonair"
-    }];
 
-    const recentlyVisited = [{
-      name: "Billy Joe",
-      bio: "Home Brewer"
-    },
-    {
-      name: "Mary Sue",
-      bio: "Professional home brewer"
-    }];
+    const following =
+      [{
+        name: "Bob Jim",
+        bio: "Moonshiner extrodonair"
+      },
+      {
+        name: "Bill Tim",
+        bio: "Moonshiner extra extrodonair"
+      }];
 
-    const score = this.state.contributionScore;
-
+    //const score = this.state.contributionScore;
+    const pages = this.state.visitedPages
     const brews = this.state.brews;
     const userFav = this.state.userFav;
+    const currentUser = this.state.userData;
 
-    let BrewsJSX;
 
-    BrewsJSX = brews.map(brew => <RecipeCard
-      key={brew.id}
+
+
+    let BrewsJSX = brews.map(brew => <RecipeCard
       UserId={brew.UserId}
       id={brew.id}
       name={brew.name}
       description={brew.description}
-      author={brew.author} />);
+      author={brew.author}
+      id={brew.id}
+      UserId={brew.UserId} />);
 
-    let FollowingJSX;
-
-    FollowingJSX = following.map(person => <UserCard
+    let FollowingJSX = following.map(person => <UserCard
       key={person.id}
       id={person.id}
       username={person.name}
       bio={person.bio}
-      score={person.score} />)
+      score={person.score}
+    />)
 
-    let LastViewedJSX;
 
-    LastViewedJSX =  recentlyVisited.map(person => <UserCard
-      key={person.id}
-      id={person.id}
-      username={person.name}
-      bio={person.bio}
-      score={person.score} />)
-
+    let LastViewedJSX = pages.map(person => <UserCard
+      id={person.data[0].id}
+      username={person.data[0].username}
+      bio={person.data[0].bio}
+      score={person.data[0].contributionScore}
+    />)
+    console.log("lastviewed", LastViewedJSX);
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       key={Brew.id}
       UserId={Brew.UserId}
       id={Brew.id}
       name={Brew.name}
       description={Brew.description}
-      author={Brew.author} />);
+      author={Brew.author}
+      UserId={Brew.UserId}
+    />);
+
+    let createdAtValue = this.state.userData.createdAt;
+
+    if (createdAtValue != undefined) {
+      createdAtValue = this.state.userData.createdAt.split("T")[0];
+    }
+
+    let bioJSX =
+      <div id="bio">
+        <Typography gutterBottom variant="body3" component="p" id="bio">
+          {this.state.bio || "No Bio"}
+        </Typography>
+        <IconButton
+          onClick={(event) => {
+            event.preventDefault();
+            this.setState({ isBioEdit: !this.state.isBioEdit });
+          }}
+          aria-label="create">
+          <CreateIcon />
+        </IconButton>
+      </div>;
+
+    if (this.state.isBioEdit) {
+      bioJSX = <div id="bio">
+        <Input multiline={true} value={this.state.bio} onChange={(e) => {
+          this.setState({ bio: e.target.value });
+        }}>
+        </Input>
+        <IconButton
+          onClick={(event) => {
+            event.preventDefault();
+            this.setState({ isBioEdit: !this.state.isBioEdit });
+            api.updateUser(this.state.currentUser.id, this.state.bio, false);
+          }}
+          aria-label="submit">
+          <CheckIcon />
+        </IconButton>
+      </div>
+    }
 
     // Currently just displays Info about the user from the DB
     return (
-      // <div id="Profile">
-      //   <div className="leftColumn">
-      //     {console.log("Love", userFav)}
-      //     <img src="./sample-avatar-2.png" alt="user avatar" className="profile-avatar" />
+      <div id="Profile">
+        <Grid container spacing={3}>
+          <Grid item xs={4} className="sidebarWrap">
 
-      //     <div className="bio">
-      //       <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries</p>
-      //     </div>
+            <Typography variant="h1" align="center">
+              {this.state.currentUser.username}
+            </Typography>
 
-
-      //         <h3 className="white header">Following:</h3>
-      //         {/* {console.log("Inside Profile",person)} */}
-      //           {LastViewedJSX}
-
-      //       <div className="profileBlock community-points">
-      //         <p>Community Points</p>
-      //         <h3>{score}</h3>
-      //       </div>
-          
-      //   </div>
-
-      //     <div className="currentBrews">
-      //       <CurrentBrews />
-      //     </div>
+            <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
 
 
-      //     <h3 className="white header">Top Recipes</h3>
-      //     {/* {console.log(" Inside profile",brews)} */}
-      //     {BrewsJSX}
+            {bioJSX}
 
+            <Typography component="p" align="center" variant="h5">
+              Joined: {createdAtValue}
+            </Typography>
 
-      //     <h3 className="white header">Last View Profiles:</h3>
-      //           {FollowingJSX}
+            <Typography align="center" component="p" variant="h5">
+              Score:  {this.state.userData.contributionScore}
+            </Typography>
 
-      //     <h3 className="white header">Favorite Recipes</h3>
-      //         {console.log(" Why?",FavBrewsJSX)}
-      //         {FavBrewsJSX}
-
-      // </div>
-
-
-
-
-
-
-              <div id="Profile">
-
-                <Grid container spacing={3}>
-                    <Grid item xs={4} className="sidebarWrap">
-
-                      <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar"/>
-
-                          <Typography gutterBottom variant="body3" component="p" id="bio">
-                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+                Following
                             </Typography>
+              {FollowingJSX}
+            </div>
 
-                        <div className="miniFeedWrap">
-                            <Typography gutterBottom variant="h5" component="h1">
-                                Following
-                            </Typography>
-                            {FollowingJSX}
-                        </div>
-
-                    </Grid>
-                    <Grid item xs={4}>
-                        <div className="miniFeedWrap">
-                          <Typography gutterBottom variant="h5" component="h1">
-                              Last Viewed Profiles:
+          </Grid>
+          <Grid item xs={4}>
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+                Last Viewed Profiles:
                           </Typography>
-                          {LastViewedJSX}
-                        </div>
+              {LastViewedJSX}
+            </div>
 
-                        <div className="miniFeedWrap">
-                          <Typography gutterBottom variant="h5" component="h1">
-                                  Top Recipes
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+                Top Recipes
                           </Typography>
-                              {BrewsJSX}
-                        </div>
+              {BrewsJSX}
+            </div>
 
-                    </Grid>
+          </Grid>
 
-                    <Grid item xs={4}>
-                      <div className="miniFeedWrap">
-                        <Typography gutterBottom variant="h5" component="h1">
-                                  Favorite Brews
-                                </Typography>
-                                {FavBrewsJSX}
-                      </div>
-                    </Grid>
-                </Grid>
-
-          </div>
-
+          <Grid item xs={4}>
+            <div className="miniFeedWrap">
+              <Typography gutterBottom variant="h5" component="h1">
+                Favorite Brews
+              </Typography>
+              {FavBrewsJSX}
+            </div>
+          </Grid>
+        </Grid>
+      </div >
     );
   }
 }

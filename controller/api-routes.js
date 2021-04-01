@@ -26,7 +26,7 @@ module.exports = function (app) {
     });
 
     // All Brews
-    app.get("/api/brew/all", (req, res) => {
+    app.get("/api/brews/all", (req, res) => {
         db.Brew
             .findAll({})
             .then(data => {

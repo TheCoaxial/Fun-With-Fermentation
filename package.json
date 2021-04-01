@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
-    "seed:dev": "node db/seed.js"
+    "seed:dev": "node db/seed.js",
+    "start": "node server.js",
+    "build": "cd client && npm run build",
+    "install": "cd client && npm install"
   },
   "repository": {
     "type": "git",
@@ -20,19 +23,19 @@
   },
   "homepage": "https://github.com/TheCoaxial/Final-Project#readme",
   "dependencies": {
-    "@material-ui/core": "^4.11.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+    "local-storage": "^2.0.0",
     "mysql2": "^2.2.5",
     "react-social": "^1.10.0",
     "sequelize": "^6.5.1"
   },
   "devDependencies": {
     "concurrently": "^6.0.0",
+    "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1",
     "nodemon": "^2.0.7",
     "sequelize-cli": "^6.2.0"

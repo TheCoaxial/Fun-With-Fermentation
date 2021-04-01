@@ -4,19 +4,38 @@ import API from '../../utils/api';
 import Comment from '../../components/Comment/comment';
 import Ingredient from "../../components/Ingredient";
 import Step from "../../components/Step";
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import Timeline from '@material-ui/lab/Timeline';
+import { makeStyles } from '@material-ui/core/styles';
+import "./styles.css"
+import authService from '../../services/auth.service.js';
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FacebookShare from "../../components/ShareButtons/FacebookShare";
 
-import "./styles.css"
-import authService from '../../services/auth.service.js';
+const useStyles = makeStyles((theme) => ({
+    timelineContent: {
+      padding: '12px 16px',
+    },
+    secondaryTail: {
+      backgroundColor: theme.palette.secondary.main,
+    },
+    verticallyCenterContent: {
+      margin: 'auto 0',
+    },
+  }));
 
 export default function BrewDisplay() {
+
+    const classes = useStyles();
 
     let [brew, setBrew] = useState({});
     let [comments, setComments] = useState([]);
     let [ingredients, setIngredients] = useState([]);
     let [steps, setSteps] = useState([]);
+    const [secondary, setSecondary] = React.useState(false);
 
     let [commentInput, setCommentInput] = useState("");
 
@@ -54,41 +73,66 @@ export default function BrewDisplay() {
         instructions={step.instructions}
     />);
 
-    return (<div>
-        <h2>{brew.name}</h2>
-        <RedditShare />
-        <TwitterShare />
-        <FacebookShare />
-        <p>Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a></p>
-        <p>{brew.description}</p>
+    return (
+        <div id="brewDisplay">
+            <div id="mainBrewDisplay">
 
-        <h3>Ingredients</h3>
-        <div id="ingredient-list">
-            {ingredientsJSX}
+                <Grid item xs={12} className="mainHeaders">
+                    <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div" className="h2-header">
+                            {brew.name}
+                    </Typography>
+
+                    <RedditShare />
+                    <TwitterShare />
+                    <FacebookShare />
+
+                    <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">
+                            Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a>
+                    </Typography>
+
+                    <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
+                            {brew.description}
+                    </Typography>
+                    
+                 </Grid>
+
+                <Grid item xs={12} md={6}>
+                    <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
+                        Ingredients
+                    </Typography>
+                    <List id="ingredient-list">
+                        {ingredientsJSX}
+                    </List>
+                 </Grid>
+
+                    <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
+                        Timeline
+                    </Typography>
+                    <Timeline>
+                        {stepsJSX}
+                    </Timeline>
+            </div>
+
+            <form onSubmit={(event) => {
+                    let { id, username } = authService.getCurrentUser();
+
+                    API.postComment(id, brewId, username, commentInput);
+                }}>
+
+                    <input type="text" value={commentInput}
+                        placeholder="Add Comment"
+                        onChange={(e) => {
+                            setCommentInput(e.target.value)
+                        }}></input>
+                    <button type="submit">Add Comment</button>
+            </form>
+
+            <div id="commentSection">
+                <h3>Comments</h3>
+                <div id="comment-list">
+                    {commentsJSX}
+                </div>
+            </div>
         </div>
-
-        <h3>Steps</h3>
-        <div id="step-list">
-            {stepsJSX}
-        </div>
-
-        <form onSubmit={(event) => {
-            let { id, username } = authService.getCurrentUser();
-
-            API.postComment(id, brewId, username, commentInput);
-        }}>
-
-            <input type="text" value={commentInput}
-                placeholder="Add Comment"
-                onChange={(e) => {
-                    setCommentInput(e.target.value)
-                }}></input>
-            <button type="submit">Add Comment</button>
-        </form>
-
-        <h3>Comments</h3>
-        <div id="comment-list">
-            {commentsJSX}
-        </div>
-    </div>);
+    );
 }
