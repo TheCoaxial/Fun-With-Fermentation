@@ -12,6 +12,9 @@ module.exports = function (app) {
             .findAll({
                 where: {
                     id: req.params.userId
+                },
+                attributes: {
+                    exclude: ['password', 'email']
                 }
             })
             .then(data => {
@@ -44,7 +47,11 @@ module.exports = function (app) {
     //TODO:// Get top contributors
     app.get("/api/users/feed", (req, res) => {
         db.User
-            .findAll({})
+            .findAll({
+                attributes: {
+                    exclude: ['password', 'email']
+                }
+            })
             .then(data => {
                 res.json(data);
             })
@@ -162,7 +169,11 @@ module.exports = function (app) {
     //TODO:// Get top contributors
     app.get("/api/users/feed", (req, res) => {
         db.User
-            .findAll({})
+            .findAll({
+                attributes: {
+                    exclude: ['password', 'email']
+                }
+            })
             .then(data => {
                 res.json(data);
             })
