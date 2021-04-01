@@ -53,7 +53,7 @@ class API {
     }
 
     getBrews() {
-        return this.axios.get("/api/brew/all");
+        return this.axios.get("/api/brews/all");
     }
 
     getUserBrews(userId) {
@@ -157,6 +157,15 @@ class API {
     }
 
     updateUser(userID, bio, contributionScore) {
+        let body = {};
+
+        if (contributionScore) {
+            body.contributionScore = contributionScore;
+        }
+        if (bio) {
+            body.bio = bio;
+        }
+
         return this.axios.put("/api/update-user/" + userID, {
             bio: bio,
             contributionScore: contributionScore
