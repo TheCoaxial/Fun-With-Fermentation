@@ -302,7 +302,7 @@ module.exports = function (app) {
     // Delete Favorite
     app.delete("/api/delete-favorite/:brewId/:userId", (req, res) => {
         db.Favorite
-            .destory({
+            .destroy({
                 where: {
                     BrewId: req.params.brewId,
                     UserId: req.params.userId

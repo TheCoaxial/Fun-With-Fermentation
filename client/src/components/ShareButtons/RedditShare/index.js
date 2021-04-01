@@ -1,12 +1,12 @@
 import React from "react";
+import RedditIcon from "@material-ui/icons/Reddit";
 import { RedditButton } from "react-social";
 import "./style.css";
 
 const RedditShare = () => {
     return (
         <RedditButton>
-{/*             Replace with reddit icon */}
-            {" Share to Reddit "}
+            <RedditIcon />
         </RedditButton>
     );
 };

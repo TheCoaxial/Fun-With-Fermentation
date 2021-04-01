@@ -9,10 +9,11 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Timeline from '@material-ui/lab/Timeline';
 import { makeStyles } from '@material-ui/core/styles';
-
-
 import "./styles.css"
 import authService from '../../services/auth.service.js';
+import RedditShare from "../../components/ShareButtons/RedditShare";
+import TwitterShare from "../../components/ShareButtons/TwitterShare";
+import FacebookShare from "../../components/ShareButtons/FacebookShare";
 
 const useStyles = makeStyles((theme) => ({
     timelineContent: {
@@ -81,6 +82,10 @@ export default function BrewDisplay() {
                             {brew.name}
                     </Typography>
 
+                    <RedditShare />
+                    <TwitterShare />
+                    <FacebookShare />
+
                     <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">
                             Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a>
                     </Typography>
@@ -106,10 +111,6 @@ export default function BrewDisplay() {
                     <Timeline>
                         {stepsJSX}
                     </Timeline>
-
-                
-
-                
             </div>
 
             <form onSubmit={(event) => {
@@ -124,7 +125,7 @@ export default function BrewDisplay() {
                             setCommentInput(e.target.value)
                         }}></input>
                     <button type="submit">Add Comment</button>
-                </form>
+            </form>
 
             <div id="commentSection">
                 <h3>Comments</h3>

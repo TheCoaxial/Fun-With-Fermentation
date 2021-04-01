@@ -113,6 +113,25 @@ async function insertData() {
     await insertTag("Beginner", 2);
     await insertTag("Intermediate", 3);
 
+    /**
+    * Favorites
+    */
+    await insertFavorite(1, 1);
+    await insertFavorite(2, 1);
+    await insertFavorite(3, 1);
+
+    await insertFavorite(1, 2);
+    await insertFavorite(2, 2);
+    await insertFavorite(3, 2);
+
+    await insertFavorite(1, 3);
+    await insertFavorite(2, 3);
+    await insertFavorite(3, 3);
+
+    await removeFavorite(2, 1);
+    await removeFavorite(2, 2);
+    await removeFavorite(2, 3);
+
     return;
 }
 
@@ -307,6 +326,26 @@ async function insertTag(name, BrewId) {
     });
 
     return;
+}
+
+async function insertFavorite(BrewId, UserId) {
+    await fetch(`http://localhost:3001/api/favorite/${BrewId}/${UserId}`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    return;
+}
+
+async function removeFavorite(BrewId, UserId) {
+    await fetch(`http://localhost:3001/api/delete-favorite/${BrewId}/${UserId}`, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
 }
 
 insertData();
