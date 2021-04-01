@@ -201,8 +201,7 @@ export default class Profile extends Component {
                         <Typography gutterBottom variant="h5" component="h1">
                                   Favorite Brews
                                 </Typography>
-                                {/* {FavBrewsJSX} */}
-                                {BrewsJSX}
+                                {FavBrewsJSX}
                       </div>
                     </Grid>
                 </Grid>
