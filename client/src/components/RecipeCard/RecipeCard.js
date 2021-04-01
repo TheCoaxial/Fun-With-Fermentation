@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import API from "../../utils/api";
 import "./RecipeCard";
 import "../../App.css";
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,9 +15,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import AuthService from "../../services/auth.service";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,32 +47,54 @@ const useStyles = makeStyles((theme) => ({
 export default function RecipeCard({ id, UserId, name, description, author }) {
 
     const classes = useStyles();
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
+    const [favorite, setFavorite] = useState(0);
+
+    const user = AuthService.getCurrentUser();
+
+    useEffect(() => {
+        API
+            .getSpecificFavorite(user.id, id)
+            .then(data => {
+/*                 console.log("Favorites Data: ", data); */
+                setFavorite(data.data.length);
+/*                 console.log("isFavorite: ", favorite); */
+            });
+    }, []);
+
+    const addFav = () => {
+        API.saveNewFavorite(id, user.id);
+        setFavorite(1);
+    };
+
+    const delFav = () => {
+        API.deleteFavorite(id, user.id);
+        setFavorite(0);
+    };
+
+    const renderFavButton = (isFav) => {
+        return(
+          <div>
+              { isFav ? (
+                  <IconButton aria-label="remove from favorites" onClick={delFav}>
+                      <FavoriteIcon />
+                  </IconButton>
+              ) : (
+                  <IconButton aria-label="add to favorites" onClick={addFav}>
+                      <FavoriteBorderIcon />
+                  </IconButton>
+              )}
+          </div>
+        );
+    };
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
-      };
+    };
 
     let brewLink = <a href={`/brews/${id}`}>{name}</a>;
 
     let userLink = <span>Created by <a href={`/user/${UserId}`}>{author}</a></span>;
-      
-
-    // const ingredientMap = () => {
-    //     if (ingredients.length) {
-    //         return ingredients.map(ingredient => {
-    //             return(
-    //                 <li>
-    //                     { ingredient }
-    //                 </li>
-    //             )
-    //         });
-    //     } else {
-    //         return(
-    //             <p>"No Ingredients Found"</p>
-    //         );
-    //     }
-    // };
 
     return (
         <div>
@@ -84,12 +109,10 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
             </Typography>
             </CardContent>
             <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
+            {renderFavButton(favorite)}
+{/*             <IconButton aria-label="share">
                 <ShareIcon />
-            </IconButton>
+            </IconButton> */}
             <IconButton
                 className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
