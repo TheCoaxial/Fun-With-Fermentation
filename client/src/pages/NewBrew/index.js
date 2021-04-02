@@ -102,10 +102,6 @@ class NewBrew extends Component {
             );
         })
 
-
-
-
-
         return (
 
             <div id="newBrew">
@@ -143,7 +139,6 @@ class NewBrew extends Component {
                         </div>
 
                         <Button className="addInputButton" variant="outlined" onClick={(e) => this.handleAppend(e, ingredientArg)}>Add Another Ingredient</Button>
-
 
                     </div>
 

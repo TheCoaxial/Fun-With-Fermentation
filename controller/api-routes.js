@@ -293,7 +293,7 @@ module.exports = function (app) {
 
     // New Brew
     app.post("/api/:userId/new-brew", (req, res) => {
-        req.body["userId"] = req.params.userId;
+        req.body["UserId"] = req.params.userId;
         db.Brew
             .create(req.body)
             .then(newBrew => res.json(newBrew))
