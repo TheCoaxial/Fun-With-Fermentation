@@ -140,7 +140,7 @@ module.exports = function (app) {
             });
     });
 
-    // Get Followers
+    // Get All Followed
     app.get("/api/follow/:userId", (req, res) => {
         db.Follow
             .findAll({
@@ -156,7 +156,7 @@ module.exports = function (app) {
             });
     });
 
-    // Get Follower
+    // Get One Following
     app.get("/api/follow/:followingId/:userId", (req, res) => {
         db.Follow
             .findAll({
@@ -335,7 +335,7 @@ module.exports = function (app) {
             });
     });
 
-    // New Follower
+    // New Follow
     app.post("/api/follow/:followingId/:userId", (req, res) => {
         db.Follow
             .create({
@@ -442,7 +442,7 @@ module.exports = function (app) {
             });
     });
 
-    // Delete Follower
+    // Delete Follow
     app.delete("/api/delete-follow/:followingId/:userId", (req, res) => {
         db.Follow
             .destroy({
