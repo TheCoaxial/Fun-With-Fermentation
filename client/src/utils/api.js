@@ -78,11 +78,12 @@ class API {
 
     // POST
 
-    postBrew(userID, name, description, username) {
+    postBrew(userID, name, description, username, difficulty) {
         return this.axios.post("/api/" + userID + "/new-brew", {
             name: name,
             description: description,
-            author: username
+            author: username,
+            difficulty: difficulty
         });
     }
 
@@ -172,10 +173,11 @@ class API {
         });
     }
 
-    updateBrew(brewID, name, description) {
+    updateBrew(brewID, name, difficulty, description) {
         return this.axios.put("/api/update-brew/" + brewID, {
             name: name,
-            description: description
+            description: description,
+            difficulty: difficulty
         });
     }
 

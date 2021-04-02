@@ -24,8 +24,10 @@ module.exports = function (sequelize, DataTypes) {
         author: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        difficulty: {
+            type: DataTypes.STRING
         }
-
     });
 
     Brew.associate = (models) => {
