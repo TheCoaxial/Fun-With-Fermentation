@@ -73,7 +73,7 @@ export default function BrewDisplay() {
     };
 
     const renderBrewDelete = () => {
-        if (brew.UserId == user.id) {
+        if (brew.UserId === user.id) {
             return(
                 <div id="deleteFlex">
                     <Button
