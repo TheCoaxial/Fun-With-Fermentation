@@ -29,16 +29,12 @@ const useStyles = makeStyles({
   });
   
 
-export default function Comment({ commentId, author, body, createdAt, UserId}) {
+export default function Comment({ handleCommentDelete, commentId, author, body, createdAt, UserId}) {
 
     const classes = useStyles();
     const preventDefault = (event) => event.preventDefault();
 
     const user = AuthService.getCurrentUser();
-
-    const handleDelete = () => {
-        API.deleteComment(commentId);
-    };
 
     console.log("userID", user.id);
     console.log("commentId", commentId);
@@ -48,7 +44,7 @@ export default function Comment({ commentId, author, body, createdAt, UserId}) {
         if (user.id == UserId) {
             return(
                 <div>
-                    <Delete onClick={handleDelete()} />
+                    <Delete onClick={handleCommentDelete(commentId)} />
                 </div>
             )
         }

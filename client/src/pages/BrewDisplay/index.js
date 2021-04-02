@@ -60,12 +60,16 @@ export default function BrewDisplay() {
                 setComments(data.data.Comments);
                 setIngredients(data.data.Ingredients);
                 setSteps(data.data.Steps);
+                console.log("brew", brew);
             });
     }, []);
 
+    const handleCommentDelete = (commentId) => {
+        API.deleteComment(commentId);
+    };
+
     const renderBrewDelete = () => {
-        console.log("userID: ", brew.id);
-        if (brew.id == user.id) {
+        if (brew.UserId == user.id) {
             return(
                 <div id="deleteFlex">
                     <Button
@@ -81,7 +85,8 @@ export default function BrewDisplay() {
         }
     };
 
-    let commentsJSX = comments.map(comment => <Comment 
+    let commentsJSX = comments.map(comment => <Comment
+        handleCommentDelete={handleCommentDelete}
         commentId={comment.id}
         key={comment.createdAt}
         body={comment.body}
