@@ -17,6 +17,7 @@ import FacebookShare from "../../components/ShareButtons/FacebookShare";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AuthService from "../../services/auth.service";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,6 +50,7 @@ export default function BrewDisplay() {
     let [commentInput, setCommentInput] = useState("");
 
     let { brewId } = useParams();
+    const user = AuthService.getCurrentUser();
 
     useEffect(() => {
         API.getSpecificBrew(brewId)
@@ -61,7 +63,25 @@ export default function BrewDisplay() {
             })
     }, []);
 
+    const renderBrewDelete = () => {
+        if (brew.UserId === user.id) {
+            return(
+                <div id="deleteFlex">
+                    <Button
+                        id="delete"
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        startIcon={<DeleteIcon />}>
+                        Delete This Brew
+                    </Button>
+                </div>
+            );
+        }
+    };
+
     let commentsJSX = comments.map(comment => <Comment 
+        commentId={comment.id}
         key={comment.createdAt}
         body={comment.body}
         createdAt={comment.createdAt}
@@ -122,6 +142,7 @@ export default function BrewDisplay() {
                             {stepsJSX}
                         </Timeline>
 
+                    {renderBrewDelete}
                     <div id="deleteFlex">
                         <Button
                             id="delete"

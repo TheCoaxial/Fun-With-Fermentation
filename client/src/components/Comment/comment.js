@@ -7,6 +7,9 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import { Delete } from "@material-ui/icons";
+import API from "../../utils/api";
+import AuthService from "../../services/auth.service";
 
 const useStyles = makeStyles({
     root: {
@@ -26,10 +29,30 @@ const useStyles = makeStyles({
   });
   
 
-export default function Comment({ author, body, createdAt ,UserId}) {
+export default function Comment({ commentId, author, body, createdAt, UserId}) {
 
     const classes = useStyles();
     const preventDefault = (event) => event.preventDefault();
+
+    const user = AuthService.getCurrentUser();
+
+    const handleDelete = () => {
+        API.deleteComment(commentId);
+    };
+
+    console.log("userID", user.id);
+    console.log("commentId", commentId);
+    console.log("userID2", UserId);
+
+    const renderDeleteButton = (user, UserId) => {
+        if (user.id === UserId) {
+            return(
+                <div>
+                    <Delete onClick={handleDelete} />
+                </div>
+            )
+        }
+    }
 
     return (
         <Card className={`comment ${classes.root}`}>
@@ -39,6 +62,7 @@ export default function Comment({ author, body, createdAt ,UserId}) {
                 {author} 
             </Typography>
         </Link>
+        {renderDeleteButton}
         {/* <Typography className={classes.pos} color="textSecondary">
             {createdAt}
         </Typography> */}
