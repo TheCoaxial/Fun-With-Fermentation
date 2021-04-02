@@ -20,11 +20,13 @@ const required = value => {
   }
 };
 
+ 
+
 const email = value => {
   if (!isEmail(value)) {
     return (
       <div className="" role="alert">
-        This is not a valid email.
+        Please enter a valid email.
       </div>
     );
   }
@@ -74,6 +76,28 @@ export default class Register extends Component {
    
   }
 
+   logincall = function(username, password) {
+    
+    AuthService.login(username, password).then(
+      () => {
+        this.props.history.push("/profile");
+        window.location.reload();
+      },
+      error => { 
+        const resMessage =
+          (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+          error.toString();
+  
+        this.setState({
+              loading: false,
+              message: resMessage
+          });
+      }
+    );
+  }
+
   onChangeUsername(event) {
     this.setState({
       username: event.target.value
@@ -109,10 +133,11 @@ export default class Register extends Component {
         this.state.password
       ).then(
         response => {
+          this.logincall(response.data.username, this.state.password)
           this.setState({
             message: response.data.message,
             successful: true
-          });
+          }, console.log("Message ",response.data));
         },
         error => {
           const resMessage =
@@ -123,8 +148,9 @@ export default class Register extends Component {
             successful: false,
             message: resMessage
           });
-        }
-      );
+        } 
+      )
+      //.then ( this.logincall(this.state.username, this.state.password));
     }
   }
 
@@ -211,7 +237,8 @@ export default class Register extends Component {
           </Form>
 
           <p>
-            Great! Now click here to log in! <Link to="/login">Log In</Link>
+            
+            If your page didn't reload click here to log in. <Link to="/login">Log In</Link>
           </p>
 
           <Footer />

@@ -20,6 +20,7 @@ exports.signup = (req, res) => {
     .then(data => {
       res.send(data);
     })
+    // .then(this.signin)
     .catch(err => {
       res.status(500).send({ message: err.message });
     });
