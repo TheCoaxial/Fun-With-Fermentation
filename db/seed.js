@@ -33,15 +33,18 @@ async function insertData() {
 
     await editBrew({
         description: "This is my brew description.",
-        name: "Brew 1"
+        name: "Brew 1",
+        difficulty: "expert"
     }, 1);
     await editBrew({
         description: "This is my brew description.",
-        name: "Brew 2"
+        name: "Brew 2",
+        difficulty: "beginner"
     }, 2);
     await editBrew({
         description: "This is my brew description.",
-        name: "Brew 3"
+        name: "Brew 3",
+        difficulty: "intermediate"
     }, 3);
 
 

@@ -420,6 +420,9 @@ module.exports = function (app) {
         if (req.body["ingredients"]) {
             body["ingredients"] = req.body["ingredients"];
         }
+        if (req.body["difficulty"]) {
+            body["difficulty"] = req.body["difficulty"];
+        }
 
         db.Brew
             .update(body,
