@@ -144,8 +144,11 @@ module.exports = function (app) {
     app.get("/api/follow/:userId", (req, res) => {
         db.Follow
             .findAll({
-                include: db.User,
-                where: { UserId: req.params.userId }
+                include: {
+                    model: db.User,
+                    as: 'Following'
+                },
+                where: { follower: req.params.userId }
             })
             .then(data => res.json(data))
             .catch(err => {
@@ -160,10 +163,9 @@ module.exports = function (app) {
     app.get("/api/follow/:followingId/:userId", (req, res) => {
         db.Follow
             .findAll({
-                include: db.User,
                 where: {
-                    UserId: req.params.userId,
-                    followingId: req.params.followingId
+                    follower: req.params.userId,
+                    following: req.params.followingId
                 }
             })
             .then(data => res.json(data))
@@ -339,8 +341,8 @@ module.exports = function (app) {
     app.post("/api/follow/:followingId/:userId", (req, res) => {
         db.Follow
             .create({
-                followingId: req.params.followingId,
-                UserId: req.params.userId
+                following: req.params.followingId,
+                follower: req.params.userId
             })
             .then(newFollower => res.json(newFollower))
             .catch(err => {
@@ -447,8 +449,8 @@ module.exports = function (app) {
         db.Follow
             .destroy({
                 where: {
-                    followingId: req.params.followingId,
-                    UserId: req.params.UserId
+                    following: req.params.followingId,
+                    follower: req.params.userId
                 }
             })
             .then(data => res.json(data))
