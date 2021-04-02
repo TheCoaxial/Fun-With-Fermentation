@@ -49,7 +49,7 @@ export default function Comment({ handleCommentDelete, commentId, author, body, 
     return (
         <Card className={`comment ${classes.root}`}>
       <CardContent>
-        <Link href={`/user/${UserId}`} onClick={preventDefault}>
+        <Link href={`/user/${UserId}`}>
             <Typography variant="body2" component="p" className="commentAuthor">
                 {author} 
             </Typography>
