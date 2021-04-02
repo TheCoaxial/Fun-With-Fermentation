@@ -8,8 +8,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 
-
-
 class NewBrew extends Component {
 
     constructor() {
@@ -24,8 +22,6 @@ class NewBrew extends Component {
             title: "",
             difficulty: "unknown"
         }
-
-
     }
 
     handleAppend(e, type) {
@@ -35,7 +31,7 @@ class NewBrew extends Component {
 
     onChange = (e) => {
 
-        if (e.target.name == "instructions" || e.target.name == "ingredients") {
+        if (e.target.name === "instructions" || e.target.name === "ingredients") {
             let id = e.target.id.split("-")[1];
             let tempArray = this.state[e.target.name];
             tempArray[id] = e.target.value;
@@ -77,17 +73,33 @@ class NewBrew extends Component {
         let ingredientCount = -1;
         let ingredientsJSX = this.state.ingredients.map(ingredient => {
             ingredientCount += 1;
-            return (<TextField id="standard-basic" label="Enter Ingredient"
-                alt="enter the first ingredient" name="ingredients" id={`ingredients-${ingredientCount}`} value={ingredient}
-                onChange={this.onChange} className="ingredient" />);
+            return (
+                <TextField
+                    label="Enter Ingredient"
+                    alt="enter the first ingredient"
+                    name="ingredients"
+                    id={`ingredients-${ingredientCount}`}
+                    value={ingredient}
+                    onChange={this.onChange}
+                    className="ingredient"
+                />
+            );
         });
 
         let instructionsCount = -1;
         let instructionsJSX = this.state.instructions.map(instruction => {
             instructionsCount += 1;
-            return (<TextField id="standard-basic" label="Enter Instruction"
-                alt="enter the first instruction" name="instructions" id={`instructions-${instructionsCount}`} value={instruction}
-                onChange={this.onChange} className="instruction" />);
+            return (
+                <TextField
+                    label="Enter Instruction"
+                    alt="enter the first instruction"
+                    name="instructions"
+                    id={`instructions-${instructionsCount}`}
+                    value={instruction}
+                    onChange={this.onChange}
+                    className="instruction"
+                />
+            );
         })
 
         return (
@@ -150,7 +162,6 @@ class NewBrew extends Component {
                     </NativeSelect>
 
                     <div id="formButtonWrap">
-
                         <Button
                             type="submit"
                             id="submit"
@@ -161,9 +172,7 @@ class NewBrew extends Component {
                         >
                             Save Brew
                         </Button>
-
                     </div>
-
                 </form>
             </div>
         );

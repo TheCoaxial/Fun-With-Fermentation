@@ -1,34 +1,52 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
+import IconButton from '@material-ui/core/IconButton';
 import { Favorite, FavoriteBorder } from "@material-ui/icons";
+import AuthService from "../../services/auth.service";
+import API from "../../utils/api";
 
-const FavButton = (props) => {
+const FavButton = ({ brewID }) => {
 
-    let isFav;
+    const [favorite, setFavorite] = useState(0);
 
-    const getFavorite = () => {
-        fetch(`/api/favorite/${props.brewId}/${props.userId}`)
-        .then(data => {
-            if (data) {
-                isFav = true;
-            } else {
-                isFav = false;
-            }
-        })
-        .catch(err => {
-            if (err) {
-                console.error(err);
-            }
-        })
-    };
-    
+    const user = AuthService.getCurrentUser();
+
     useEffect(() => {
-        getFavorite();
-    }, []);
+        API
+            .getSpecificFavorite(user.id, brewID)
+            .then(data => setFavorite(data.data.length));
+    }, [brewID, user.id]);
 
-    if (isFav) {
-        return <Favorite />;
-    }
-    return <FavoriteBorder />;
+    const addFav = () => {
+        API.saveNewFavorite(brewID, user.id);
+        setFavorite(1);
+    };
+
+    const delFav = () => {
+        API.deleteFavorite(brewID, user.id);
+        setFavorite(0);
+    };
+
+    const renderFavButton = (isFav) => {
+        return(
+          <div>
+              { isFav ? (
+                  <IconButton aria-label="remove from favorites" onClick={delFav}>
+                      <Favorite />
+                  </IconButton>
+              ) : (
+                  <IconButton aria-label="add to favorites" onClick={addFav}>
+                      <FavoriteBorder />
+                  </IconButton>
+              )}
+          </div>
+        );
+    };
+
+    return(
+        <div>
+            {renderFavButton(favorite)}
+        </div>
+    );
 };
 
 export default FavButton;

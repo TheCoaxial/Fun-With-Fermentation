@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
+import FollowButton from "../../components/FollowButton";
 
 const useStyles = makeStyles({
     root: {
@@ -22,19 +23,16 @@ export default function UserCard({ id ,username, bio, newBrew, score }) {
 
     const classes = useStyles();
 
-
-
     return (
-
         <div>
-            <Link to={`/user/${id}`}>
-                <Card className={`userCard ${classes.root}`}>
-                        <CardMedia
-                            className={classes.media}
-                            image="./sample-avatar.jpg"
-                            title="User Avatar"
-                        />
-                        <CardContent>
+            <Card className={`userCard ${classes.root}`}>
+                    <CardMedia
+                        className={classes.media}
+                        image="./sample-avatar.jpg"
+                        title="User Avatar"
+                    />
+                    <CardContent>
+                        <Link to={`/user/${id}`}>
                             <div className="flexWrap-horizontal">
                                 <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" />
                                 <div className="text-verticalAlign">
@@ -43,13 +41,15 @@ export default function UserCard({ id ,username, bio, newBrew, score }) {
                                     </Typography>
                                 </div>
                             </div>
-                            <Typography variant="body2" color="textSecondary" component="p">
-                                Score: {score}
-                            </Typography>
-                        </CardContent>
-                </Card>
-            </Link>
+                        </Link>
+                        <FollowButton
+                            followID={id}
+                        />
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            Score: {score}
+                        </Typography>
+                    </CardContent>
+            </Card>
         </div>
-
     )
 }

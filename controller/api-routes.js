@@ -140,6 +140,43 @@ module.exports = function (app) {
             });
     });
 
+    // Get All Followed
+    app.get("/api/follow/:userId", (req, res) => {
+        db.Follow
+            .findAll({
+                include: {
+                    model: db.User,
+                    as: 'Following'
+                },
+                where: { follower: req.params.userId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get One Following
+    app.get("/api/follow/:followingId/:userId", (req, res) => {
+        db.Follow
+            .findAll({
+                where: {
+                    follower: req.params.userId,
+                    following: req.params.followingId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
     // Get Brews with Tag
     // not sure if i did this right
     /*     app.get("/api/brewTags/:tagId", (req, res) => {
@@ -300,6 +337,20 @@ module.exports = function (app) {
             });
     });
 
+    // New Follow
+    app.post("/api/follow/:followingId/:userId", (req, res) => {
+        db.Follow
+            .create({
+                following: req.params.followingId,
+                follower: req.params.userId
+            })
+            .then(newFollower => res.json(newFollower))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
     // New Ingredient
     app.post("/api/:brewId/new-ingredient", (req, res) => {
         db.Ingredient
@@ -384,6 +435,22 @@ module.exports = function (app) {
                 where: {
                     BrewId: req.params.brewId,
                     UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Follow
+    app.delete("/api/delete-follow/:followingId/:userId", (req, res) => {
+        db.Follow
+            .destroy({
+                where: {
+                    following: req.params.followingId,
+                    follower: req.params.userId
                 }
             })
             .then(data => res.json(data))

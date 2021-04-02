@@ -46,11 +46,12 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     User.associate = (models) => {
-
         User.hasMany(models.Comment, { onDelete: 'cascade' });
         User.hasMany(models.Brew, { onDelete: 'cascade' });
         User.belongsToMany(models.Brew, { through: models.Favorite });
 
+        User.belongsToMany(models.User, { through: models.Follow, as: "Follower", foreignKey: 'follower', onDelete: 'cascade' });
+        User.belongsToMany(models.User, { through: models.Follow, as: 'Followering', foreignKey: 'following', onDelete: 'cascade' });
     };
 
     User.prototype.incrementContributionScore = (num) => {
