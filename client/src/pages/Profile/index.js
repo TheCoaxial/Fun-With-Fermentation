@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
 import ls from 'local-storage';
-// import FollowingCard from "../../components/FollowingList/FollowingList";
 import API from "../../utils/api";
 import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
-import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
-
-import CreateIcon from '@material-ui/icons/Create';
 import CheckIcon from '@material-ui/icons/Check';
 import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core';
-import StarIcon from '@material-ui/icons/Star';
-
+/* import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
+import CreateIcon from '@material-ui/icons/Create';
+import StarIcon from '@material-ui/icons/Star'; */
 
 export default class Profile extends Component {
   constructor(props) {
@@ -73,7 +70,7 @@ export default class Profile extends Component {
     } catch {
       console.log("No user data to display");
     }
-    let uniqueIds = [... new Set(parsedIds)];
+    let uniqueIds = [...new Set(parsedIds)];
 
     const removeCurrentUser = uniqueIds.indexOf(JSON.stringify(this.state.currentUser.id));
 
@@ -95,34 +92,18 @@ export default class Profile extends Component {
   }
 
   render() {
-    //hard coding a following list
-
-/*     const following =
-      [{
-        name: "Bob Jim",
-        bio: "Moonshiner extrodonair"
-      },
-      {
-        name: "Bill Tim",
-        bio: "Moonshiner extra extrodonair"
-      }]; */
-
     //const score = this.state.contributionScore;
-    const pages = this.state.visitedPages
+    //const pages = this.state.visitedPages
+    //const currentUser = this.state.userData;
     const brews = this.state.brews;
     const userFav = this.state.userFav;
     const following = this.state.following;
-    const currentUser = this.state.userData;
-    console.log("fav", userFav);
-    console.log("following", following);
 
     let BrewsJSX = brews.map(brew => <RecipeCard
-      UserId={brew.UserId}
       id={brew.id}
       name={brew.name}
       description={brew.description}
       author={brew.author}
-      id={brew.id}
       UserId={brew.UserId} />);
 
     let FollowingJSX = following.map(({ Following }) => <UserCard
@@ -143,7 +124,6 @@ export default class Profile extends Component {
     
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       key={Brew.id}
-      UserId={Brew.UserId}
       id={Brew.id}
       name={Brew.name}
       description={Brew.description}

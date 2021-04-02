@@ -31,7 +31,7 @@ class NewBrew extends Component {
 
     onChange = (e) => {
 
-        if (e.target.name == "instructions" || e.target.name == "ingredients") {
+        if (e.target.name === "instructions" || e.target.name === "ingredients") {
             let id = e.target.id.split("-")[1];
             let tempArray = this.state[e.target.name];
             tempArray[id] = e.target.value;
@@ -157,7 +157,7 @@ class NewBrew extends Component {
 
                     </div>
 
-                    <InputLabel htmlFor="select" id="selectLabel">Difficulty of Brew </InputLabel>
+                    <InputLabel htmlFor="select" id="selectLabel">Difficulty of Brew</InputLabel>
                     <NativeSelect name="difficulty" onChange={this.onChange} value={this.state.difficulty} id="select">
                         <option value="unknown"></option>
                         <option value="beginner">beginner</option>
@@ -167,19 +167,17 @@ class NewBrew extends Component {
                     </NativeSelect>
 
                     <div id="formButtonWrap">
-
                         <Button
                             type="submit"
                             id="submit"
                             variant="contained"
                             color="primary"
                             size="large"
-                            startIcon={<LocalDrinkIcon />}>
+                            startIcon={<LocalDrinkIcon />}
+                        >
                             Save Brew
-                                    </Button>
-
+                        </Button>
                     </div>
-
                 </form>
             </div>
         );

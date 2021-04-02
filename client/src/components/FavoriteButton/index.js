@@ -14,7 +14,7 @@ const FavButton = ({ brewID }) => {
         API
             .getSpecificFavorite(user.id, brewID)
             .then(data => setFavorite(data.data.length));
-    }, []);
+    }, [brewID, user.id]);
 
     const addFav = () => {
         API.saveNewFavorite(brewID, user.id);

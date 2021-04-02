@@ -11,8 +11,6 @@ export default function UserDisplay() {
     let [userData, setUserData] = useState({});
     let [brews, setBrews] = useState([]);
     let { userId } = useParams([]);
-
-    let ids = JSON.parse(ls.get('visited')) || [];
     
     useEffect(() => {
         API.getUserProfile(userId)
@@ -21,6 +19,7 @@ export default function UserDisplay() {
                 setUserData(data.data[0]);
             })
 
+        let ids = JSON.parse(ls.get('visited')) || [];
         ids.push(userId);
        
         ls.set('visited', JSON.stringify(ids))

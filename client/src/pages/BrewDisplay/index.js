@@ -76,12 +76,16 @@ export default function BrewDisplay() {
         quantityUnits={ingredient.quantityUnits}
     />);
 
-    let stepsJSX = steps.map(step => <Step
-        key={step.id}
-        id={step.id}
-        duration={step.duration}
-        instructions={step.instructions}
-    />);
+    let stepNumber = 0;
+    let stepsJSX = steps.map(step => {
+        stepNumber += 1;
+        return(<Step
+            key={step.id}
+            stepNumber={stepNumber}
+            duration={step.duration}
+            instructions={step.instructions}
+        />);
+    });
 
     return (
         <div id="brewDisplay">
