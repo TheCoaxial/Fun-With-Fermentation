@@ -173,10 +173,11 @@ class API {
         });
     }
 
-    updateBrew(brewID, name, description) {
+    updateBrew(brewID, name, difficulty, description) {
         return this.axios.put("/api/update-brew/" + brewID, {
             name: name,
-            description: description
+            description: description,
+            difficulty: difficulty
         });
     }
 
