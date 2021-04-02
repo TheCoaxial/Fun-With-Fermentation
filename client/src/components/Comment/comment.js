@@ -44,11 +44,11 @@ export default function Comment({ commentId, author, body, createdAt, UserId}) {
     console.log("commentId", commentId);
     console.log("userID2", UserId);
 
-    const renderDeleteButton = (user, UserId) => {
-        if (user.id === UserId) {
+    const renderDeleteButton = () => {
+        if (user.id == UserId) {
             return(
                 <div>
-                    <Delete onClick={handleDelete} />
+                    <Delete onClick={handleDelete()} />
                 </div>
             )
         }
@@ -62,7 +62,7 @@ export default function Comment({ commentId, author, body, createdAt, UserId}) {
                 {author} 
             </Typography>
         </Link>
-        {renderDeleteButton}
+        {renderDeleteButton()}
         {/* <Typography className={classes.pos} color="textSecondary">
             {createdAt}
         </Typography> */}
