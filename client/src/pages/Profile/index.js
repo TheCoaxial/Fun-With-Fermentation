@@ -171,76 +171,69 @@ export default class Profile extends Component {
 
     // Currently just displays Info about the user from the DB
     return (
-      <div id="Profile">
-        <Grid container spacing={3}>
-          <Grid item xs={4} className="sidebarWrap">
+        <div id="Profile">
+            <Grid container spacing={3}>
+                <Grid item xs={4} className="sidebarWrap">
+                      <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
+                  <Typography variant="h2" align="center" id="userName">
+                      {this.state.currentUser.username}
+                  </Typography>
+                  {bioJSX}
 
-              <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
+                  <div className="bioSubheadFlex">
+                    <Typography component="p" align="center" variant="h6">
+                        <span className="br bioSubheadTitle">
+                            Joined
+                        </span>
+                        <span className="br">
+                            {createdAtValue}
+                        </span>
+                    </Typography>
 
-            <Typography variant="h2" align="center" id="userName">
-              {this.state.currentUser.username}
-            </Typography>
+                    <Typography align="center" component="p" variant="h6">
+                        <span className="br bioSubheadTitle">
+                            Score
+                        </span>
+                        <span className="br">
+                            {this.state.userData.contributionScore}
+                        </span>
+                    </Typography>
+                  </div> 
 
-              {bioJSX}
+                  <div className="miniFeedWrap">
+                      <Typography gutterBottom variant="h5" component="h1">
+                          Following
+                      </Typography>
+                      {FollowingJSX}
+                  </div>
+                </Grid>
+                
+                <Grid item xs={4}>
+                  <div className="miniFeedWrap">
+                    <Typography gutterBottom variant="h5" component="h1">
+                        Last Viewed Profiles:
+                    </Typography>
+{/*                 {LastViewedJSX} */}
+                  </div>
 
+                  <div className="miniFeedWrap">
+                      <Typography gutterBottom variant="h5" component="h1">
+                          Top Recipes
+                      </Typography>
+                      {BrewsJSX}
+                  </div>
+                </Grid>
 
-            <div class="bioSubheadFlex">
-
-              <Typography component="p" align="center" variant="h6">
-                <span class="br bioSubheadTitle">
-                  Joined
-                </span>
-                <span class="br">
-                  {createdAtValue}
-                </span>
-              </Typography>
-
-              <Typography align="center" component="p" variant="h6">
-                <span class="br bioSubheadTitle">
-                  Score
-                </span>
-                <span class="br">
-                  {this.state.userData.contributionScore}
-                </span>
-              </Typography>
-
-            </div> 
-
-            <div className="miniFeedWrap">
-              <Typography gutterBottom variant="h5" component="h1">
-                Following
-                            </Typography>
-              {FollowingJSX}
-            </div>
-
-          </Grid>
-          <Grid item xs={4}>
-            <div className="miniFeedWrap">
-              <Typography gutterBottom variant="h5" component="h1">
-                Last Viewed Profiles:
-                          </Typography>
-{/*               {LastViewedJSX} */}
-            </div>
-
-            <div className="miniFeedWrap">
-              <Typography gutterBottom variant="h5" component="h1">
-                Top Recipes
-                          </Typography>
-              {BrewsJSX}
-            </div>
-
-          </Grid>
-
-          <Grid item xs={4}>
-            <div className="miniFeedWrap">
-              <Typography gutterBottom variant="h5" component="h1">
-                Favorite Brews
-              </Typography>
-              {FavBrewsJSX}
-            </div>
-          </Grid>
-        </Grid>
-      </div >
+                <Grid item xs={4}>
+                    <div className="miniFeedWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                            Favorite Brews
+                        </Typography>
+                        {FavBrewsJSX}
+                    </div>
+                </Grid>
+            </Grid>
+        </div >
     );
   }
 }
