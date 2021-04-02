@@ -60,11 +60,12 @@ export default function BrewDisplay() {
                 setComments(data.data.Comments);
                 setIngredients(data.data.Ingredients);
                 setSteps(data.data.Steps);
-            })
+            });
     }, []);
 
     const renderBrewDelete = () => {
-        if (brew.UserId === user.id) {
+        console.log("userID: ", brew.id);
+        if (brew.id == user.id) {
             return(
                 <div id="deleteFlex">
                     <Button
@@ -142,17 +143,7 @@ export default function BrewDisplay() {
                             {stepsJSX}
                         </Timeline>
 
-                    {renderBrewDelete}
-                    <div id="deleteFlex">
-                        <Button
-                            id="delete"
-                            variant="contained"
-                            color="secondary"
-                            className={classes.button}
-                            startIcon={<DeleteIcon />}>
-                            Delete This Brew
-                        </Button>
-                    </div>
+                    {renderBrewDelete()}
                 </div>
 
                 <div id="commentSection">
