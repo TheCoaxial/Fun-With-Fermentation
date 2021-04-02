@@ -78,11 +78,12 @@ class API {
 
     // POST
 
-    postBrew(userID, name, description, username) {
+    postBrew(userID, name, description, username, difficulty) {
         return this.axios.post("/api/" + userID + "/new-brew", {
             name: name,
             description: description,
-            author: username
+            author: username,
+            difficulty: difficulty
         });
     }
 
