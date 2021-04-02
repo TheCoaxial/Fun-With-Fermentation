@@ -17,6 +17,7 @@ import FacebookShare from "../../components/ShareButtons/FacebookShare";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AuthService from "../../services/auth.service";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,24 +45,55 @@ export default function BrewDisplay() {
     let [comments, setComments] = useState([]);
     let [ingredients, setIngredients] = useState([]);
     let [steps, setSteps] = useState([]);
-    const [secondary, setSecondary] = React.useState(false);
+    const [secondary, setSecondary] = useState(false);
 
     let [commentInput, setCommentInput] = useState("");
 
     let { brewId } = useParams();
+    const user = AuthService.getCurrentUser();
 
     useEffect(() => {
         API.getSpecificBrew(brewId)
             .then((data) => {
-                console.log(data.data);
                 setBrew(data.data);
                 setComments(data.data.Comments);
                 setIngredients(data.data.Ingredients);
                 setSteps(data.data.Steps);
-            })
+            });
     }, []);
 
-    let commentsJSX = comments.map(comment => <Comment 
+    const handleCommentDelete = (commentId) => {
+        API.deleteComment(commentId);
+        window.location.assign(`/brews/${brewId}`);
+    };
+
+    const handleBrewDelete = () => {
+        API.deleteBrew(brewId);
+        window.location.assign("/feed");
+    };
+
+    const renderBrewDelete = () => {
+        if (brew.UserId === user.id) {
+            return(
+                <div id="deleteFlex">
+                    <Button
+                        id="delete"
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        startIcon={<DeleteIcon />}
+                        onClick={() => handleBrewDelete()}
+                    >
+                        Delete This Brew
+                    </Button>
+                </div>
+            );
+        }
+    };
+
+    let commentsJSX = comments.map(comment => <Comment
+        handleCommentDelete={handleCommentDelete}
+        commentId={comment.id}
         key={comment.createdAt}
         body={comment.body}
         createdAt={comment.createdAt}
@@ -126,16 +158,7 @@ export default function BrewDisplay() {
                             {stepsJSX}
                         </Timeline>
 
-                    <div id="deleteFlex">
-                        <Button
-                            id="delete"
-                            variant="contained"
-                            color="secondary"
-                            className={classes.button}
-                            startIcon={<DeleteIcon />}>
-                            Delete This Brew
-                        </Button>
-                    </div>
+                    {renderBrewDelete()}
                 </div>
 
                 <div id="commentSection">
