@@ -45,7 +45,7 @@ export default function BrewDisplay() {
     let [comments, setComments] = useState([]);
     let [ingredients, setIngredients] = useState([]);
     let [steps, setSteps] = useState([]);
-    const [secondary, setSecondary] = React.useState(false);
+    const [secondary, setSecondary] = useState(false);
 
     let [commentInput, setCommentInput] = useState("");
 

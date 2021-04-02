@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { Delete } from "@material-ui/icons";
-import API from "../../utils/api";
 import AuthService from "../../services/auth.service";
 
 const useStyles = makeStyles({
@@ -32,12 +31,12 @@ const useStyles = makeStyles({
 export default function Comment({ handleCommentDelete, commentId, author, body, createdAt, UserId}) {
 
     const classes = useStyles();
-    const preventDefault = (event) => event.preventDefault();
+/*     const preventDefault = (event) => event.preventDefault(); */
 
     const user = AuthService.getCurrentUser();
 
     const renderDeleteButton = () => {
-        if (user.id == UserId) {
+        if (user.id === UserId) {
             return(
                 <div>
                     <Delete onClick={() => handleCommentDelete(commentId)} />
@@ -48,21 +47,20 @@ export default function Comment({ handleCommentDelete, commentId, author, body, 
 
     return (
         <Card className={`comment ${classes.root}`}>
-      <CardContent>
-        <Link href={`/user/${UserId}`}>
-            <Typography variant="body2" component="p" className="commentAuthor">
-                {author} 
-            </Typography>
-        </Link>
-        {renderDeleteButton()}
-        {/* <Typography className={classes.pos} color="textSecondary">
-            {createdAt}
-        </Typography> */}
-        <Typography variant="body1" component="p" className="commentBody">
-            {body}
-        </Typography>
-      </CardContent>
-    </Card>);
-
-
+            <CardContent>
+                <Link href={`/user/${UserId}`}>
+                    <Typography variant="body2" component="p" className="commentAuthor">
+                        {author} 
+                    </Typography>
+                </Link>
+                {renderDeleteButton()}
+                {/* <Typography className={classes.pos} color="textSecondary">
+                    {createdAt}
+                </Typography> */}
+                <Typography variant="body1" component="p" className="commentBody">
+                    {body}
+                </Typography>
+            </CardContent>
+        </Card>
+    );
 }

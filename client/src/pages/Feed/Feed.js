@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Header from "../../components/Header/Header";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import UserCard from "../../components/UserCard/UserCard"
 import API from "../../utils/api";
