@@ -14,8 +14,17 @@ import authService from '../../services/auth.service.js';
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FacebookShare from "../../components/ShareButtons/FacebookShare";
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles((theme) => ({
+    root: {
+        '& .MuiTextField-root': {
+          margin: theme.spacing(1),
+          width: '25ch',
+        },
+      },
     timelineContent: {
       padding: '12px 16px',
     },
@@ -75,64 +84,83 @@ export default function BrewDisplay() {
 
     return (
         <div id="brewDisplay">
-            <div id="mainBrewDisplay">
+            <div id="brewDisplayFlex">
+                <div id="mainBrewDisplay">
 
-                <Grid item xs={12} className="mainHeaders">
-                    <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div" className="h2-header">
-                            {brew.name}
-                    </Typography>
+                    <Grid item xs={12} className="mainHeaders">
+                        <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div" className="h2-header">
+                                {brew.name}
+                        </Typography>
 
-                    <RedditShare />
-                    <TwitterShare />
-                    <FacebookShare />
+                        <RedditShare />
+                        <TwitterShare />
+                        <FacebookShare />
 
-                    <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">
-                            Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a>
-                    </Typography>
+                        <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">
+                                Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a>
+                        </Typography>
 
-                    <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
-                            {brew.description}
-                    </Typography>
-                    
-                 </Grid>
+                        <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
+                                {brew.description}
+                        </Typography>
+                        
+                    </Grid>
 
-                <Grid item xs={12} md={6}>
-                    <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
-                        Ingredients
-                    </Typography>
-                    <List id="ingredient-list">
-                        {ingredientsJSX}
-                    </List>
-                 </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
+                            Ingredients
+                        </Typography>
+                        <List id="ingredient-list">
+                            {ingredientsJSX}
+                        </List>
+                    </Grid>
 
-                    <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
-                        Timeline
-                    </Typography>
-                    <Timeline>
-                        {stepsJSX}
-                    </Timeline>
-            </div>
+                        <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
+                            Timeline
+                        </Typography>
+                        <Timeline>
+                            {stepsJSX}
+                        </Timeline>
 
-            <form onSubmit={(event) => {
-                    let { id, username } = authService.getCurrentUser();
+                    <div id="deleteFlex">
+                        <Button
+                            id="delete"
+                            variant="contained"
+                            color="secondary"
+                            className={classes.button}
+                            startIcon={<DeleteIcon />}>
+                            Delete This Brew
+                        </Button>
+                    </div>
+                </div>
 
-                    API.postComment(id, brewId, username, commentInput);
-                }}>
+                <div id="commentSection">
 
-                    <input type="text" value={commentInput}
-                        placeholder="Add Comment"
-                        onChange={(e) => {
-                            setCommentInput(e.target.value)
-                        }}></input>
-                    <button type="submit">Add Comment</button>
-            </form>
+                <form onSubmit={(event) => {
+                        let { id, username } = authService.getCurrentUser();
 
-            <div id="commentSection">
-                <h3>Comments</h3>
-                <div id="comment-list">
-                    {commentsJSX}
+                        API.postComment(id, brewId, username, commentInput);
+                    }}>
+                            <TextField
+                                id="outlined-multiline-static"
+                                multiline
+                                rows={4}
+                                variant="outlined"
+                                placeholder="Add a Comment Here"
+                                value={commentInput}
+                                onChange={(e) => {
+                                    setCommentInput(e.target.value)
+                                }}
+                            />
+                        <Button type="submit" id="submitComment">Submit Comment</Button>
+                </form>
+
+                    <div id="comment-list">
+                        {commentsJSX}
+                    </div>
                 </div>
             </div>
+                
         </div>
     );
 }
