@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 
 // import Container from "../src/components/Container";
-import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 // import logo from './logo.svg';
 import './App.css';

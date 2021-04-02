@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
 import ls from 'local-storage';
-// import Header from "../profile/index";
 // import FollowingCard from "../../components/FollowingList/FollowingList";
 import api from "../../utils/api";
 import UserCard from "../../components/UserCard/UserCard.js";

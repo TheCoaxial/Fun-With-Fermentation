@@ -47,7 +47,7 @@ export default function Step({ id, duration, instructions }) {
                 <Typography variant="h6" component="span">
                     {instructions}
                 </Typography>
-                <Typography>duration: {duration}</Typography>
+                {/* <Typography>duration: {duration}</Typography> */}
                 </TimelineContent>
             </TimelineItem>
 
