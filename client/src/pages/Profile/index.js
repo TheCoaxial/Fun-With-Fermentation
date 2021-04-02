@@ -236,15 +236,12 @@ export default class Profile extends Component {
             <div className="miniFeedWrap">
               <Typography gutterBottom variant="h5" component="h1">
                 Favorite Brews
-                                </Typography>
-              {/* {FavBrewsJSX} */}
-              {BrewsJSX}
+              </Typography>
+              {FavBrewsJSX}
             </div>
           </Grid>
         </Grid>
-
       </div >
-
     );
   }
 }
