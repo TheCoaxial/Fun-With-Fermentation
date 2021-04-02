@@ -17,6 +17,7 @@ import FacebookShare from "../../components/ShareButtons/FacebookShare";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import FavoriteButton from "../../components/FavoriteButton";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -93,7 +94,9 @@ export default function BrewDisplay() {
                         </Typography>
 
                         <div id="shareButtons">
-
+                            <FavoriteButton
+                                brewID={brewId}
+                            />
                             <RedditShare />
                             <TwitterShare />
                             <FacebookShare />
