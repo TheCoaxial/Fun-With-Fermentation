@@ -92,9 +92,13 @@ export default function BrewDisplay() {
                                 {brew.name}
                         </Typography>
 
-                        <RedditShare />
-                        <TwitterShare />
-                        <FacebookShare />
+                        <div id="shareButtons">
+
+                            <RedditShare />
+                            <TwitterShare />
+                            <FacebookShare />
+
+                        </div>
 
                         <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">
                                 Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a>
@@ -106,7 +110,7 @@ export default function BrewDisplay() {
                         
                     </Grid>
 
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12}>
                         <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
                             Ingredients
                         </Typography>
