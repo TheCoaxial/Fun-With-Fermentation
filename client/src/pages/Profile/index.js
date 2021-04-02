@@ -128,13 +128,13 @@ export default class Profile extends Component {
     />)
 
 
-    let LastViewedJSX = pages.map(person => <UserCard
+/*     let LastViewedJSX = pages.map(person => <UserCard
       id={person.data[0].id}
       username={person.data[0].username}
       bio={person.data[0].bio}
       score={person.data[0].contributionScore}
     />)
-    console.log("lastviewed", LastViewedJSX);
+    console.log("lastviewed", LastViewedJSX); */
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       key={Brew.id}
       UserId={Brew.UserId}
@@ -233,7 +233,7 @@ export default class Profile extends Component {
               <Typography gutterBottom variant="h5" component="h1">
                 Last Viewed Profiles:
                           </Typography>
-              {LastViewedJSX}
+{/*               {LastViewedJSX} */}
             </div>
 
             <div className="miniFeedWrap">
