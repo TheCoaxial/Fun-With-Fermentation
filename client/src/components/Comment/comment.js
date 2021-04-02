@@ -36,15 +36,11 @@ export default function Comment({ handleCommentDelete, commentId, author, body, 
 
     const user = AuthService.getCurrentUser();
 
-    console.log("userID", user.id);
-    console.log("commentId", commentId);
-    console.log("userID2", UserId);
-
     const renderDeleteButton = () => {
         if (user.id == UserId) {
             return(
                 <div>
-                    <Delete onClick={handleCommentDelete(commentId)} />
+                    <Delete onClick={() => handleCommentDelete(commentId)} />
                 </div>
             )
         }

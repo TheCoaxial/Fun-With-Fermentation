@@ -55,17 +55,21 @@ export default function BrewDisplay() {
     useEffect(() => {
         API.getSpecificBrew(brewId)
             .then((data) => {
-                console.log(data.data);
                 setBrew(data.data);
                 setComments(data.data.Comments);
                 setIngredients(data.data.Ingredients);
                 setSteps(data.data.Steps);
-                console.log("brew", brew);
             });
     }, []);
 
     const handleCommentDelete = (commentId) => {
         API.deleteComment(commentId);
+        window.location.assign(`/brews/${brewId}`);
+    };
+
+    const handleBrewDelete = () => {
+        API.deleteBrew(brewId);
+        window.location.assign("/feed");
     };
 
     const renderBrewDelete = () => {
@@ -77,7 +81,9 @@ export default function BrewDisplay() {
                         variant="contained"
                         color="secondary"
                         className={classes.button}
-                        startIcon={<DeleteIcon />}>
+                        startIcon={<DeleteIcon />}
+                        onClick={() => handleBrewDelete()}
+                    >
                         Delete This Brew
                     </Button>
                 </div>
