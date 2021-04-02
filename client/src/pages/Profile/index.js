@@ -11,7 +11,8 @@ import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
 
 import CreateIcon from '@material-ui/icons/Create';
 import CheckIcon from '@material-ui/icons/Check';
-import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core'
+import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core';
+import StarIcon from '@material-ui/icons/Star';
 
 
 export default class Profile extends Component {
@@ -152,35 +153,34 @@ export default class Profile extends Component {
     }
 
     let bioJSX =
-      <div id="bio">
-        <Typography gutterBottom variant="body3" component="p" id="bio">
-          {this.state.bio || "No Bio"}
-        </Typography>
-        <IconButton
-          onClick={(event) => {
-            event.preventDefault();
-            this.setState({ isBioEdit: !this.state.isBioEdit });
-          }}
-          aria-label="create">
-          <CreateIcon />
-        </IconButton>
+      <div id="bioViewState">
+          <IconButton
+            onClick={(event) => {
+              event.preventDefault();
+              this.setState({ isBioEdit: !this.state.isBioEdit });
+            }}
+            aria-label="create">
+              <Typography gutterBottom variant="body3" component="p" id="bioText">
+                {this.state.bio || "No Bio"}
+              </Typography>
+          </IconButton>
       </div>;
 
     if (this.state.isBioEdit) {
-      bioJSX = <div id="bio">
+      bioJSX = <div id="bioEditState">
         <Input multiline={true} value={this.state.bio} onChange={(e) => {
           this.setState({ bio: e.target.value });
         }}>
         </Input>
-        <IconButton
-          onClick={(event) => {
-            event.preventDefault();
-            this.setState({ isBioEdit: !this.state.isBioEdit });
-            api.updateUser(this.state.currentUser.id, this.state.bio, false);
-          }}
-          aria-label="submit">
-          <CheckIcon />
-        </IconButton>
+          <IconButton
+            onClick={(event) => {
+              event.preventDefault();
+              this.setState({ isBioEdit: !this.state.isBioEdit });
+              api.updateUser(this.state.currentUser.id, this.state.bio, false);
+            }}
+            aria-label="submit">
+            <CheckIcon />
+          </IconButton>
       </div>
     }
 
@@ -190,22 +190,36 @@ export default class Profile extends Component {
         <Grid container spacing={3}>
           <Grid item xs={4} className="sidebarWrap">
 
-            <Typography variant="h1" align="center">
+              <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
+
+            <Typography variant="h2" align="center" id="userName">
               {this.state.currentUser.username}
             </Typography>
 
-            <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
+              {bioJSX}
 
 
-            {bioJSX}
+            <div class="bioSubheadFlex">
 
-            <Typography component="p" align="center" variant="h5">
-              Joined: {createdAtValue}
-            </Typography>
+              <Typography component="p" align="center" variant="h6">
+                <span class="br bioSubheadTitle">
+                  Joined
+                </span>
+                <span class="br">
+                  {createdAtValue}
+                </span>
+              </Typography>
 
-            <Typography align="center" component="p" variant="h5">
-              Score:  {this.state.userData.contributionScore}
-            </Typography>
+              <Typography align="center" component="p" variant="h6">
+                <span class="br bioSubheadTitle">
+                  Score
+                </span>
+                <span class="br">
+                  {this.state.userData.contributionScore}
+                </span>
+              </Typography>
+
+            </div> 
 
             <div className="miniFeedWrap">
               <Typography gutterBottom variant="h5" component="h1">

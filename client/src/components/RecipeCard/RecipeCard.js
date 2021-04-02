@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import API from "../../utils/api";
 import "./RecipeCard";
+import "./style.css";
 import "../../App.css";
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -94,11 +95,11 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
 
     let brewLink = <a href={`/brews/${id}`}>{name}</a>;
 
-    let userLink = <span>Created by <a href={`/user/${UserId}`}>{author}</a></span>;
+    let userLink = <span className="userLink"><a href={`/user/${UserId}`}>{author}</a></span>;
 
     return (
-        <div>
-            <Card className={`recipeCard ${classes.root}`}>
+        <div className="recipeCard">
+            <Card className={`${classes.root}`}>
             <CardHeader
             title={brewLink}
             subheader={userLink}
@@ -110,28 +111,7 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
             </CardContent>
             <CardActions disableSpacing>
             {renderFavButton(favorite)}
-{/*             <IconButton aria-label="share">
-                <ShareIcon />
-            </IconButton> */}
-            <IconButton
-                className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
-                })}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-            >
-                <ExpandMoreIcon />
-            </IconButton>
             </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-            <CardContent>
-                <Typography paragraph>Instructions</Typography>
-                <Typography paragraph>
-                    Show recipe ingredients and instructions here if warranted.
-                </Typography>
-            </CardContent>
-            </Collapse>
             </Card>
         </div>
     );

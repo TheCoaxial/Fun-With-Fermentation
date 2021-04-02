@@ -11,24 +11,121 @@
 #Profile .avatar {
     width:15rem;
     height:15rem;
-    margin:0px auto;
+    padding:12px;
+    border-radius:0;
 }
 
-#Profile .makeStyles-root-1,
-#Profile .makeStyles-root-3 {
-    max-width:100%;
+#Profile .avatar img {
+    border-radius:5%;
+}
+
+#Profile #userName {
+    margin:0.2em;
+    margin-bottom:0;
+    text-align:left;
+}
+
+#Profile #bioViewState .MuiIconButton-root {
+    border-radius:0;
+    font-size:1rem;
+    line-height:1.25;
+    text-align: left;
+}
+
+#Profile .bioSubheadFlex {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:90%;
+    margin-bottom:2em;
+    padding:12px;
+}
+
+#Profile .bioSubheadFlex p {
+    text-align: left;
+}
+
+/* #Profile .bioSubheadFlex p {
+    text-align: right;
+} */
+
+#Profile .bioSubheadFlex .bioSubheadTitle {
+    text-transform:uppercase;
+    opacity:0.5;
+    font-weight:bold;
+    font-size:65%;
+}
+
+#Profile #bioEditState {
+    width:100%;
+}
+
+#Profile #bioEditState .MuiInputBase-root {
+    width:100%;
+}
+
+#Profile #bioEditState textarea {
+    width:inherit;
+}
+#Profile #bioEditState {
+    position:relative;
+}
+
+#Profile #bioEditState button {
+    position:absolute;
+    bottom:0;
+    right:-2em;
+}
+
+#Profile .userCard {
+    margin-top:3em;
+}
+
+#Profile .userCard .MuiAvatar-root {
+    height:65px;
+    width:65px;
+    position:absolute;
+    left:-1rem;
+    top:-1.5rem;
+}
+
+#Profile .userCard.MuiPaper-root {
+    position:relative;
+    overflow:visible;
+}
+
+#Profile .userCard .text-verticalAlign h2 {
+    margin-left:3rem;
+    margin-bottom:0;
+}  
+
+#Profile .userCard .flexWrap-horizontal {
+    margin-bottom:0;
+}
+
+
+#Profile .userCard .MuiTypography-root.MuiTypography-body2 {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.5rem;
 }
 
 #Profile .recipeCard {
     margin-top:1rem;
+    position:relative;
 }
 
-#Profile #bio {
-    margin:2rem auto 2rem auto;
-    width:90%;
-    text-align: center;
+#Profile .recipeCard .MuiCardHeader-content {
+    max-width:10rem;
 }
 
-#Profile .miniFeedWrap {
-    margin-top:2rem;
-}
+/* #Profile .recipeCard .MuiCardContent-root {
+    padding-top:0;
+    padding-bottom:0;
+} */
+
+/* #Profile .recipeCard .userLink {
+    position: absolute;
+    top:16px;
+    right:16px;
+} */
