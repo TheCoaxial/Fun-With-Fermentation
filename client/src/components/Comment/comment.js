@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import { Edit, Delete } from "@material-ui/icons";
+import LikeButton from "../../components/CommentLikeButton";
 import AuthService from "../../services/auth.service";
 
 const useStyles = makeStyles({
@@ -63,6 +64,9 @@ export default function Comment({ handleCommentDelete, renderCommentForm, commen
                         {author} 
                     </Typography>
                 </Link>
+                <LikeButton
+                    commentID={commentId}
+                />
                 {renderEditButton()}
                 {renderDeleteButton()}
                 {/* <Typography className={classes.pos} color="textSecondary">

@@ -208,7 +208,7 @@ module.exports = function (app) {
 
     // Get Like By
     app.get("/api/comment-like/:commentId", (req, res) => {
-        db.CommentLIke
+        db.CommentLike
             .findAll({
                 where: { CommentId: req.params.commentId }
             })

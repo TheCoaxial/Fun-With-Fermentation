@@ -135,7 +135,7 @@ class API {
     }
 
     newCommentLike(commentID, userID) {
-        return this.axios.post("/api/favorite/" + commentID + "/" + userID, {
+        return this.axios.post("/api/comment-like/" + commentID + "/" + userID, {
             CommentId: commentID,
             UserId: userID
         });
@@ -180,7 +180,7 @@ class API {
     }
 
     deleteCommentLike(commentID, userID) {
-        return this.axios.delete("/api/delete-favorite/" + commentID + "/" + userID);
+        return this.axios.delete("/api/delete-comment-like/" + commentID + "/" + userID);
     }
 
     deleteIngredient(ingredientID) {
