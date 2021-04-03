@@ -10,9 +10,17 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:3001"
+let corsOptions = {
+  origin: "https://salty-sea-99414.herokuapp.com/"
 };
+
+if (process.env.NODE_ENV !== "production") {
+  corsOptions = {
+    origin: "http://localhost:3001"
+  };
+
+}
+
 
 const db = require("./models");
 
