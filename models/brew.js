@@ -1,34 +1,40 @@
 module.exports = function (sequelize, DataTypes) {
-    const Brew = sequelize.define("Brew", {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
-        },
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [0, 40]
+    const Brew = sequelize.define(
+        "Brew",
+        {
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+                allowNull: false
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                validate: {
+                    len: [0, 40]
+                }
+            },
+            description: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                defaultValue: "",
+                validate: {
+                    len: [0, 500]
+                }
+            },
+            author: {
+                type: DataTypes.STRING,
+                allowNull: false
+            },
+            difficulty: {
+                type: DataTypes.STRING
             }
         },
-        description: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: "",
-            validate: {
-                len: [0, 500]
-            }
-        },
-        author: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        difficulty: {
-            type: DataTypes.STRING
+        {
+            paranoid: true
         }
-    });
+    );
 
     Brew.associate = (models) => {
         Brew.hasMany(models.Ingredient, { onDelete: 'cascade' });

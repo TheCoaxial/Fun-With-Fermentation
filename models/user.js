@@ -1,49 +1,54 @@
 module.exports = function (sequelize, DataTypes) {
-    const User = sequelize.define("User", {
-        id: {
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
-        },
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validate: {
-                len: [3, 20]
+    const User = sequelize.define(
+        "User",
+        {
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+                allowNull: false
+            },
+            username: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+                validate: {
+                    len: [3, 20]
+                }
+            },
+            password: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            email: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                unique: true,
+                validate: {
+                    isEmail: true
+                }
+            },
+            bio: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                defaultValue: "",
+                validate: {
+                    len: [0, 500]
+                }
+            },
+            contributionScore: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                defaultValue: 0,
+                validate: {
+                    min: 0
+                }
             }
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validate: {
-                isEmail: true
-            }
-        },
-        bio: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: "",
-            validate: {
-                len: [0, 500]
-            }
-        },
-        contributionScore: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0,
-            validate: {
-                min: 0
-            }
-        },
-
-    });
+        {
+            paranoid: true
+        }
+    );
 
     User.associate = (models) => {
         User.hasMany(models.Comment, { onDelete: 'cascade' });
