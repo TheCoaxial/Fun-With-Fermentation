@@ -160,8 +160,9 @@ export default class Profile extends Component {
             }}
             aria-label="create">
               <Typography gutterBottom variant="body3" component="p" id="bioText">
-                {this.state.bio || "No Bio"}
+                {this.state.bio || "Insert your bio here!"}
               </Typography>
+              <CreateIcon />
           </IconButton>
       </div>;
 

@@ -30,6 +30,21 @@
     font-size:1rem;
     line-height:1.25;
     text-align: left;
+    width:100%;
+}
+
+#Profile #bioViewState .MuiTypography-root {
+    width:90%;
+    overflow-wrap: break-word;
+}
+
+#Profile #bioViewState .MuiSvgIcon-root {
+    visibility: hidden;
+}
+
+#Profile #bioViewState:hover .MuiSvgIcon-root,
+#Profile #bioViewState:focus .MuiSvgIcon-root {
+    visibility: visible;
 }
 
 #Profile .bioSubheadFlex {
@@ -57,11 +72,11 @@
 }
 
 #Profile #bioEditState {
-    width:100%;
+    width:95%;
 }
 
 #Profile #bioEditState .MuiInputBase-root {
-    width:100%;
+    width:95%;
 }
 
 #Profile #bioEditState textarea {
