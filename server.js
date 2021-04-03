@@ -28,6 +28,7 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.use(express.static('./client/build'));
 // Simple test route
 app.get("/", (req, res) => {
   res.json({ message: "Test route" });
