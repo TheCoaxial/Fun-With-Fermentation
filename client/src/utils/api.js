@@ -100,6 +100,16 @@ class API {
         return this.axios.get("/api/users/feed");
     }
 
+    searchUsers(searchString) {
+        return this.axios.get(`/api/search/user/${searchString}`);
+    }
+    searchBrews(searchString) {
+        return this.axios.get(`/api/search/brew/${searchString}`);
+    }
+    searchIngredients(searchString) {
+        return this.axios.get(`/api/search/ingredient/${searchString}`);
+    }
+
     // POST
 
     postBrew(userID, name, description, username, difficulty) {
