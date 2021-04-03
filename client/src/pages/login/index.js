@@ -16,7 +16,7 @@ import AuthService from "../../services/auth.service";
 const required = value => {
   if (!value) {
     return (
-      <div  role="alert">
+      <div role="alert">
         This field is required!
       </div>
     );
@@ -25,31 +25,35 @@ const required = value => {
 
 export default class Login extends Component {
   constructor(props) {
+
     super(props);
 
-        this.state = {
-            username: "",
-            password: "",
-            loading: false,
-            message: ""
-        };
 
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.handleLogin = this.handleLogin.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-    }
+    console.log(this.props);
+
+    this.state = {
+      username: "",
+      password: "",
+      loading: false,
+      message: ""
+    };
+
+    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
+    this.onChangePassword = this.onChangePassword.bind(this);
+  }
 
   onChangeUsername(event) {
-        this.setState({
-            username: event.target.value
-        });
-    }
+    this.setState({
+      username: event.target.value
+    });
+  }
 
   onChangePassword(event) {
-        this.setState({
-            password: event.target.value
-        });
-    }
+    this.setState({
+      password: event.target.value
+    });
+  }
 
   handleLogin(event) {
     event.preventDefault();
@@ -63,27 +67,27 @@ export default class Login extends Component {
 
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.username, this.state.password).then(
-        () => {
+        ({ username }) => {
+          this.props.setCurrentUser(username);
           this.props.history.push("/profile");
-          window.location.reload();
         },
         error => {
           const resMsg =
             (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
+              error.response.data &&
+              error.response.data.message) ||
             error.toString();
 
           this.setState({
-                loading: false,
-                message: resMsg
-            });
+            loading: false,
+            message: resMsg
+          });
         }
       );
     } else {
       this.setState({
-            loading: false
-        });
+        loading: false
+      });
     }
   }
 
@@ -92,9 +96,9 @@ export default class Login extends Component {
       <div className="flexWrap" id="Login">
         <div className="">
 
-          <Avatar 
-            alt="" 
-            src="/logo.png" 
+          <Avatar
+            alt=""
+            src="/logo.png"
             className="logo"
           />
 
@@ -105,53 +109,53 @@ export default class Login extends Component {
             }}
           >
             <div className="inputWrapper">
-              <TextField 
-                  id="outlined-basic" 
-                  variant="outlined" 
-                  type="text"
-                  className=""
-                  name="username"
-                  placeholder="username"
-                  value={this.state.username}
-                  onChange={this.onChangeUsername}
-                  validations={[required]}
-                />
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                type="text"
+                className=""
+                name="username"
+                placeholder="username"
+                value={this.state.username}
+                onChange={this.onChangeUsername}
+                validations={[required]}
+              />
             </div>
 
             <div className="inputWrapper">
-              <TextField 
-                  id="outlined-basic" 
-                  variant="outlined" 
-                  type="password"
-                  className=""
-                  name="password"
-                  placeholder="password"
-                  value={this.state.password}
-                  onChange={this.onChangePassword}
-                  validations={[required]}
-                />
+              <TextField
+                id="outlined-basic"
+                variant="outlined"
+                type="password"
+                className=""
+                name="password"
+                placeholder="password"
+                value={this.state.password}
+                onChange={this.onChangePassword}
+                validations={[required]}
+              />
             </div>
 
             <div className="">
-                <Button 
-                    variant="contained"
-                    type="submit"
-                    className=""
-                    disabled={this.state.loading}>
-                    
-                    {this.state.loading && (
-                    <span className=""></span>
-                    )}
-                    <span>Login</span>
-                </Button>
+              <Button
+                variant="contained"
+                type="submit"
+                className=""
+                disabled={this.state.loading}>
+
+                {this.state.loading && (
+                  <span className=""></span>
+                )}
+                <span>Login</span>
+              </Button>
             </div>
 
             {this.state.message && (
-                <div className="">
-                    <div className="" role="alert">
-                    {this.state.message}
-                    </div>
+              <div className="">
+                <div className="" role="alert">
+                  {this.state.message}
                 </div>
+              </div>
             )}
             <CheckButton
               style={{ display: "none" }}
@@ -162,7 +166,7 @@ export default class Login extends Component {
           </Form>
 
           <Typography variant="body1" gutterBottom>
-              Don't have an account? <Link to="/register">Sign Up</Link>
+            Don't have an account? <Link to="/register">Sign Up</Link>
           </Typography>
 
           <Footer />

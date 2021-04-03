@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 
 // import Container from "../src/components/Container";
@@ -15,12 +15,13 @@ import Profile from "./pages/Profile";
 import NewBrew from "./pages/NewBrew";
 import UserDisplay from "./pages/UserDisplay";
 import BrewDisplay from "./pages/BrewDisplay";
+import Navbar from './components/Navbar/Navbar'
 
 class App extends Component {
     constructor(props) {
         super(props);
 
-        this.logOut = this.logOut.bind(this);
+        this.handleNavbarRender = this.handleNavbarRender.bind(this);
 
         this.state = {
             showModeratorBoard: false,
@@ -39,88 +40,18 @@ class App extends Component {
         };
     };
 
-    logOut() {
-        AuthService.logout();
+    handleNavbarRender(newUser) {
+        this.setState({ currentUser: newUser });
     }
 
     render() {
-        const { currentUser } = this.state;
-
         return (
             <Router>
-                <nav className="navbar navbar-expand navbar-dark bg-dark">
-                    <Link to={"/"} className="navbar-brand">
-                    </Link>
-
-                    {currentUser ? (
-                        <div className="navbar-nav ml-auto navbar-loggedIn">
-                            <li className="nav-item">
-                                <Link to={"/feed"} className="nav-link">
-                                    <img src="./logo.png" alt="beer logo" className="logo" id="logo" />
-                                    {/* Feed */}
-                                </Link>
-                            </li>
-
-                            <SearchBar />
-
-                            <div className="userSpecific-navWrap">
-
-                                <li className="nav-item classicNavButton-wrap">
-                                    <Link to={"/brew"} className="nav-link newBrew-button">
-                                        Create a New Brew
-                                </Link>
-                                </li>
-
-                                <li className="nav-item subMenu-wrap">
-                                    <Link to={"/profile"} className="nav-link">
-                                        <img src="./sample-avatar-2.png" alt="user avatar" className="avatar" />
-                                        {currentUser.username}
-                                    </Link>
-
-                                    <ul className="userMenu-showHide">
-                                        <li className="nav-item">
-                                            <Link to={"/profile"} className="nav-link">
-                                                Profile
-                                        </Link>
-                                        </li>
-
-                                        <li className="nav-item">
-                                            <a href="/login" className="nav-link" onClick={this.logOut}>
-                                                Log Out
-                                        </a>
-                                        </li>
-
-
-                                    </ul>
-                                </li>
-
-                            </div>
-
-
-
-
-
-
-                        </div>
-                    ) : (
-                        <div className="navbar-nav ml-auto navbar-loggedOut">
-                            <li className="nav-item classicNavButton-wrap">
-                                <Link to={"/login"} className="nav-link classic-button">
-                                    Login
-                                </Link>
-                            </li>
-                            <li className="nav-item classicNavButton-wrap">
-                                <Link to={"/register"} className="nav-link classic-button">
-                                    Sign Up
-                                </Link>
-                            </li>
-                        </div>
-                    )}
-                </nav>
+                <Navbar currentUser={this.state.currentUser} />
                 {/* <Header /> */}
                 <div className="container mt-3">
                     <Switch>
-                        <Route exact path={["/", "/login"]} component={Login} />
+                        <Route exact path={["/", "/login"]} component={(props) => <Login history={props.history} setCurrentUser={this.handleNavbarRender} />} />
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path={"/feed"} component={Feed} />
