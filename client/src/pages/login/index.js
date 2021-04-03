@@ -135,6 +135,7 @@ export default class Login extends Component {
             <div className="">
                 <Button 
                     variant="contained"
+                    type="submit"
                     className=""
                     disabled={this.state.loading}>
                     

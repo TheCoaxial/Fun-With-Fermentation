@@ -122,7 +122,7 @@ export default class Register extends Component {
 
     this.setState({
       message: "",
-      successful: false
+      successful: false 
     });
 
     if (this.checkBtn.context._errors.length === 0) {
@@ -213,7 +213,7 @@ export default class Register extends Component {
 
                   <Button 
                     variant="contained"
-                    className=""
+                    type="submit"
                     className="btn">
                       Sign Up
                   </Button>
