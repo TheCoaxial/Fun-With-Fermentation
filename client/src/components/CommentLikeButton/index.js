@@ -73,7 +73,7 @@ const LikeButton = ({ commentID }) => {
             scoreHolder -= 1;
         } */
         
-        setCommentAuthor({ id: commentAuthor.id, bio: commentAuthor.bio, contributionScore: scoreHolder })
+        setCommentAuthor({ id: commentAuthor.id, bio: commentAuthor.bio, contributionScore: scoreHolder });
         API.updateUser(commentAuthor.id, commentAuthor.bio, scoreHolder);
     };
 
