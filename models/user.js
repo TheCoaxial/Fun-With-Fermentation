@@ -11,7 +11,8 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             unique: true,
             validate: {
-                len: [3, 20]
+                len: [3, 20],
+                notContains: [' ']
             }
         },
         password: {
