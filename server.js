@@ -25,7 +25,11 @@ app.get("/", (req, res) => {
   res.json({ message: "Test route" });
 });
 
-const PORT = process.env.EXPRESS_PORT || 3001;
+let PORT = process.env.EXPRESS_PORT || 3001;
+
+if (process.env.NODE_ENV === "production") {
+  PORT = process.env.PORT;
+}
 
 //routes
 require("./controller/api-routes")(app);
