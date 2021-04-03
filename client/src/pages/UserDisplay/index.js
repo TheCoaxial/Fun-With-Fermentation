@@ -4,17 +4,14 @@ import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import API from '../../utils/api';
 import "./styles.css"
 import ls from 'local-storage'
+import FollowButton from "../../components/FollowButton";
 
 export default function UserDisplay() {
 
     let [userData, setUserData] = useState({});
     let [brews, setBrews] = useState([]);
     let { userId } = useParams([]);
-
-    let ids = JSON.parse(ls.get('visited')) || [];
     
-
-
     useEffect(() => {
         API.getUserProfile(userId)
             .then((data) => {
@@ -22,6 +19,7 @@ export default function UserDisplay() {
                 setUserData(data.data[0]);
             })
 
+        let ids = JSON.parse(ls.get('visited')) || [];
         ids.push(userId);
        
         ls.set('visited', JSON.stringify(ids))
@@ -43,7 +41,12 @@ export default function UserDisplay() {
         UserId={brew.UserId} />);
 
     return (<div id="userDisplay">
-        <h2 className="title">{userData.username} <span id="score"> Score: {userData.contributionScore}</span></h2>
+        <h2 className="title">{userData.username}
+            <span id="score"> Score: {userData.contributionScore}</span>
+            <FollowButton
+                followID={userId}
+            />
+        </h2>
         <p>{userData.bio || "No Bio"}</p>
 
         <h3>Brews</h3>
@@ -51,5 +54,4 @@ export default function UserDisplay() {
             {brewsJSX}
         </div>
     </div>);
-
 }

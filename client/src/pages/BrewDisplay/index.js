@@ -10,13 +10,14 @@ import List from '@material-ui/core/List';
 import Timeline from '@material-ui/lab/Timeline';
 import { makeStyles } from '@material-ui/core/styles';
 import "./styles.css"
-import authService from '../../services/auth.service.js';
+import AuthService from '../../services/auth.service.js';
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FacebookShare from "../../components/ShareButtons/FacebookShare";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import FavoriteButton from "../../components/FavoriteButton";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,24 +45,82 @@ export default function BrewDisplay() {
     let [comments, setComments] = useState([]);
     let [ingredients, setIngredients] = useState([]);
     let [steps, setSteps] = useState([]);
-    const [secondary, setSecondary] = React.useState(false);
+    const [secondary, setSecondary] = useState(false);
 
     let [commentInput, setCommentInput] = useState("");
 
     let { brewId } = useParams();
+    const user = AuthService.getCurrentUser();
 
     useEffect(() => {
         API.getSpecificBrew(brewId)
             .then((data) => {
-                console.log(data.data);
                 setBrew(data.data);
                 setComments(data.data.Comments);
                 setIngredients(data.data.Ingredients);
                 setSteps(data.data.Steps);
-            })
+            });
     }, []);
 
-    let commentsJSX = comments.map(comment => <Comment 
+    const renderCommentForm = (commentId) => {
+        return(
+            <form onSubmit={(event) => {
+                API.updateComment(commentId, commentInput);
+            }}>
+                    <TextField
+                        id="outlined-multiline-static"
+                        multiline
+                        rows={4}
+                        variant="outlined"
+                        placeholder="Add a Comment Here"
+                        value={commentInput}
+                        onChange={(e) => {
+                            setCommentInput(e.target.value)
+                        }}
+                    />
+                <Button type="submit" id="submitComment">Edit Comment</Button>
+            </form>
+        );
+    }
+
+    const handleCommentEdit = (commentId, body) => {
+        API.updateComment(commentId, body);
+        window.location.assign(`/brews/${brewId}`);        
+    }
+
+    const handleCommentDelete = (commentId) => {
+        API.deleteComment(commentId);
+        window.location.assign(`/brews/${brewId}`);
+    };
+
+    const handleBrewDelete = () => {
+        API.deleteBrew(brewId);
+        window.location.assign("/feed");
+    };
+
+    const renderBrewDelete = () => {
+        if (brew.UserId === user.id) {
+            return(
+                <div id="deleteFlex">
+                    <Button
+                        id="delete"
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        startIcon={<DeleteIcon />}
+                        onClick={() => handleBrewDelete()}
+                    >
+                        Delete This Brew
+                    </Button>
+                </div>
+            );
+        }
+    };
+
+    let commentsJSX = comments.map(comment => <Comment
+        renderCommentForm={renderCommentForm}
+        handleCommentDelete={handleCommentDelete}
+        commentId={comment.id}
         key={comment.createdAt}
         body={comment.body}
         createdAt={comment.createdAt}
@@ -75,12 +134,16 @@ export default function BrewDisplay() {
         quantityUnits={ingredient.quantityUnits}
     />);
 
-    let stepsJSX = steps.map(step => <Step
-        key={step.id}
-        id={step.id}
-        duration={step.duration}
-        instructions={step.instructions}
-    />);
+    let stepNumber = 0;
+    let stepsJSX = steps.map(step => {
+        stepNumber += 1;
+        return(<Step
+            key={step.id}
+            stepNumber={stepNumber}
+            duration={step.duration}
+            instructions={step.instructions}
+        />);
+    });
 
     return (
         <div id="brewDisplay">
@@ -93,7 +156,9 @@ export default function BrewDisplay() {
                         </Typography>
 
                         <div id="shareButtons">
-
+                            <FavoriteButton
+                                brewID={brewId}
+                            />
                             <RedditShare />
                             <TwitterShare />
                             <FacebookShare />
@@ -126,23 +191,13 @@ export default function BrewDisplay() {
                             {stepsJSX}
                         </Timeline>
 
-                    <div id="deleteFlex">
-                        <Button
-                            id="delete"
-                            variant="contained"
-                            color="secondary"
-                            className={classes.button}
-                            startIcon={<DeleteIcon />}>
-                            Delete This Brew
-                        </Button>
-                    </div>
+                    {renderBrewDelete()}
                 </div>
 
                 <div id="commentSection">
 
                 <form onSubmit={(event) => {
-                        let { id, username } = authService.getCurrentUser();
-
+                        let { id, username } = AuthService.getCurrentUser();
                         API.postComment(id, brewId, username, commentInput);
                     }}>
                             <TextField

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function Step({ id, duration, instructions }) {
+export default function Step({ stepNumber, duration, instructions }) {
 
     const classes = useStyles();
 
@@ -34,7 +34,7 @@ export default function Step({ id, duration, instructions }) {
                 variant="body2"
                 color="textSecondary"
                 >
-                {id}
+                {stepNumber}
                 </TimelineOppositeContent>
                 <TimelineSeparator>
                 <TimelineConnector />

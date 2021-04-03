@@ -103,7 +103,7 @@ module.exports = function (app) {
             });
     });
 
-    //Get Favorites
+    // Get Favorites
     app.get("/api/favorite/:userId", (req, res) => {
         db.Favorite
             .findAll({
@@ -120,6 +120,20 @@ module.exports = function (app) {
             });
     });
 
+    // Get Favorited By
+    app.get("/api/favorited/:brewId", (req, res) => {
+        db.Favorite
+            .findAll({
+                where: { BrewId: req.params.brewId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
 
     // Get Favorite
     app.get("/api/favorite/:brewId/:userId", (req, res) => {
@@ -128,6 +142,91 @@ module.exports = function (app) {
                 include: db.Brew,
                 where: {
                     BrewId: req.params.brewId,
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get All Followed
+    app.get("/api/follow/:userId", (req, res) => {
+        db.Follow
+            .findAll({
+                include: {
+                    model: db.User,
+                    as: 'Following'
+                },
+                where: { follower: req.params.userId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get All Followers
+    app.get("/api/followers/:followingId", ({ params }, res) => {
+        db.Follow
+            .findAll({
+                where: { following: params.followingId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get One Following
+    app.get("/api/follow/:followingId/:userId", (req, res) => {
+        db.Follow
+            .findAll({
+                where: {
+                    follower: req.params.userId,
+                    following: req.params.followingId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get Like By
+    app.get("/api/comment-like/:commentId", (req, res) => {
+        db.CommentLike
+            .findAll({
+                where: { CommentId: req.params.commentId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Check One Like
+    app.get("/api/comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .findAll({
+                where: {
+                    CommentId: req.params.commentId,
                     UserId: req.params.userId
                 }
             })
@@ -256,7 +355,7 @@ module.exports = function (app) {
 
     // New Brew
     app.post("/api/:userId/new-brew", (req, res) => {
-        req.body["userId"] = req.params.userId;
+        req.body["UserId"] = req.params.userId;
         db.Brew
             .create(req.body)
             .then(newBrew => res.json(newBrew))
@@ -294,6 +393,34 @@ module.exports = function (app) {
                 UserId: req.params.userId
             })
             .then(newFav => res.json(newFav))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // New Follow
+    app.post("/api/follow/:followingId/:userId", (req, res) => {
+        db.Follow
+            .create({
+                following: req.params.followingId,
+                follower: req.params.userId
+            })
+            .then(newFollower => res.json(newFollower))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // New Comment Like
+    app.post("/api/comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .create({
+                CommentId: req.params.commentId,
+                UserId: req.params.userId
+            })
+            .then(newLike => res.json(newLike))
             .catch(err => {
                 res.sendStatus(500);
                 throw err;
@@ -383,6 +510,38 @@ module.exports = function (app) {
             .destroy({
                 where: {
                     BrewId: req.params.brewId,
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Follow
+    app.delete("/api/delete-follow/:followingId/:userId", (req, res) => {
+        db.Follow
+            .destroy({
+                where: {
+                    following: req.params.followingId,
+                    follower: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Comment Like
+    app.delete("/api/delete-comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .destroy({
+                where: {
+                    CommentId: req.params.commentId,
                     UserId: req.params.userId
                 }
             })

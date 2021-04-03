@@ -8,8 +8,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 
-
-
 class NewBrew extends Component {
 
     constructor() {
@@ -24,20 +22,16 @@ class NewBrew extends Component {
             title: "",
             difficulty: "unknown"
         }
-
-
     }
 
     handleAppend(e, type) {
         e.preventDefault();
-
         this.setState({ [type]: [...this.state[type], ""] });
-
     }
 
     onChange = (e) => {
 
-        if (e.target.name == "instructions" || e.target.name == "ingredients") {
+        if (e.target.name === "instructions" || e.target.name === "ingredients") {
             let id = e.target.id.split("-")[1];
             let tempArray = this.state[e.target.name];
             tempArray[id] = e.target.value;
@@ -46,7 +40,6 @@ class NewBrew extends Component {
         } else {
             this.setState({ [e.target.name]: e.target.value });
         }
-
     }
 
     onSubmit = (e) => {
@@ -72,8 +65,6 @@ class NewBrew extends Component {
             });
     }
 
-
-
     render() {
 
         const ingredientArg = "ingredients";
@@ -82,23 +73,34 @@ class NewBrew extends Component {
         let ingredientCount = -1;
         let ingredientsJSX = this.state.ingredients.map(ingredient => {
             ingredientCount += 1;
-            return (<TextField id="standard-basic" label="Enter Ingredient"
-                alt="enter the first ingredient" name="ingredients" id={`ingredients-${ingredientCount}`} value={ingredient}
-                onChange={this.onChange} className="ingredient" />);
+            return (
+                <TextField
+                    label="Enter Ingredient"
+                    alt="enter the first ingredient"
+                    name="ingredients"
+                    id={`ingredients-${ingredientCount}`}
+                    value={ingredient}
+                    onChange={this.onChange}
+                    className="ingredient"
+                />
+            );
         });
-
 
         let instructionsCount = -1;
         let instructionsJSX = this.state.instructions.map(instruction => {
             instructionsCount += 1;
-            return (<TextField id="standard-basic" label="Enter Instruction"
-                alt="enter the first instruction" name="instructions" id={`instructions-${instructionsCount}`} value={instruction}
-                onChange={this.onChange} className="instruction" />);
+            return (
+                <TextField
+                    label="Enter Instruction"
+                    alt="enter the first instruction"
+                    name="instructions"
+                    id={`instructions-${instructionsCount}`}
+                    value={instruction}
+                    onChange={this.onChange}
+                    className="instruction"
+                />
+            );
         })
-
-
-
-
 
         return (
 
@@ -138,7 +140,6 @@ class NewBrew extends Component {
 
                         <Button className="addInputButton" variant="outlined" onClick={(e) => this.handleAppend(e, ingredientArg)}>Add Another Ingredient</Button>
 
-
                     </div>
 
                     <div className="formGroup">
@@ -151,7 +152,7 @@ class NewBrew extends Component {
 
                     </div>
 
-                    <InputLabel htmlFor="select" id="selectLabel">Difficulty of Brew </InputLabel>
+                    <InputLabel htmlFor="select" id="selectLabel">Difficulty of Brew</InputLabel>
                     <NativeSelect name="difficulty" onChange={this.onChange} value={this.state.difficulty} id="select">
                         <option value="unknown"></option>
                         <option value="beginner">beginner</option>
@@ -161,19 +162,17 @@ class NewBrew extends Component {
                     </NativeSelect>
 
                     <div id="formButtonWrap">
-
                         <Button
                             type="submit"
                             id="submit"
                             variant="contained"
                             color="primary"
                             size="large"
-                            startIcon={<LocalDrinkIcon />}>
+                            startIcon={<LocalDrinkIcon />}
+                        >
                             Save Brew
-                                    </Button>
-
+                        </Button>
                     </div>
-
                 </form>
             </div>
         );
