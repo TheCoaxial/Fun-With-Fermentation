@@ -43,7 +43,7 @@ const LikeButton = ({ commentID }) => {
 
     const renderlikeCount = count => {
         return(
-            <div>{ count }</div>
+            <div className="likesVerticalAlign">{ count }</div>
         );
     };
 
@@ -65,7 +65,7 @@ const LikeButton = ({ commentID }) => {
     };
 
     return(
-        <div>
+        <div className="commentLikeWrapper">
             {renderLikeButton(like)}
         </div>
     );

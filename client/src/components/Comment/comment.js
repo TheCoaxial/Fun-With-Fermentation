@@ -39,9 +39,9 @@ export default function Comment({ handleCommentDelete, renderCommentForm, commen
     const renderEditButton = () => {
         if (user.id === UserId) {
             return(
-                <div>
+                <button>
                     <Edit onClick={() => renderCommentForm(commentId)} />
-                </div>
+                </button>
             )
         }
     }
@@ -49,9 +49,9 @@ export default function Comment({ handleCommentDelete, renderCommentForm, commen
     const renderDeleteButton = () => {
         if (user.id === UserId) {
             return(
-                <div>
+                <button>
                     <Delete onClick={() => handleCommentDelete(commentId)} />
-                </div>
+                </button>
             )
         }
     }
@@ -60,15 +60,18 @@ export default function Comment({ handleCommentDelete, renderCommentForm, commen
         <Card className={`comment ${classes.root}`}>
             <CardContent>
                 <Link href={`/user/${UserId}`}>
-                    <Typography variant="body2" component="p" className="commentAuthor">
                         {author} 
-                    </Typography>
                 </Link>
-                <LikeButton
-                    commentID={commentId}
-                />
-                {renderEditButton()}
-                {renderDeleteButton()}
+
+                <div className="commentButtonWrapper">
+                    <LikeButton
+                        commentID={commentId}
+                    />
+                    <div className="deleteCommentWrapper">
+                        {/* {renderEditButton()} */}
+                        {renderDeleteButton()}
+                    </div>
+                </div>
                 {/* <Typography className={classes.pos} color="textSecondary">
                     {createdAt}
                 </Typography> */}

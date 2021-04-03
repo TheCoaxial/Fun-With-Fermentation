@@ -6,6 +6,7 @@ import "./Feed.css";
 import "../../App.css";
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
+import SearchBar from "../../components/SearchBar";
 
 export default function Feed() {
 
@@ -47,8 +48,8 @@ export default function Feed() {
         name={brew.name}
         description={brew.description}
         author={brew.author}
-        id={brew.id} 
-        UserId={brew.UserId}/>);
+        id={brew.id}
+        UserId={brew.UserId} />);
 
     topUsersJSX = sortedUsers.map(user => <UserCard
         key={user.id}
@@ -107,8 +108,8 @@ export default function Feed() {
 
 
             </Grid>
-            
 
+            <SearchBar />
         </div>
     )
     // } else {
