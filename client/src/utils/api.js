@@ -68,6 +68,10 @@ class API {
         return this.axios.get("/api/favorite/" + userID);
     }
 
+    getFavoritedBy(brewID) {
+        return this.axios.get("/api/favorited/" + brewID);
+    }
+
     getSpecificFavorite(userID, brewID) {
         return this.axios.get("/api/favorite/" + brewID + "/" + userID);
     }
