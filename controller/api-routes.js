@@ -206,6 +206,39 @@ module.exports = function (app) {
             });
     });
 
+    // Get Like By
+    app.get("/api/comment-like/:commentId", (req, res) => {
+        db.CommentLIke
+            .findAll({
+                where: { CommentId: req.params.commentId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Check One Like
+    app.get("/api/comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .findAll({
+                where: {
+                    CommentId: req.params.commentId,
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
     // Get Brews with Tag
     // not sure if i did this right
     /*     app.get("/api/brewTags/:tagId", (req, res) => {
@@ -380,6 +413,20 @@ module.exports = function (app) {
             });
     });
 
+    // New Comment Like
+    app.post("/api/comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .create({
+                CommentId: req.params.commentId,
+                UserId: req.params.userId
+            })
+            .then(newLike => res.json(newLike))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
     // New Ingredient
     app.post("/api/:brewId/new-ingredient", (req, res) => {
         db.Ingredient
@@ -480,6 +527,22 @@ module.exports = function (app) {
                 where: {
                     following: req.params.followingId,
                     follower: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Comment Like
+    app.delete("/api/delete-comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .destroy({
+                where: {
+                    CommentId: req.params.commentId,
+                    UserId: req.params.userId
                 }
             })
             .then(data => res.json(data))

@@ -88,6 +88,14 @@ class API {
         return this.axios.get("/api/follow/" + followID + "/" + userID);
     }
 
+    getLikedBy(commentID) {
+        return this.axios.get("/api/comment-like/" + commentID);
+    }
+
+    getSpecificCommentLike(userID, commentID) {
+        return this.axios.get("/api/comment-like/" + commentID + "/" + userID);
+    }
+
     getTopUsers() {
         return this.axios.get("/api/users/feed");
     }
@@ -122,6 +130,13 @@ class API {
     newFollow(followID, userID) {
         return this.axios.post("/api/follow/" + followID + "/" + userID, {
             followingId: followID,
+            UserId: userID
+        });
+    }
+
+    newCommentLike(commentID, userID) {
+        return this.axios.post("/api/favorite/" + commentID + "/" + userID, {
+            CommentId: commentID,
             UserId: userID
         });
     }
@@ -162,6 +177,10 @@ class API {
 
     deleteFollow(followID, userID) {
         return this.axios.delete("/api/delete-follow/" + followID + "/" + userID);
+    }
+
+    deleteCommentLike(commentID, userID) {
+        return this.axios.delete("/api/delete-favorite/" + commentID + "/" + userID);
     }
 
     deleteIngredient(ingredientID) {
