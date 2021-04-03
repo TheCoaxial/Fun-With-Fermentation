@@ -103,7 +103,7 @@ module.exports = function (app) {
             });
     });
 
-    //Get Favorites
+    // Get Favorites
     app.get("/api/favorite/:userId", (req, res) => {
         db.Favorite
             .findAll({
@@ -120,6 +120,20 @@ module.exports = function (app) {
             });
     });
 
+    // Get Favorited By
+    app.get("/api/favorited/:brewId", (req, res) => {
+        db.Favorite
+            .findAll({
+                where: { BrewId: req.params.brewId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
 
     // Get Favorite
     app.get("/api/favorite/:brewId/:userId", (req, res) => {
