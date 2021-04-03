@@ -3,6 +3,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Favorite, FavoriteBorder } from "@material-ui/icons";
 import AuthService from "../../services/auth.service";
 import API from "../../utils/api";
+import "./style.css";
 
 const FavButton = ({ brewID }) => {
 
@@ -59,7 +60,7 @@ const FavButton = ({ brewID }) => {
     };
 
     return(
-        <div>
+        <div id="favoriteButtonWrapper">
             {renderFavButton(favorite)}
         </div>
     );
