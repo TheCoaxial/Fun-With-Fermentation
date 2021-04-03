@@ -10,7 +10,7 @@ import List from '@material-ui/core/List';
 import Timeline from '@material-ui/lab/Timeline';
 import { makeStyles } from '@material-ui/core/styles';
 import "./styles.css"
-import authService from '../../services/auth.service.js';
+import AuthService from '../../services/auth.service.js';
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FacebookShare from "../../components/ShareButtons/FacebookShare";
@@ -62,6 +62,32 @@ export default function BrewDisplay() {
             });
     }, []);
 
+    const renderCommentForm = (commentId) => {
+        return(
+            <form onSubmit={(event) => {
+                API.updateComment(commentId, commentInput);
+            }}>
+                    <TextField
+                        id="outlined-multiline-static"
+                        multiline
+                        rows={4}
+                        variant="outlined"
+                        placeholder="Add a Comment Here"
+                        value={commentInput}
+                        onChange={(e) => {
+                            setCommentInput(e.target.value)
+                        }}
+                    />
+                <Button type="submit" id="submitComment">Edit Comment</Button>
+            </form>
+        );
+    }
+
+    const handleCommentEdit = (commentId, body) => {
+        API.updateComment(commentId, body);
+        window.location.assign(`/brews/${brewId}`);        
+    }
+
     const handleCommentDelete = (commentId) => {
         API.deleteComment(commentId);
         window.location.assign(`/brews/${brewId}`);
@@ -92,6 +118,7 @@ export default function BrewDisplay() {
     };
 
     let commentsJSX = comments.map(comment => <Comment
+        renderCommentForm={renderCommentForm}
         handleCommentDelete={handleCommentDelete}
         commentId={comment.id}
         key={comment.createdAt}
@@ -170,8 +197,7 @@ export default function BrewDisplay() {
                 <div id="commentSection">
 
                 <form onSubmit={(event) => {
-                        let { id, username } = authService.getCurrentUser();
-
+                        let { id, username } = AuthService.getCurrentUser();
                         API.postComment(id, brewId, username, commentInput);
                     }}>
                             <TextField

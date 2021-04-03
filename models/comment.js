@@ -22,6 +22,7 @@ module.exports = function(sequelize, DataTypes) {
 
     Comment.associate = (models) => {
         Comment.belongsTo(models.Brew);
+        Comment.belongsToMany(models.User, { through: models.CommentLike });
     };
     
     return Comment;

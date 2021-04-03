@@ -103,7 +103,7 @@ module.exports = function (app) {
             });
     });
 
-    //Get Favorites
+    // Get Favorites
     app.get("/api/favorite/:userId", (req, res) => {
         db.Favorite
             .findAll({
@@ -120,6 +120,20 @@ module.exports = function (app) {
             });
     });
 
+    // Get Favorited By
+    app.get("/api/favorited/:brewId", (req, res) => {
+        db.Favorite
+            .findAll({
+                where: { BrewId: req.params.brewId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
 
     // Get Favorite
     app.get("/api/favorite/:brewId/:userId", (req, res) => {
@@ -159,6 +173,21 @@ module.exports = function (app) {
             });
     });
 
+    // Get All Followers
+    app.get("/api/followers/:followingId", ({ params }, res) => {
+        db.Follow
+            .findAll({
+                where: { following: params.followingId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
     // Get One Following
     app.get("/api/follow/:followingId/:userId", (req, res) => {
         db.Follow
@@ -166,6 +195,39 @@ module.exports = function (app) {
                 where: {
                     follower: req.params.userId,
                     following: req.params.followingId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get Like By
+    app.get("/api/comment-like/:commentId", (req, res) => {
+        db.CommentLike
+            .findAll({
+                where: { CommentId: req.params.commentId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Check One Like
+    app.get("/api/comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .findAll({
+                where: {
+                    CommentId: req.params.commentId,
+                    UserId: req.params.userId
                 }
             })
             .then(data => res.json(data))
@@ -351,6 +413,20 @@ module.exports = function (app) {
             });
     });
 
+    // New Comment Like
+    app.post("/api/comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .create({
+                CommentId: req.params.commentId,
+                UserId: req.params.userId
+            })
+            .then(newLike => res.json(newLike))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
     // New Ingredient
     app.post("/api/:brewId/new-ingredient", (req, res) => {
         db.Ingredient
@@ -451,6 +527,22 @@ module.exports = function (app) {
                 where: {
                     following: req.params.followingId,
                     follower: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Comment Like
+    app.delete("/api/delete-comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .destroy({
+                where: {
+                    CommentId: req.params.commentId,
+                    UserId: req.params.userId
                 }
             })
             .then(data => res.json(data))
