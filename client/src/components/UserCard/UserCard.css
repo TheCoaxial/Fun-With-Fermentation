@@ -13,3 +13,18 @@
     line-height:1.7;
     margin-left:1rem;
 }
+
+.userCard .MuiIconButton-label div {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    height:inherit;
+    margin-left:0.25em;
+    opacity: 0.65;
+    font-size:1.2rem;
+}
+
+.userCard button {
+    border-radius:0;
+}
+

@@ -3,6 +3,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { Person, PersonOutline, Add, Remove, Star, StarOutline } from "@material-ui/icons";
 import AuthService from "../../services/auth.service";
 import API from "../../utils/api";
+import "./style.css";
 
 const FollowButton = ({ followID }) => {
 
@@ -44,18 +45,19 @@ const FollowButton = ({ followID }) => {
     const renderFollowButton = isFollow => {
         return(
           <div>
-              { renderFollowCount(followCount) }
               { isFollow ? (
                   <IconButton aria-label="remove from favorites" onClick={delFollow}>
                       <Remove />
                       <Person />
                       <Star />
+                      { renderFollowCount(followCount) }
                   </IconButton>
               ) : (
                   <IconButton aria-label="add to favorites" onClick={addFollow}>
                       <Add />
                       <PersonOutline />
                       <StarOutline />
+                      { renderFollowCount(followCount) }
                   </IconButton>
               )}
           </div>
@@ -63,7 +65,7 @@ const FollowButton = ({ followID }) => {
     };
 
     return(
-        <div>
+        <div id="followerButtonWrapper">
             {renderFollowButton(follow)}
         </div>
     );
