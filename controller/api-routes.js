@@ -90,7 +90,7 @@ module.exports = function (app) {
                 where: {
                     id: req.params.brewId
                 },
-                include: [db.Comment, db.Ingredient, db.Step]
+                include: [db.Comment, db.Ingredient, db.Step, db.User]
             })
             .then(data => {
                 res.json(data);
