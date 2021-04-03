@@ -49,14 +49,12 @@ const FollowButton = ({ followID }) => {
                   <IconButton aria-label="remove from favorites" onClick={delFollow}>
                       <Remove />
                       <Person />
-                      <Star />
                       { renderFollowCount(followCount) }
                   </IconButton>
               ) : (
                   <IconButton aria-label="add to favorites" onClick={addFollow}>
                       <Add />
                       <PersonOutline />
-                      <StarOutline />
                       { renderFollowCount(followCount) }
                   </IconButton>
               )}
