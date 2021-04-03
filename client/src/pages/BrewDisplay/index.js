@@ -62,6 +62,32 @@ export default function BrewDisplay() {
             });
     }, []);
 
+    const renderCommentForm = (commentId) => {
+        return(
+            <form onSubmit={(event) => {
+                API.updateComment(commentId, commentInput);
+            }}>
+                    <TextField
+                        id="outlined-multiline-static"
+                        multiline
+                        rows={4}
+                        variant="outlined"
+                        placeholder="Add a Comment Here"
+                        value={commentInput}
+                        onChange={(e) => {
+                            setCommentInput(e.target.value)
+                        }}
+                    />
+                <Button type="submit" id="submitComment">Edit Comment</Button>
+            </form>
+        );
+    }
+
+    const handleCommentEdit = (commentId, body) => {
+        API.updateComment(commentId, body);
+        window.location.assign(`/brews/${brewId}`);        
+    }
+
     const handleCommentDelete = (commentId) => {
         API.deleteComment(commentId);
         window.location.assign(`/brews/${brewId}`);
@@ -92,6 +118,7 @@ export default function BrewDisplay() {
     };
 
     let commentsJSX = comments.map(comment => <Comment
+        renderCommentForm={renderCommentForm}
         handleCommentDelete={handleCommentDelete}
         commentId={comment.id}
         key={comment.createdAt}
@@ -171,7 +198,6 @@ export default function BrewDisplay() {
 
                 <form onSubmit={(event) => {
                         let { id, username } = AuthService.getCurrentUser();
-
                         API.postComment(id, brewId, username, commentInput);
                     }}>
                             <TextField
