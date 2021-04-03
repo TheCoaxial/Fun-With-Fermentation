@@ -108,7 +108,7 @@ class App extends Component {
 
                     {currentUser ? (
                         <div className="navbar-nav ml-auto navbar-loggedIn">
-                            <li className="nav-item">
+                             <li className="nav-item">
                                 <Link to={"/feed"} className="nav-link">
                                 <Avatar alt="Logo" src="/logo.png" alt="beer logo" className="logo" id="logo" />
                                 </Link>
@@ -184,10 +184,10 @@ class App extends Component {
                 {/* <Header /> */}
                 <div className="container mt-3">
                     <Switch>
-                        <Route exact path={["/", "/login"]} component={Login} />
+                        <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/profile" component={Profile} />
-                        <Route exact path={"/feed"} component={Feed} />
+                        <Route exact path={["/", "/feed"]} component={Feed} />
                         <Route exact path="/brew" component={NewBrew} />
                         <Route path="/user/:userId" component={UserDisplay} />
                         <Route path="/brews/:brewId" component={BrewDisplay} />
