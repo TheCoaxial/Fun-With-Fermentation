@@ -1,5 +1,6 @@
 // const { regexp } = require("sequelize/types/lib/operators");
 const db = require("../models");
+const Sequelize = require('sequelize');
 
 
 module.exports = function (app) {
@@ -12,6 +13,9 @@ module.exports = function (app) {
             .findAll({
                 where: {
                     id: req.params.userId
+                },
+                attributes: {
+                    exclude: ['password', 'email']
                 }
             })
             .then(data => {
@@ -26,7 +30,7 @@ module.exports = function (app) {
     });
 
     // All Brews
-    app.get("/api/brew/all", (req, res) => {
+    app.get("/api/brews/all", (req, res) => {
         db.Brew
             .findAll({})
             .then(data => {
@@ -44,7 +48,11 @@ module.exports = function (app) {
     //TODO:// Get top contributors
     app.get("/api/users/feed", (req, res) => {
         db.User
-            .findAll({})
+            .findAll({
+                attributes: {
+                    exclude: ['password', 'email']
+                }
+            })
             .then(data => {
                 res.json(data);
             })
@@ -95,7 +103,7 @@ module.exports = function (app) {
             });
     });
 
-    //Get Favorites
+    // Get Favorites
     app.get("/api/favorite/:userId", (req, res) => {
         db.Favorite
             .findAll({
@@ -112,6 +120,20 @@ module.exports = function (app) {
             });
     });
 
+    // Get Favorited By
+    app.get("/api/favorited/:brewId", (req, res) => {
+        db.Favorite
+            .findAll({
+                where: { BrewId: req.params.brewId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
 
     // Get Favorite
     app.get("/api/favorite/:brewId/:userId", (req, res) => {
@@ -120,6 +142,91 @@ module.exports = function (app) {
                 include: db.Brew,
                 where: {
                     BrewId: req.params.brewId,
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get All Followed
+    app.get("/api/follow/:userId", (req, res) => {
+        db.Follow
+            .findAll({
+                include: {
+                    model: db.User,
+                    as: 'Following'
+                },
+                where: { follower: req.params.userId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get All Followers
+    app.get("/api/followers/:followingId", ({ params }, res) => {
+        db.Follow
+            .findAll({
+                where: { following: params.followingId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get One Following
+    app.get("/api/follow/:followingId/:userId", (req, res) => {
+        db.Follow
+            .findAll({
+                where: {
+                    follower: req.params.userId,
+                    following: req.params.followingId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Get Like By
+    app.get("/api/comment-like/:commentId", (req, res) => {
+        db.CommentLike
+            .findAll({
+                where: { CommentId: req.params.commentId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // Check One Like
+    app.get("/api/comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .findAll({
+                where: {
+                    CommentId: req.params.commentId,
                     UserId: req.params.userId
                 }
             })
@@ -162,7 +269,77 @@ module.exports = function (app) {
     //TODO:// Get top contributors
     app.get("/api/users/feed", (req, res) => {
         db.User
-            .findAll({})
+            .findAll({
+                attributes: {
+                    exclude: ['password', 'email']
+                }
+            })
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    //Search Routes
+
+    //Search by user name
+    //return data in usercardable format
+    app.get("/api/search/user/:username", (req, res) => {
+        db.User
+            .findAll({
+                where: {
+                    username: { [Sequelize.Op.like]: '%' + req.params.username + '%' }
+                },
+                attributes: {
+                    exclude: ['password', 'email']
+                }
+            })
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    //Search by brew name
+    //Returns brew name in recipe cardable format
+    app.get("/api/search/brew/:name", (req, res) => {
+        db.Brew
+            .findAll({
+                where: {
+                    name: { [Sequelize.Op.like]: '%' + req.params.name + '%' }
+                }
+            })
+            .then(data => {
+                res.json(data);
+            })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    //Search by ingredient
+    //returns data brew in recipe cardable format
+    app.get("/api/search/ingredient/:name", (req, res) => {
+        db.Ingredient
+            .findAll({
+                where: {
+                    name: { [Sequelize.Op.like]: '%' + req.params.name + '%' }
+                },
+                include: db.Brew
+            })
             .then(data => {
                 res.json(data);
             })
@@ -178,7 +355,7 @@ module.exports = function (app) {
 
     // New Brew
     app.post("/api/:userId/new-brew", (req, res) => {
-        req.body["userId"] = req.params.userId;
+        req.body["UserId"] = req.params.userId;
         db.Brew
             .create(req.body)
             .then(newBrew => res.json(newBrew))
@@ -216,6 +393,34 @@ module.exports = function (app) {
                 UserId: req.params.userId
             })
             .then(newFav => res.json(newFav))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // New Follow
+    app.post("/api/follow/:followingId/:userId", (req, res) => {
+        db.Follow
+            .create({
+                following: req.params.followingId,
+                follower: req.params.userId
+            })
+            .then(newFollower => res.json(newFollower))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // New Comment Like
+    app.post("/api/comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .create({
+                CommentId: req.params.commentId,
+                UserId: req.params.userId
+            })
+            .then(newLike => res.json(newLike))
             .catch(err => {
                 res.sendStatus(500);
                 throw err;
@@ -302,9 +507,41 @@ module.exports = function (app) {
     // Delete Favorite
     app.delete("/api/delete-favorite/:brewId/:userId", (req, res) => {
         db.Favorite
-            .destory({
+            .destroy({
                 where: {
                     BrewId: req.params.brewId,
+                    UserId: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Follow
+    app.delete("/api/delete-follow/:followingId/:userId", (req, res) => {
+        db.Follow
+            .destroy({
+                where: {
+                    following: req.params.followingId,
+                    follower: req.params.userId
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                res.sendStatus(500);
+                throw err;
+            });
+    });
+
+    // Delete Comment Like
+    app.delete("/api/delete-comment-like/:commentId/:userId", (req, res) => {
+        db.CommentLike
+            .destroy({
+                where: {
+                    CommentId: req.params.commentId,
                     UserId: req.params.userId
                 }
             })
@@ -419,6 +656,9 @@ module.exports = function (app) {
         }
         if (req.body["ingredients"]) {
             body["ingredients"] = req.body["ingredients"];
+        }
+        if (req.body["difficulty"]) {
+            body["difficulty"] = req.body["difficulty"];
         }
 
         db.Brew

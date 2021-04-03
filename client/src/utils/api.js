@@ -53,7 +53,7 @@ class API {
     }
 
     getBrews() {
-        return this.axios.get("/api/brew/all");
+        return this.axios.get("/api/brews/all");
     }
 
     getUserBrews(userId) {
@@ -68,8 +68,32 @@ class API {
         return this.axios.get("/api/favorite/" + userID);
     }
 
+    getFavoritedBy(brewID) {
+        return this.axios.get("/api/favorited/" + brewID);
+    }
+
     getSpecificFavorite(userID, brewID) {
         return this.axios.get("/api/favorite/" + brewID + "/" + userID);
+    }
+
+    getUserFollowing(userID) {
+        return this.axios.get("/api/follow/" + userID);
+    }
+
+    getFollowers(followID) {
+        return this.axios.get("/api/followers/" + followID);
+    }
+
+    getSpecificFollowed(userID, followID) {
+        return this.axios.get("/api/follow/" + followID + "/" + userID);
+    }
+
+    getLikedBy(commentID) {
+        return this.axios.get("/api/comment-like/" + commentID);
+    }
+
+    getSpecificCommentLike(userID, commentID) {
+        return this.axios.get("/api/comment-like/" + commentID + "/" + userID);
     }
 
     getTopUsers() {
@@ -78,11 +102,12 @@ class API {
 
     // POST
 
-    postBrew(userID, name, description, username) {
+    postBrew(userID, name, description, username, difficulty) {
         return this.axios.post("/api/" + userID + "/new-brew", {
             name: name,
             description: description,
-            author: username
+            author: username,
+            difficulty: difficulty
         });
     }
 
@@ -98,6 +123,20 @@ class API {
     saveNewFavorite(brewID, userID) {
         return this.axios.post("/api/favorite/" + brewID + "/" + userID, {
             BrewId: brewID,
+            UserId: userID
+        });
+    }
+
+    newFollow(followID, userID) {
+        return this.axios.post("/api/follow/" + followID + "/" + userID, {
+            followingId: followID,
+            UserId: userID
+        });
+    }
+
+    newCommentLike(commentID, userID) {
+        return this.axios.post("/api/comment-like/" + commentID + "/" + userID, {
+            CommentId: commentID,
             UserId: userID
         });
     }
@@ -136,6 +175,14 @@ class API {
         return this.axios.delete("/api/delete-favorite/" + brewID + "/" + userID);
     }
 
+    deleteFollow(followID, userID) {
+        return this.axios.delete("/api/delete-follow/" + followID + "/" + userID);
+    }
+
+    deleteCommentLike(commentID, userID) {
+        return this.axios.delete("/api/delete-comment-like/" + commentID + "/" + userID);
+    }
+
     deleteIngredient(ingredientID) {
         return this.axios.delete("/api/delete-ingredient/" + ingredientID);
     }
@@ -172,10 +219,11 @@ class API {
         });
     }
 
-    updateBrew(brewID, name, description) {
+    updateBrew(brewID, name, difficulty, description) {
         return this.axios.put("/api/update-brew/" + brewID, {
             name: name,
-            description: description
+            description: description,
+            difficulty: difficulty
         });
     }
 

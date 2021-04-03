@@ -1,3 +1,53 @@
-.title {
-    color:black
+
+#userDisplay {
+    margin-top:3em;
+    margin-left:2em;
+}
+
+#userDisplay h5 {
+    font-weight:bold;
+    margin-bottom:0.5em;
+}
+
+#userDisplay #userHeader {
+    margin-bottom:3em;
+}
+
+#userDisplay {
+    width:auto;
+}
+
+#userDisplay h6 {
+    font-weight:500;
+    margin-bottom:0.5em;
+}
+
+#userDisplay .MuiGrid-item {
+    background-color: white;
+    position: relative;
+}
+
+#userDisplay #positionAbsoluteWrap {
+    position:absolute;
+    top:16px;
+    right:16px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#userDisplay #positionAbsoluteWrap button {
+    border-radius:0;
+    padding:0;
+}
+
+#userDisplay #positionAbsoluteWrap #score {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: inherit;
+    margin-right:1em;
+}
+
+#userDisplay .recipeCard .MuiPaper-root {
+    background-color:#eee;
 }

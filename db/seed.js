@@ -33,15 +33,18 @@ async function insertData() {
 
     await editBrew({
         description: "This is my brew description.",
-        name: "Brew 1"
+        name: "Brew 1",
+        difficulty: "expert"
     }, 1);
     await editBrew({
         description: "This is my brew description.",
-        name: "Brew 2"
+        name: "Brew 2",
+        difficulty: "beginner"
     }, 2);
     await editBrew({
         description: "This is my brew description.",
-        name: "Brew 3"
+        name: "Brew 3",
+        difficulty: "intermediate"
     }, 3);
 
 
@@ -112,6 +115,25 @@ async function insertData() {
     await insertTag("Expert", 1);
     await insertTag("Beginner", 2);
     await insertTag("Intermediate", 3);
+
+    /**
+    * Favorites
+    */
+    await insertFavorite(1, 1);
+    await insertFavorite(2, 1);
+    await insertFavorite(3, 1);
+
+    await insertFavorite(1, 2);
+    await insertFavorite(2, 2);
+    await insertFavorite(3, 2);
+
+    await insertFavorite(1, 3);
+    await insertFavorite(2, 3);
+    await insertFavorite(3, 3);
+
+    await removeFavorite(2, 1);
+    await removeFavorite(2, 2);
+    await removeFavorite(2, 3);
 
     return;
 }
@@ -307,6 +329,26 @@ async function insertTag(name, BrewId) {
     });
 
     return;
+}
+
+async function insertFavorite(BrewId, UserId) {
+    await fetch(`http://localhost:3001/api/favorite/${BrewId}/${UserId}`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    return;
+}
+
+async function removeFavorite(BrewId, UserId) {
+    await fetch(`http://localhost:3001/api/delete-favorite/${BrewId}/${UserId}`, {
+        method: "DELETE",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
 }
 
 insertData();

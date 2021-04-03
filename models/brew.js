@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [0, 60]
+                len: [0, 40]
             }
         },
         description: {
@@ -24,14 +24,16 @@ module.exports = function (sequelize, DataTypes) {
         author: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        difficulty: {
+            type: DataTypes.STRING
         }
-
     });
 
     Brew.associate = (models) => {
-        Brew.hasMany(models.Ingredient);
-        Brew.hasMany(models.Comment);
-        Brew.hasMany(models.Step);
+        Brew.hasMany(models.Ingredient, { onDelete: 'cascade' });
+        Brew.hasMany(models.Comment, { onDelete: 'cascade' });
+        Brew.hasMany(models.Step, { onDelete: 'cascade' });
         Brew.belongsTo(models.User);
         Brew.belongsToMany(models.User, { through: models.Favorite });
         Brew.belongsToMany(models.Tag, { through: 'BrewTags' });

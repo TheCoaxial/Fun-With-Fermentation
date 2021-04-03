@@ -7,7 +7,9 @@
 }
 
 #Feed .makeStyles-root-1,
-#Feed .makeStyles-root-3 {
+#Feed .makeStyles-root-3,
+#Feed .makeStyles-root-9,
+#Feed .MuiPaper-root.MuiCard-root {
     max-width:none !important;
 }
 
@@ -26,4 +28,39 @@
 
 #Feed .sidebarWrap {
     padding-left:5%;
+}
+
+#Feed .userCard,
+#Feed .userCard .MuiPaper-root {
+    position:relative;
+}
+
+#Feed .userCard #followerButtonWrapper {
+    position:absolute;
+    right:5px;
+    bottom:5px;
+}
+
+#Feed .userCard .MuiTypography-body2 {
+    position: absolute;
+    left:16px;
+    bottom:16px;
+}
+
+@media only screen and (max-width:900px) {
+
+    #Feed .userCard #followerButtonWrapper {
+        position:absolute;
+        left:16px;
+        top:5px;
+        height:2em;
+        display:flex;
+    }
+
+    #Feed .userCard #followerButtonWrapper button {
+        background-color: #ccc;
+        border-radius: 5%;
+        height: 2em;
+    }
+
 }

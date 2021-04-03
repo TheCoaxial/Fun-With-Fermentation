@@ -4,17 +4,16 @@ import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import API from '../../utils/api';
 import "./styles.css"
 import ls from 'local-storage'
+import FollowButton from "../../components/FollowButton";
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 
 export default function UserDisplay() {
 
     let [userData, setUserData] = useState({});
     let [brews, setBrews] = useState([]);
     let { userId } = useParams([]);
-
-    let ids = JSON.parse(ls.get('visited')) || [];
     
-
-
     useEffect(() => {
         API.getUserProfile(userId)
             .then((data) => {
@@ -22,6 +21,7 @@ export default function UserDisplay() {
                 setUserData(data.data[0]);
             })
 
+        let ids = JSON.parse(ls.get('visited')) || [];
         ids.push(userId);
        
         ls.set('visited', JSON.stringify(ids))
@@ -32,7 +32,7 @@ export default function UserDisplay() {
             .then(data => {
                 setBrews(data.data)
             })
-    }, []);
+    }, [userId]);
 
     let brewsJSX = brews.map(brew => <RecipeCard
         key={brew.id}
@@ -42,14 +42,43 @@ export default function UserDisplay() {
         id={brew.id}
         UserId={brew.UserId} />);
 
-    return (<div id="userDisplay">
-        <h2 className="title">{userData.username} <span id="score"> Score: {userData.contributionScore}</span></h2>
-        <p>{userData.bio || "No Bio"}</p>
+    return (
+    <div id="userDisplay">
+        <Grid container spacing={3}>
+            <Grid item xs={12} sm={8}>
+                <div id="positionAbsoluteWrap">
+                    <FollowButton
+                        followID={userId}
+                    />
+                    <div id="score">
+                        <Typography variant="body2" className="title" id="score">
+                            Score: {userData.contributionScore}
+                        </Typography>
+                    </div>
+                </div>
 
-        <h3>Brews</h3>
-        <div id="brew-list">
-            {brewsJSX}
-        </div>
+                <div id="userHeader">
+
+                    <Typography variant="h5" className="title">
+                        {userData.username}
+                    </Typography>
+
+                    <Typography variant="body1" className="title">
+                        {userData.bio || "No Bio"}
+                    </Typography>
+
+                </div>
+
+                
+
+                
+                <div id="brew-list">
+                    <Typography variant="h6" className="title">
+                        Brews
+                    </Typography>
+                    {brewsJSX}
+                </div>
+            </Grid>
+        </Grid>
     </div>);
-
 }

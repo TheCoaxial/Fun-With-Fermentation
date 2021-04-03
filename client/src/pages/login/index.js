@@ -2,9 +2,12 @@
 // Extended/modified by Cory Scanlon
 import React, { Component } from "react";
 import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import Footer from "../../components/Footer/index";
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
 import "./style.css";
 
@@ -88,9 +91,10 @@ export default class Login extends Component {
     return (
       <div className="flexWrap" id="Login">
         <div className="">
-          <img
-            src="./logo.png"
-            alt="logo"
+
+          <Avatar 
+            alt="" 
+            src="/logo.png" 
             className="logo"
           />
 
@@ -100,40 +104,45 @@ export default class Login extends Component {
               this.form = check;
             }}
           >
-            <div className="">
-              <Input
-                type="text"
-                className=""
-                name="username"
-                placeholder="username"
-                value={this.state.username}
-                onChange={this.onChangeUsername}
-                validations={[required]}
-              />
+            <div className="inputWrapper">
+              <TextField 
+                  id="outlined-basic" 
+                  variant="outlined" 
+                  type="text"
+                  className=""
+                  name="username"
+                  placeholder="username"
+                  value={this.state.username}
+                  onChange={this.onChangeUsername}
+                  validations={[required]}
+                />
+            </div>
+
+            <div className="inputWrapper">
+              <TextField 
+                  id="outlined-basic" 
+                  variant="outlined" 
+                  type="password"
+                  className=""
+                  name="password"
+                  placeholder="password"
+                  value={this.state.password}
+                  onChange={this.onChangePassword}
+                  validations={[required]}
+                />
             </div>
 
             <div className="">
-              <Input
-                type="password"
-                className=""
-                name="password"
-                placeholder="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}
-              />
-            </div>
-
-            <div className="">
-              <button
+                <Button 
+                    variant="contained"
                     className=""
-                    disabled={this.state.loading}
-                >
+                    disabled={this.state.loading}>
+                    
                     {this.state.loading && (
                     <span className=""></span>
                     )}
                     <span>Login</span>
-                </button>
+                </Button>
             </div>
 
             {this.state.message && (
@@ -151,9 +160,9 @@ export default class Login extends Component {
             />
           </Form>
 
-          <p>
-            Don't have an account? <Link to="/register">Sign Up</Link>
-          </p>
+          <Typography variant="body1" gutterBottom>
+              Don't have an account? <Link to="/register">Sign Up</Link>
+          </Typography>
 
           <Footer />
 

@@ -20,6 +20,7 @@
 
 #Register .logo {
     width:9rem;
+    height:9rem;
     border:1px solid #be8c60;
     border-radius:50%;
     background-color:#d49c6b;
@@ -44,21 +45,25 @@
 /* ------- form styles ------ */
 /* -------------------------- */
 
-#Register form input {
-    display:block;
-    margin:0px auto;
-    margin-top:1rem;
-    padding:0.5rem;
-}
-
-#Register button {
-    background-color:#d49c6b;
-    color:#252b31;
-    display:block;
-    margin:0px auto;
-    margin-top:1rem;
-    padding:0.5rem;
-    width:5rem;
-    border-color:#be8c60;
-    border-radius:10%;
-}
+#Register .MuiInputBase-input {
+    background-color:white;
+    border-radius: 4px;
+  }
+  
+  #Register .inputWrapper {
+    margin-top:0.5em;
+  }
+  
+  #Register .inputWrapper:first-of-type {
+    margin-top:1.5em;
+  }
+  
+  #Register button {
+    margin-top:1.5em;
+    margin-bottom:1.5em;
+  }
+  
+  #Register .MuiOutlinedInput-input {
+    padding:7.5px 14px;
+  }
+  

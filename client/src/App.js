@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 
 // import Container from "../src/components/Container";
-import Header from "./components/Header/Header";
 import Footer from "./components/Footer";
 // import logo from './logo.svg';
 import './App.css';
@@ -13,7 +12,7 @@ import Feed from "./pages/Feed/Feed";
 import Login from "./pages/login";
 import Register from "./pages/register";
 
-
+import SearchBar from "./components/SearchBar";
 import Profile from "./pages/Profile";
 import NewBrew from "./pages/NewBrew";
 import UserDisplay from "./pages/UserDisplay";
@@ -65,6 +64,8 @@ class App extends Component {
                                     {/* Feed */}
                                 </Link>
                             </li>
+
+                            <SearchBar />
 
                             <div className="userSpecific-navWrap">
 

@@ -20,6 +20,7 @@
 
 #Login .logo {
     width:9rem;
+    height:9rem;
     border:1px solid #be8c60;
     border-radius:50%;
     background-color:#d49c6b;
@@ -44,7 +45,7 @@
 /* ------- form styles ------ */
 /* -------------------------- */
 
-#Login form input {
+/* #Login form input {
     display:block;
     margin:0px auto;
     margin-top:1rem;
@@ -61,7 +62,31 @@
     width:5rem;
     border-color:#be8c60;
     border-radius:10%;
+} */
+
+
+#Login .MuiInputBase-input {
+  background-color:white;
+  border-radius: 4px;
 }
+
+#Login .inputWrapper {
+  margin-top:0.5em;
+}
+
+#Login .inputWrapper:first-of-type {
+  margin-top:1.5em;
+}
+
+#Login button {
+  margin-top:1.5em;
+  margin-bottom:1.5em;
+}
+
+#Login .MuiOutlinedInput-input {
+  padding:7.5px 14px;
+}
+
 
 
 

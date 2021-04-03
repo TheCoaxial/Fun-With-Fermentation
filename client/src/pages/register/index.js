@@ -5,6 +5,10 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import Footer from "../../components/Footer/index";
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
 import { isEmail } from "validator";
 import "./style.css";
@@ -155,11 +159,11 @@ export default class Register extends Component {
     return (
       <div className="flexWrap" id="Register">
         <div>
-          <img
-            src="./logo.png"
-            alt="logo"
-            className="logo"
-          />
+          <Avatar 
+              alt="" 
+              src="/logo.png" 
+              className="logo"
+            />
 
           <Form
             onSubmit={this.handleRegister}
@@ -206,7 +210,14 @@ export default class Register extends Component {
                 </div>
 
                 <div className="form-group">
-                  <button className="btn">Sign Up</button>
+
+                  <Button 
+                    variant="contained"
+                    className=""
+                    className="btn">
+                      Sign Up
+                  </Button>
+
                 </div>
               </div>
             )}
@@ -233,9 +244,9 @@ export default class Register extends Component {
             />
           </Form>
 
-          <p> 
-            Already a user? click here to log in. <Link to="/login">Log In</Link>
-          </p>
+          <Typography variant="body1" gutterBottom>
+            Already have an account? <Link to="/login">Log In</Link>
+          </Typography>
 
           <Footer />
 

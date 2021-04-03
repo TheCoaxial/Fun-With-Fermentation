@@ -1,0 +1,210 @@
+
+
+/*-- general styles --*/
+
+#brewDisplay {
+    max-width:100vw;
+}
+
+#brewDisplay #brewDisplayFlex {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-around;
+}
+
+#brewDisplay button:hover {
+    cursor:pointer;
+}
+
+#brewDisplay .MuiTypography-root {
+    text-align:left;
+}
+
+#brewDisplay #mainBrewDisplay {
+    flex:1.5;
+    margin:0px auto;
+    background-color:white;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.4);
+    padding:5%;
+    padding-top:2.5%;
+    margin:2em;
+    margin-top:2em;
+    position: relative;
+}
+
+
+/*-- brew recipe header --*/
+
+#brewDisplay #mainBrewDisplay .author-header {
+    opacity: 0.65;
+    margin-bottom:1em;
+}
+
+#brewDisplay #mainBrewDisplay .description-header {
+    margin-top:2em;
+    margin-bottom:1em;
+}
+
+#brewDisplay #mainBrewDisplay .h2-header {
+    font-weight:bold;
+}
+
+#brewDisplay #mainBrewDisplay .h5-headers {
+    margin-top:3em;
+    font-weight:bold;
+}
+
+
+/*-- share buttons --*/
+
+#brewDisplay #mainBrewDisplay #shareButtons {
+    position:absolute;
+    top:2.5%;
+    right:5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#brewDisplay #mainBrewDisplay #shareButtons button {
+    margin:0.5em;
+}
+
+
+
+/*-- ingredients --*/
+
+#brewDisplay #mainBrewDisplay #ingredient-list .MuiListItemText-primary {
+    font-size:1.15rem;
+}
+
+
+
+/*-- timeline --*/
+
+#brewDisplay #mainBrewDisplay .step p {
+    display:flex;
+    flex-direction: row;
+}
+
+#brewDisplay #mainBrewDisplay .step p {
+    display: flex;
+    flex-direction: row;
+}
+
+#brewDisplay #mainBrewDisplay .step p .vertical-align {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#brewDisplay #mainBrewDisplay .step p #stepTime {
+    display: flex;
+    flex-direction: row;
+}
+
+#brewDisplay #mainBrewDisplay .step p .stepTimeSpan {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 0.25em;
+}
+
+#brewDisplay #mainBrewDisplay .MuiTimeline-root .MuiTimelineContent-root {
+    flex:10;
+}
+
+#brewDisplay #mainBrewDisplay .MuiTimelineOppositeContent-root {
+    text-align: left;
+    padding-left:0;
+}
+
+#brewDisplay #mainBrewDisplay .MuiTimeline-root {
+    padding-left:0;
+}
+
+#brewDisplay #mainBrewDisplay .MuiTimeline-alignLeft .MuiTypography-h6 {
+    font-size:1.1rem;
+}
+
+/*-- delete button --*/
+
+#brewDisplay #deleteFlex {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width:98%;
+    margin-top:5em;
+}
+
+#brewDisplay #delete {
+    width:20em;
+}
+
+#brewDisplay #deleteFlex .MuiButton-containedSecondary {
+    background-color:transparent;
+    color:#f50057;
+    border:3px solid #f50057;
+}
+
+
+/*-- comment section --*/
+
+#brewDisplay #commentSection {
+    flex:1;
+    margin:2em;
+}
+
+#brewDisplay #commentSection form,
+#brewDisplay #commentSection #comment-list {
+    margin:0px auto;
+    text-align: center;
+}
+
+#brewDisplay #commentSection form {
+    display:flex;
+    flex-direction:column;
+}
+
+#brewDisplay #commentSection #comment-list .comment {
+    margin-top:0.5em;
+    border:1px solid black;
+    background-color:white;
+    color:black;
+    border-radius: 2%;
+}
+
+#brewDisplay #commentSection #comment-list .commentAuthor {
+    text-align:left;
+}
+
+#brewDisplay #commentSection #comment-list .commentAuthor:hover {
+    color:#d49c6b;
+}
+
+#brewDisplay #commentSection #comment-list .commentBody {
+    text-align:center;
+    margin-top:1em;
+    overflow-wrap: anywhere;
+}
+
+#brewDisplay #commentSection #submitComment {
+    border:1px solid black;
+    width:50%;
+    margin-top:1em;
+    margin-bottom:2em;
+}
+
+#brewDisplay #commentSection .MuiOutlinedInput-multiline {
+    background-color:white;
+}
+
+#brewDisplay #commentSection #comment-list a p {
+    color:black;
+    opacity: 0.5;
+}
+
+#brewDisplay #commentSection #comment-list .MuiPaper-root.comment {
+    min-width:0 !important;
+}
+
