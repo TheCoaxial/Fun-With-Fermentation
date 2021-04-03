@@ -7,11 +7,9 @@ import Footer from "./components/Footer";
 import './App.css';
 import ls from 'local-storage'
 import AuthService from "./services/auth.service";
-
 import Feed from "./pages/Feed/Feed";
 import Login from "./pages/login";
 import Register from "./pages/register";
-
 import SearchBar from "./components/SearchBar";
 import Profile from "./pages/Profile";
 import NewBrew from "./pages/NewBrew";
@@ -33,8 +31,6 @@ class App extends Component {
     
     componentDidMount() {
         const user = AuthService.getCurrentUser();
-        // ls('foo', 'bar');
-        // console.log(ls('foo'));
         if (user) {
             this.setState({
                 currentUser: user,
@@ -138,21 +134,5 @@ class App extends Component {
         );
     }
 };
-
-
-// function App() {
-//     return (
-//         <Router>
-//             <div>
-//                 <Container>
-//                     <Route exact path="/brew" component={Brew} />
-//                     <Route exact path="/profile" component={Profile} />
-//                     <Route exact path="/feed" component={Feed} />
-//                 </Container>
-//                 <Footer />
-//             </div>
-//         </Router>
-//     );
-// }
 
 export default App;
