@@ -173,8 +173,10 @@ export default class Register extends Component {
           >
             {!this.state.successful && (
               <div>
-                <div>
-                  <Input
+                <div className="inputWrapper">
+                  <TextField
+                    id="outlined-basic" 
+                    variant="outlined" 
                     type="text"
                     className=""
                     name="username"
@@ -185,8 +187,10 @@ export default class Register extends Component {
                   />
                 </div>
 
-                <div>
-                  <Input
+                <div className="inputWrapper">
+                  <TextField
+                    id="outlined-basic" 
+                    variant="outlined" 
                     type="text"
                     className=""
                     name="email"
@@ -197,8 +201,10 @@ export default class Register extends Component {
                   />
                 </div>
 
-                <div>
-                  <Input
+                <div className="inputWrapper">
+                  <TextField
+                    id="outlined-basic" 
+                    variant="outlined" 
                     type="password"
                     className=""
                     name="password"
