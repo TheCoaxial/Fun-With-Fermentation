@@ -42,12 +42,13 @@ export default function UserCard({ id ,username, bio, newBrew, score }) {
                                 </div>
                             </div>
                         </Link>
-                        <FollowButton
-                            followID={id}
-                        />
                         <Typography variant="body2" color="textSecondary" component="p">
                             Score: {score}
                         </Typography>
+
+                        <FollowButton
+                            followID={id}
+                        />
                     </CardContent>
             </Card>
         </div>

@@ -125,6 +125,16 @@
     bottom: 0.5rem;
 }
 
+#Profile .userCard #followerButtonWrapper {
+    position: absolute;
+    bottom: -2em;
+    right: 0.5em;
+}
+
+#Profile .userCard #followerButtonWrapper .MuiButtonBase-root {
+    padding:0;
+}
+
 #Profile .recipeCard {
     margin-top:1rem;
     position:relative;
@@ -134,13 +144,3 @@
     max-width:10rem;
 }
 
-/* #Profile .recipeCard .MuiCardContent-root {
-    padding-top:0;
-    padding-bottom:0;
-} */
-
-/* #Profile .recipeCard .userLink {
-    position: absolute;
-    top:16px;
-    right:16px;
-} */
