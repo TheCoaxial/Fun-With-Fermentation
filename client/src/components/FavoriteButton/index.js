@@ -5,14 +5,14 @@ import AuthService from "../../services/auth.service";
 import API from "../../utils/api";
 import "./style.css";
 
-const FavButton = ({ brewID }) => {
+const FavButton = ({ brewID }/* , favorite, favCount, addFav, delFav */) => {
 
     const [favorite, setFavorite] = useState(0);
     const [favCount, setFavCount] = useState(0);
     const [brewAuthor, setBrewAuthor] = useState({});
     const user = AuthService.getCurrentUser();
 
-    useEffect(() => {
+   useEffect(() => {
         API
             .getSpecificBrew(brewID)
             .then(data => setBrewAuthor({ id: data.data.User.id, bio: data.data.User.bio, contributionScore: data.data.User.contributionScore }));
