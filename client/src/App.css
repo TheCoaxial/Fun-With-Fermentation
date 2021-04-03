@@ -7,6 +7,18 @@ html {
   padding-bottom:5%;
 }
 
+html body {
+  padding-right:0 !important;
+}
+
+a { 
+  text-decoration: none !important;
+}
+
+.br {
+  display:block;
+}
+
 .App-body {
   height:100vh;
   width:100vw;
@@ -58,7 +70,7 @@ html {
 
 .navbar {
   background-color:#282c34;
-  padding:0.5rem 3rem 0.5rem 3rem;
+  padding:0.5rem 2rem 0.5rem 1.5rem;
   height:5rem;
 }
 
@@ -72,7 +84,8 @@ html {
 }
 
 .navbar #logo {
-  width:4rem;
+    width:4rem;
+    height:4rem;
     border:1px solid #be8c60;
     border-radius:50%;
     background-color:#d49c6b;
@@ -81,10 +94,12 @@ html {
 
 .navbar .avatar {
   width: 3rem;
+  height:2.9rem;
   border: 0px solid white;
   background-color: white;
   border-radius: 50%;
   margin:0px auto;
+  margin-bottom:0.25rem;
 }
 
 .navbar li {
@@ -124,11 +139,10 @@ html {
   min-width:15%
 }
 
-.navbar li .nav-link.newBrew-button {
-  background-color:#d49c6b;
-  color:white;
-  padding:1rem 2rem 1rem 2rem;
-  margin-right:4rem;
+.navbar li .nav-link.newBrew-button .MuiButton-root {
+  padding:0.75rem 1.25rem;
+  margin-right:1rem;
+  text-transform: none;
 }
 
 .navbar .classicNavButton-wrap {
@@ -183,13 +197,6 @@ html {
 /* --- logged out navbar ---- */
 /* -------------------------- */
 
-.navbar-loggedOut li .nav-link.classic-button {
-  background-color:#d49c6b;
-  color:white;
-  padding:1rem 2rem 1rem 2rem;
-  width:5rem;
-  text-align: center;
-}
 
 .navbar-loggedOut {
   display:flex;
@@ -201,11 +208,67 @@ html {
   margin-right:4rem;
 }
 
-
-a { 
-  text-decoration: none !important;
+.navbar-loggedOut .MuiButton-root {
+  min-width:10em;
+  padding: 0.75rem 1.25rem;
+  text-transform:none;
 }
 
-.br {
-  display:block;
+/* -------------------------- */
+/* --- drop down menu ---- */
+/* -------------------------- */
+
+.navbar #profileMenuButton {
+  background-color:transparent;
+  box-shadow:none;
+  padding-top:0;
+  padding-bottom:0;
+  height:100%;
 }
+
+.navbar #profileMenuButton .MuiButton-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height:100%;
+  color:white;
+  text-transform: none;
+  min-width:10em;
+}
+
+.MuiMenu-list .nav-link {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.MuiMenu-list .MuiListItemIcon-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.MuiMenu-list .MuiListItemIcon-root {
+  min-width:40px;
+}
+
+.MuiMenu-list .MuiButton-root {
+  padding:0;
+}
+
+.MuiMenu-list .MuiListItem-root.MuiMenuItem-root:focus,
+.MuiMenu-list .MuiListItem-root.MuiMenuItem-root:hover {
+  background-color:#fff !important;
+}
+
+.MuiMenu-list .MuiListItem-root.MuiMenuItem-root:focus a div,
+.MuiMenu-list .MuiListItem-root.MuiMenuItem-root:focus a .MuiTypography-root,
+.MuiMenu-list .MuiListItem-root.MuiMenuItem-root a .MuiTypography-root {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+
+.MuiMenu-list .MuiListItem-button {
+  transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition-property: background-color;
+}
+

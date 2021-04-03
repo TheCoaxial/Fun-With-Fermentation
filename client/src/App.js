@@ -1,34 +1,87 @@
 import React, { Component } from "react";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
 
-// import Container from "../src/components/Container";
 import Footer from "./components/Footer";
-// import logo from './logo.svg';
 import './App.css';
 import ls from 'local-storage'
 import AuthService from "./services/auth.service";
 import Feed from "./pages/Feed/Feed";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import SearchBar from "./components/SearchBar";
+
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
 import Profile from "./pages/Profile";
 import NewBrew from "./pages/NewBrew";
 import UserDisplay from "./pages/UserDisplay";
 import BrewDisplay from "./pages/BrewDisplay";
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import { withStyles } from '@material-ui/core/styles';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+const StyledMenu = withStyles({
+    paper: {
+      border: '1px solid #d3d4d5',
+    },
+  })((props) => (
+    <Menu
+      elevation={0}
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
+      {...props}
+    />
+  ));
+  
+  const StyledMenuItem = withStyles((theme) => ({
+    root: {
+      '&:focus': {
+        backgroundColor: theme.palette.primary.main,
+        '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+          color: theme.palette.common.white,
+        },
+      },
+    },
+  }))(MenuItem);
 
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.logOut = this.logOut.bind(this);
+        this.handleClick.bind(this);
+        this.handleClose.bind(this);
+        this.handleClick = this.handleClick.bind(this);
+        this.handleClose = this.handleClose.bind(this);
 
         this.state = {
             showModeratorBoard: false,
             showAdminBoard: false,
             currentUser: undefined,
+            anchorEl: null
         };
     };
 
+    handleClick(event) {
+        this.setState({ anchorEl: event.currentTarget });
+        console.log(this.state.anchorEl);
+    };
+
+    handleClose() {
+        this.setState({ anchorEl: null });
+        console.log(this.state.anchorEl);
+    };
+    
     componentDidMount() {
         const user = AuthService.getCurrentUser();
         if (user) {
@@ -40,6 +93,7 @@ class App extends Component {
     };
 
     logOut() {
+        window.location.href="/login";
         AuthService.logout();
     }
 
@@ -54,64 +108,74 @@ class App extends Component {
 
                     {currentUser ? (
                         <div className="navbar-nav ml-auto navbar-loggedIn">
-                            <li className="nav-item">
+                             <li className="nav-item">
                                 <Link to={"/feed"} className="nav-link">
-                                    <img src="./logo.png" alt="beer logo" className="logo" id="logo" />
-                                    {/* Feed */}
+                                <Avatar alt="Logo" src="/logo.png" alt="beer logo" className="logo" id="logo" />
                                 </Link>
                             </li>
-
-                            <SearchBar />
 
                             <div className="userSpecific-navWrap">
 
                                 <li className="nav-item classicNavButton-wrap">
                                     <Link to={"/brew"} className="nav-link newBrew-button">
-                                        Create a New Brew
-                                </Link>
-                                </li>
-
-                                <li className="nav-item subMenu-wrap">
-                                    <Link to={"/profile"} className="nav-link">
-                                        <img src="./sample-avatar-2.png" alt="user avatar" className="avatar" />
-                                        {currentUser.username}
+                                        <Button variant="contained">Create a New Brew</Button>
                                     </Link>
-
-                                    <ul className="userMenu-showHide">
-                                        <li className="nav-item">
-                                            <Link to={"/profile"} className="nav-link">
-                                                Profile
-                                        </Link>
-                                        </li>
-
-                                        <li className="nav-item">
-                                            <a href="/login" className="nav-link" onClick={this.logOut}>
-                                                Log Out
-                                        </a>
-                                        </li>
-
-
-                                    </ul>
                                 </li>
+
+                                <div>
+                                    <Button
+                                        id="profileMenuButton"
+                                        aria-controls="customized-menu"
+                                        aria-haspopup="true"
+                                        variant="contained"
+                                        onClick={this.handleClick}>
+                                            <Avatar alt="Logo" src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
+                                                {currentUser.username}
+                                    </Button>
+                                    <StyledMenu
+                                        id="customized-menu"
+                                        anchorEl={this.state.anchorEl}
+                                        keepMounted
+                                        open={this.state.anchorEl}
+                                        onClose={this.handleClose}>
+                                        <StyledMenuItem>
+                                            
+                                            <Link to={"/profile"} className="nav-link">
+                                                <ListItemIcon>
+                                                    <AccountBoxIcon fontSize="small" />
+                                                </ListItemIcon>
+                                                <ListItemText primary="Profile" />
+                                            </Link>
+                                            
+                                        </StyledMenuItem>
+
+                                        <StyledMenuItem>
+
+                                            <Link className="nav-link" onClick={this.logOut}>
+                                                <ListItemIcon>
+                                                        <ExitToAppIcon fontSize="small" />
+                                                </ListItemIcon>
+                                                <ListItemText primary="Log Out" />
+                                            </Link>
+                                            
+                                        </StyledMenuItem>
+                                    </StyledMenu>
+                                </div>
 
                             </div>
-
-
-
-
-
-
+                            
                         </div>
+
                     ) : (
                         <div className="navbar-nav ml-auto navbar-loggedOut">
                             <li className="nav-item classicNavButton-wrap">
                                 <Link to={"/login"} className="nav-link classic-button">
-                                    Login
+                                    <Button variant="contained">Login</Button>
                                 </Link>
                             </li>
                             <li className="nav-item classicNavButton-wrap">
                                 <Link to={"/register"} className="nav-link classic-button">
-                                    Sign Up
+                                    <Button variant="contained">Sign Up</Button>
                                 </Link>
                             </li>
                         </div>
@@ -120,10 +184,10 @@ class App extends Component {
                 {/* <Header /> */}
                 <div className="container mt-3">
                     <Switch>
-                        <Route exact path={["/", "/login"]} component={Login} />
+                        <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/profile" component={Profile} />
-                        <Route exact path={"/feed"} component={Feed} />
+                        <Route exact path={["/", "/feed"]} component={Feed} />
                         <Route exact path="/brew" component={NewBrew} />
                         <Route path="/user/:userId" component={UserDisplay} />
                         <Route path="/brews/:brewId" component={BrewDisplay} />
