@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
         Comment.belongsTo(models.Brew);
         Comment.belongsToMany(models.User, { through: models.CommentLike });
         Comment.belongsToMany(models.Comment, { through: models.CommentReply, as: 'Parent', foreignKey: 'parent', onDelete: 'cascade' });
-        Comment.belongsToMany(models.Comment, { through: models.CommentReply, as: 'Child', foreignKey: 'child', onDelete: 'cascade' });
+        Comment.belongsTo(models.Comment, { through: models.CommentReply, as: 'Child', foreignKey: 'child' });
     };
     
     return Comment;
