@@ -110,7 +110,7 @@ export default class Profile extends Component {
     let FollowingJSX = following.map(({ Following }) => <UserCard
       key={Following.id}
       id={Following.id}
-      username={Following.name}
+      username={Following.username}
       bio={Following.bio}
       score={Following.contributionScore}
     />) 
