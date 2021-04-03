@@ -88,6 +88,10 @@ class API {
         return this.axios.get("/api/follow/" + followID + "/" + userID);
     }
 
+    getCommentInfo(commentID) {
+        return this.axios.get("/api/comment/" + commentID);
+    }
+
     getLikedBy(commentID) {
         return this.axios.get("/api/comment-like/" + commentID);
     }

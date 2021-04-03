@@ -10,9 +10,13 @@ const FavButton = ({ brewID }) => {
 
     const [favorite, setFavorite] = useState(0);
     const [favCount, setFavCount] = useState(0);
+    const [brewAuthor, setBrewAuthor] = useState({});
     const user = AuthService.getCurrentUser();
 
     useEffect(() => {
+        API
+            .getSpecificBrew(brewID)
+            .then(data => setBrewAuthor({ id: data.data.User.id, bio: data.data.User.bio, contributionScore: data.data.User.contributionScore }));
         API
             .getFavoritedBy(brewID)
             .then(data => setFavCount(data.data.length));
@@ -27,6 +31,11 @@ const FavButton = ({ brewID }) => {
         let countHolder = favCount;
         countHolder += 1;
         setFavCount(countHolder);
+
+        let scoreHolder = brewAuthor.contributionScore;
+        scoreHolder += 5;
+        setBrewAuthor({ id: brewAuthor.id, bio: brewAuthor.bio, contributionScore: scoreHolder });
+        API.updateUser(brewAuthor.id, brewAuthor.bio, scoreHolder);
     };
 
     const delFav = () => {
@@ -35,6 +44,11 @@ const FavButton = ({ brewID }) => {
         let countHolder = favCount;
         countHolder -= 1;
         setFavCount(countHolder);
+
+        let scoreHolder = brewAuthor.contributionScore;
+        scoreHolder -= 5;
+        setBrewAuthor({ id: brewAuthor.id, bio: brewAuthor.bio, contributionScore: scoreHolder });
+        API.updateUser(brewAuthor.id, brewAuthor.bio, scoreHolder);
     };
 
     const renderFavCount = count => {
