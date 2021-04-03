@@ -7,8 +7,8 @@ import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
 import CheckIcon from '@material-ui/icons/Check';
 import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core';
-/* import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
 import CreateIcon from '@material-ui/icons/Create';
+/* import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
 import StarIcon from '@material-ui/icons/Star'; */
 
 export default class Profile extends Component {

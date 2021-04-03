@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import Feed from "../Feed/Feed";
 import Footer from "../../components/Footer/index";
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Avatar from '@material-ui/core/Avatar';
 import { Link } from 'react-router-dom';
 import { isEmail } from "validator";
 import "./style.css";
@@ -132,11 +135,11 @@ export default class Register extends Component {
     return (
       <div className="flexWrap" id="Register">
         <div>
-          <img
-            src="./logo.png"
-            alt="logo"
-            className="logo"
-          />
+          <Avatar 
+              alt="" 
+              src="/logo.png" 
+              className="logo"
+            />
 
           <Form
             onSubmit={this.handleRegister}
@@ -146,44 +149,64 @@ export default class Register extends Component {
           >
             {!this.state.successful && (
               <div>
-                <div>
-                  <Input
-                    type="text"
-                    className=""
-                    name="username"
-                    placeholder="username"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}
-                    validations={[required, vusername]}
-                  />
+
+                <div className="inputWrapper">
+
+                    <TextField 
+                      id="outlined-basic" 
+                      variant="outlined" 
+                      type="text"
+                      className=""
+                      name="username"
+                      placeholder="username"
+                      value={this.state.username}
+                      onChange={this.onChangeUsername}
+                      validations={[required, vusername]}
+                    />
+
                 </div>
 
-                <div>
-                  <Input
-                    type="text"
-                    className=""
-                    name="email"
-                    placeholder="email"
-                    value={this.state.email}
-                    onChange={this.onChangeEmail}
-                    validations={[required, email]}
-                  />
+                <div className="inputWrapper">
+
+                    <TextField 
+                      id="outlined-basic" 
+                      variant="outlined" 
+                      type="text"
+                      className=""
+                      name="email"
+                      placeholder="email"
+                      value={this.state.email}
+                      onChange={this.onChangeEmail}
+                      validations={[required, email]}
+                    />
+
                 </div>
 
-                <div>
-                  <Input
-                    type="password"
-                    className=""
-                    name="password"
-                    placeholder="password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    validations={[required, vpassword]}
-                  />
+                <div className="inputWrapper">
+
+                    <TextField 
+                      id="outlined-basic" 
+                      variant="outlined" 
+                      type="password"
+                      className=""
+                      name="password"
+                      placeholder="password"
+                      value={this.state.password}
+                      onChange={this.onChangePassword}
+                      validations={[required, vpassword]}
+                    />
+
                 </div>
 
                 <div className="form-group">
-                  <button className="btn">Sign Up</button>
+
+                  <Button 
+                    variant="contained"
+                    className=""
+                    className="btn">
+                      Sign Up
+                  </Button>
+
                 </div>
               </div>
             )}
@@ -210,9 +233,9 @@ export default class Register extends Component {
             />
           </Form>
 
-          <p>
+          <Typography variant="body1" gutterBottom>
             Already have an account? <Link to="/login">Log In</Link>
-          </p>
+          </Typography>
 
           <Footer />
 
