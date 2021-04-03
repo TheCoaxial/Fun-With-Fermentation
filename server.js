@@ -32,7 +32,7 @@ require("./controller/api-routes")(app);
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
 
-db.sequelize.sync({force:true }).then(() => {
+db.sequelize.sync({}).then(() => {
   app.listen(PORT, () => {
     console.log(`server is listening http://localhost:${PORT}`);
   });

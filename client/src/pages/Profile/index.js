@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AuthService from "../../services/auth.service";
 import ls from 'local-storage';
 import API from "../../utils/api";
+import PlaceHolderCard from "../../components/PlaceHolderCard/PlaceHolderCard";
 import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
@@ -207,7 +208,14 @@ export default class Profile extends Component {
                       <Typography gutterBottom variant="h5" component="h1">
                           Following
                       </Typography>
-                      {FollowingJSX}
+                      {this.state.following[0] ? (FollowingJSX) 
+                      :
+                      <PlaceHolderCard
+                        mockTitle= "People You Follow"
+                        description="This is where you'll find all the profiles 
+                        that you follow!"
+                      >
+                      </PlaceHolderCard> }
                   </div>
                 </Grid>
                 
@@ -216,14 +224,28 @@ export default class Profile extends Component {
                     <Typography gutterBottom variant="h5" component="h1">
                         Last Viewed Profiles:
                     </Typography>
-                {LastViewedJSX}
+                {this.state.visitedPages[0] ? (LastViewedJSX) 
+                :
+                <PlaceHolderCard
+                        mockTitle= "Profiles you've seen"
+                        description="This is where you'll find all the profiles 
+                        you've visited today!"
+                      >
+                </PlaceHolderCard> }
                   </div>
 
                   <div className="miniFeedWrap">
                       <Typography gutterBottom variant="h5" component="h1">
                           Top Recipes
                       </Typography>
-                      {BrewsJSX}
+                      {this.state.brews[0] ? (BrewsJSX) 
+                      : 
+                      (<PlaceHolderCard
+                        mockTitle= "Uploaded Brews"
+                        description="This is where you'll find all the information
+                        about all the brews that you upload!"
+                      >
+                     </PlaceHolderCard>) }
                   </div>
                 </Grid>
 
@@ -232,7 +254,13 @@ export default class Profile extends Component {
                         <Typography gutterBottom variant="h5" component="h1">
                             Favorite Brews
                         </Typography>
-                        {FavBrewsJSX}
+                        {this.state.userFav[0] ? (FavBrewsJSX) :
+                         (<PlaceHolderCard
+                            mockTitle= "Favorite Brews"
+                            description="This is where you'll find all the information
+                            about all the brews that you favorite!"
+                          >
+                         </PlaceHolderCard>) }  
                     </div>
                 </Grid>
             </Grid>
