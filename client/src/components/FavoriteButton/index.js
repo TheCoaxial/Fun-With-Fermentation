@@ -35,13 +35,13 @@ const FavButton = ({ brewID }) => {
         setFavCount(countHolder);
     };
 
-    const renderFavCount = (count) => {
+    const renderFavCount = count => {
         return(
             <div>{ count }</div>
         );
     };
 
-    const renderFavButton = (isFav) => {
+    const renderFavButton = isFav => {
         return(
           <div>
               { renderFavCount(favCount) }
