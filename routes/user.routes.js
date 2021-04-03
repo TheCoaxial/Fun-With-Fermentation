@@ -1,6 +1,3 @@
-const { authJwt } = require("../middleware");
-const controller = require("../controller/user.controller");
-
 module.exports = function(app) {
   app.use(function(req, res, next) {
     res.header(
@@ -9,13 +6,4 @@ module.exports = function(app) {
     );
     next();
   });
-
-  //Test Routes
-  app.get("/api/test/all", controller.allAccess);
-  app.get(
-    "/api/test/user",
-    [authJwt.verifyToken],
-    controller.userBoard
-  );
-
 };

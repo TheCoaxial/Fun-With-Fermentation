@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import ls from 'local-storage';
 
 const API_URL = "/api/auth/";
 
@@ -9,19 +9,21 @@ class AuthService {
          .post(API_URL + "signin", {
              username,
              password
-             
-         } )
+            })
          .then(response => { 
              if (response.data.accessToken) {
-                 localStorage.setItem("user", JSON.stringify(response.data)); 
+                 ls.set("user", JSON.stringify(response.data)); 
              }
              return response.data;
          });
     }
 
+    // As a call out, I know removing the recently visited key from
+    // local storage on a logout isn't a great UX decision but, it does eliminate
+    // some possible crashes that I ran out of time to contend with
     logout(){
-        localStorage.removeItem("user");
-        
+        ls.remove("user"); 
+        ls.remove("visited");
     }
 
     register(username, email, password) {
@@ -30,14 +32,17 @@ class AuthService {
             username,
             email,
             password
-        });
+        })   
     }
-
+ 
     getCurrentUser() {
-        
-        
-        return JSON.parse(localStorage.getItem("user"));
-        
+    
+        try{
+            return JSON.parse(ls.get("user"));
+        }
+        catch{
+            console.log("failed to getCurrentUser")
+        }      
     }
 
 

@@ -1,3 +1,5 @@
+// Original code by BezKoder(https://github.com/bezkoder/react-jwt-auth) 
+// Extended/modified by Cory Scanlon
 import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -23,17 +25,17 @@ const required = value => {
   }
 };
 
-const email = value => {
+const verifyEmail = value => {
   if (!isEmail(value)) {
     return (
       <div className="" role="alert">
-        This is not a valid email.
+        Please enter a valid email.
       </div>
     );
   }
 };
 
-const vusername = value => {
+const veryifyUsername = value => {
   if (value.length < 4 || value.length > 20) {
     return (
       <div className="" role="alert">
@@ -43,11 +45,11 @@ const vusername = value => {
   }
 };
 
-const vpassword = value => {
-  if (value.length < 6 || value.length > 40) {
+const verifyPassword = value => {
+  if (value.length < 5 || value.length > 30) {
     return (
       <div className="" role="alert">
-        The password must be between 6 and 40 characters.
+        The password must be between 5 and 30 characters.
       </div>
     );
   }
@@ -65,16 +67,36 @@ export default class Register extends Component {
         message: ""
     };
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
+    this.onChangeEmail = this.onChangeEmail.bind(this);
 
-    this.handleRegister = this.handleRegister.bind(this);
+    this.onChangeUsername = this.onChangeUsername.bind(this);
 
     this.onChangePassword = this.onChangePassword.bind(this);
 
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    
+    this.handleRegister = this.handleRegister.bind(this);
 
-   
+  }
+
+   logincall = function(username, password) {
+    
+    AuthService.login(username, password).then(
+      () => {
+        this.props.history.push("/profile");
+        window.location.reload();
+      },
+      error => { 
+        const resMsg =
+          (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+          error.toString();
+  
+        this.setState({
+              loading: false,
+              message: resMsg
+          });
+      }
+    );
   }
 
   onChangeUsername(event) {
@@ -100,35 +122,37 @@ export default class Register extends Component {
 
     this.setState({
       message: "",
-      successful: false
+      successful: false 
     });
-
-    this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.register(
         this.state.username,
         this.state.email,
         this.state.password
-      ).then(
+      )
+      .then(
         response => {
+          this.logincall(response.data.username, this.state.password)
           this.setState({
             message: response.data.message,
             successful: true
-          });
+          }, console.log("Message ",response.data));
         },
         error => {
-          const resMessage =
+          const resMsg =
             error.message ||
             error.toString();
 
           this.setState({
             successful: false,
-            message: resMessage
+            message: resMsg
           });
-        }
-      );
+        } 
+      )
+     
     }
+    this.form.validateAll();
   }
 
   render() {
@@ -149,60 +173,47 @@ export default class Register extends Component {
           >
             {!this.state.successful && (
               <div>
-
-                <div className="inputWrapper">
-
-                    <TextField 
-                      id="outlined-basic" 
-                      variant="outlined" 
-                      type="text"
-                      className=""
-                      name="username"
-                      placeholder="username"
-                      value={this.state.username}
-                      onChange={this.onChangeUsername}
-                      validations={[required, vusername]}
-                    />
-
+                <div>
+                  <Input
+                    type="text"
+                    className=""
+                    name="username"
+                    placeholder="username"
+                    value={this.state.username}
+                    onChange={this.onChangeUsername}
+                    validations={[required, veryifyUsername]}
+                  />
                 </div>
 
-                <div className="inputWrapper">
-
-                    <TextField 
-                      id="outlined-basic" 
-                      variant="outlined" 
-                      type="text"
-                      className=""
-                      name="email"
-                      placeholder="email"
-                      value={this.state.email}
-                      onChange={this.onChangeEmail}
-                      validations={[required, email]}
-                    />
-
+                <div>
+                  <Input
+                    type="text"
+                    className=""
+                    name="email"
+                    placeholder="email"
+                    value={this.state.email}
+                    onChange={this.onChangeEmail}
+                    validations={[required, verifyEmail]}
+                  />
                 </div>
 
-                <div className="inputWrapper">
-
-                    <TextField 
-                      id="outlined-basic" 
-                      variant="outlined" 
-                      type="password"
-                      className=""
-                      name="password"
-                      placeholder="password"
-                      value={this.state.password}
-                      onChange={this.onChangePassword}
-                      validations={[required, vpassword]}
-                    />
-
+                <div>
+                  <Input
+                    type="password"
+                    className=""
+                    name="password"
+                    placeholder="password"
+                    value={this.state.password}
+                    onChange={this.onChangePassword}
+                    validations={[required, verifyPassword]}
+                  />
                 </div>
 
                 <div className="form-group">
 
                   <Button 
                     variant="contained"
-                    className=""
+                    type="submit"
                     className="btn">
                       Sign Up
                   </Button>
