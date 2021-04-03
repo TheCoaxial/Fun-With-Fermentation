@@ -10,7 +10,7 @@ import List from '@material-ui/core/List';
 import Timeline from '@material-ui/lab/Timeline';
 import { makeStyles } from '@material-ui/core/styles';
 import "./styles.css"
-import authService from '../../services/auth.service.js';
+import AuthService from '../../services/auth.service.js';
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FacebookShare from "../../components/ShareButtons/FacebookShare";
@@ -170,7 +170,7 @@ export default function BrewDisplay() {
                 <div id="commentSection">
 
                 <form onSubmit={(event) => {
-                        let { id, username } = authService.getCurrentUser();
+                        let { id, username } = AuthService.getCurrentUser();
 
                         API.postComment(id, brewId, username, commentInput);
                     }}>

@@ -35,6 +35,7 @@ module.exports = function (sequelize, DataTypes) {
         Brew.hasMany(models.Comment, { onDelete: 'cascade' });
         Brew.hasMany(models.Step, { onDelete: 'cascade' });
         Brew.belongsTo(models.User);
+        Brew.belongsToMany(models.User, { through: models.Rating });
         Brew.belongsToMany(models.User, { through: models.Favorite });
         Brew.belongsToMany(models.Tag, { through: 'BrewTags' });
     };
