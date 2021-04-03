@@ -80,6 +80,10 @@ class API {
         return this.axios.get("/api/follow/" + userID);
     }
 
+    getFollowers(followID) {
+        return this.axios.get("/api/followers/" + followID);
+    }
+
     getSpecificFollowed(userID, followID) {
         return this.axios.get("/api/follow/" + followID + "/" + userID);
     }

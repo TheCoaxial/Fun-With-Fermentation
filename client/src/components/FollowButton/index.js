@@ -7,10 +7,13 @@ import API from "../../utils/api";
 const FollowButton = ({ followID }) => {
 
     const [follow, setFollow] = useState(0);
-
+    const [followCount, setFollowCount] = useState(0);
     const user = AuthService.getCurrentUser();
 
     useEffect(() => {
+        API
+            .getFollowers(followID)
+            .then(data => setFollowCount(data.data.length));
         API
             .getSpecificFollowed(user.id, followID)
             .then(data => setFollow(data.data.length));
@@ -19,16 +22,29 @@ const FollowButton = ({ followID }) => {
     const addFollow = () => {
         API.newFollow(followID, user.id);
         setFollow(1);
+        let countHolder = followCount;
+        countHolder += 1;
+        setFollowCount(countHolder);
     };
 
     const delFollow = () => {
         API.deleteFollow(followID, user.id);
         setFollow(0);
+        let countHolder = followCount;
+        countHolder -= 1;
+        setFollowCount(countHolder);
     };
 
-    const renderFollowButton = (isFollow) => {
+    const renderFollowCount = count => {
+        return(
+            <div>{ count }</div>
+        )
+    }
+
+    const renderFollowButton = isFollow => {
         return(
           <div>
+              { renderFollowCount(followCount) }
               { isFollow ? (
                   <IconButton aria-label="remove from favorites" onClick={delFollow}>
                       <Remove />

@@ -173,6 +173,21 @@ module.exports = function (app) {
             });
     });
 
+    // Get All Followers
+    app.get("/api/followers/:followingId", ({ params }, res) => {
+        db.Follow
+            .findAll({
+                where: { following: params.followingId }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
     // Get One Following
     app.get("/api/follow/:followingId/:userId", (req, res) => {
         db.Follow
