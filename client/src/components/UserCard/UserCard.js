@@ -32,16 +32,21 @@ export default function UserCard({ id ,username, bio, newBrew, score }) {
                         title="User Avatar"
                     />
                     <CardContent>
-                        <Link to={`/user/${id}`}>
+                        
                             <div className="flexWrap-horizontal">
                                 <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" />
                                 <div className="text-verticalAlign">
+                                <Link to={`/user/${id}`}>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         {username}
                                     </Typography>
+                                </Link>
+                                    <Typography gutterBottom  component="p" className="bio">
+                                        {bio}
+                                    </Typography>
                                 </div>
                             </div>
-                        </Link>
+                        
                         <Typography variant="body2" color="textSecondary" component="p">
                             Score: {score}
                         </Typography>

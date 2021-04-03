@@ -50,6 +50,7 @@ export default function Feed() {
         author={brew.author}
         id={brew.id}
         UserId={brew.UserId} />);
+    feedBrewsJSX.splice(10);
 
     topUsersJSX = sortedUsers.map(user => <UserCard
         key={user.id}
@@ -57,32 +58,10 @@ export default function Feed() {
         bio={user.bio}
         score={user.contributionScore}
         id={user.id} />);
+    topUsersJSX.splice(5);
 
 
     return (
-        // <div id="Feed">
-
-        //     <div className="feedWrap">
-        //         <div className="mainFeed">
-        //             {feedBrewsJSX}
-        //         </div>
-
-        //         <div className="sidebarWrap">
-        //             <div className="popularRecipesFeed">
-        //                 <div className="sidebarHeader"><h2>Active Brews</h2></div>
-        //                 {feedBrewsJSX}
-        //                 <div className="sidebarFooter"></div>
-        //             </div>
-
-        //             <div className="popularUsersFeed">
-
-        //                 <div className="sidebarHeader"><h2>Active Users</h2></div>
-        //                 {topUsersJSX}
-        //                 <div className="sidebarFooter"></div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
 
         <div id="Feed">
 
@@ -94,15 +73,11 @@ export default function Feed() {
                         </Typography>
                         {topUsersJSX}
                     </div>
-
-                    <div className="innerSidebarWrap">
-                        <Typography gutterBottom variant="h5" component="h1">
-                            Top Recipes
-                        </Typography>
-                        {feedBrewsJSX}
-                    </div>
                 </Grid>
                 <Grid item xs={8}>
+                    <Typography gutterBottom variant="h5" component="h1">
+                        Top Recipes
+                        </Typography>
                     {feedBrewsJSX}
                 </Grid>
 
@@ -112,9 +87,4 @@ export default function Feed() {
             <SearchBar />
         </div>
     )
-    // } else {
-    //    <div>
-    //        <h1>No Token, No entry</h1>
-    //    </div>
-    // }
 }

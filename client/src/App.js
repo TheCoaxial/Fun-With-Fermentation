@@ -5,7 +5,6 @@ import Footer from "./components/Footer";
 import './App.css';
 import ls from 'local-storage'
 import AuthService from "./services/auth.service";
-
 import Feed from "./pages/Feed/Feed";
 import Login from "./pages/login";
 import Register from "./pages/register";
@@ -18,8 +17,6 @@ import UserDisplay from "./pages/UserDisplay";
 import BrewDisplay from "./pages/BrewDisplay";
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
 import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';

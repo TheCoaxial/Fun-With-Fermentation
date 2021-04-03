@@ -10,9 +10,17 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:3001"
+let corsOptions = {
+  origin: "https://salty-sea-99414.herokuapp.com/"
 };
+
+if (process.env.NODE_ENV !== "production") {
+  corsOptions = {
+    origin: "http://localhost:3001"
+  };
+
+}
+
 
 const db = require("./models");
 
@@ -25,14 +33,18 @@ app.get("/", (req, res) => {
   res.json({ message: "Test route" });
 });
 
-const PORT = process.env.EXPRESS_PORT || 3001;
+let PORT = process.env.EXPRESS_PORT || 3001;
+
+if (process.env.NODE_ENV === "production") {
+  PORT = process.env.PORT;
+}
 
 //routes
 require("./controller/api-routes")(app);
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
 
-db.sequelize.sync({force:true }).then(() => {
+db.sequelize.sync({}).then(() => {
   app.listen(PORT, () => {
     console.log(`server is listening http://localhost:${PORT}`);
   });

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "./style.css";
 import { fade, makeStyles, withStyles } from '@material-ui/core/styles';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import UserCard from '../UserCard/UserCard';
@@ -174,51 +175,38 @@ export default function SearchBar() {
   }
 
   return (
-    <div className={classes.grow}>
-      <form onSubmit={handleSubmit}>
-        <div className={classes.search}>
+    <div className={classes.grow} id="searchWrapper">
+      <h2>Search Brews or Users</h2>
+      <form onSubmit={handleSubmit} id="searchInputs">
+        <div className={classes.search} id="searchBox">
           <div className={classes.searchIcon}>
             <SearchIcon />
           </div>
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ 'aria-label': 'search' }}
-            onChange={handleSearchChange}
-          />
+          <div id="searchBoxVerticalAlign">
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={handleSearchChange}
+            />
+          </div>
         </div>
-        {/* <InputLabel id="difficulty-select-label">Difficulty</InputLabel>
-        <Select
-          labelId="difficulty-select-label"
-          id="difficulty-select"
-          value={difficulty}
-          onChange={handleDifficultyChange}
-          input={<BootstrapInput />}
-        >
-          <MenuItem value={""}>
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"Beginner"}>Beginner</MenuItem>
-          <MenuItem value={"Intermediate"}>Intermediate</MenuItem>
-          <MenuItem value={"Expert"}>Expert</MenuItem>
-          <MenuItem value={"Unknown"}>Unknown</MenuItem>
-        </Select> */}
-
-        <InputLabel id="type-select-label">Search Type</InputLabel>
-        <Select
-          labelId="type-select-label"
-          id="type-select"
-          value={searchType}
-          onChange={handleTypeChange}
-          input={<BootstrapInput />}
-        >
-          <MenuItem value={"Ingredient"}>Ingredient</MenuItem>
-          <MenuItem value={"Brew"}>Brew</MenuItem>
-          <MenuItem value={"User"}>User</MenuItem>
-        </Select>
+        <div className="searchTypeWrapper">
+          {/* <InputLabel id="type-select-label">Search Type</InputLabel> */}
+          <Select
+            labelId="type-select-label"
+            id="type-select"
+            value={searchType}
+            onChange={handleTypeChange}
+            input={<BootstrapInput />}>
+            <MenuItem value={"Ingredient"}>Ingredient</MenuItem>
+            <MenuItem value={"Brew"}>Brew</MenuItem>
+            <MenuItem value={"User"}>User</MenuItem>
+          </Select>
+        </div>
         <Button type="submit">Search</Button>
       </form>
       <div id="search-results">
