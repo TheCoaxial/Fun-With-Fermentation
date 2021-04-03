@@ -7,16 +7,21 @@ async function insertData() {
     /**
      * Users
      */
-    let user1Token = await insertUser("Username1", "username1@email.com", "unhashedpassword");
-    let user2Token = await insertUser("Username2", "username2@email.com", "unhashedpassword");
-    let user3Token = await insertUser("Username3", "username3@email.com", "unhashedpassword");
+    await insertUser("Ehrman", "username1@email.com", "unhashedpassword");
+    await insertUser("UsernamePerson", "username2@email.com", "unhashedpassword");
+    await insertUser("brewguy", "username3@email.com", "unhashedpassword");
+    await insertUser("soccerlover774", "username4@email.com", "unhashedpassword");
+    await insertUser("qwerty", "username5@email.com", "unhashedpassword");
+    await insertUser("reddituser72", "username6@email.com", "unhashedpassword");
 
     /**
      * Brews
      */
-    await insertBrew("Username1's first Brew", "Username1", 1);
-    await insertBrew("Username1's second Brew", "Username1", 1);
-    await insertBrew("Username2's first Brew", "Username2", 2);
+    await insertBrew("Username1's first Brew", "Ehrman", 1);
+    await insertBrew("Username1's second Brew", "Ehrman", 1);
+    await insertBrew("Username2's first Brew", "UsernamePerson", 2);
+    await insertBrew("pineapple Brew", "soccerlover774", 4);
+    await insertBrew("beginner brew", "reddituser72", 6);
 
     await editUser({
         bio: "Hello I am the first user.",
@@ -33,55 +38,79 @@ async function insertData() {
 
     await editBrew({
         description: "This is my brew description.",
-        name: "Brew 1",
+        name: "ehrman brew 1",
         difficulty: "expert"
     }, 1);
     await editBrew({
         description: "This is my brew description.",
-        name: "Brew 2",
+        name: "ehrman brew 2",
         difficulty: "beginner"
     }, 2);
     await editBrew({
         description: "This is my brew description.",
-        name: "Brew 3",
+        name: "username persons brew",
         difficulty: "intermediate"
     }, 3);
+    await editBrew({
+        description: "This is my brew description.",
+        difficulty: "expert"
+    }, 4);
+    await editBrew({
+        description: "This is my brew description.",
+        difficulty: "beginner"
+    }, 5);
+    await editBrew({
+        description: "This is my brew description.",
+        difficulty: "beginner"
+    }, 6);
 
 
 
     /**
    * Comments
    */
-    await insertComment("WOW INCREDIBLE", "Username1", 1, 3);
-    await insertComment("This Is my brew", "Username1", 1, 2);
-    await insertComment("This Is Username3's comment", "Username3", 3, 1);
+    await insertComment("WOW INCREDIBLE", "Ehrman", 1, 3);
+    await insertComment("This Is my brew", "Ehrman", 1, 2);
+    await insertComment("This Is Username3's comment", "brewguy", 3, 1);
+    await insertComment("This was actually very difficult you lied", "brewguy", 3, 6);
+    await insertComment("You copied my recipe!", "UsernamePerson", 2, 4);
+    await insertComment("You ALSO copied my recipe!", "UsernamePerson", 2, 5);
 
     await editComment({
-        body: "new comment 1"
+        body: "This Is my brew"
     }, 1);
 
     await editComment({
-        body: "new comment 2"
+        body: "WOW INCREDIBLE"
     }, 2);
 
     await editComment({
-        body: "new comment 3"
+        body: "new This Is Username3's comment 3"
     }, 3);
 
     /**
     * Ingredients
     */
-    await insertIngredient("ingredient1", 5, "Oz", 1);
-    await insertIngredient("ingredient2", 10, "lb", 1);
-    await insertIngredient("ingredient3", 13, "teaspoon", 1);
+    await insertIngredient("potatos", 5, "Oz", 1);
+    await insertIngredient("salad dressing", 10, "lb", 1);
+    await insertIngredient("lettuce", 13, "teaspoon", 1);
 
-    await insertIngredient("ingredient1", 6, "cups", 2);
+    await insertIngredient("pineapple", 6, "cups", 2);
     await insertIngredient("ingredient2", 11, "ml", 2);
     await insertIngredient("ingredient3", 14, "pinch", 2);
 
-    await insertIngredient("ingredient1", 7, "pint", 3);
+    await insertIngredient("alcohol", 7, "pint", 3);
     await insertIngredient("ingredient2", 13, "fluid ounce", 3);
-    await insertIngredient("ingredient3", 17, "gallon", 3);
+    await insertIngredient("bees", 17, "gallon", 3);
+
+
+    await insertIngredient("alcohol", 7, "pint", 4);
+    await insertIngredient("ingredient2", 13, "fluid ounce", 4);
+    await insertIngredient("bees", 17, "gallon", 4);
+
+    await insertIngredient("alcohol", 7, "pint", 5);
+    await insertIngredient("ingredient2", 13, "fluid ounce", 5);
+    await insertIngredient("bees", 17, "gallon", 5);
 
     await editIngredient({
         name: "edited ingredient2",
@@ -103,6 +132,20 @@ async function insertData() {
     await insertStep(25, "instruction 1 brew 3", 3);
     await insertStep(200, "instruction 2 brew 3", 3);
     await insertStep(50, "instruction 3 brew 3", 3);
+
+    await insertStep(25, "instruction 1 brew 3", 4);
+    await insertStep(200, "instruction 2 brew 3", 4);
+    await insertStep(50, "instruction 3 brew 3", 4);
+
+
+    await insertStep(25, "instruction 1 brew 3", 5);
+    await insertStep(200, "instruction 2 brew 3", 5);
+    await insertStep(50, "instruction 3 brew 3", 5);
+
+
+    await insertStep(25, "instruction 1 brew 3", 6);
+    await insertStep(200, "instruction 2 brew 3", 6);
+    await insertStep(50, "instruction 3 brew 3", 6);
 
     await editStep({
         duration: 9000,
