@@ -11,7 +11,7 @@ const cors = require("cors");
 const app = express();
 
 let corsOptions = {
-  origin: "https://salty-sea-99414.herokuapp.com/"
+  origin: "https://salty-sea-99414.herokuapp.com"
 };
 
 if (process.env.NODE_ENV !== "production") {
