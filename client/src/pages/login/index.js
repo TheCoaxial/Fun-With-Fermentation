@@ -1,3 +1,5 @@
+// Original code by BezKoder(https://github.com/bezkoder/react-jwt-auth) 
+// Extended/modified by Cory Scanlon
 import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -63,7 +65,7 @@ export default class Login extends Component {
           window.location.reload();
         },
         error => {
-          const resMessage =
+          const resMsg =
             (error.response &&
             error.response.data &&
             error.response.data.message) ||
@@ -71,7 +73,7 @@ export default class Login extends Component {
 
           this.setState({
                 loading: false,
-                message: resMessage
+                message: resMsg
             });
         }
       );
