@@ -7,19 +7,16 @@ const GuestRoute = ({ component: Component, children, redirectTo = "/", ...props
 
     const render = ({ location }) => (
         isAuth
-        
             ? <Redirect to={{ pathname: redirectTo, state: { from: location } }} />
-            
             : (Component ? <Component /> : children)
     );
 
     return (
         <Route
-          {...props}
-          render={render}
+            {...props}
+            render={render}
         />
     );
-
 }
 
 export default GuestRoute;

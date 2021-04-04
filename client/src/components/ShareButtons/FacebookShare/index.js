@@ -1,7 +1,6 @@
 import React from "react";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import { FacebookButton } from "react-social";
-import "./style.css";
 
 const FacebookShare = () => {
     return (

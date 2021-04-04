@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import AuthService from "../../services/auth.service.js";
 import "./style.css";
 import API from '../../utils/api.js';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import InputLabel from '@material-ui/core/InputLabel';
-import NativeSelect from '@material-ui/core/NativeSelect';
+import { TextField, Button, InputLabel, NativeSelect } from "@material-ui/core";
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 
 class NewBrew extends Component {
