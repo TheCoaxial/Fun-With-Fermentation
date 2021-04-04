@@ -3,10 +3,12 @@ import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import UserCard from "../../components/UserCard/UserCard"
 import API from "../../utils/api";
 import "./Feed.css";
+import ls from 'local-storage';
 import "../../App.css";
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
 import SearchBar from "../../components/SearchBar";
+import { Redirect } from "react-router-dom";
 
 export default function Feed() {
 
@@ -60,7 +62,7 @@ export default function Feed() {
         id={user.id} />);
     topUsersJSX.splice(5);
 
-
+    if(ls.get("user")){
     return (
 
         <div id="Feed">
@@ -87,4 +89,5 @@ export default function Feed() {
             <SearchBar />
         </div>
     )
+    } else{ return <Redirect to="/" /> }
 }

@@ -40,9 +40,9 @@ export default function Navbar({ currentUser }) {
                             </li>
 
                             <li className="nav-item">
-                                <a href="https://salty-dawn-64372.herokuapp.com/" className="nav-link" onClick={() => {
+                                <a href="http://localhost:3000/" className="nav-link" onClick={() => {
                                     authService.logout();
-                                    this.props.history.push("https://salty-dawn-64372.herokuapp.com/");
+                                    this.props.history.push("http://localhost:3000/");
                                 }}>
                                     Log Out
                     </a>
