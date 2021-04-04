@@ -28,7 +28,6 @@ export default class Profile extends Component {
       visitedIds: ls.get('visited') || [],
       visitedPages: []
     };
-
   }
 
   componentDidMount() {
@@ -51,10 +50,7 @@ export default class Profile extends Component {
 
     API
         .getUserBrews(this.state.currentUser.id)
-        .then(res => {
-            console.log(" userBrews", res.data);
-            this.setState({ brews: res.data });
-        });
+        .then(res => this.setState({ brews: res.data }));
 
     API
         .getUserFollowing(this.state.currentUser.id)
@@ -85,12 +81,11 @@ export default class Profile extends Component {
 
     let collectedData = [];
     uniqueIds.forEach(Ids => {
-      console.log("ids", uniqueIds);
+/*       console.log("ids", uniqueIds); */
       API.getUserProfile(Ids)
         .then(res => {
-
           collectedData.push(res);
-          console.log("data", collectedData)
+/*           console.log("data", collectedData) */
           this.setState({ visitedPages: collectedData })
         });
     })
@@ -105,11 +100,13 @@ export default class Profile extends Component {
     const following = this.state.following;
 
     let BrewsJSX = brews.map(brew => <RecipeCard
+      key={brew.id}
       id={brew.id}
       name={brew.name}
       description={brew.description}
       author={brew.author}
-      UserId={brew.UserId} />);
+      UserId={brew.UserId}
+    />);
 
     let FollowingJSX = following.map(({ Following }) => <UserCard
       key={Following.id}
@@ -117,17 +114,16 @@ export default class Profile extends Component {
       username={Following.name}
       bio={Following.bio}
       score={Following.contributionScore}
-    />) 
-    console.log("following", following)
+    />);
 
-    let LastViewedJSX = pages.map(person => 
-    <UserCard
+    let LastViewedJSX = pages.map(person => <UserCard
+      key={person.data[0].id}
       id={person.data[0].id}
       username={person.data[0].username}
       bio={person.data[0].bio}
       score={person.data[0].contributionScore}
-    /> )
-    //console.log("lastviewed", LastViewedJSX); 
+    />);
+    LastViewedJSX.splice(3);
     
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       key={Brew.id}
@@ -182,7 +178,7 @@ export default class Profile extends Component {
     return (
         <div id="Profile">
             <Grid container spacing={3}>
-                <Grid item xs={4} className="sidebarWrap">
+                <Grid item lg={3} sm={12} className="sidebarWrap">
                       <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
                   <Typography variant="h2" align="center" id="userName">
                       {this.state.currentUser.username}
@@ -208,56 +204,41 @@ export default class Profile extends Component {
                         </span>
                     </Typography>
                   </div> 
-
                   <div className="miniFeedWrap">
-                      <Typography gutterBottom variant="h5" component="h1">
-                          Following
-                      </Typography>
-                      {this.state.following[0] ? (FollowingJSX) 
-                      :
-                      <PlaceHolderCard
-                        mockTitle= "People You Follow"
-                        description="This is where you'll find all the profiles 
-                        that you follow!"
-                      >
-                      </PlaceHolderCard> }
-                  </div>
-                </Grid>
-                
-                <Grid item xs={4}>
-                  <div className="miniFeedWrap">
-                    <Typography gutterBottom variant="h5" component="h1">
-                        Last Viewed Profiles:
-                    </Typography>
-                {this.state.visitedPages[0] ? (LastViewedJSX) 
-                :
-                <PlaceHolderCard
-                        mockTitle= "Profiles you've seen"
-                        description="This is where you'll find all the profiles 
-                        you've visited today!"
-                      >
-                </PlaceHolderCard> }
-                  </div>
-
-                  <div className="miniFeedWrap">
-                      <Typography gutterBottom variant="h5" component="h1">
-                          Top Recipes
-                      </Typography>
-                      {this.state.brews[0] ? (BrewsJSX) 
-                      : 
-                      (<PlaceHolderCard
-                        mockTitle= "Uploaded Brews"
-                        description="This is where you'll find all the information
-                        about all the brews that you upload!"
-                      >
-                     </PlaceHolderCard>) }
-                  </div>
+                        <Typography gutterBottom variant="h5" component="h1">
+                            Recently Viewed Profiles:
+                        </Typography>
+                        {this.state.visitedPages[0] ? (LastViewedJSX) 
+                        :
+                        <PlaceHolderCard
+                            mockTitle= "Profiles you've seen"
+                            description="This is where you'll find all the profiles 
+                            you've visited today!"
+                        >
+                        </PlaceHolderCard> }
+                    </div>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item lg={3} sm={12}>
+                    <div className="miniFeedWrap">
+                          <Typography gutterBottom variant="h5" component="h1">
+                              Following
+                          </Typography>
+                          {this.state.following[0] ? (FollowingJSX) 
+                          :
+                          <PlaceHolderCard
+                              mockTitle= "People You Follow"
+                              description="This is where you'll find all the profiles 
+                              that you follow!"
+                          >
+                          </PlaceHolderCard> }
+                    </div>
+                </Grid>
+
+                <Grid item lg={3} sm={12}>
                     <div className="miniFeedWrap">
                         <Typography gutterBottom variant="h5" component="h1">
-                            Favorite Brews
+                            Saved Brews
                         </Typography>
                         {this.state.userFav[0] ? (FavBrewsJSX) :
                          (<PlaceHolderCard
@@ -266,6 +247,21 @@ export default class Profile extends Component {
                             about all the brews that you favorite!"
                           >
                          </PlaceHolderCard>) }  
+                    </div>
+                </Grid>
+                <Grid item lg={3} sm={12}>
+                    <div className="miniFeedWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                            My Brews
+                        </Typography>
+                        {this.state.brews[0] ? (BrewsJSX) 
+                        : 
+                        (<PlaceHolderCard
+                          mockTitle= "Uploaded Brews"
+                          description="This is where you'll find all the information
+                          about all the brews that you upload!"
+                        >
+                      </PlaceHolderCard>) }
                     </div>
                 </Grid>
             </Grid>

@@ -4,10 +4,10 @@ import API from '../../utils/api';
 import Comment from '../../components/Comment/comment';
 import Ingredient from "../../components/Ingredient";
 import Step from "../../components/Step";
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
+
 import ls from 'local-storage';
-import List from '@material-ui/core/List';
+
+import { Grid, Typography, List, TextField, Button } from "@material-ui/core";
 import Timeline from '@material-ui/lab/Timeline';
 import { makeStyles } from '@material-ui/core/styles';
 import "./styles.css"
@@ -15,8 +15,6 @@ import AuthService from '../../services/auth.service.js';
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FacebookShare from "../../components/ShareButtons/FacebookShare";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FavoriteButton from "../../components/FavoriteButton";
 import authService from '../../services/auth.service.js';
@@ -41,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BrewDisplay(props) {
-    console.log(props);
+    /*     console.log(props); */
 
     const classes = useStyles();
 
@@ -59,7 +57,6 @@ export default function BrewDisplay(props) {
     useEffect(() => {
         API.getSpecificBrew(brewId)
             .then((data) => {
-                console.log(data.data);
                 setBrew(data.data);
                 setComments(data.data.Comments);
                 setIngredients(data.data.Ingredients);
@@ -88,16 +85,16 @@ export default function BrewDisplay(props) {
     //     );
     // }
 
-    const handleCommentEdit = (commentId, body) => {
-        API.updateComment(commentId, body).then(res => {
-            setComments([...comments, { id: commentId, body: body, author: authService.getCurrentUser().username, UserId: authService.getCurrentUser().id }]);
-        });
-    }
+    // const handleCommentEdit = (commentId, body) => {
+    //     API.updateComment(commentId, body).then(res => {
+    //         setComments([...comments, { id: commentId, body: body, author: authService.getCurrentUser().username, UserId: authService.getCurrentUser().id }]);
+    //     });
+    // }
 
     const handleCommentDelete = (commentId) => {
         API.deleteComment(commentId).then(res => {
             let temparray = comments.filter(comment => {
-                if (comment.id != commentId) {
+                if (comment.id !== commentId) {
                     return comment;
                 }
             });
@@ -208,33 +205,34 @@ export default function BrewDisplay(props) {
                         {renderBrewDelete()}
                     </div>
 
-                    <div id="commentSection">
+                </div>
 
-                        <form onSubmit={(event) => {
-                            event.preventDefault();
-                            let { id, username } = AuthService.getCurrentUser();
-                            API.postComment(id, brewId, username, commentInput).then(res => {
-                                setComments([...comments, { UserId: id, body: commentInput, author: username }]);
-                                setCommentInput("");
-                            });
-                        }}>
-                            <TextField
-                                id="outlined-multiline-static"
-                                multiline
-                                rows={4}
-                                variant="outlined"
-                                placeholder="Add a Comment Here"
-                                value={commentInput}
-                                onChange={(e) => {
-                                    setCommentInput(e.target.value)
-                                }}
-                            />
-                            <Button type="submit" id="submitComment">Submit Comment</Button>
-                        </form>
+                <div id="commentSection">
 
-                        <div id="comment-list">
-                            {commentsJSX}
-                        </div>
+                    <form onSubmit={(event) => {
+                        event.preventDefault();
+                        let { id, username } = AuthService.getCurrentUser();
+                        API.postComment(id, brewId, username, commentInput).then(res => {
+                            setComments([...comments, res.data]);
+                            setCommentInput("");
+                        });
+                    }}>
+                        <TextField
+                            id="outlined-multiline-static"
+                            multiline
+                            rows={4}
+                            variant="outlined"
+                            placeholder="Add a Comment Here"
+                            value={commentInput}
+                            onChange={(e) => {
+                                setCommentInput(e.target.value)
+                            }}
+                        />
+                        <Button type="submit" id="submitComment">Submit Comment</Button>
+                    </form>
+
+                    <div id="comment-list">
+                        {commentsJSX}
                     </div>
                 </div>
 

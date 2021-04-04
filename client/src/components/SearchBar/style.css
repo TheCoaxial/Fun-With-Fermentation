@@ -40,3 +40,47 @@
     margin-left:10px;
     margin-right:10px;
 }
+
+#search-results .userCard .MuiCardMedia-root {
+    display:none;
+}
+
+#search-results .userCard {
+    position:relative;
+    overflow:visible;
+    margin:0px auto;
+    margin-top:40px;
+    width:95%;
+}
+
+#search-results .userCard .MuiAvatar-root {
+    width:70px;
+    height:70px;
+    /* position:absolute;
+    left:-20px; */
+}
+
+#search-results .userCard .text-verticalAlign {
+    margin-left:5%;
+    height:inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+}
+
+#search-results .userCard .text-verticalAlign h2 {
+    margin-left:0;
+    margin-bottom:0;
+}
+
+#Feed #search-results .userCard .MuiTypography-body2 {
+    position:absolute;
+    right:16px;
+    top:16px;
+    left:auto;
+    bottom:auto;
+}
+
+#Feed #search-results .userCard .flexWrap-horizontal {
+    margin-bottom:0;
+}

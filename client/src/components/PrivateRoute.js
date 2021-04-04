@@ -7,19 +7,16 @@ const PrivateRoute = ({ component: Component, children, redirectTo = "/", ...pro
 
     const render = () => (
         isAuth
-        
-            ? (Component ? <Component /> : children)
-            
+            ? (Component ? <Component /> : children)            
             : <Redirect to={{ pathname: redirectTo, state: { from: location } }} />
     );
 
     return (
         <Route
-          {...props}
-          render={render}
+            {...props}
+            render={render}
         />
     );
-
 }
 
 export default PrivateRoute;

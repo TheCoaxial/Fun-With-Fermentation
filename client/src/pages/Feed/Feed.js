@@ -5,21 +5,17 @@ import API from "../../utils/api";
 import "./Feed.css";
 import ls from 'local-storage';
 import "../../App.css";
-import Grid from "@material-ui/core/Grid";
-import Typography from '@material-ui/core/Typography';
+import { Grid, Typography } from "@material-ui/core";
 import SearchBar from "../../components/SearchBar";
 import { Redirect } from "react-router-dom";
 
 export default function Feed() {
 
-    const [brews, setBrews] = useState([]);
     // const [currentUser, authCurrentUser] = useState([[currentUser = JSON.parse(localStorage.getItem('user'))]]);
-
+    const [brews, setBrews] = useState([]);
     const [topUsers, setTopUsers] = useState([]);
     let topUsersJSX;
-
     let feedBrewsJSX;
-
 
     useEffect(() => {
         API.getBrews()
@@ -64,9 +60,7 @@ export default function Feed() {
 
     if(ls.get("user")){
     return (
-
         <div id="Feed">
-
             <Grid container spacing={3}>
                 <Grid item xs={4} className="sidebarWrap">
                     <div className="innerSidebarWrap">
@@ -78,14 +72,11 @@ export default function Feed() {
                 </Grid>
                 <Grid item xs={8}>
                     <Typography gutterBottom variant="h5" component="h1">
-                        Top Recipes
-                        </Typography>
+                        Top Brews
+                    </Typography>
                     {feedBrewsJSX}
                 </Grid>
-
-
             </Grid>
-
             <SearchBar />
         </div>
     )

@@ -5,11 +5,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import Footer from "../../components/Footer/index";
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-
-import Button from '@material-ui/core/Button';
-import Avatar from '@material-ui/core/Avatar';
+import { Typography, TextField, Button, Avatar } from "@material-ui/core";
 import { Link, Redirect } from 'react-router-dom';
 import { isEmail } from "validator";
 import "./style.css";

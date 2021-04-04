@@ -11,7 +11,7 @@
 #Profile .avatar {
     width:15rem;
     height:15rem;
-    padding:12px;
+    padding:0 0 0 12px;
     border-radius:0;
 }
 
@@ -126,7 +126,7 @@
 }
 
 #Profile .userCard #followerButtonWrapper {
-    position: absolute;
+/*     position: absolute; */
     bottom: -2em;
     right: 0.5em;
 }
@@ -144,3 +144,6 @@
     max-width:10rem;
 }
 
+#Profile .miniFeedWrap {
+    margin-bottom:2em;
+}
