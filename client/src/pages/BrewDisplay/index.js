@@ -134,7 +134,8 @@ export default function BrewDisplay(props) {
         body={comment.body}
         createdAt={comment.createdAt}
         author={comment.author}
-        UserId={comment.UserId} />);
+        UserId={comment.UserId}
+    />);
 
     let ingredientsJSX = ingredients.map(ingredient => <Ingredient
         key={ingredient.id}
@@ -186,7 +187,7 @@ export default function BrewDisplay(props) {
                         <Grid item xs={12}>
                             <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
                                 Ingredients
-                        </Typography>
+                            </Typography>
                             <List id="ingredient-list">
                                 {ingredientsJSX}
                             </List>
