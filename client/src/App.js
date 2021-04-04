@@ -26,34 +26,34 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const StyledMenu = withStyles({
     paper: {
-      border: '1px solid #d3d4d5',
+        border: '1px solid #d3d4d5',
     },
-  })((props) => (
+})((props) => (
     <Menu
-      elevation={0}
-      getContentAnchorEl={null}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'center',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'center',
-      }}
-      {...props}
+        elevation={0}
+        getContentAnchorEl={null}
+        anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+        }}
+        transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+        }}
+        {...props}
     />
-  ));
-  
-  const StyledMenuItem = withStyles((theme) => ({
+));
+
+const StyledMenuItem = withStyles((theme) => ({
     root: {
-      '&:focus': {
-        backgroundColor: theme.palette.primary.main,
-        '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-          color: theme.palette.common.white,
+        '&:focus': {
+            backgroundColor: theme.palette.primary.main,
+            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+                color: theme.palette.common.white,
+            },
         },
-      },
     },
-  }))(MenuItem);
+}))(MenuItem);
 
 class App extends Component {
     constructor(props) {
@@ -81,7 +81,7 @@ class App extends Component {
         this.setState({ anchorEl: null });
         console.log(this.state.anchorEl);
     };
-    
+
     componentDidMount() {
         const user = AuthService.getCurrentUser();
         if (user) {
@@ -103,13 +103,13 @@ class App extends Component {
                 {/* <Header /> */}
                 <div className="container mt-3">
                     <Switch>
-                        <Route exact path={["/", "/login"]} component={(props) => <Login history={props.history} setCurrentUser={this.handleNavbarRender} />} />
                         <Route exact path="/register" component={(props) => <Register history={props.history} setCurrentUser={this.handleNavbarRender} />} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path={"/feed"} component={Feed} />
                         <Route exact path="/brew" component={NewBrew} />
                         <Route path="/user/:userId" component={UserDisplay} />
                         <Route path="/brews/:brewId" component={BrewDisplay} />
+                        <Route exact path={["*", "/", "/login"]} component={(props) => <Login history={props.history} setCurrentUser={this.handleNavbarRender} />} />
                     </Switch>
                 </div>
                 <Footer />
