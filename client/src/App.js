@@ -1,6 +1,5 @@
-import React, { Component, useState } from "react";
-import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
-
+import React, { Component } from "react";
+import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Footer from "./components/Footer";
 import './App.css';
 import ls from 'local-storage'
@@ -8,21 +7,19 @@ import AuthService from "./services/auth.service";
 import Feed from "./pages/Feed/Feed";
 import Login from "./pages/login";
 import Register from "./pages/register";
-
-import Avatar from '@material-ui/core/Avatar';
+import { Menu, MenuItem } from "@material-ui/core";
+import { withStyles } from '@material-ui/core/styles';
+/* import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'; */
 import Profile from "./pages/Profile";
 import NewBrew from "./pages/NewBrew";
 import UserDisplay from "./pages/UserDisplay";
 import BrewDisplay from "./pages/BrewDisplay";
 import Navbar from './components/Navbar/Navbar';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import { withStyles } from '@material-ui/core/styles';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const StyledMenu = withStyles({
     paper: {

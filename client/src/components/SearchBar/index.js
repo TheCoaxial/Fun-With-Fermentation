@@ -1,15 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./style.css";
 import { fade, makeStyles, withStyles } from '@material-ui/core/styles';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import UserCard from '../UserCard/UserCard';
-import InputBase from '@material-ui/core/InputBase';
-import InputLabel from '@material-ui/core/InputLabel';
+import { InputBase, Select, MenuItem, Button } from "@material-ui/core";
+/* import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl'; */
 import SearchIcon from '@material-ui/icons/Search';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import { Button } from '@material-ui/core';
 import api from '../../utils/api';
 
 const BootstrapInput = withStyles((theme) => ({
@@ -97,13 +94,13 @@ export default function SearchBar() {
   const classes = useStyles();
 
   const [search, setSearch] = useState("");
-  const [difficulty, setDifficulty] = useState("");
   const [searchType, setSearchType] = useState("Brew");
   const [searchResults, setSearchResults] = useState({ type: 'brew', results: [] });
+/*   const [difficulty, setDifficulty] = useState("");
 
   const handleDifficultyChange = event => {
     setDifficulty(event.target.value);
-  };
+  }; */
 
   const handleTypeChange = event => {
     setSearchType(event.target.value);
@@ -115,39 +112,35 @@ export default function SearchBar() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(searchType);
     switch (searchType) {
       case "Brew":
-        api.searchBrews(search).then(res => {
-          console.log(res.data);
-          setSearchResults({ type: 'brew', results: res.data });
-        });
+        api
+          .searchBrews(search)
+          .then(res => setSearchResults({ type: 'brew', results: res.data }));
         break;
       case "Ingredient":
-        api.searchIngredients(search).then(res => {
-          console.log(res.data);
-          setSearchResults({ type: 'ingredient', results: res.data });
-        });
+        api
+          .searchIngredients(search)
+          .then(res => setSearchResults({ type: 'ingredient', results: res.data }));
         break;
       case "User":
-        api.searchUsers(search).then(res => {
-          console.log(res.data);
-          setSearchResults({ type: 'user', results: res.data });
-        });
+        api
+          .searchUsers(search)
+          .then(res => setSearchResults({ type: 'user', results: res.data }));
         break;
     }
   };
 
   let resultsJSX;
 
-  if (searchResults.type == "user") {
+  if (searchResults.type === "user") {
     resultsJSX = searchResults.results.map(result => <UserCard
       key={result.id}
       username={result.username}
       bio={result.bio}
       score={result.contributionScore}
       id={result.id} />);
-  } else if (searchResults.type == "brew") {
+  } else if (searchResults.type === "brew") {
     resultsJSX = searchResults.results.map(result => <RecipeCard
       key={result.id}
       name={result.name}
