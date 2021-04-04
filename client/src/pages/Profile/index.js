@@ -108,13 +108,13 @@ export default class Profile extends Component {
       UserId={brew.UserId}
     />);
 
-    let FollowingJSX = following.map(({ Following }) => <UserCard
-      key={Following.id}
-      id={Following.id}
-      username={Following.name}
-      bio={Following.bio}
-      score={Following.contributionScore}
-    />);
+    // let FollowingJSX = following.map(({ Following }) => <UserCard
+    //   key={Following.id}
+    //   id={Following.id}
+    //   username={Following.name}
+    //   bio={Following.bio}
+    //   score={Following.contributionScore}
+    // />);
 
     let LastViewedJSX = pages.map(person => <UserCard
       key={person.data[0].id}
@@ -224,14 +224,15 @@ export default class Profile extends Component {
                           <Typography gutterBottom variant="h5" component="h1">
                               Following
                           </Typography>
-                          {this.state.following[0] ? (FollowingJSX) 
-                          :
+                          {/* {this.state.following[0] ? (FollowingJSX) 
+                          : */}
                           <PlaceHolderCard
                               mockTitle= "People You Follow"
                               description="This is where you'll find all the profiles 
                               that you follow!"
                           >
-                          </PlaceHolderCard> }
+                          </PlaceHolderCard> 
+                           
                     </div>
                 </Grid>
 
