@@ -59,29 +59,6 @@ export default function Feed() {
 
 
     return (
-        // <div id="Feed">
-
-        //     <div className="feedWrap">
-        //         <div className="mainFeed">
-        //             {feedBrewsJSX}
-        //         </div>
-
-        //         <div className="sidebarWrap">
-        //             <div className="popularRecipesFeed">
-        //                 <div className="sidebarHeader"><h2>Active Brews</h2></div>
-        //                 {feedBrewsJSX}
-        //                 <div className="sidebarFooter"></div>
-        //             </div>
-
-        //             <div className="popularUsersFeed">
-
-        //                 <div className="sidebarHeader"><h2>Active Users</h2></div>
-        //                 {topUsersJSX}
-        //                 <div className="sidebarFooter"></div>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
 
         <div id="Feed">
 

@@ -11,6 +11,7 @@ const FavButton = ({ brewID }) => {
     const [favCount, setFavCount] = useState(0);
     const user = AuthService.getCurrentUser();
 
+    
     useEffect(() => {
         API
             .getFavoritedBy(brewID)

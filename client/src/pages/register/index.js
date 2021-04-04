@@ -7,9 +7,10 @@ import CheckButton from "react-validation/build/button";
 import Footer from "../../components/Footer/index";
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { isEmail } from "validator";
 import "./style.css";
 
@@ -82,7 +83,7 @@ export default class Register extends Component {
     AuthService.login(username, password).then(
       () => {
         this.props.history.push("/profile");
-        window.location.reload();
+        //window.location.reload();
       },
       error => { 
         const resMsg =
@@ -214,6 +215,7 @@ export default class Register extends Component {
                   <Button 
                     variant="contained"
                     type="submit"
+                    onClick={<Redirect to="/profile" />}
                     className="btn">
                       Sign Up
                   </Button>

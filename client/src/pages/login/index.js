@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import "./style.css";
 
 import AuthService from "../../services/auth.service";
@@ -64,8 +64,9 @@ export default class Login extends Component {
     if (this.checkBtn.context._errors.length === 0) {
       AuthService.login(this.state.username, this.state.password).then(
         () => {
-          this.props.history.push("/profile");
-          window.location.reload();
+          <Redirect to="/profile" />
+           this.props.history.push("/profile");
+          // window.location.reload();
         },
         error => {
           const resMsg =
@@ -137,13 +138,14 @@ export default class Login extends Component {
                     variant="contained"
                     type="submit"
                     className=""
+                    onClick={<Redirect to="/profile" />}
                     disabled={this.state.loading}>
                     
                     {this.state.loading && (
                     <span className=""></span>
                     )}
                     <span>Login</span>
-                </Button>
+                </Button>           
             </div>
 
             {this.state.message && (
