@@ -34,7 +34,7 @@ class App extends Component {
         const user = AuthService.getCurrentUser();
         if (user) {
             this.setState({
-                currentUser: user,
+                currentUser: user.username,
                 visited: ls.get('visited') || []
             });
         };
@@ -52,7 +52,7 @@ class App extends Component {
                 <div className="container mt-3">
                     <Switch>
                         <Route exact path={["/", "/login"]} component={(props) => <Login history={props.history} setCurrentUser={this.handleNavbarRender} />} />
-                        <Route exact path="/register" component={Register} />
+                        <Route exact path="/register" component={(props) => <Register history={props.history} setCurrentUser={this.handleNavbarRender} />} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path={"/feed"} component={Feed} />
                         <Route exact path="/brew" component={NewBrew} />

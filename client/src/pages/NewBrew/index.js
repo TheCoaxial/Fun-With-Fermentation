@@ -10,8 +10,8 @@ import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 
 class NewBrew extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             currentUser: AuthService.getCurrentUser(),
@@ -61,7 +61,7 @@ class NewBrew extends Component {
                     API.postStep(brewId, instruction);
                 });
 
-                window.location.assign("/feed");
+                this.props.history.push("/feed");
             });
     }
 

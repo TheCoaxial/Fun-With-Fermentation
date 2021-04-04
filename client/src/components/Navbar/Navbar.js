@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from 'react-router-dom';
 import authService from "../../services/auth.service";
 
-export default function Navbar({currentUser}) {
+export default function Navbar({ currentUser }) {
 
     return (<nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
@@ -28,7 +28,7 @@ export default function Navbar({currentUser}) {
                     <li className="nav-item subMenu-wrap">
                         <Link to={"/profile"} className="nav-link">
                             <img src="./sample-avatar-2.png" alt="user avatar" className="avatar" />
-                            {currentUser.username}
+                            {currentUser}
                         </Link>
 
                         <ul className="userMenu-showHide">
@@ -39,7 +39,10 @@ export default function Navbar({currentUser}) {
                             </li>
 
                             <li className="nav-item">
-                                <a href="/login" className="nav-link" onClick={() => authService.logout()}>
+                                <a href="/login" className="nav-link" onClick={() => {
+                                    authService.logout();
+                                    this.props.history.push("/login");
+                                }}>
                                     Log Out
                     </a>
                             </li>

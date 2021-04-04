@@ -18,26 +18,28 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FavoriteButton from "../../components/FavoriteButton";
+import authService from '../../services/auth.service.js';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         '& .MuiTextField-root': {
-          margin: theme.spacing(1),
-          width: '25ch',
+            margin: theme.spacing(1),
+            width: '25ch',
         },
-      },
+    },
     timelineContent: {
-      padding: '12px 16px',
+        padding: '12px 16px',
     },
     secondaryTail: {
-      backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.secondary.main,
     },
     verticallyCenterContent: {
-      margin: 'auto 0',
+        margin: 'auto 0',
     },
-  }));
+}));
 
-export default function BrewDisplay() {
+export default function BrewDisplay(props) {
+    console.log(props);
 
     const classes = useStyles();
 
@@ -55,6 +57,7 @@ export default function BrewDisplay() {
     useEffect(() => {
         API.getSpecificBrew(brewId)
             .then((data) => {
+                console.log(data.data);
                 setBrew(data.data);
                 setComments(data.data.Comments);
                 setIngredients(data.data.Ingredients);
@@ -62,45 +65,54 @@ export default function BrewDisplay() {
             });
     }, []);
 
-    const renderCommentForm = (commentId) => {
-        return(
-            <form onSubmit={(event) => {
-                API.updateComment(commentId, commentInput);
-            }}>
-                    <TextField
-                        id="outlined-multiline-static"
-                        multiline
-                        rows={4}
-                        variant="outlined"
-                        placeholder="Add a Comment Here"
-                        value={commentInput}
-                        onChange={(e) => {
-                            setCommentInput(e.target.value)
-                        }}
-                    />
-                <Button type="submit" id="submitComment">Edit Comment</Button>
-            </form>
-        );
-    }
+    // const renderCommentForm = (commentId) => {
+    //     return (
+    //         <form onSubmit={(event) => {
+    //             API.updateComment(commentId, commentInput);
+    //         }}>
+    //             <TextField
+    //                 id="outlined-multiline-static"
+    //                 multiline
+    //                 rows={4}
+    //                 variant="outlined"
+    //                 placeholder="Add a Comment Here"
+    //                 value={commentInput}
+    //                 onChange={(e) => {
+    //                     setCommentInput(e.target.value)
+    //                 }}
+    //             />
+    //             <Button type="submit" id="submitComment">Edit Comment</Button>
+    //         </form>
+    //     );
+    // }
 
     const handleCommentEdit = (commentId, body) => {
-        API.updateComment(commentId, body);
-        window.location.assign(`/brews/${brewId}`);        
+        API.updateComment(commentId, body).then(res => {
+            setComments([...comments, { id: commentId, body: body, author: authService.getCurrentUser().username, UserId: authService.getCurrentUser().id }]);
+        });
     }
 
     const handleCommentDelete = (commentId) => {
-        API.deleteComment(commentId);
-        window.location.assign(`/brews/${brewId}`);
+        API.deleteComment(commentId).then(res => {
+            let temparray = comments.filter(comment => {
+                if (comment.id != commentId) {
+                    return comment;
+                }
+            });
+            setComments(temparray);
+        });
     };
 
     const handleBrewDelete = () => {
-        API.deleteBrew(brewId);
-        window.location.assign("/feed");
+        API.deleteBrew(brewId).then(() => {
+            props.history.push('/feed')
+        });
+
     };
 
     const renderBrewDelete = () => {
         if (brew.UserId === user.id) {
-            return(
+            return (
                 <div id="deleteFlex">
                     <Button
                         id="delete"
@@ -118,7 +130,6 @@ export default function BrewDisplay() {
     };
 
     let commentsJSX = comments.map(comment => <Comment
-        renderCommentForm={renderCommentForm}
         handleCommentDelete={handleCommentDelete}
         commentId={comment.id}
         key={comment.createdAt}
@@ -137,7 +148,7 @@ export default function BrewDisplay() {
     let stepNumber = 0;
     let stepsJSX = steps.map(step => {
         stepNumber += 1;
-        return(<Step
+        return (<Step
             key={step.id}
             stepNumber={stepNumber}
             duration={step.duration}
@@ -152,7 +163,7 @@ export default function BrewDisplay() {
 
                     <Grid item xs={12} className="mainHeaders">
                         <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div" className="h2-header">
-                                {brew.name}
+                            {brew.name}
                         </Typography>
 
                         <div id="shareButtons">
@@ -166,13 +177,13 @@ export default function BrewDisplay() {
                         </div>
 
                         <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">
-                                Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a>
+                            Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a>
                         </Typography>
 
                         <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
-                                {brew.description}
+                            {brew.description}
                         </Typography>
-                        
+
                     </Grid>
 
                     <Grid item xs={12}>
@@ -184,42 +195,46 @@ export default function BrewDisplay() {
                         </List>
                     </Grid>
 
-                        <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
-                            Timeline
+                    <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
+                        Timeline
                         </Typography>
-                        <Timeline>
-                            {stepsJSX}
-                        </Timeline>
+                    <Timeline>
+                        {stepsJSX}
+                    </Timeline>
 
                     {renderBrewDelete()}
                 </div>
 
                 <div id="commentSection">
 
-                <form onSubmit={(event) => {
+                    <form onSubmit={(event) => {
+                        event.preventDefault();
                         let { id, username } = AuthService.getCurrentUser();
-                        API.postComment(id, brewId, username, commentInput);
+                        API.postComment(id, brewId, username, commentInput).then(res => {
+                            setComments([...comments, { UserId: id, body: commentInput, author: username }]);
+                            setCommentInput("");
+                        });
                     }}>
-                            <TextField
-                                id="outlined-multiline-static"
-                                multiline
-                                rows={4}
-                                variant="outlined"
-                                placeholder="Add a Comment Here"
-                                value={commentInput}
-                                onChange={(e) => {
-                                    setCommentInput(e.target.value)
-                                }}
-                            />
+                        <TextField
+                            id="outlined-multiline-static"
+                            multiline
+                            rows={4}
+                            variant="outlined"
+                            placeholder="Add a Comment Here"
+                            value={commentInput}
+                            onChange={(e) => {
+                                setCommentInput(e.target.value)
+                            }}
+                        />
                         <Button type="submit" id="submitComment">Submit Comment</Button>
-                </form>
+                    </form>
 
                     <div id="comment-list">
                         {commentsJSX}
                     </div>
                 </div>
             </div>
-                
+
         </div>
     );
 }
