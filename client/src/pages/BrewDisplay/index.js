@@ -252,7 +252,7 @@ export default function BrewDisplay(props) {
                     </form>
 
                     <div id="comment-list">
-                        {commentsMap()}
+                        {commentMap()}
                     </div>
                 </div>
 
