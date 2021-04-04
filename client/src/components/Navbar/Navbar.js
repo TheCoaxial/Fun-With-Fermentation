@@ -58,7 +58,6 @@ export default function Navbar({ currentUser }) {
         setAnchorEl(null);
     };
 
-
     return (<nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
         </Link>
@@ -122,7 +121,6 @@ export default function Navbar({ currentUser }) {
                             </StyledMenuItem>
                         </StyledMenu>
                     </div>
-
                 </div>
             </div>
         ) : (
