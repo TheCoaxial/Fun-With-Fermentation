@@ -126,7 +126,7 @@
 }
 
 #Profile .userCard #followerButtonWrapper {
-    position: absolute;
+/*     position: absolute; */
     bottom: -2em;
     right: 0.5em;
 }

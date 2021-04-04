@@ -27,7 +27,6 @@ export default class Profile extends Component {
       visitedIds: ls.get('visited') || [],
       visitedPages: []
     };
-
   }
 
   componentDidMount() {
@@ -50,17 +49,13 @@ export default class Profile extends Component {
 
     API
         .getUserBrews(this.state.currentUser.id)
-        .then(res => {
-            console.log(" userBrews", res.data);
-            this.setState({ brews: res.data });
-        });
+        .then(res => this.setState({ brews: res.data }));
 
     API
         .getUserFollowing(this.state.currentUser.id)
         .then(res => this.setState({ following: res.data }));
 
     this.recentlyViewed();
-
   };
 
   recentlyViewed() {
@@ -81,12 +76,11 @@ export default class Profile extends Component {
 
     let collectedData = [];
     uniqueIds.forEach(Ids => {
-      console.log("ids", uniqueIds);
+/*       console.log("ids", uniqueIds); */
       API.getUserProfile(Ids)
         .then(res => {
-
           collectedData.push(res);
-          console.log("data", collectedData)
+/*           console.log("data", collectedData) */
           this.setState({ visitedPages: collectedData })
         });
     })
@@ -105,7 +99,8 @@ export default class Profile extends Component {
       name={brew.name}
       description={brew.description}
       author={brew.author}
-      UserId={brew.UserId} />);
+      UserId={brew.UserId}
+    />);
 
     let FollowingJSX = following.map(({ Following }) => <UserCard
       key={Following.id}
@@ -113,17 +108,16 @@ export default class Profile extends Component {
       username={Following.username}
       bio={Following.bio}
       score={Following.contributionScore}
-    />) 
-    console.log("following", following)
+    />);
 
-    let LastViewedJSX = pages.map(person => 
-    <UserCard
+    let LastViewedJSX = pages.map(person => <UserCard
+      key={person.data[0].id}
       id={person.data[0].id}
       username={person.data[0].username}
       bio={person.data[0].bio}
       score={person.data[0].contributionScore}
-    /> )
-    //console.log("lastviewed", LastViewedJSX); 
+    />);
+    LastViewedJSX.splice(3);
     
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       key={Brew.id}
@@ -173,11 +167,10 @@ export default class Profile extends Component {
       </div>
     }
 
-    // Currently just displays Info about the user from the DB
     return (
         <div id="Profile">
             <Grid container spacing={3}>
-                <Grid item xs={4} className="sidebarWrap">
+                <Grid item lg={3} sm={12} className="sidebarWrap">
                       <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
                   <Typography variant="h2" align="center" id="userName">
                       {this.state.currentUser.username}
@@ -203,9 +196,22 @@ export default class Profile extends Component {
                         </span>
                     </Typography>
                   </div> 
+                  <div className="miniFeedWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                            Recently Viewed Profiles:
+                        </Typography>
+                        {this.state.visitedPages[0] ? (LastViewedJSX) 
+                        :
+                        <PlaceHolderCard
+                            mockTitle= "Profiles you've seen"
+                            description="This is where you'll find all the profiles 
+                            you've visited today!"
+                        >
+                        </PlaceHolderCard> }
+                    </div>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item lg={3} sm={12}>
                     <div className="miniFeedWrap">
                           <Typography gutterBottom variant="h5" component="h1">
                               Following
@@ -219,22 +225,9 @@ export default class Profile extends Component {
                           >
                           </PlaceHolderCard> }
                     </div>
-                    <div className="miniFeedWrap">
-                        <Typography gutterBottom variant="h5" component="h1">
-                            Last Viewed Profiles:
-                        </Typography>
-                        {this.state.visitedPages[0] ? (LastViewedJSX) 
-                        :
-                        <PlaceHolderCard
-                            mockTitle= "Profiles you've seen"
-                            description="This is where you'll find all the profiles 
-                            you've visited today!"
-                        >
-                        </PlaceHolderCard> }
-                    </div>
                 </Grid>
 
-                <Grid item xs={4}>
+                <Grid item lg={3} sm={12}>
                     <div className="miniFeedWrap">
                         <Typography gutterBottom variant="h5" component="h1">
                             Saved Brews
@@ -247,6 +240,8 @@ export default class Profile extends Component {
                           >
                          </PlaceHolderCard>) }  
                     </div>
+                </Grid>
+                <Grid item lg={3} sm={12}>
                     <div className="miniFeedWrap">
                         <Typography gutterBottom variant="h5" component="h1">
                             My Brews
