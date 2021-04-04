@@ -4,6 +4,7 @@ import authService from "../../services/auth.service";
 
 export default function Navbar({ currentUser }) {
 
+
     return (<nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
         </Link>

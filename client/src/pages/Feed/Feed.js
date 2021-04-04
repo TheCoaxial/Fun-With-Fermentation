@@ -87,9 +87,4 @@ export default function Feed() {
             <SearchBar />
         </div>
     )
-    // } else {
-    //    <div>
-    //        <h1>No Token, No entry</h1>
-    //    </div>
-    // }
 }

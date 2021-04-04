@@ -41,7 +41,7 @@ export default function UserCard({ id ,username, bio, newBrew, score }) {
                                         {username}
                                     </Typography>
                                 </Link>
-                                    <Typography gutterBottom  component="p">
+                                    <Typography gutterBottom  component="p" className="bio">
                                         {bio}
                                     </Typography>
                                 </div>

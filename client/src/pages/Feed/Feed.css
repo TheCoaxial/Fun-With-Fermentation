@@ -18,6 +18,10 @@
     max-width:345px;
 }
 
+#Feed .innerSidebarWrap .userCard .bio {
+    display:none;
+}
+
 #Feed .recipeCard {
     margin-top:1rem;
 }

@@ -9,9 +9,13 @@ const FollowButton = ({ followID }) => {
 
     const [follow, setFollow] = useState(0);
     const [followCount, setFollowCount] = useState(0);
+    const [followedUser, setFollowedUser] = useState({});
     const user = AuthService.getCurrentUser();
 
     useEffect(() => {
+        API
+            .getUserProfile(followID)
+            .then(data => setFollowedUser({ id: data.data[0].id, bio: data.data[0].bio, contributionScore: data.data[0].contributionScore }));
         API
             .getFollowers(followID)
             .then(data => setFollowCount(data.data.length));
@@ -26,6 +30,11 @@ const FollowButton = ({ followID }) => {
         let countHolder = followCount;
         countHolder += 1;
         setFollowCount(countHolder);
+
+        let scoreHolder = followedUser.contributionScore;
+        scoreHolder += 5;
+        setFollowedUser({ id: followedUser.id, bio: followedUser.bio, contributionScore: scoreHolder });
+        API.updateUser(followedUser.id, followedUser.bio, scoreHolder);
     };
 
     const delFollow = () => {
@@ -34,6 +43,11 @@ const FollowButton = ({ followID }) => {
         let countHolder = followCount;
         countHolder -= 1;
         setFollowCount(countHolder);
+
+        let scoreHolder = followedUser.contributionScore;
+        scoreHolder -= 5;
+        setFollowedUser({ id: followedUser.id, bio: followedUser.bio, contributionScore: scoreHolder });
+        API.updateUser(followedUser.id, followedUser.bio, scoreHolder);
     };
 
     const renderFollowCount = count => {
