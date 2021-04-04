@@ -24,7 +24,8 @@ if (process.env.NODE_ENV !== "production") {
 
 const db = require("./models");
 
-app.use(cors(corsOptions));
+app.use(cors()) 
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
