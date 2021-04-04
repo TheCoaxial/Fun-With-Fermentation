@@ -42,45 +42,43 @@ export default function UserDisplay() {
         id={brew.id}
         UserId={brew.UserId} />);
 
-    if(ls.get('user')){
-    return (
-    <div id="userDisplay">
-        <Grid container spacing={3}>
-            <Grid item xs={12} sm={8}>
-                <div id="positionAbsoluteWrap">
-                    <FollowButton
-                        followID={userId}
-                    />
-                    <div id="score">
-                        <Typography variant="body2" className="title" id="score">
-                            Score: {userData.contributionScore}
-                        </Typography>
-                    </div>
-                </div>
+    if (ls.get('user')) {
+        return (
+            <div id="userDisplay">
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={8}>
+                        <div id="positionAbsoluteWrap">
+                            <FollowButton
+                                followID={userId}
+                            />
+                            <div id="score">
+                                <Typography variant="body2" className="title" id="score">
+                                    Score: {userData.contributionScore}
+                                </Typography>
+                            </div>
+                        </div>
 
-                <div id="userHeader">
+                        <div id="userHeader">
+                            <Typography variant="h5" className="title">
+                                {userData.username}
+                            </Typography>
 
-                    <Typography variant="h5" className="title">
-                        {userData.username}
-                    </Typography>
+                            <Typography variant="body1" className="title">
+                                {userData.bio || "No Bio"}
+                            </Typography>
+                        </div>
 
-                    <Typography variant="body1" className="title">
-                        {userData.bio || "No Bio"}
-                    </Typography>
-
-                </div>
-
-                
-
-                
-                <div id="brew-list">
-                    <Typography variant="h6" className="title">
-                        Brews
-                    </Typography>
-                    {brewsJSX}
-                </div>
-            </Grid>
-        </Grid>
-    </div>);
-    }else{return <Redirect to="/" />}
+                        <div id="brew-list">
+                            <Typography variant="h6" className="title">
+                                Brews
+                            </Typography>
+                            {brewsJSX}
+                        </div>
+                    </Grid>
+                </Grid>
+            </div>
+        );
+    } else { 
+        return <Redirect to="/" />
+    }
 }
