@@ -99,14 +99,14 @@ export default class Profile extends Component {
     const userFav = this.state.userFav;
     const following = this.state.following;
 
-    let BrewsJSX = brews.map(brew => <RecipeCard
-      key={brew.id}
-      id={brew.id}
-      name={brew.name}
-      description={brew.description}
-      author={brew.author}
-      UserId={brew.UserId}
-    />);
+    // let BrewsJSX = brews.map(brew => <RecipeCard
+    //   key={brew.id}
+    //   id={brew.id}
+    //   name={brew.name}
+    //   description={brew.description}
+    //   author={brew.author}
+    //   UserId={brew.UserId}
+    // />);
 
     // let FollowingJSX = following.map(({ Following }) => <UserCard
     //   key={Following.id}
@@ -125,14 +125,14 @@ export default class Profile extends Component {
     />);
     LastViewedJSX.splice(3);
     
-    let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
-      key={Brew.id}
-      id={Brew.id}
-      name={Brew.name}
-      description={Brew.description}
-      author={Brew.author}
-      UserId={Brew.UserId}
-    />);
+    // let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
+    //   key={Brew.id}
+    //   id={Brew.id}
+    //   name={Brew.name}
+    //   description={Brew.description}
+    //   author={Brew.author}
+    //   UserId={Brew.UserId}
+    // />);
 
     let createdAtValue = this.state.userData.createdAt;
 
