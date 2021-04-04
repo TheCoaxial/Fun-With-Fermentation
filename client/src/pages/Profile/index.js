@@ -203,56 +203,41 @@ export default class Profile extends Component {
                         </span>
                     </Typography>
                   </div> 
-
-                  <div className="miniFeedWrap">
-                      <Typography gutterBottom variant="h5" component="h1">
-                          Following
-                      </Typography>
-                      {this.state.following[0] ? (FollowingJSX) 
-                      :
-                      <PlaceHolderCard
-                        mockTitle= "People You Follow"
-                        description="This is where you'll find all the profiles 
-                        that you follow!"
-                      >
-                      </PlaceHolderCard> }
-                  </div>
                 </Grid>
-                
-                <Grid item xs={4}>
-                  <div className="miniFeedWrap">
-                    <Typography gutterBottom variant="h5" component="h1">
-                        Last Viewed Profiles:
-                    </Typography>
-                {this.state.visitedPages[0] ? (LastViewedJSX) 
-                :
-                <PlaceHolderCard
-                        mockTitle= "Profiles you've seen"
-                        description="This is where you'll find all the profiles 
-                        you've visited today!"
-                      >
-                </PlaceHolderCard> }
-                  </div>
 
-                  <div className="miniFeedWrap">
-                      <Typography gutterBottom variant="h5" component="h1">
-                          Top Recipes
-                      </Typography>
-                      {this.state.brews[0] ? (BrewsJSX) 
-                      : 
-                      (<PlaceHolderCard
-                        mockTitle= "Uploaded Brews"
-                        description="This is where you'll find all the information
-                        about all the brews that you upload!"
-                      >
-                     </PlaceHolderCard>) }
-                  </div>
+                <Grid item xs={4}>
+                    <div className="miniFeedWrap">
+                          <Typography gutterBottom variant="h5" component="h1">
+                              Following
+                          </Typography>
+                          {this.state.following[0] ? (FollowingJSX) 
+                          :
+                          <PlaceHolderCard
+                              mockTitle= "People You Follow"
+                              description="This is where you'll find all the profiles 
+                              that you follow!"
+                          >
+                          </PlaceHolderCard> }
+                    </div>
+                    <div className="miniFeedWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                            Last Viewed Profiles:
+                        </Typography>
+                        {this.state.visitedPages[0] ? (LastViewedJSX) 
+                        :
+                        <PlaceHolderCard
+                            mockTitle= "Profiles you've seen"
+                            description="This is where you'll find all the profiles 
+                            you've visited today!"
+                        >
+                        </PlaceHolderCard> }
+                    </div>
                 </Grid>
 
                 <Grid item xs={4}>
                     <div className="miniFeedWrap">
                         <Typography gutterBottom variant="h5" component="h1">
-                            Favorite Brews
+                            Saved Brews
                         </Typography>
                         {this.state.userFav[0] ? (FavBrewsJSX) :
                          (<PlaceHolderCard
@@ -261,6 +246,19 @@ export default class Profile extends Component {
                             about all the brews that you favorite!"
                           >
                          </PlaceHolderCard>) }  
+                    </div>
+                    <div className="miniFeedWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                            My Brews
+                        </Typography>
+                        {this.state.brews[0] ? (BrewsJSX) 
+                        : 
+                        (<PlaceHolderCard
+                          mockTitle= "Uploaded Brews"
+                          description="This is where you'll find all the information
+                          about all the brews that you upload!"
+                        >
+                      </PlaceHolderCard>) }
                     </div>
                 </Grid>
             </Grid>
