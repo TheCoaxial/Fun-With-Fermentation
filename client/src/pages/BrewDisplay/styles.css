@@ -70,6 +70,10 @@
     margin:0.5em;
 }
 
+#brewDisplay #mainBrewDisplay #shareButtons #favoriteButtonWrapper .MuiButtonBase-root.MuiIconButton-root {
+    padding:0;
+    margin-left:0;
+}
 
 
 /*-- ingredients --*/
@@ -174,8 +178,14 @@
     border-radius: 2%;
 }
 
+#brewDisplay #comment-list .MuiCardContent-root,
+#brewDisplay #comment-list .MuiCardContent-root a {
+    text-align:left;
+}
+
 #brewDisplay #commentSection #comment-list .commentAuthor {
     text-align:left;
+    width:auto;
 }
 
 #brewDisplay #commentSection #comment-list .commentAuthor:hover {
@@ -206,5 +216,50 @@
 
 #brewDisplay #commentSection #comment-list .MuiPaper-root.comment {
     min-width:0 !important;
+    position:relative;
 }
 
+#brewDisplay #commentSection #comment-list .comment .commentButtonWrapper {
+    position:absolute;
+    top:5px;
+    right:10px;
+    display: flex;
+    flex-direction: row-reverse;
+    z-index:5;
+}
+
+#brewDisplay #commentSection .deleteCommentWrapper button {
+    background-color:transparent;
+    border:none;
+    padding:0;
+}
+
+#brewDisplay #commentSection #comment-list .comment .commentButtonWrapper button:hover {
+   cursor: pointer;
+}
+
+#brewDisplay .comment .commentButtonWrapper .commentLikeWrapper {
+    margin-left:0.5em;
+}
+
+#brewDisplay .comment .commentButtonWrapper .commentLikeWrapper > div {
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+}
+
+#brewDisplay .comment .commentButtonWrapper .commentLikeWrapper > div button {
+    padding:0;
+}
+
+#brewDisplay .commentLikeWrapper .likesVerticalAlign {
+    height:inherit;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0.65;
+}
+
+#brewDisplay .commentLikeWrapper .MuiLink-root .commentAuthor {
+    width:auto;
+}

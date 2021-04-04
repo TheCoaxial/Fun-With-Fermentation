@@ -61,11 +61,11 @@ export default class Register extends Component {
     super(props);
 
     this.state = {
-        username: "",
-        email: "",
-        password: "",
-        successful: false,
-        message: ""
+      username: "",
+      email: "",
+      password: "",
+      successful: false,
+      message: ""
     };
 
     this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -78,24 +78,24 @@ export default class Register extends Component {
 
   }
 
-   logincall = function(username, password) {
-    
+  logincall = function (username, password) {
+
     AuthService.login(username, password).then(
-      () => {
+      ({ username }) => {
+        this.props.setCurrentUser(username);
         this.props.history.push("/profile");
-        //window.location.reload();
       },
-      error => { 
+      error => {
         const resMsg =
           (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
+            error.response.data &&
+            error.response.data.message) ||
           error.toString();
-  
+
         this.setState({
-              loading: false,
-              message: resMsg
-          });
+          loading: false,
+          message: resMsg
+        });
       }
     );
   }
@@ -123,7 +123,7 @@ export default class Register extends Component {
 
     this.setState({
       message: "",
-      successful: false 
+      successful: false
     });
 
     if (this.checkBtn.context._errors.length === 0) {
@@ -132,26 +132,26 @@ export default class Register extends Component {
         this.state.email,
         this.state.password
       )
-      .then(
-        response => {
-          this.logincall(response.data.username, this.state.password)
-          this.setState({
-            message: response.data.message,
-            successful: true
-          }, console.log("Message ",response.data));
-        },
-        error => {
-          const resMsg =
-            error.message ||
-            error.toString();
+        .then(
+          response => {
+            this.logincall(response.data.username, this.state.password)
+            this.setState({
+              message: response.data.message,
+              successful: true
+            }, console.log("Message ", response.data));
+          },
+          error => {
+            const resMsg =
+              error.message ||
+              error.toString();
 
-          this.setState({
-            successful: false,
-            message: resMsg
-          });
-        } 
-      )
-     
+            this.setState({
+              successful: false,
+              message: resMsg
+            });
+          }
+        )
+
     }
     this.form.validateAll();
   }
@@ -160,11 +160,11 @@ export default class Register extends Component {
     return (
       <div className="flexWrap" id="Register">
         <div>
-          <Avatar 
-              alt="" 
-              src="/logo.png" 
-              className="logo"
-            />
+          <Avatar
+            alt=""
+            src="/logo.png"
+            className="logo"
+          />
 
           <Form
             onSubmit={this.handleRegister}
@@ -174,8 +174,10 @@ export default class Register extends Component {
           >
             {!this.state.successful && (
               <div>
-                <div>
-                  <Input
+                <div className="inputWrapper">
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
                     type="text"
                     className=""
                     name="username"
@@ -186,8 +188,10 @@ export default class Register extends Component {
                   />
                 </div>
 
-                <div>
-                  <Input
+                <div className="inputWrapper">
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
                     type="text"
                     className=""
                     name="email"
@@ -198,8 +202,10 @@ export default class Register extends Component {
                   />
                 </div>
 
-                <div>
-                  <Input
+                <div className="inputWrapper">
+                  <TextField
+                    id="outlined-basic"
+                    variant="outlined"
                     type="password"
                     className=""
                     name="password"
@@ -212,12 +218,12 @@ export default class Register extends Component {
 
                 <div className="form-group">
 
-                  <Button 
+                  <Button
                     variant="contained"
                     type="submit"
                     onClick={<Redirect to="/profile" />}
                     className="btn">
-                      Sign Up
+                    Sign Up
                   </Button>
 
                 </div>

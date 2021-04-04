@@ -88,6 +88,10 @@ class API {
         return this.axios.get("/api/follow/" + followID + "/" + userID);
     }
 
+    getCommentInfo(commentID) {
+        return this.axios.get("/api/comment/" + commentID);
+    }
+
     getLikedBy(commentID) {
         return this.axios.get("/api/comment-like/" + commentID);
     }
@@ -98,6 +102,16 @@ class API {
 
     getTopUsers() {
         return this.axios.get("/api/users/feed");
+    }
+
+    searchUsers(searchString) {
+        return this.axios.get(`/api/search/user/${searchString}`);
+    }
+    searchBrews(searchString) {
+        return this.axios.get(`/api/search/brew/${searchString}`);
+    }
+    searchIngredients(searchString) {
+        return this.axios.get(`/api/search/ingredient/${searchString}`);
     }
 
     // POST

@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import IconButton from '@material-ui/core/IconButton';
-import { Favorite, FavoriteBorder } from "@material-ui/icons";
+import StarIcon from '@material-ui/icons/Star';
+import StarOutlineIcon from '@material-ui/icons/StarOutline';
 import AuthService from "../../services/auth.service";
 import API from "../../utils/api";
 import "./style.css";
@@ -9,10 +10,14 @@ const FavButton = ({ brewID }) => {
 
     const [favorite, setFavorite] = useState(0);
     const [favCount, setFavCount] = useState(0);
+    const [brewAuthor, setBrewAuthor] = useState({});
     const user = AuthService.getCurrentUser();
 
     
     useEffect(() => {
+        API
+            .getSpecificBrew(brewID)
+            .then(data => setBrewAuthor({ id: data.data.User.id, bio: data.data.User.bio, contributionScore: data.data.User.contributionScore }));
         API
             .getFavoritedBy(brewID)
             .then(data => setFavCount(data.data.length));
@@ -27,6 +32,11 @@ const FavButton = ({ brewID }) => {
         let countHolder = favCount;
         countHolder += 1;
         setFavCount(countHolder);
+
+        let scoreHolder = brewAuthor.contributionScore;
+        scoreHolder += 5;
+        setBrewAuthor({ id: brewAuthor.id, bio: brewAuthor.bio, contributionScore: scoreHolder });
+        API.updateUser(brewAuthor.id, brewAuthor.bio, scoreHolder);
     };
 
     const delFav = () => {
@@ -35,6 +45,11 @@ const FavButton = ({ brewID }) => {
         let countHolder = favCount;
         countHolder -= 1;
         setFavCount(countHolder);
+
+        let scoreHolder = brewAuthor.contributionScore;
+        scoreHolder -= 5;
+        setBrewAuthor({ id: brewAuthor.id, bio: brewAuthor.bio, contributionScore: scoreHolder });
+        API.updateUser(brewAuthor.id, brewAuthor.bio, scoreHolder);
     };
 
     const renderFavCount = count => {
@@ -49,11 +64,11 @@ const FavButton = ({ brewID }) => {
               { renderFavCount(favCount) }
               { isFav ? (
                   <IconButton aria-label="remove from favorites" onClick={delFav}>
-                      <Favorite />
+                      <StarIcon />
                   </IconButton>
               ) : (
                   <IconButton aria-label="add to favorites" onClick={addFav}>
-                      <FavoriteBorder />
+                      <StarOutlineIcon />
                   </IconButton>
               )}
           </div>

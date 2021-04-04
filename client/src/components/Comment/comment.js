@@ -13,45 +13,36 @@ import AuthService from "../../services/auth.service";
 
 const useStyles = makeStyles({
     root: {
-      minWidth: 275,
+        minWidth: 275,
     },
     bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
     },
     title: {
-      fontSize: 14,
+        fontSize: 14,
     },
     pos: {
-      marginBottom: 12,
+        marginBottom: 12,
     },
-  });
-  
+});
 
-export default function Comment({ handleCommentDelete, renderCommentForm, commentId, author, body, createdAt, UserId}) {
+
+export default function Comment({ handleCommentDelete, commentId, author, body, createdAt, UserId }) {
 
     const classes = useStyles();
-/*     const preventDefault = (event) => event.preventDefault(); */
+    /*     const preventDefault = (event) => event.preventDefault(); */
 
     const user = AuthService.getCurrentUser();
 
-    const renderEditButton = () => {
-        if (user.id === UserId) {
-            return(
-                <div>
-                    <Edit onClick={() => renderCommentForm(commentId)} />
-                </div>
-            )
-        }
-    }
 
     const renderDeleteButton = () => {
         if (user.id === UserId) {
-            return(
-                <div>
+            return (
+                <button>
                     <Delete onClick={() => handleCommentDelete(commentId)} />
-                </div>
+                </button>
             )
         }
     }
@@ -60,15 +51,18 @@ export default function Comment({ handleCommentDelete, renderCommentForm, commen
         <Card className={`comment ${classes.root}`}>
             <CardContent>
                 <Link href={`/user/${UserId}`}>
-                    <Typography variant="body2" component="p" className="commentAuthor">
-                        {author} 
-                    </Typography>
+                    {author}
                 </Link>
-                <LikeButton
-                    commentID={commentId}
-                />
-                {renderEditButton()}
-                {renderDeleteButton()}
+
+                <div className="commentButtonWrapper">
+                    <LikeButton
+                        commentID={commentId}
+                    />
+                    <div className="deleteCommentWrapper">
+                        {/* {renderEditButton()} */}
+                        {renderDeleteButton()}
+                    </div>
+                </div>
                 {/* <Typography className={classes.pos} color="textSecondary">
                     {createdAt}
                 </Typography> */}

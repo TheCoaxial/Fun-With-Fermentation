@@ -6,6 +6,7 @@ import "./Feed.css";
 import "../../App.css";
 import Grid from "@material-ui/core/Grid";
 import Typography from '@material-ui/core/Typography';
+import SearchBar from "../../components/SearchBar";
 
 export default function Feed() {
 
@@ -47,8 +48,9 @@ export default function Feed() {
         name={brew.name}
         description={brew.description}
         author={brew.author}
-        id={brew.id} 
-        UserId={brew.UserId}/>);
+        id={brew.id}
+        UserId={brew.UserId} />);
+    feedBrewsJSX.splice(10);
 
     topUsersJSX = sortedUsers.map(user => <UserCard
         key={user.id}
@@ -56,6 +58,7 @@ export default function Feed() {
         bio={user.bio}
         score={user.contributionScore}
         id={user.id} />);
+    topUsersJSX.splice(5);
 
 
     return (
@@ -70,27 +73,18 @@ export default function Feed() {
                         </Typography>
                         {topUsersJSX}
                     </div>
-
-                    <div className="innerSidebarWrap">
-                        <Typography gutterBottom variant="h5" component="h1">
-                            Top Recipes
-                        </Typography>
-                        {feedBrewsJSX}
-                    </div>
                 </Grid>
                 <Grid item xs={8}>
+                    <Typography gutterBottom variant="h5" component="h1">
+                        Top Recipes
+                        </Typography>
                     {feedBrewsJSX}
                 </Grid>
 
 
             </Grid>
-            
 
+            <SearchBar />
         </div>
     )
-    // } else {
-    //    <div>
-    //        <h1>No Token, No entry</h1>
-    //    </div>
-    // }
 }

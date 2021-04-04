@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import "./style.css";
 import { fade, makeStyles, withStyles } from '@material-ui/core/styles';
+import RecipeCard from '../RecipeCard/RecipeCard';
+import UserCard from '../UserCard/UserCard';
 import InputBase from '@material-ui/core/InputBase';
 import InputLabel from '@material-ui/core/InputLabel';
 import SearchIcon from '@material-ui/icons/Search';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { Button } from '@material-ui/core';
+import api from '../../utils/api';
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -89,81 +94,124 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SearchBar() {
-    const classes = useStyles();
+  const classes = useStyles();
 
-    const [search, setSearch] = useState("");
-    const [difficulty, setDifficulty] = useState("");
-    const [searchType, setSearchType] = useState("");
+  const [search, setSearch] = useState("");
+  const [difficulty, setDifficulty] = useState("");
+  const [searchType, setSearchType] = useState("Brew");
+  const [searchResults, setSearchResults] = useState({ type: 'brew', results: [] });
 
-    const handleDifficultyChange = event => {
-        setDifficulty(event.target.value);
-        console.log(difficulty);
-    };
+  const handleDifficultyChange = event => {
+    setDifficulty(event.target.value);
+  };
 
-    const handleTypeChange = event => {
-        setSearchType(event.target.value);
-        console.log(searchType);
-    };
+  const handleTypeChange = event => {
+    setSearchType(event.target.value);
+  };
 
-    const handleSearchChange = event => {
-        setSearch(event.target.value);
-        console.log(search);
-    };
+  const handleSearchChange = event => {
+    setSearch(event.target.value);
+  };
 
-    const handleSubmit = event => {
-        event.preventDefault();
-    };
+  const handleSubmit = event => {
+    event.preventDefault();
+    console.log(searchType);
+    switch (searchType) {
+      case "Brew":
+        api.searchBrews(search).then(res => {
+          console.log(res.data);
+          setSearchResults({ type: 'brew', results: res.data });
+        });
+        break;
+      case "Ingredient":
+        api.searchIngredients(search).then(res => {
+          console.log(res.data);
+          setSearchResults({ type: 'ingredient', results: res.data });
+        });
+        break;
+      case "User":
+        api.searchUsers(search).then(res => {
+          console.log(res.data);
+          setSearchResults({ type: 'user', results: res.data });
+        });
+        break;
+    }
+  };
 
-    return (
-        <div className={classes.grow}>
-            <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                    <SearchIcon />
-                </div>
-                <InputBase
-                    placeholder="Search…"
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                    onChange={handleSearchChange}
-                />
-            </div>
-            <FormControl className={classes.margin}>
-                <InputLabel id="difficulty-select-label">Difficulty</InputLabel>
-                <Select
-                    labelId="difficulty-select-label"
-                    id="difficulty-select"
-                    value={difficulty}
-                    onChange={handleDifficultyChange}
-                    input={<BootstrapInput />}
-                >
-                    <MenuItem value={""}>
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={"Beginner"}>Beginner</MenuItem>
-                    <MenuItem value={"Intermediate"}>Intermediate</MenuItem>
-                    <MenuItem value={"Expert"}>Expert</MenuItem>
-                    <MenuItem value={"Unknown"}>Unknown</MenuItem>
-                </Select>
-            </FormControl>
-            <FormControl className={classes.margin}>
-                <InputLabel id="type-select-label">Search Type</InputLabel>
-                <Select
-                    labelId="type-select-label"
-                    id="type-select"
-                    value={searchType}
-                    onChange={handleTypeChange}
-                    input={<BootstrapInput />}
-                >
-                    <MenuItem value={"Brew"}>
-                        <em>Brew</em>
-                    </MenuItem>
-                    <MenuItem value={"Brew"}>Brew</MenuItem>
-                    <MenuItem value={"User"}>User</MenuItem>
-                </Select>
-            </FormControl>
-        </div>
+  let resultsJSX;
+
+  if (searchResults.type == "user") {
+    resultsJSX = searchResults.results.map(result => <UserCard
+      key={result.id}
+      username={result.username}
+      bio={result.bio}
+      score={result.contributionScore}
+      id={result.id} />);
+  } else if (searchResults.type == "brew") {
+    resultsJSX = searchResults.results.map(result => <RecipeCard
+      key={result.id}
+      name={result.name}
+      description={result.description}
+      author={result.author}
+      id={result.id}
+      UserId={result.UserId} />
     );
+
+  } else {
+    let prevKey = -1;
+    resultsJSX = searchResults.results.map(({ Brew }) => {
+      if (prevKey == Brew.id) {
+        return;
+      }
+      prevKey = Brew.id;
+      return <RecipeCard
+        key={Brew.id}
+        name={Brew.name}
+        description={Brew.description}
+        author={Brew.author}
+        id={Brew.id}
+        UserId={Brew.UserId} />
+    });
+  }
+
+  return (
+    <div className={classes.grow} id="searchWrapper">
+      <h2>Search Brews or Users</h2>
+      <form onSubmit={handleSubmit} id="searchInputs">
+        <div className={classes.search} id="searchBox">
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <div id="searchBoxVerticalAlign">
+            <InputBase
+              placeholder="Search…"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{ 'aria-label': 'search' }}
+              onChange={handleSearchChange}
+            />
+          </div>
+        </div>
+        <div className="searchTypeWrapper">
+          {/* <InputLabel id="type-select-label">Search Type</InputLabel> */}
+          <Select
+            labelId="type-select-label"
+            id="type-select"
+            value={searchType}
+            onChange={handleTypeChange}
+            input={<BootstrapInput />}>
+            <MenuItem value={"Ingredient"}>Ingredient</MenuItem>
+            <MenuItem value={"Brew"}>Brew</MenuItem>
+            <MenuItem value={"User"}>User</MenuItem>
+          </Select>
+        </div>
+        <Button type="submit">Search</Button>
+      </form>
+      <div id="search-results">
+        {resultsJSX}
+      </div>
+    </div>
+  );
 }
