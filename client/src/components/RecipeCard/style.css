@@ -18,3 +18,12 @@
 .recipeCard .MuiCardContent-root {
     padding-top:0;
 }
+
+.userLink a {
+    display: inline-block;
+    font-size:inherit;
+}
+
+.recipeCard a:hover {
+    cursor: pointer;
+}

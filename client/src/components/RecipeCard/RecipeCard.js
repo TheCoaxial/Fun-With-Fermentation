@@ -53,12 +53,10 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
   };
 
   let brewLink = <Link onClick={() => { history.push(`/brews/${id}`) }}>
-    <Typography>{name}</Typography>
+    <Typography variant="h5">{name}</Typography>
   </Link>;
 
-  let userLink = <span className="userLink"><Link onClick={() => { history.push(`/user/${UserId}`) }} >
-    <Typography>{author}</Typography>
-  </Link></span>;
+  let userLink = <Typography variant="subtitle2" className="userLink">Created by <Link onClick={() => { history.push(`/user/${UserId}`) }} >{author}</Link></Typography>;
 
   return (
     <div className="recipeCard">

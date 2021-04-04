@@ -2,6 +2,11 @@
 /* ----- general styles ----- */
 /* -------------------------- */
 
+#Feed {
+    height:100%;
+    padding-bottom:7%;
+}
+
 .MuiGrid-spacing-xs-3 > .MuiGrid-item {
     padding:2rem !important;
 }
@@ -22,12 +27,16 @@
     display:none;
 }
 
+#Feed .innerSidebarWrap .userCard h2 {
+    font-size:1.3rem;
+}
+
 #Feed .recipeCard {
     margin-top:1rem;
 }
 
 #Feed .innerSidebarWrap {
-    margin-top:2rem;
+    margin-top:0;
 }
 
 #Feed .sidebarWrap {
@@ -49,6 +58,12 @@
     position: absolute;
     left:16px;
     bottom:16px;
+    top:auto;
+    right:auto;
+}
+
+#Feed .userCard .MuiCardContent-root:last-child {
+    padding-bottom:30px;
 }
 
 @media only screen and (max-width:900px) {
@@ -57,6 +72,8 @@
         position:absolute;
         left:16px;
         top:5px;
+        bottom:auto;
+        right:auto;
         height:2em;
         display:flex;
     }

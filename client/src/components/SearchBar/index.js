@@ -176,7 +176,7 @@ export default function SearchBar() {
 
   return (
     <div className={classes.grow} id="searchWrapper">
-      <h2>Search Brews or Users</h2>
+      <h2>Search Brews, Ingredients, or Users</h2>
       <form onSubmit={handleSubmit} id="searchInputs">
         <div className={classes.search} id="searchBox">
           <div className={classes.searchIcon}>
