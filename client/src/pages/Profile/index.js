@@ -32,36 +32,33 @@ export default class Profile extends Component {
 
   componentDidMount() {
     if(this.state.currentUser){
-    API
-        .getUserProfile(this.state.currentUser.id)
-        .then(res => {
-            let userData = res.data[0];
-            console.log(userData);
-            this.setState({
-                contributionScore: userData.contributionScore,
-                bio: userData.bio,
-                userData: res.data[0]
-            });
-        });
+      API
+          .getUserProfile(this.state.currentUser.id)
+          .then(res => {
+              let userData = res.data[0];
+              console.log(userData);
+              this.setState({
+                  contributionScore: userData.contributionScore,
+                  bio: userData.bio,
+                  userData: res.data[0]
+              });
+          });
 
-    API
-        .getUserFavorites(this.state.currentUser.id)
-        .then(res => this.setState({ userFav: res.data }));
+      API
+          .getUserFavorites(this.state.currentUser.id)
+          .then(res => this.setState({ userFav: res.data }));
 
-    API
-        .getUserBrews(this.state.currentUser.id)
-        .then(res => this.setState({ brews: res.data }));
+      API
+          .getUserBrews(this.state.currentUser.id)
+          .then(res => this.setState({ brews: res.data }));
 
-    API
-        .getUserFollowing(this.state.currentUser.id)
-        .then(res => this.setState({ following: res.data }));
+      API
+          .getUserFollowing(this.state.currentUser.id)
+          .then(res => this.setState({ following: res.data }));
 
-    this.recentlyViewed();
-
-  } 
-    
-  
-}
+      this.recentlyViewed();
+    }   
+  }
 
   recentlyViewed() {
 
@@ -111,7 +108,7 @@ export default class Profile extends Component {
     let FollowingJSX = following.map(({ Following }) => <UserCard
       key={Following.id}
       id={Following.id}
-      username={Following.name}
+      username={Following.username}
       bio={Following.bio}
       score={Following.contributionScore}
     />);

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Redirect, useParams } from 'react-router';
-import RecipeCard from '../../components/RecipeCard/RecipeCard';
-import API from '../../utils/api';
-import "./styles.css"
+import { useParams } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import ls from 'local-storage'
-import FollowButton from "../../components/FollowButton";
 import { Grid, Typography } from "@material-ui/core";
+import API from '../../utils/api';
+import RecipeCard from '../../components/RecipeCard/RecipeCard';
+import FollowButton from "../../components/FollowButton";
+import "./styles.css"
 
 export default function UserDisplay() {
 

@@ -83,9 +83,10 @@ export default function Navbar({ currentUser }) {
                             aria-controls="customized-menu"
                             aria-haspopup="true"
                             variant="contained"
-                            onClick={handleClick}>
-                                <Avatar alt="Logo" src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
-                                    {currentUser.username}
+                            onClick={handleClick}
+                        >
+                            <Avatar alt="Logo" src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
+                            {currentUser.username}
                         </Button>
 
                         <StyledMenu
@@ -112,7 +113,7 @@ export default function Navbar({ currentUser }) {
                                     history.push("/");
                                 }}>
                                     <ListItemIcon>
-                                            <ExitToApp fontSize="small" />
+                                        <ExitToApp fontSize="small" />
                                     </ListItemIcon>
                                     <ListItemText primary="Log Out" />
                                 </Link>

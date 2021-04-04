@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { Redirect } from "react-router-dom";
+import AuthService from '../../services/auth.service.js';
+import ls from 'local-storage';
+import { Grid, Typography, List, TextField, Button } from "@material-ui/core";
+import Timeline from '@material-ui/lab/Timeline';
+import { makeStyles } from '@material-ui/core/styles';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 import API from '../../utils/api';
 import Comment from '../../components/Comment/comment';
 import Ingredient from "../../components/Ingredient";
 import Step from "../../components/Step";
-
-import ls from 'local-storage';
-
-import { Grid, Typography, List, TextField, Button } from "@material-ui/core";
-import Timeline from '@material-ui/lab/Timeline';
-import { makeStyles } from '@material-ui/core/styles';
-import "./styles.css"
-import AuthService from '../../services/auth.service.js';
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FacebookShare from "../../components/ShareButtons/FacebookShare";
-import DeleteIcon from '@material-ui/icons/Delete';
 import FavoriteButton from "../../components/FavoriteButton";
-import authService from '../../services/auth.service.js';
-import { Redirect } from "react-router-dom";
+import "./styles.css"
 
 const useStyles = makeStyles((theme) => ({
     root: {
