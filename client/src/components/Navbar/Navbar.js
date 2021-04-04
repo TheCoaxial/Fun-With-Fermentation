@@ -108,9 +108,9 @@ export default function Navbar({ currentUser }) {
 
                             <StyledMenuItem>
 
-                                <Link to={"/login"} className="nav-link" onClick={() => {
+                                <Link to={"/"} className="nav-link" onClick={() => {
                                     authService.logout();
-                                    history.push("/login");
+                                    history.push("/");
                                 }}>
                                     <ListItemIcon>
                                             <ExitToAppIcon fontSize="small" />

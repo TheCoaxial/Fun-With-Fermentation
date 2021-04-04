@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { Redirect, useParams } from 'react-router';
 import RecipeCard from '../../components/RecipeCard/RecipeCard';
 import API from '../../utils/api';
 import "./styles.css"
@@ -41,6 +41,7 @@ export default function UserDisplay() {
         id={brew.id}
         UserId={brew.UserId} />);
 
+    if(ls.get('user')){
     return (
     <div id="userDisplay">
         <Grid container spacing={3}>
@@ -80,4 +81,5 @@ export default function UserDisplay() {
             </Grid>
         </Grid>
     </div>);
+    }else{return <Redirect to="/" />}
 }

@@ -9,6 +9,7 @@ import "./profile.css";
 import CheckIcon from '@material-ui/icons/Check';
 import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
+import { Redirect } from "react-router-dom";
 /* import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
 import StarIcon from '@material-ui/icons/Star'; */
 
@@ -30,7 +31,7 @@ export default class Profile extends Component {
   }
 
   componentDidMount() {
-
+    if(this.state.currentUser){
     API
         .getUserProfile(this.state.currentUser.id)
         .then(res => {
@@ -56,7 +57,11 @@ export default class Profile extends Component {
         .then(res => this.setState({ following: res.data }));
 
     this.recentlyViewed();
-  };
+
+  } 
+    
+  
+}
 
   recentlyViewed() {
 
@@ -106,7 +111,7 @@ export default class Profile extends Component {
     let FollowingJSX = following.map(({ Following }) => <UserCard
       key={Following.id}
       id={Following.id}
-      username={Following.username}
+      username={Following.name}
       bio={Following.bio}
       score={Following.contributionScore}
     />);
@@ -168,6 +173,8 @@ export default class Profile extends Component {
       </div>
     }
 
+    // Currently just displays Info about the user from the DB
+    if(this.state.currentUser){
     return (
         <div id="Profile">
             <Grid container spacing={3}>
@@ -260,5 +267,6 @@ export default class Profile extends Component {
             </Grid>
         </div >
     );
+    } else{ return <Redirect to="/" /> }
   }
 }

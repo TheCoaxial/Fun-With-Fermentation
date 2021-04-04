@@ -4,8 +4,8 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import CheckButton from "react-validation/build/button";
 import Footer from "../../components/Footer/index";
+import { Link, Redirect } from 'react-router-dom';
 import { Typography, TextField, Button, Avatar } from "@material-ui/core";
-import { Link } from 'react-router-dom';
 import "./style.css";
 
 import AuthService from "../../services/auth.service";
