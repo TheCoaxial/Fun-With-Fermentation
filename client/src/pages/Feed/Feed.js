@@ -4,8 +4,7 @@ import UserCard from "../../components/UserCard/UserCard"
 import API from "../../utils/api";
 import "./Feed.css";
 import "../../App.css";
-import Grid from "@material-ui/core/Grid";
-import Typography from '@material-ui/core/Typography';
+import { Grid, Typography } from "@material-ui/core";
 import SearchBar from "../../components/SearchBar";
 
 export default function Feed() {

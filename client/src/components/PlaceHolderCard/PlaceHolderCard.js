@@ -1,10 +1,7 @@
 import React from "react";
 import "./style.css";
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import { Card, CardHeader, CardContent, Typography } from "@material-ui/core";
 import { red } from '@material-ui/core/colors';
 
 
