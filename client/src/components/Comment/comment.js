@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from "react-router-dom";
 import './styles.css';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, Typography, Link } from '@material-ui/core';
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
 });
 
 export default function Comment({ handleCommentDelete, commentId, author, body, createdAt, UserId }) {
-
+    let history = useHistory();
     const classes = useStyles();
     /*     const preventDefault = (event) => event.preventDefault(); */
 
@@ -42,12 +43,12 @@ export default function Comment({ handleCommentDelete, commentId, author, body, 
         }
     }
 
+    let userLink = <Typography variant="subtitle2" className="userLink"><Link onClick={() => { history.push(`/user/${UserId}`) }} >{author}</Link></Typography>;
+
     return (
         <Card className={`comment ${classes.root}`}>
             <CardContent>
-                <Link href={`/user/${UserId}`}>
-                    {author}
-                </Link>
+                {userLink}
 
                 <div className="commentButtonWrapper">
                     <LikeButton
