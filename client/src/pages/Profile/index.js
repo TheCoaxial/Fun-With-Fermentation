@@ -95,6 +95,7 @@ export default class Profile extends Component {
     const following = this.state.following;
 
     let BrewsJSX = brews.map(brew => <RecipeCard
+      key={brew.id}
       id={brew.id}
       name={brew.name}
       description={brew.description}

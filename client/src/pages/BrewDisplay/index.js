@@ -4,9 +4,7 @@ import API from '../../utils/api';
 import Comment from '../../components/Comment/comment';
 import Ingredient from "../../components/Ingredient";
 import Step from "../../components/Step";
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
+import { Grid, Typography, List, TextField, Button } from "@material-ui/core";
 import Timeline from '@material-ui/lab/Timeline';
 import { makeStyles } from '@material-ui/core/styles';
 import "./styles.css"
@@ -14,11 +12,8 @@ import AuthService from '../../services/auth.service.js';
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FacebookShare from "../../components/ShareButtons/FacebookShare";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FavoriteButton from "../../components/FavoriteButton";
-import authService from '../../services/auth.service.js';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -39,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BrewDisplay(props) {
-    console.log(props);
+/*     console.log(props); */
 
     const classes = useStyles();
 
@@ -57,13 +52,12 @@ export default function BrewDisplay(props) {
     useEffect(() => {
         API.getSpecificBrew(brewId)
             .then((data) => {
-                console.log(data.data);
                 setBrew(data.data);
                 setComments(data.data.Comments);
                 setIngredients(data.data.Ingredients);
                 setSteps(data.data.Steps);
             });
-    }, []);
+    }, [brewId]);
 
     // const renderCommentForm = (commentId) => {
     //     return (
@@ -86,16 +80,16 @@ export default function BrewDisplay(props) {
     //     );
     // }
 
-    const handleCommentEdit = (commentId, body) => {
-        API.updateComment(commentId, body).then(res => {
-            setComments([...comments, { id: commentId, body: body, author: authService.getCurrentUser().username, UserId: authService.getCurrentUser().id }]);
-        });
-    }
+    // const handleCommentEdit = (commentId, body) => {
+    //     API.updateComment(commentId, body).then(res => {
+    //         setComments([...comments, { id: commentId, body: body, author: authService.getCurrentUser().username, UserId: authService.getCurrentUser().id }]);
+    //     });
+    // }
 
     const handleCommentDelete = (commentId) => {
         API.deleteComment(commentId).then(res => {
             let temparray = comments.filter(comment => {
-                if (comment.id != commentId) {
+                if (comment.id !== commentId) {
                     return comment;
                 }
             });
@@ -211,7 +205,7 @@ export default function BrewDisplay(props) {
                         event.preventDefault();
                         let { id, username } = AuthService.getCurrentUser();
                         API.postComment(id, brewId, username, commentInput).then(res => {
-                            setComments([...comments, { UserId: id, body: commentInput, author: username }]);
+                            setComments([...comments, { id: id, body: commentInput, author: username }]);
                             setCommentInput("");
                         });
                     }}>
