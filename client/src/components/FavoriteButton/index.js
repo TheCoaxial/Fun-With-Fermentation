@@ -1,7 +1,6 @@
 import { React, useEffect, useState } from "react";
 import IconButton from '@material-ui/core/IconButton';
-import StarIcon from '@material-ui/icons/Star';
-import StarOutlineIcon from '@material-ui/icons/StarOutline';
+import { Star, StarOutline } from "@material-ui/icons";
 import AuthService from "../../services/auth.service";
 import API from "../../utils/api";
 import "./style.css";
@@ -63,11 +62,11 @@ const FavButton = ({ brewID }) => {
               { renderFavCount(favCount) }
               { isFav ? (
                   <IconButton aria-label="remove from favorites" onClick={delFav}>
-                      <StarIcon />
+                      <Star />
                   </IconButton>
               ) : (
                   <IconButton aria-label="add to favorites" onClick={addFav}>
-                      <StarOutlineIcon />
+                      <StarOutline />
                   </IconButton>
               )}
           </div>

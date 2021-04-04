@@ -1,22 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from 'react-router-dom';
 import "./RecipeCard";
 import "./style.css";
 import "../../App.css";
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-
-import { Link } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
+import { Card, CardHeader, CardContent, CardActions, Link, Typography } from "@material-ui/core";
 import { red } from '@material-ui/core/colors';
+/* import clsx from 'clsx';
+import CardMedia from '@material-ui/core/CardMedia';
+import Collapse from '@material-ui/core/Collapse';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MoreVertIcon from '@material-ui/icons/MoreVert'; */
 import FavoriteButton from "../../components/FavoriteButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,11 +40,11 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
   let history = useHistory();
 
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
+/*   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
-  };
+  }; */
 
   let brewLink = <Link onClick={() => { history.push(`/brews/${id}`) }}>
     <Typography variant="h5">{name}</Typography>

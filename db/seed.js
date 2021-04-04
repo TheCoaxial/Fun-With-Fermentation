@@ -22,6 +22,7 @@ async function insertData() {
     await insertBrew("Username2's first Brew", "UsernamePerson", 2);
     await insertBrew("pineapple Brew", "soccerlover774", 4);
     await insertBrew("beginner brew", "reddituser72", 6);
+    await insertBrew("banana brew", "qwerty", 5);
 
     await editUser({
         bio: "Hello I am the first user.",
