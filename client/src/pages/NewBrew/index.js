@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
+import ls from 'local-storage';
 import AuthService from "../../services/auth.service.js";
 import { TextField, Button, InputLabel, NativeSelect } from "@material-ui/core";
 import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
@@ -99,80 +101,83 @@ class NewBrew extends Component {
             );
         })
 
-        return (
+        if (ls.get('user')) {
+            return (
+                <div id="newBrew">
+                    <form id="newBrewForm" onSubmit={this.onSubmit}>
 
-            <div id="newBrew">
-                <form id="newBrewForm" onSubmit={this.onSubmit}>
+                        <TextField
+                            required
+                            id="outlined-required brewName"
+                            variant="outlined"
+                            label="Brew Name"
+                            defaultValue="Brew Name"
+                            alt="enter the name of your brew"
+                            name="title"
+                            value={this.state.title}
+                            onChange={this.onChange}
+                        />
 
-                    <TextField
-                        required
-                        id="outlined-required brewName"
-                        variant="outlined"
-                        label="Brew Name"
-                        defaultValue="Brew Name"
-                        alt="enter the name of your brew"
-                        name="title"
-                        value={this.state.title}
-                        onChange={this.onChange}
-                    />
+                        <TextField
+                            id="outlined-multiline-static brewDescription"
+                            label="Description"
+                            multiline
+                            rows={4}
+                            defaultValue="Default Value"
+                            variant="outlined"
+                            placeholder="Enter any additional description about your brew (optional)"
+                            name="description"
+                            value={this.state.description}
+                            onChange={this.onChange}
+                        />
 
-                    <TextField
-                        id="outlined-multiline-static brewDescription"
-                        label="Description"
-                        multiline
-                        rows={4}
-                        defaultValue="Default Value"
-                        variant="outlined"
-                        placeholder="Enter any additional description about your brew (optional)"
-                        name="description"
-                        value={this.state.description}
-                        onChange={this.onChange}
-                    />
+                        <div className="formGroup">
 
-                    <div className="formGroup">
+                            <div className="ingredients">
+                                {ingredientsJSX}
+                            </div>
 
-                        <div className="ingredients">
-                            {ingredientsJSX}
+                            <Button className="addInputButton" variant="outlined" onClick={(e) => this.handleAppend(e, ingredientArg)}>Add Another Ingredient</Button>
+
                         </div>
 
-                        <Button className="addInputButton" variant="outlined" onClick={(e) => this.handleAppend(e, ingredientArg)}>Add Another Ingredient</Button>
+                        <div className="formGroup">
 
-                    </div>
+                            <div className="instructions">
+                                {instructionsJSX}
+                            </div>
 
-                    <div className="formGroup">
+                            <Button className="addInputButton" variant="outlined" onClick={(e) => this.handleAppend(e, instructionArg)}>Add Another Instruction</Button>
 
-                        <div className="instructions">
-                            {instructionsJSX}
                         </div>
 
-                        <Button className="addInputButton" variant="outlined" onClick={(e) => this.handleAppend(e, instructionArg)}>Add Another Instruction</Button>
+                        <InputLabel htmlFor="select" id="selectLabel">Difficulty of Brew</InputLabel>
+                        <NativeSelect name="difficulty" onChange={this.onChange} value={this.state.difficulty} id="select">
+                            <option value="unknown"></option>
+                            <option value="beginner">beginner</option>
+                            <option value="intermediate">intermediate</option>
+                            <option value="expert">expert</option>
+                            <option value="unknown">unknown</option>
+                        </NativeSelect>
 
-                    </div>
-
-                    <InputLabel htmlFor="select" id="selectLabel">Difficulty of Brew</InputLabel>
-                    <NativeSelect name="difficulty" onChange={this.onChange} value={this.state.difficulty} id="select">
-                        <option value="unknown"></option>
-                        <option value="beginner">beginner</option>
-                        <option value="intermediate">intermediate</option>
-                        <option value="expert">expert</option>
-                        <option value="unknown">unknown</option>
-                    </NativeSelect>
-
-                    <div id="formButtonWrap">
-                        <Button
-                            type="submit"
-                            id="submit"
-                            variant="contained"
-                            color="primary"
-                            size="large"
-                            startIcon={<LocalDrinkIcon />}
-                        >
-                            Save Brew
-                        </Button>
-                    </div>
-                </form>
-            </div>
-        );
+                        <div id="formButtonWrap">
+                            <Button
+                                type="submit"
+                                id="submit"
+                                variant="contained"
+                                color="primary"
+                                size="large"
+                                startIcon={<LocalDrinkIcon />}
+                            >
+                                Save Brew
+                            </Button>
+                        </div>
+                    </form>
+                </div>
+            );
+        } else {
+            return <Redirect to="/" />
+        } 
     }
 }
 

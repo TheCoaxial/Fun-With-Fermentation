@@ -5,8 +5,8 @@ import SearchBar from "../../components/SearchBar";
 import "./Search.css";
 import "../../App.css";
 
-export default function Feed() {
-    if (ls.length('user')) {
+export default function Search() {
+    if (ls.get('user')) {
         return (
             <div id="Feed">
                 <SearchBar />
