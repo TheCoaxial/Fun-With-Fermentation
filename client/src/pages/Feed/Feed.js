@@ -6,7 +6,6 @@ import "./Feed.css";
 import ls from 'local-storage';
 import "../../App.css";
 import { Grid, Typography } from "@material-ui/core";
-import SearchBar from "../../components/SearchBar";
 import { Redirect } from "react-router-dom";
 
 export default function Feed() {
@@ -62,7 +61,7 @@ export default function Feed() {
     return (
         <div id="Feed">
             <Grid container spacing={3}>
-                <Grid item xs={4} className="sidebarWrap">
+                <Grid item md={4} xs={12} className="sidebarWrap">
                     <div className="innerSidebarWrap">
                         <Typography gutterBottom variant="h5" component="h1">
                             Top Users
@@ -70,14 +69,13 @@ export default function Feed() {
                         {topUsersJSX}
                     </div>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item md={8} xs={12}>
                     <Typography gutterBottom variant="h5" component="h1">
                         Top Brews
                     </Typography>
                     {feedBrewsJSX}
                 </Grid>
             </Grid>
-            <SearchBar />
         </div>
     )
     } else{ return <Redirect to="/" /> }
