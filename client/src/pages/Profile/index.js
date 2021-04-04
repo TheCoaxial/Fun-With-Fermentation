@@ -241,13 +241,13 @@ export default class Profile extends Component {
                         <Typography gutterBottom variant="h5" component="h1">
                             Saved Brews
                         </Typography>
-                        {this.state.userFav[0] ? (FavBrewsJSX) :
-                         (<PlaceHolderCard
+                        {/* {this.state.userFav[0] ? (FavBrewsJSX) : */}
+                         <PlaceHolderCard
                             mockTitle= "Favorite Brews"
                             description="This is where you'll find all the information
                             about all the brews that you favorite!"
                           >
-                         </PlaceHolderCard>) }  
+                         </PlaceHolderCard>   
                     </div>
                 </Grid>
                 <Grid item lg={3} sm={12}>
@@ -255,14 +255,14 @@ export default class Profile extends Component {
                         <Typography gutterBottom variant="h5" component="h1">
                             My Brews
                         </Typography>
-                        {this.state.brews[0] ? (BrewsJSX) 
-                        : 
-                        (<PlaceHolderCard
+                        {/* {this.state.brews[0] ? (BrewsJSX) 
+                        :  */}
+                        <PlaceHolderCard
                           mockTitle= "Uploaded Brews"
                           description="This is where you'll find all the information
                           about all the brews that you upload!"
                         >
-                      </PlaceHolderCard>) }
+                      </PlaceHolderCard> 
                     </div>
                 </Grid>
             </Grid>
