@@ -1,9 +1,9 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
+import ls from 'local-storage';
+import SearchBar from "../../components/SearchBar";
 import "./Search.css";
 import "../../App.css";
-import ls from 'local-storage';
-import { Redirect } from "react-router-dom";
-import SearchBar from "../../components/SearchBar";
 
 export default function Feed() {
     if (ls.length('user')) {

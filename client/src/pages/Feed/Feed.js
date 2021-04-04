@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import ls from 'local-storage';
+import { Grid, Typography } from "@material-ui/core";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import UserCard from "../../components/UserCard/UserCard"
 import API from "../../utils/api";
 import "./Feed.css";
-import ls from 'local-storage';
 import "../../App.css";
-import { Grid, Typography } from "@material-ui/core";
-import { Redirect } from "react-router-dom";
 
 export default function Feed() {
 

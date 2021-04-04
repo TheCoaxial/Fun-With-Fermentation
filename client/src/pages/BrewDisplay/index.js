@@ -7,7 +7,6 @@ import { Grid, Typography, List, TextField, Button } from "@material-ui/core";
 import Timeline from '@material-ui/lab/Timeline';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
-
 import API from '../../utils/api';
 import Comment from '../../components/Comment/comment';
 import Ingredient from "../../components/Ingredient";
@@ -60,7 +59,7 @@ export default function BrewDisplay(props) {
                 setIngredients(data.data.Ingredients);
                 setSteps(data.data.Steps);
             });
-    }, []);
+    }, [brewId]);
 
     // const renderCommentForm = (commentId) => {
     //     return (

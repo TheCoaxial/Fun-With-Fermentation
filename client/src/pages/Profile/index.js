@@ -1,15 +1,15 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import ls from 'local-storage';
+import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core';
+import { Check, Create } from "@material-ui/icons";
 import API from "../../utils/api";
 import PlaceHolderCard from "../../components/PlaceHolderCard/PlaceHolderCard";
 import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
-import CheckIcon from '@material-ui/icons/Check';
-import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core';
-import CreateIcon from '@material-ui/icons/Create';
-import { Redirect } from "react-router-dom";
+
 /* import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
 import StarIcon from '@material-ui/icons/Star'; */
 
@@ -148,7 +148,7 @@ export default class Profile extends Component {
               <Typography gutterBottom variant="body3" component="p" id="bioText">
                 {this.state.bio || "Insert your bio here!"}
               </Typography>
-              <CreateIcon />
+              <Create />
           </IconButton>
       </div>;
 
@@ -165,7 +165,7 @@ export default class Profile extends Component {
               API.updateUser(this.state.currentUser.id, this.state.bio, false);
             }}
             aria-label="submit">
-            <CheckIcon />
+            <Check />
           </IconButton>
       </div>
     }
