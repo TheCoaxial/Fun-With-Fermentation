@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import IconButton from '@material-ui/core/IconButton';
-import { Person, PersonOutline, Add, Remove, Star, StarOutline } from "@material-ui/icons";
+import { Person, PersonOutline, Add, Remove } from "@material-ui/icons";
 import AuthService from "../../services/auth.service";
 import API from "../../utils/api";
 import "./style.css";

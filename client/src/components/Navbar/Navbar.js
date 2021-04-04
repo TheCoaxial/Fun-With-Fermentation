@@ -124,12 +124,6 @@ export default function Navbar({ currentUser }) {
                     </div>
 
                 </div>
-
-
-
-
-
-
             </div>
         ) : (
             <div className="navbar-nav ml-auto navbar-loggedOut">

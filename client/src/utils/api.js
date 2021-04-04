@@ -135,24 +135,15 @@ class API {
     }
 
     saveNewFavorite(brewID, userID) {
-        return this.axios.post("/api/favorite/" + brewID + "/" + userID, {
-            BrewId: brewID,
-            UserId: userID
-        });
+        return this.axios.post("/api/favorite/" + brewID + "/" + userID);
     }
 
     newFollow(followID, userID) {
-        return this.axios.post("/api/follow/" + followID + "/" + userID, {
-            followingId: followID,
-            UserId: userID
-        });
+        return this.axios.post("/api/follow/" + followID + "/" + userID);
     }
 
     newCommentLike(commentID, userID) {
-        return this.axios.post("/api/comment-like/" + commentID + "/" + userID, {
-            CommentId: commentID,
-            UserId: userID
-        });
+        return this.axios.post("/api/comment-like/" + commentID + "/" + userID);
     }
 
     postIngredient(brewID, name) {
@@ -218,15 +209,6 @@ class API {
     }
 
     updateUser(userID, bio, contributionScore) {
-        let body = {};
-
-        if (contributionScore) {
-            body.contributionScore = contributionScore;
-        }
-        if (bio) {
-            body.bio = bio;
-        }
-
         return this.axios.put("/api/update-user/" + userID, {
             bio: bio,
             contributionScore: contributionScore
