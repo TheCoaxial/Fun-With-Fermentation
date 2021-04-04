@@ -125,16 +125,19 @@ export default class Profile extends Component {
     />);
     LastViewedJSX.splice(3);
     
-    if(userFav[0]){
-    let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
-      key={Brew.id}
-      id={Brew.id}
-      name={Brew.name}
-      description={Brew.description}
-      author={Brew.author}
-      UserId={Brew.UserId}
-    />);
-    }
+    
+    // const FavBrewsJSX = () =>{
+    //   if 
+    // userFav.map(({ Brew }) => <RecipeCard
+    //   key={Brew.id}
+    //   id={Brew.id}
+    //   name={Brew.name}
+    //   description={Brew.description}
+    //   author={Brew.author}
+    //   UserId={Brew.UserId}
+    // />);
+    // }
+    
 
     let createdAtValue = this.state.userData.createdAt;
 

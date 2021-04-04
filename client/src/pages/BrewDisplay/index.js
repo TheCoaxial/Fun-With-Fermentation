@@ -128,14 +128,34 @@ export default function BrewDisplay(props) {
         }
     };
 
-    let commentsJSX = comments.map(comment => <Comment
-        handleCommentDelete={handleCommentDelete}
-        commentId={comment.id}
-        key={comment.createdAt}
-        body={comment.body}
-        createdAt={comment.createdAt}
-        author={comment.author}
-        UserId={comment.UserId} />);
+    const commentMap = () => {
+        if (comments.length) {
+            return comments.map(comment => {
+                return(
+                    <Comment
+                        handleCommentDelete={handleCommentDelete}
+                        commentId={comment.id}
+                        key={comment.createdAt}
+                        body={comment.body}
+                        createdAt={comment.createdAt}
+                        author={comment.author}
+                        UserId={comment.UserId}
+                    />
+                );
+            });
+        } else {
+            return;
+        }
+    }
+
+    // let commentsJSX = comments.map(comment => <Comment
+    //     handleCommentDelete={handleCommentDelete}
+    //     commentId={comment.id}
+    //     key={comment.createdAt}
+    //     body={comment.body}
+    //     createdAt={comment.createdAt}
+    //     author={comment.author}
+    //     UserId={comment.UserId} />);
 
     let ingredientsJSX = ingredients.map(ingredient => <Ingredient
         key={ingredient.id}
@@ -232,7 +252,7 @@ export default function BrewDisplay(props) {
                     </form>
 
                     <div id="comment-list">
-                        {commentsJSX}
+                        {commentsMap()}
                     </div>
                 </div>
 
