@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import AuthService from '../../services/auth.service.js';
 import ls from 'local-storage';
-import { Grid, Typography, List, TextField, Button } from "@material-ui/core";
+import { Grid, Typography, List, TextField, Button, Link } from "@material-ui/core";
 import Timeline from '@material-ui/lab/Timeline';
 import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BrewDisplay(props) {
     /*     console.log(props); */
 
+    let history = useHistory();
     const classes = useStyles();
 
     let [brew, setBrew] = useState({});
@@ -103,7 +104,6 @@ export default function BrewDisplay(props) {
         API.deleteBrew(brewId).then(() => {
             props.history.push('/feed')
         });
-
     };
 
     const renderBrewDelete = () => {
@@ -124,6 +124,8 @@ export default function BrewDisplay(props) {
             );
         }
     };
+
+    let userLink = <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">Created by <Link onClick={() => { history.push(`/user/${brew.UserId}`) }} >{brew.author}</Link></Typography>;
 
     let commentsJSX = comments.map(comment => <Comment
         handleCommentDelete={handleCommentDelete}
@@ -173,9 +175,7 @@ export default function BrewDisplay(props) {
 
                             </div>
 
-                            <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">
-                                Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a>
-                            </Typography>
+                            {userLink}
 
                             <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
                                 {brew.description}
