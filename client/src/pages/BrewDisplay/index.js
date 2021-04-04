@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BrewDisplay(props) {
-/*     console.log(props); */
+    /*     console.log(props); */
 
     const classes = useStyles();
 
@@ -57,7 +57,7 @@ export default function BrewDisplay(props) {
                 setIngredients(data.data.Ingredients);
                 setSteps(data.data.Steps);
             });
-    }, [brewId]);
+    }, []);
 
     // const renderCommentForm = (commentId) => {
     //     return (
@@ -205,7 +205,7 @@ export default function BrewDisplay(props) {
                         event.preventDefault();
                         let { id, username } = AuthService.getCurrentUser();
                         API.postComment(id, brewId, username, commentInput).then(res => {
-                            setComments([...comments, { id: id, body: commentInput, author: username }]);
+                            setComments([...comments, res.data]);
                             setCommentInput("");
                         });
                     }}>
