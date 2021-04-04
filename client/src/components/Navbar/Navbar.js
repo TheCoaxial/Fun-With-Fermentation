@@ -1,46 +1,126 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import authService from "../../services/auth.service";
+import "./style.css";
+
+import Avatar from '@material-ui/core/Avatar';
+import Button from '@material-ui/core/Button';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import { withStyles } from '@material-ui/core/styles';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+const StyledMenu = withStyles({
+    paper: {
+      border: '1px solid #d3d4d5',
+    },
+  })((props) => (
+    <Menu
+      elevation={0}
+      getContentAnchorEl={null}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
+      {...props}
+    />
+  ));
+
+  const StyledMenuItem = withStyles((theme) => ({
+    root: {
+      '&:focus': {
+        backgroundColor: theme.palette.primary.main,
+        '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+          color: theme.palette.common.white,
+        },
+      },
+    },
+  }))(MenuItem);
 
 export default function Navbar({ currentUser }) {
+
+    let history = useHistory();
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+
     return (<nav className="navbar navbar-expand navbar-dark bg-dark">
         <Link to={"/"} className="navbar-brand">
         </Link>
 
         {currentUser ? (
             <div className="navbar-nav ml-auto navbar-loggedIn">
-                <li className="nav-item">
+                <div className="nav-item">
                     <Link to={"/feed"} className="nav-link">
-                        <img src="./logo.png" alt="beer logo" className="logo" id="logo" />
+                        <Avatar alt="Logo" src="/logo.png" alt="beer logo" className="logo" id="logo" />
                     </Link>
-                </li>
+                </div>
+
                 <div className="userSpecific-navWrap">
-                    <li className="nav-item classicNavButton-wrap">
+
+                    <div className="nav-item classicNavButton-wrap">
                         <Link to={"/brew"} className="nav-link newBrew-button">
-                            Create New Brew
+                            <Button variant="contained">Create a New Brew</Button>
                         </Link>
-                    </li>
-                    <li className="nav-item subMenu-wrap">
-                        <Link to={"/profile"} className="nav-link">
-                            <img src="./sample-avatar-2.png" alt="user avatar" className="avatar" />
-                            {currentUser}
-                        </Link>
-                        <ul className="userMenu-showHide">
-                            <li className="nav-item">
+                    </div>
+
+                    <div>
+                        <Button
+                            id="profileMenuButton"
+                            aria-controls="customized-menu"
+                            aria-haspopup="true"
+                            variant="contained"
+                            onClick={handleClick}>
+                                <Avatar alt="Logo" src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
+                                    {currentUser.username}
+                        </Button>
+
+                        <StyledMenu
+                            id="customized-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}>
+                            <StyledMenuItem>
+
                                 <Link to={"/profile"} className="nav-link">
-                                    Profile
+                                    <ListItemIcon>
+                                        <AccountBoxIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Profile" />
                                 </Link>
-                            </li>
-                            <li className="nav-item">
-                                <a href="/login" className="nav-link" onClick={() => {
+
+                            </StyledMenuItem>
+
+                            <StyledMenuItem>
+
+                                <Link to={"/login"} className="nav-link" onClick={() => {
                                     authService.logout();
-                                    this.props.history.push("/login");
+                                    history.push("/login");
                                 }}>
-                                    Log Out
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+                                    <ListItemIcon>
+                                            <ExitToAppIcon fontSize="small" />
+                                    </ListItemIcon>
+                                    <ListItemText primary="Log Out" />
+                                </Link>
+
+                            </StyledMenuItem>
+                        </StyledMenu>
+                    </div>
                 </div>
             </div>
         ) : (
