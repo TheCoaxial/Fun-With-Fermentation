@@ -125,9 +125,7 @@ export default class Profile extends Component {
     />);
     LastViewedJSX.splice(3);
     
-    
-   
-    userFav.map(({ Brew }) => <RecipeCard
+    let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       key={Brew.id}
       id={Brew.id}
       name={Brew.name}
@@ -135,8 +133,6 @@ export default class Profile extends Component {
       author={Brew.author}
       UserId={Brew.UserId}
     />);
-    
-    
 
     let createdAtValue = this.state.userData.createdAt;
 
@@ -235,9 +231,7 @@ export default class Profile extends Component {
                               description="This is where you'll find all the profiles 
                               that you follow!"
                           >
-                          </PlaceHolderCard> 
-                          } 
-                           
+                          </PlaceHolderCard> }
                     </div>
                 </Grid>
 
@@ -247,13 +241,12 @@ export default class Profile extends Component {
                             Saved Brews
                         </Typography>
                         {this.state.userFav[0] ? (FavBrewsJSX) :
-                         <PlaceHolderCard
+                         (<PlaceHolderCard
                             mockTitle= "Favorite Brews"
                             description="This is where you'll find all the information
                             about all the brews that you favorite!"
                           >
-                         </PlaceHolderCard>   
-                        }
+                         </PlaceHolderCard>) }  
                     </div>
                 </Grid>
                 <Grid item lg={3} sm={12}>
@@ -263,13 +256,12 @@ export default class Profile extends Component {
                         </Typography>
                         {this.state.brews[0] ? (BrewsJSX) 
                         : 
-                        <PlaceHolderCard
+                        (<PlaceHolderCard
                           mockTitle= "Uploaded Brews"
                           description="This is where you'll find all the information
                           about all the brews that you upload!"
                         >
-                        </PlaceHolderCard> 
-                        }
+                      </PlaceHolderCard>) }
                     </div>
                 </Grid>
             </Grid>
