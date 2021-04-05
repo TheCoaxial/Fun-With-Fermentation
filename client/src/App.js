@@ -15,6 +15,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'; */
+import Search from "./pages/Search/Search";
 import Profile from "./pages/Profile";
 import NewBrew from "./pages/NewBrew";
 import UserDisplay from "./pages/UserDisplay";
@@ -103,6 +104,7 @@ class App extends Component {
                         <Route exact path="/register" component={(props) => <Register history={props.history} setCurrentUser={this.handleNavbarRender} />} />
                         <Route exact path="/profile" component={Profile} />
                         <Route exact path={"/feed"} component={Feed} />
+                        <Route exact path="/search" component={Search} />
                         <Route exact path="/brew" component={NewBrew} />
                         <Route path="/user/:userId" component={UserDisplay} />
                         <Route path="/brews/:brewId" component={BrewDisplay} />

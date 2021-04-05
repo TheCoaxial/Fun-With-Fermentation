@@ -1,15 +1,15 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import ls from 'local-storage';
+import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core';
+import { Check, Create } from "@material-ui/icons";
 import API from "../../utils/api";
 import PlaceHolderCard from "../../components/PlaceHolderCard/PlaceHolderCard";
 import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
-import CheckIcon from '@material-ui/icons/Check';
-import { Input, Grid, Typography, Avatar, IconButton } from '@material-ui/core';
-import CreateIcon from '@material-ui/icons/Create';
-import { Redirect } from "react-router-dom";
+
 /* import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
 import StarIcon from '@material-ui/icons/Star'; */
 
@@ -32,36 +32,33 @@ export default class Profile extends Component {
 
   componentDidMount() {
     if(this.state.currentUser){
-    API
-        .getUserProfile(this.state.currentUser.id)
-        .then(res => {
-            let userData = res.data[0];
-            console.log(userData);
-            this.setState({
-                contributionScore: userData.contributionScore,
-                bio: userData.bio,
-                userData: res.data[0]
-            });
-        });
+      API
+          .getUserProfile(this.state.currentUser.id)
+          .then(res => {
+              let userData = res.data[0];
+              console.log(userData);
+              this.setState({
+                  contributionScore: userData.contributionScore,
+                  bio: userData.bio,
+                  userData: res.data[0]
+              });
+          });
 
-    API
-        .getUserFavorites(this.state.currentUser.id)
-        .then(res => this.setState({ userFav: res.data }));
+      API
+          .getUserFavorites(this.state.currentUser.id)
+          .then(res => this.setState({ userFav: res.data }));
 
-    API
-        .getUserBrews(this.state.currentUser.id)
-        .then(res => this.setState({ brews: res.data }));
+      API
+          .getUserBrews(this.state.currentUser.id)
+          .then(res => this.setState({ brews: res.data }));
 
-    API
-        .getUserFollowing(this.state.currentUser.id)
-        .then(res => this.setState({ following: res.data }));
+      API
+          .getUserFollowing(this.state.currentUser.id)
+          .then(res => this.setState({ following: res.data }));
 
-    this.recentlyViewed();
-
-  } 
-    
-  
-}
+      this.recentlyViewed();
+    }   
+  }
 
   recentlyViewed() {
 
@@ -111,7 +108,7 @@ export default class Profile extends Component {
     let FollowingJSX = following.map(({ Following }) => <UserCard
       key={Following.id}
       id={Following.id}
-      username={Following.name}
+      username={Following.username}
       bio={Following.bio}
       score={Following.contributionScore}
     />);
@@ -151,7 +148,7 @@ export default class Profile extends Component {
               <Typography gutterBottom variant="body3" component="p" id="bioText">
                 {this.state.bio || "Insert your bio here!"}
               </Typography>
-              <CreateIcon />
+              <Create />
           </IconButton>
       </div>;
 
@@ -168,7 +165,7 @@ export default class Profile extends Component {
               API.updateUser(this.state.currentUser.id, this.state.bio, false);
             }}
             aria-label="submit">
-            <CheckIcon />
+            <Check />
           </IconButton>
       </div>
     }

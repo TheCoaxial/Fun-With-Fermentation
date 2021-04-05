@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { Redirect, useHistory } from "react-router-dom";
+import AuthService from '../../services/auth.service.js';
+import ls from 'local-storage';
+import { Grid, Typography, List, TextField, Button, Link } from "@material-ui/core";
+import Timeline from '@material-ui/lab/Timeline';
+import { makeStyles } from '@material-ui/core/styles';
+import DeleteIcon from '@material-ui/icons/Delete';
 import API from '../../utils/api';
 import Comment from '../../components/Comment/comment';
 import Ingredient from "../../components/Ingredient";
 import Step from "../../components/Step";
-
-import ls from 'local-storage';
-
-import { Grid, Typography, List, TextField, Button } from "@material-ui/core";
-import Timeline from '@material-ui/lab/Timeline';
-import { makeStyles } from '@material-ui/core/styles';
-import "./styles.css"
-import AuthService from '../../services/auth.service.js';
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FacebookShare from "../../components/ShareButtons/FacebookShare";
-import DeleteIcon from '@material-ui/icons/Delete';
 import FavoriteButton from "../../components/FavoriteButton";
-import authService from '../../services/auth.service.js';
-import { Redirect } from "react-router-dom";
+import "./styles.css"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BrewDisplay(props) {
     /*     console.log(props); */
 
+    let history = useHistory();
     const classes = useStyles();
 
     let [brew, setBrew] = useState({});
@@ -62,7 +60,7 @@ export default function BrewDisplay(props) {
                 setIngredients(data.data.Ingredients);
                 setSteps(data.data.Steps);
             });
-    }, []);
+    }, [brewId]);
 
     // const renderCommentForm = (commentId) => {
     //     return (
@@ -106,7 +104,6 @@ export default function BrewDisplay(props) {
         API.deleteBrew(brewId).then(() => {
             props.history.push('/feed')
         });
-
     };
 
     const renderBrewDelete = () => {
@@ -127,6 +124,8 @@ export default function BrewDisplay(props) {
             );
         }
     };
+
+    let userLink = <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">Created by <Link onClick={() => { history.push(`/user/${brew.UserId}`) }} >{brew.author}</Link></Typography>;
 
     let commentsJSX = comments.map(comment => <Comment
         handleCommentDelete={handleCommentDelete}
@@ -177,9 +176,7 @@ export default function BrewDisplay(props) {
 
                             </div>
 
-                            <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">
-                                Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a>
-                            </Typography>
+                            {userLink}
 
                             <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
                                 {brew.description}
@@ -190,7 +187,7 @@ export default function BrewDisplay(props) {
                         <Grid item xs={12}>
                             <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
                                 Ingredients
-                        </Typography>
+                            </Typography>
                             <List id="ingredient-list">
                                 {ingredientsJSX}
                             </List>
