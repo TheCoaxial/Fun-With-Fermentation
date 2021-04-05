@@ -143,13 +143,13 @@ export default function SearchBar() {
   } else if (searchResults.type === "brew") {
     resultsJSX = searchResults.results.map(result => <RecipeCard
       key={result.id}
+      difficulty={result.difficulty}
       name={result.name}
       description={result.description}
       author={result.author}
       id={result.id}
       UserId={result.UserId} />
     );
-
   } else {
     let prevKey = -1;
     resultsJSX = searchResults.results.map(({ Brew }) => {
@@ -159,6 +159,7 @@ export default function SearchBar() {
       prevKey = Brew.id;
       return <RecipeCard
         key={Brew.id}
+        difficulty={Brew.difficulty}
         name={Brew.name}
         description={Brew.description}
         author={Brew.author}

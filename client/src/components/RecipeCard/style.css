@@ -27,3 +27,12 @@
 .recipeCard a:hover {
     cursor: pointer;
 }
+
+#desc {
+    display: inline;
+}
+
+#diff {
+    display: inline;
+    float: right;
+}

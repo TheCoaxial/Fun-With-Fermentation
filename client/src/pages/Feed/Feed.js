@@ -42,6 +42,7 @@ export default function Feed() {
 
     feedBrewsJSX = brews.map(brew => <RecipeCard
         key={brew.id}
+        difficulty={brew.difficulty}
         name={brew.name}
         description={brew.description}
         author={brew.author}

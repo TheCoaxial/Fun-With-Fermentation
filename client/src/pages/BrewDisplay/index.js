@@ -179,6 +179,10 @@ export default function BrewDisplay(props) {
                             {userLink}
 
                             <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
+                                Difficulty: {brew.difficulty}
+                            </Typography>
+
+                            <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
                                 {brew.description}
                             </Typography>
 
