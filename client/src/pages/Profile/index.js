@@ -99,22 +99,22 @@ export default class Profile extends Component {
     const userFav = this.state.userFav;
     const following = this.state.following;
 
-    // let BrewsJSX = brews.map(brew => <RecipeCard
-    //   key={brew.id}
-    //   id={brew.id}
-    //   name={brew.name}
-    //   description={brew.description}
-    //   author={brew.author}
-    //   UserId={brew.UserId}
-    // />);
+    let BrewsJSX = brews.map(brew => <RecipeCard
+      key={brew.id}
+      id={brew.id}
+      name={brew.name}
+      description={brew.description}
+      author={brew.author}
+      UserId={brew.UserId}
+    />);
 
-    // let FollowingJSX = following.map(({ Following }) => <UserCard
-    //   key={Following.id}
-    //   id={Following.id}
-    //   username={Following.name}
-    //   bio={Following.bio}
-    //   score={Following.contributionScore}
-    // />);
+    let FollowingJSX = following.map(({ Following }) => <UserCard
+      key={Following.id}
+      id={Following.id}
+      username={Following.name}
+      bio={Following.bio}
+      score={Following.contributionScore}
+    />);
 
     let LastViewedJSX = pages.map(person => <UserCard
       key={person.data[0].id}
@@ -126,17 +126,16 @@ export default class Profile extends Component {
     LastViewedJSX.splice(3);
     
     
-    // const FavBrewsJSX = () =>{
-    //   if 
-    // userFav.map(({ Brew }) => <RecipeCard
-    //   key={Brew.id}
-    //   id={Brew.id}
-    //   name={Brew.name}
-    //   description={Brew.description}
-    //   author={Brew.author}
-    //   UserId={Brew.UserId}
-    // />);
-    // }
+   
+    userFav.map(({ Brew }) => <RecipeCard
+      key={Brew.id}
+      id={Brew.id}
+      name={Brew.name}
+      description={Brew.description}
+      author={Brew.author}
+      UserId={Brew.UserId}
+    />);
+    
     
 
     let createdAtValue = this.state.userData.createdAt;
@@ -229,14 +228,15 @@ export default class Profile extends Component {
                           <Typography gutterBottom variant="h5" component="h1">
                               Following
                           </Typography>
-                          {/* {this.state.following[0] ? (FollowingJSX) 
-                          : */}
+                          {this.state.following[0] ? (FollowingJSX) 
+                          :
                           <PlaceHolderCard
                               mockTitle= "People You Follow"
                               description="This is where you'll find all the profiles 
                               that you follow!"
                           >
                           </PlaceHolderCard> 
+                          } 
                            
                     </div>
                 </Grid>
@@ -246,13 +246,14 @@ export default class Profile extends Component {
                         <Typography gutterBottom variant="h5" component="h1">
                             Saved Brews
                         </Typography>
-                        {/* {this.state.userFav[0] ? (FavBrewsJSX) : */}
+                        {this.state.userFav[0] ? (FavBrewsJSX) :
                          <PlaceHolderCard
                             mockTitle= "Favorite Brews"
                             description="This is where you'll find all the information
                             about all the brews that you favorite!"
                           >
                          </PlaceHolderCard>   
+                        }
                     </div>
                 </Grid>
                 <Grid item lg={3} sm={12}>
@@ -260,14 +261,15 @@ export default class Profile extends Component {
                         <Typography gutterBottom variant="h5" component="h1">
                             My Brews
                         </Typography>
-                        {/* {this.state.brews[0] ? (BrewsJSX) 
-                        :  */}
+                        {this.state.brews[0] ? (BrewsJSX) 
+                        : 
                         <PlaceHolderCard
                           mockTitle= "Uploaded Brews"
                           description="This is where you'll find all the information
                           about all the brews that you upload!"
                         >
-                      </PlaceHolderCard> 
+                        </PlaceHolderCard> 
+                        }
                     </div>
                 </Grid>
             </Grid>
