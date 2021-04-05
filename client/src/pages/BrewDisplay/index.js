@@ -135,7 +135,8 @@ export default function BrewDisplay(props) {
         body={comment.body}
         createdAt={comment.createdAt}
         author={comment.author}
-        UserId={comment.UserId} />);
+        UserId={comment.UserId}
+    />);
 
     let ingredientsJSX = ingredients.map(ingredient => <Ingredient
         key={ingredient.id}

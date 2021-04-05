@@ -29,22 +29,31 @@ app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static('./client/build'));
+
 // Simple test route
-app.get("/", (req, res) => {
-  res.json({ message: "Test route" });
-});
+// app.get("/", (req, res) => {
+//   res.json({ message: "Test route" });
+// });
 
 let PORT = process.env.EXPRESS_PORT || 3001;
 
-if (process.env.NODE_ENV === "production") {
-  PORT = process.env.PORT;
-}
+
+
 
 //routes
 require("./controller/api-routes")(app);
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static('./client/build'));
+  PORT = process.env.PORT;
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+  });
+} else{
+  app.use(express.static("public"));
+}
 
 db.sequelize.sync({}).then(() => {
   app.listen(PORT, () => {
