@@ -4,6 +4,13 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./models");
 
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+  corsOptions = {
+    origin: "http://localhost:3001"
+  };
+}
+
 const app = express();
 app.use(cors()) 
 app.use(express.urlencoded({ extended: true }));
@@ -19,13 +26,6 @@ require('./routes/user.routes')(app);
 let corsOptions = {
   origin: "https://salty-sea-99414.herokuapp.com"
 };
-
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-  corsOptions = {
-    origin: "http://localhost:3001"
-  };
-}
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static('./client/build'));
