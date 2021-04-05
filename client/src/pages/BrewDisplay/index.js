@@ -128,23 +128,25 @@ export default function BrewDisplay(props) {
         }
     };
 
+    let commentArray = ["one"];
+
     const commentMap = () => {
         if (comments.length) {
             return comments.map(comment => {
                 return(
                     <Comment
                         handleCommentDelete={handleCommentDelete}
-                        commentId={comment.id}
-                        key={comment.createdAt}
-                        body={comment.body}
-                        createdAt={comment.createdAt}
-                        author={comment.author}
-                        UserId={comment.UserId}
+                        commentId={1}
+                        key={222}
+                        body={"A string"}
+                        createdAt={222}
+                        author={"Cory"}
+                        UserId={1}
                     />
                 );
             });
         } else {
-            return;
+            return(<h1>No Comments Yet</h1>);
         }
     }
 
@@ -252,7 +254,7 @@ export default function BrewDisplay(props) {
                     </form>
 
                     <div id="comment-list">
-                        {commentMap()}
+                        {commentMap(commentArray)}
                     </div>
                 </div>
 
