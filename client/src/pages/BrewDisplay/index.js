@@ -35,8 +35,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function BrewDisplay(props) {
-    /*     console.log(props); */
-
     let history = useHistory();
     const classes = useStyles();
 
@@ -136,6 +134,7 @@ export default function BrewDisplay(props) {
         UserId={comment.UserId}
     />);
 
+    ingredients.sort((a, b) => a.quantity - b.quantity);
     let ingredientsJSX = ingredients.map(ingredient => <Ingredient
         key={ingredient.id}
         name={ingredient.name}
@@ -143,16 +142,12 @@ export default function BrewDisplay(props) {
         quantityUnits={ingredient.quantityUnits}
     />);
 
-    let stepNumber = 0;
-    let stepsJSX = steps.map(step => {
-        stepNumber += 1;
-        return (<Step
-            key={step.id}
-            stepNumber={stepNumber}
-            duration={step.duration}
-            instructions={step.instructions}
-        />);
-    });
+    steps.sort((a, b) => a.duration - b.duration);
+    let stepsJSX = steps.map(step => <Step
+        key={step.id}
+        duration={step.duration}
+        instructions={step.instructions}
+    />);
 
     if (ls.get('user')) {
         return (
