@@ -131,17 +131,17 @@ export default function BrewDisplay(props) {
     let commentArray = ["one"];
 
     const commentMap = () => {
-        if (comments.length) {
+        if (comments[0]) {
             return comments.map(comment => {
                 return(
                     <Comment
                         handleCommentDelete={handleCommentDelete}
-                        commentId={1}
-                        key={222}
-                        body={"A string"}
-                        createdAt={222}
-                        author={"Cory"}
-                        UserId={1}
+                        commentId={comment.id}
+                        key={comment.createdAt}
+                        body={comment.body}
+                        createdAt={comment.createdAt}
+                        author={comment.author}
+                        UserId={comment.UserId}
                     />
                 );
             });
