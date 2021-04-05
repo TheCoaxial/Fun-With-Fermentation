@@ -13,7 +13,6 @@ import Ingredient from "../../components/Ingredient";
 import Step from "../../components/Step";
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
-import FacebookShare from "../../components/ShareButtons/FacebookShare";
 import FavoriteButton from "../../components/FavoriteButton";
 import "./styles.css"
 
@@ -172,8 +171,6 @@ export default function BrewDisplay(props) {
                                 />
                                 <RedditShare />
                                 <TwitterShare />
-                                <FacebookShare />
-
                             </div>
 
                             {userLink}
