@@ -187,9 +187,9 @@ export default function BrewDisplay(props) {
                             </Typography>
 
                             <div id="shareButtons">
-                                <FavoriteButton
+                                {/* <FavoriteButton
                                     brewID={brewId}
-                                />
+                                /> */}
                                 <RedditShare />
                                 <TwitterShare />
                                 <FacebookShare />
