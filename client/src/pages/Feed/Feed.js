@@ -66,11 +66,10 @@ export default function Feed() {
                         <Typography gutterBottom variant="h5" component="h1">
                             Top Users
                         </Typography>
-                    <div className="innerSidebarWrap">
-                        
-                            <div id="topUsersWrap">
-                                {topUsersJSX}
-                            </div>
+                    <div className="innerSidebarWrap">                        
+                        <div id="topUsersWrap">
+                            {topUsersJSX}
+                        </div>
                     </div>
                 </Grid>
                 <Grid item md={8} xs={12}>
