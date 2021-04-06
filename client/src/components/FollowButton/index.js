@@ -77,7 +77,7 @@ const FollowButton = ({ followID }) => {
     };
 
     return(
-        <div id="followerButtonWrapper">
+        <div>
             {renderFollowButton(follow)}
         </div>
     );

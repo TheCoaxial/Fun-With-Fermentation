@@ -63,11 +63,13 @@ export default function Feed() {
         <div id="Feed">
             <Grid container spacing={3}>
                 <Grid item md={4} xs={12} className="sidebarWrap">
-                    <div className="innerSidebarWrap">
                         <Typography gutterBottom variant="h5" component="h1">
                             Top Users
                         </Typography>
-                        {topUsersJSX}
+                    <div className="innerSidebarWrap">                        
+                        <div id="topUsersWrap">
+                            {topUsersJSX}
+                        </div>
                     </div>
                 </Grid>
                 <Grid item md={8} xs={12}>
