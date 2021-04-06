@@ -71,6 +71,13 @@ export default function BrewDisplay(props) {
         }
     };
 
+    let difUpper;
+    if (brew.difficulty) {
+      difUpper = brew.difficulty.charAt(0).toUpperCase() + brew.difficulty.slice(1);
+    } else {
+      difUpper = "";
+    }
+
     let userLink = <Typography sx={{ mt: 4, mb: 2 }} component="div" className="author-header">Created by <Link onClick={() => { history.push(`/user/${brew.UserId}`) }} >{brew.author}</Link></Typography>;
 
     let commentsJSX = comments.map(comment => <Comment
@@ -120,7 +127,7 @@ export default function BrewDisplay(props) {
                             {userLink}
 
                             <Typography sx={{ mt: 4, mb: 2 }} component="p" className="description-header">
-                                Difficulty: {brew.difficulty}
+                                {difUpper}
                             </Typography>
 
                             <Typography sx={{ mt: 4, mb: 2 }} component="p" className="description-header">
