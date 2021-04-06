@@ -36,6 +36,7 @@ export default function UserDisplay() {
 
     let brewsJSX = brews.map(brew => <RecipeCard
         key={brew.id}
+        difficulty={brew.difficulty}
         name={brew.name}
         description={brew.description}
         author={brew.author}

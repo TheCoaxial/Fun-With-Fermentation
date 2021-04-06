@@ -16,11 +16,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Step({ stepNumber, duration, instructions }) {
+export default function Step({ duration, instructions }) {
 
     const classes = useStyles();
-
-    return(        
+    if (instructions.length) {
+        return(        
             <TimelineItem>
                 <TimelineOppositeContent
                     className={classes.verticallyCenterContent}
@@ -28,7 +28,7 @@ export default function Step({ stepNumber, duration, instructions }) {
                     variant="body2"
                     color="textSecondary"
                 >
-                    {stepNumber}
+                    {duration}
                 </TimelineOppositeContent>
                 <TimelineSeparator>
                     <TimelineConnector />
@@ -45,4 +45,5 @@ export default function Step({ stepNumber, duration, instructions }) {
                 </TimelineContent>
             </TimelineItem>
         )
+    } else { return null; }
 };

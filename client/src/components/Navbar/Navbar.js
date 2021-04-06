@@ -90,9 +90,11 @@ export default function Navbar({ currentUser }) {
                             aria-controls="customized-menu"
                             aria-haspopup="true"
                             variant="contained"
+
                             onClick={handleClick}>
                                 <Avatar alt="Logo" src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
                                     {currentUser.username}
+
                         </Button>
 
                         <StyledMenu
@@ -100,7 +102,8 @@ export default function Navbar({ currentUser }) {
                             anchorEl={anchorEl}
                             keepMounted
                             open={Boolean(anchorEl)}
-                            onClose={handleClose}>
+                            onClose={handleClose}
+                        >
                             <StyledMenuItem>
 
                                 <Link to={"/profile"} className="nav-link">
@@ -115,7 +118,9 @@ export default function Navbar({ currentUser }) {
                             <StyledMenuItem>
 
                                 <Link to={"/login"} className="nav-link" onClick={() => {
-                                    authService.logout();
+                                                                                  
+                                    AuthService.logout();
+
                                     history.push("/login");
                                 }}>
                                     <ListItemIcon>
