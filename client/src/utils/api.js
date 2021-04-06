@@ -146,16 +146,18 @@ class API {
         return this.axios.post("/api/comment-like/" + commentID + "/" + userID);
     }
 
-    postIngredient(brewID, name) {
+    postIngredient(brewID, name, ingredientNumber) {
         return this.axios.post("/api/" + brewID + "/new-ingredient", {
             name: name,
+            quantity: ingredientNumber,
             BrewId: brewID
         });
     }
 
-    postStep(brewID, instructions) {
+    postStep(brewID, instructions, stepNumber) {
         return this.axios.post("/api/" + brewID + "/new-step", {
             instructions: instructions,
+            duration: stepNumber,
             BrewId: brewID
         });
     }

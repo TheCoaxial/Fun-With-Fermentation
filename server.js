@@ -4,6 +4,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./models");
 
+let corsOptions = {
+  origin: "https://salty-sea-99414.herokuapp.com"
+};
+
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
   corsOptions = {
@@ -22,10 +26,6 @@ let PORT = process.env.EXPRESS_PORT || 3001;
 require("./controller/api-routes")(app);
 require('./routes/auth.routes')(app);
 require('./routes/user.routes')(app);
-
-let corsOptions = {
-  origin: "https://salty-sea-99414.herokuapp.com"
-};
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static('./client/build'));

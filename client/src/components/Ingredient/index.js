@@ -4,14 +4,13 @@ import CheckIcon from '@material-ui/icons/Check';
 
 export default function Ingredient({ name, quantity, quantityUnits }) {
     return(
-        
             <ListItem>
                 <ListItemIcon>
                 <CheckIcon />
                 </ListItemIcon>
                 <ListItemText
                 primary={name}
-                secondary={quantity + " " + quantityUnits}
+/*                 secondary={quantity + " " + quantityUnits} */
                 />
             </ListItem>
     );
