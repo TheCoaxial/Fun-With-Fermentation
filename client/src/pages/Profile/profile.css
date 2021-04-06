@@ -3,6 +3,12 @@
 /* -------------------------- */
 
 
+#Profile .MuiGrid-spacing-xs-3 > .MuiGrid-item {
+    padding-right:1em;
+    padding-left:2em;
+    padding-top:2em;
+}
+
 #Profile .userCard .MuiCardMedia-root {
     display:none;
     height:0;
@@ -14,8 +20,8 @@
 }
 
 #Profile .avatar {
-    width:15rem;
-    height:15rem;
+    width:13rem;
+    height:13rem;
     padding:0 0 0 12px;
     border-radius:0;
 }
@@ -28,6 +34,8 @@
     margin:0.2em;
     margin-bottom:0;
     text-align:left;
+    font-size:3rem;
+    line-break: anywhere;
 }
 
 #Profile #bioViewState .MuiIconButton-root {
