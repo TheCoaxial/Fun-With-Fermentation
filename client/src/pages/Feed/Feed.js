@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Redirect } from "react-router-dom";
+import ls from 'local-storage';
+import { Grid, Typography } from "@material-ui/core";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import UserCard from "../../components/UserCard/UserCard"
 import API from "../../utils/api";
 import "./Feed.css";
 import "../../App.css";
-import { Grid, Typography } from "@material-ui/core";
-import SearchBar from "../../components/SearchBar";
 
 export default function Feed() {
 
@@ -56,10 +57,11 @@ export default function Feed() {
         id={user.id} />);
     topUsersJSX.splice(5);
 
+    if(ls.get("user")){
     return (
         <div id="Feed">
             <Grid container spacing={3}>
-                <Grid item xs={4} className="sidebarWrap">
+                <Grid item md={4} xs={12} className="sidebarWrap">
                     <div className="innerSidebarWrap">
                         <Typography gutterBottom variant="h5" component="h1">
                             Top Users
@@ -67,14 +69,14 @@ export default function Feed() {
                         {topUsersJSX}
                     </div>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item md={8} xs={12}>
                     <Typography gutterBottom variant="h5" component="h1">
                         Top Brews
                     </Typography>
                     {feedBrewsJSX}
                 </Grid>
             </Grid>
-            <SearchBar />
         </div>
     )
+    } else{ return <Redirect to="/" /> }
 }

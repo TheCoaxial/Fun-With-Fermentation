@@ -11,7 +11,7 @@ const FavButton = ({ brewID }) => {
     const [favCount, setFavCount] = useState(0);
     const [brewAuthor, setBrewAuthor] = useState({});
     const user = AuthService.getCurrentUser();
-
+    
     useEffect(() => {
         API
             .getSpecificBrew(brewID)

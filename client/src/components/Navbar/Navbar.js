@@ -1,17 +1,10 @@
 import React from "react";
 import { Link, useHistory } from 'react-router-dom';
-import authService from "../../services/auth.service";
+import AuthService from "../../services/auth.service";
 import "./style.css";
-
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { Avatar, Button, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core";
+import { AccountBox, ExitToApp } from "@material-ui/icons";
 import { withStyles } from '@material-ui/core/styles';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const StyledMenu = withStyles({
     paper: {

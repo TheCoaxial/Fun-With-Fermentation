@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { Redirect, useHistory } from "react-router-dom";
+import AuthService from '../../services/auth.service.js';
+import ls from 'local-storage';
+import { Grid, Typography, List, TextField, Button, Link } from "@material-ui/core";
+import Timeline from '@material-ui/lab/Timeline';
+import { makeStyles } from '@material-ui/core/styles';
+import DeleteIcon from '@material-ui/icons/Delete';
 import API from '../../utils/api';
 import Comment from '../../components/Comment/comment';
 import Ingredient from "../../components/Ingredient";
 import Step from "../../components/Step";
-import { Grid, Typography, List, TextField, Button } from "@material-ui/core";
-import Timeline from '@material-ui/lab/Timeline';
-import { makeStyles } from '@material-ui/core/styles';
-import "./styles.css"
-import AuthService from '../../services/auth.service.js';
 import RedditShare from "../../components/ShareButtons/RedditShare";
 import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FacebookShare from "../../components/ShareButtons/FacebookShare";
-import DeleteIcon from '@material-ui/icons/Delete';
 import FavoriteButton from "../../components/FavoriteButton";
+import "./styles.css"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 export default function BrewDisplay(props) {
     /*     console.log(props); */
 
+    let history = useHistory();
     const classes = useStyles();
 
     let [brew, setBrew] = useState({});
@@ -57,7 +60,7 @@ export default function BrewDisplay(props) {
                 setIngredients(data.data.Ingredients);
                 setSteps(data.data.Steps);
             });
-    }, []);
+    }, [brewId]);
 
     // const renderCommentForm = (commentId) => {
     //     return (
@@ -101,7 +104,6 @@ export default function BrewDisplay(props) {
         API.deleteBrew(brewId).then(() => {
             props.history.push('/feed')
         });
-
     };
 
     const renderBrewDelete = () => {
@@ -123,6 +125,8 @@ export default function BrewDisplay(props) {
         }
     };
 
+    let userLink = <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">Created by <Link onClick={() => { history.push(`/user/${brew.UserId}`) }} >{brew.author}</Link></Typography>;
+
     let commentsJSX = comments.map(comment => <Comment
         handleCommentDelete={handleCommentDelete}
         commentId={comment.id}
@@ -130,7 +134,8 @@ export default function BrewDisplay(props) {
         body={comment.body}
         createdAt={comment.createdAt}
         author={comment.author}
-        UserId={comment.UserId} />);
+        UserId={comment.UserId}
+    />);
 
     let ingredientsJSX = ingredients.map(ingredient => <Ingredient
         key={ingredient.id}
@@ -150,53 +155,54 @@ export default function BrewDisplay(props) {
         />);
     });
 
-    return (
-        <div id="brewDisplay">
-            <div id="brewDisplayFlex">
-                <div id="mainBrewDisplay">
+    if (ls.get('user')) {
+        return (
+            <div id="brewDisplay">
+                <div id="brewDisplayFlex">
+                    <div id="mainBrewDisplay">
 
-                    <Grid item xs={12} className="mainHeaders">
-                        <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div" className="h2-header">
-                            {brew.name}
-                        </Typography>
+                        <Grid item xs={12} className="mainHeaders">
+                            <Typography sx={{ mt: 4, mb: 2 }} variant="h2" component="div" className="h2-header">
+                                {brew.name}
+                            </Typography>
 
-                        <div id="shareButtons">
-                            <FavoriteButton
-                                brewID={brewId}
-                            />
-                            <RedditShare />
-                            <TwitterShare />
-                            <FacebookShare />
+                            <div id="shareButtons">
+                                <FavoriteButton
+                                    brewID={brewId}
+                                />
+                                <RedditShare />
+                                <TwitterShare />
+                                <FacebookShare />
 
-                        </div>
+                            </div>
 
-                        <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">
-                            Created by <a href={`/user/${brew.UserId}`}>{brew.author}</a>
-                        </Typography>
+                            {userLink}
 
-                        <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
-                            {brew.description}
-                        </Typography>
+                            <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
+                                {brew.description}
+                            </Typography>
 
-                    </Grid>
+                        </Grid>
 
-                    <Grid item xs={12}>
+                        <Grid item xs={12}>
+                            <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
+                                Ingredients
+                            </Typography>
+                            <List id="ingredient-list">
+                                {ingredientsJSX}
+                            </List>
+                        </Grid>
+
                         <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
-                            Ingredients
+                            Timeline
                         </Typography>
-                        <List id="ingredient-list">
-                            {ingredientsJSX}
-                        </List>
-                    </Grid>
+                        <Timeline>
+                            {stepsJSX}
+                        </Timeline>
 
-                    <Typography sx={{ mt: 4, mb: 2 }} variant="h5" component="div" className="h5-headers">
-                        Timeline
-                        </Typography>
-                    <Timeline>
-                        {stepsJSX}
-                    </Timeline>
+                        {renderBrewDelete()}
+                    </div>
 
-                    {renderBrewDelete()}
                 </div>
 
                 <div id="commentSection">
@@ -227,8 +233,10 @@ export default function BrewDisplay(props) {
                         {commentsJSX}
                     </div>
                 </div>
-            </div>
 
-        </div>
-    );
+            </div>
+        );
+    } else { 
+        return <Redirect to='/' /> 
+    }
 }

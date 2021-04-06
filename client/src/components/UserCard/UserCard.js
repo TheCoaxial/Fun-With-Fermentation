@@ -1,11 +1,10 @@
 import React from "react";
-import "../../App.css";
-import './UserCard.css'
+import { Link, useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardContent, CardMedia, Typography, Avatar } from "@material-ui/core";
-import { Link } from 'react-router-dom';
 import FollowButton from "../../components/FollowButton";
-import { useHistory } from 'react-router-dom';
+import "../../App.css";
+import './UserCard.css'
 
 const useStyles = makeStyles({
     root: {

@@ -1,13 +1,13 @@
 // Original code by BezKoder(https://github.com/bezkoder/react-jwt-auth) 
 // Extended/modified by Cory Scanlon
 import React, { Component } from "react";
+import { Link, Redirect } from 'react-router-dom';
 import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
+/* import Input from "react-validation/build/input"; */
 import CheckButton from "react-validation/build/button";
-import Footer from "../../components/Footer/index";
 import { Typography, TextField, Button, Avatar } from "@material-ui/core";
-import { Link } from 'react-router-dom';
 import { isEmail } from "validator";
+import Footer from "../../components/Footer/index";
 import "./style.css";
 
 import AuthService from "../../services/auth.service";
@@ -217,6 +217,7 @@ export default class Register extends Component {
                   <Button
                     variant="contained"
                     type="submit"
+                    onClick={<Redirect to="/profile" />}
                     className="btn">
                     Sign Up
                   </Button>
