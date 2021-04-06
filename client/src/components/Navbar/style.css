@@ -79,6 +79,10 @@
     margin-right:1rem;
     text-transform: none;
   }
+
+  .navbar .classicNavButton-wrap:first-of-type {
+    margin-right:2em;
+  }
   
   .navbar .classicNavButton-wrap {
     height:100%;

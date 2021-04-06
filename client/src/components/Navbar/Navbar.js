@@ -71,6 +71,11 @@ export default function Navbar({ currentUser }) {
                 </div>
 
                 <div className="userSpecific-navWrap">
+                    <div className="nav-item classicNavButton-wrap">
+                        <Link to={"/search"} className="nav-link newBrew-button">
+                            <Button variant="contained">Search</Button>
+                        </Link>
+                    </div>
 
                     <div className="nav-item classicNavButton-wrap">
                         <Link to={"/brew"} className="nav-link newBrew-button">
@@ -79,6 +84,7 @@ export default function Navbar({ currentUser }) {
                     </div>
 
                     <div>
+                        
                         <Button
                             id="profileMenuButton"
                             aria-controls="customized-menu"
