@@ -44,13 +44,17 @@ export default function UserCard({ id, username, bio, newBrew, score }) {
                         </div>
                     </div>
 
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        Score: {score}
-                    </Typography>
+                    <div className="followScoreWrapper">
 
-                    <FollowButton
-                        followID={id}
-                    />
+                        <Typography variant="body2" color="textSecondary" component="p" className="score">
+                            Score: {score}
+                        </Typography>
+
+                        <FollowButton
+                            followID={id}
+                        />
+
+                    </div>
                 </CardContent>
             </Card>
         </div>
