@@ -1,17 +1,10 @@
 import React from "react";
 import { Link, useHistory } from 'react-router-dom';
-import authService from "../../services/auth.service";
+import AuthService from "../../services/auth.service";
 import "./style.css";
-
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import { Avatar, Button, ListItemIcon, ListItemText, Menu, MenuItem } from "@material-ui/core";
+import { AccountBox, ExitToApp } from "@material-ui/icons";
 import { withStyles } from '@material-ui/core/styles';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const StyledMenu = withStyles({
     paper: {
@@ -79,7 +72,7 @@ export default function Navbar({ currentUser }) {
 
                     <div className="nav-item classicNavButton-wrap">
                         <Link to={"/brew"} className="nav-link newBrew-button">
-                            <Button variant="contained">Create Brew</Button>
+                            <Button variant="contained">Create a New Brew</Button>
                         </Link>
                     </div>
 
@@ -90,9 +83,10 @@ export default function Navbar({ currentUser }) {
                             aria-controls="customized-menu"
                             aria-haspopup="true"
                             variant="contained"
-                            onClick={handleClick}>
-                                <Avatar alt="Logo" src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
-                                    {currentUser.username}
+                            onClick={handleClick}
+                        >
+                            <Avatar alt="Logo" src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
+                            {currentUser.username}
                         </Button>
 
                         <StyledMenu
@@ -106,7 +100,7 @@ export default function Navbar({ currentUser }) {
 
                                 <Link to={"/profile"} className="nav-link">
                                     <ListItemIcon>
-                                        <AccountBoxIcon fontSize="small" />
+                                        <AccountBox fontSize="small" />
                                     </ListItemIcon>
                                     <ListItemText primary="Profile" />
                                 </Link>
@@ -116,11 +110,11 @@ export default function Navbar({ currentUser }) {
                             <StyledMenuItem>
 
                                 <Link to={"/login"} className="nav-link" onClick={() => {
-                                    authService.logout();
+                                    AuthService.logout();
                                     history.push("/login");
                                 }}>
                                     <ListItemIcon>
-                                            <ExitToAppIcon fontSize="small" />
+                                        <ExitToApp fontSize="small" />
                                     </ListItemIcon>
                                     <ListItemText primary="Log Out" />
                                 </Link>
@@ -135,16 +129,14 @@ export default function Navbar({ currentUser }) {
                 <li className="nav-item classicNavButton-wrap">
                     <Link to={"/login"} className="nav-link classic-button">
                         Login
-            </Link>
+                    </Link>
                 </li>
                 <li className="nav-item classicNavButton-wrap">
                     <Link to={"/register"} className="nav-link classic-button">
                         Sign Up
-            </Link>
+                    </Link>
                 </li>
             </div>
         )}
     </nav>)
 }
-
-
