@@ -21,9 +21,9 @@
 .navbar #logo {
     width:4rem;
     height:4rem;
-    border:1px solid #be8c60;
+    border:1px solid rgba(166, 175, 161, 0.9);;
     border-radius:50%;
-    background-color:#d49c6b;
+    background-color:rgba(166, 175, 161, 0.9);;
     padding:0 0.15rem;
 }
 
@@ -91,6 +91,11 @@
   justify-content: center;
 }
 
+.navbar .classicNavButton-wrap button {
+  background-color:rgba(185, 196, 179, 1);
+  font-weight: bold;
+  color:rgba(47, 61, 48, 1);
+}
 
 .navbar .subMenu-wrap {
   padding-bottom:1.5rem;

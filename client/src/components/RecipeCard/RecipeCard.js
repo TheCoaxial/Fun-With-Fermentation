@@ -63,8 +63,8 @@ export default function RecipeCard({ id, UserId, name, description, author, diff
           <Typography id="desc" variant="body2" color="textSecondary" component="p">
             {description}
           </Typography>
-          <Typography id="diff" variant="body2" color="textSecondary" component="p">
-            Difficulty: {difficulty}
+          <Typography id="diff" variant="body2" color="textSecondary" component="p" class={difficulty}>
+            {difficulty}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

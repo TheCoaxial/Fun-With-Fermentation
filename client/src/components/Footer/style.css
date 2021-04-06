@@ -1,8 +1,7 @@
 footer {
     position:fixed;
     bottom:0;
-    background-color: rgba(47, 61, 48, 1);
-    color:white;
+    background-color: rgba(87, 96, 92, 1);
     text-align:center;
     height:5vh;
     width:100vw;
@@ -16,4 +15,5 @@ footer h4 {
     font-weight:300;
     font-size:0.8rem;
     margin:0;
+    color:white;
 }

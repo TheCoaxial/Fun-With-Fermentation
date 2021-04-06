@@ -13,6 +13,7 @@ html body {
 
 a { 
   text-decoration: none !important;
+  color:rgba(97, 98, 68, 1) !important;
 }
 
 a:hover {
@@ -21,6 +22,10 @@ a:hover {
 
 .br {
   display:block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color:#2f3c16;
 }
 
 .App-body {

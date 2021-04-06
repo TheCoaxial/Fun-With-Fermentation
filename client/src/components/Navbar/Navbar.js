@@ -79,7 +79,7 @@ export default function Navbar({ currentUser }) {
 
                     <div className="nav-item classicNavButton-wrap">
                         <Link to={"/brew"} className="nav-link newBrew-button">
-                            <Button variant="contained">Create a New Brew</Button>
+                            <Button variant="contained">Create Brew</Button>
                         </Link>
                     </div>
 
