@@ -116,7 +116,7 @@ export default function Navbar({ currentUser }) {
                             <StyledMenuItem>
 
                                 <Link to={"/login"} className="nav-link" onClick={() => {
-                                    AuthService.logout();
+                                    authService.logout();
                                     history.push("/login");
                                 }}>
                                     <ListItemIcon>
