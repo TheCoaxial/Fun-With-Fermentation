@@ -15,23 +15,17 @@ export default function UserDisplay() {
     let { userId } = useParams([]);
     
     useEffect(() => {
-        API.getUserProfile(userId)
-            .then((data) => {
-                //console.log(data.data[0]);
-                setUserData(data.data[0]);
-            })
+        API
+            .getUserProfile(userId)
+            .then((data) => setUserData(data.data[0]));
 
         let ids = JSON.parse(ls.get('visited')) || [];
         ids.push(userId);
-       
         ls.set('visited', JSON.stringify(ids))
-        console.log("ids?",ids);
 
-
-        API.getUserBrews(userId)
-            .then(data => {
-                setBrews(data.data)
-            })
+        API
+            .getUserBrews(userId)
+            .then(data => setBrews(data.data));
     }, [userId]);
 
     let brewsJSX = brews.map(brew => <RecipeCard
@@ -42,6 +36,11 @@ export default function UserDisplay() {
         author={brew.author}
         id={brew.id}
         UserId={brew.UserId} />);
+
+    let createdAtValue;
+    if (userData.createdAt !== undefined) {
+        createdAtValue = userData.createdAt.split("T")[0];
+    }
 
     if (ls.get('user')) {
         return (
@@ -62,6 +61,11 @@ export default function UserDisplay() {
                         <div id="userHeader">
                             <Typography variant="h5" className="title">
                                 {userData.username}
+                                <Typography component="p">
+                                    <span className="br bioSubheadTitle">
+                                        Joined {createdAtValue}
+                                    </span>
+                                </Typography>
                             </Typography>
 
                             <Typography variant="body1" className="title">

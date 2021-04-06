@@ -42,8 +42,6 @@ export default function BrewDisplay(props) {
     let [comments, setComments] = useState([]);
     let [ingredients, setIngredients] = useState([]);
     let [steps, setSteps] = useState([]);
-    const [secondary, setSecondary] = useState(false);
-
     let [commentInput, setCommentInput] = useState("");
 
     let { brewId } = useParams();
@@ -58,33 +56,6 @@ export default function BrewDisplay(props) {
                 setSteps(data.data.Steps);
             });
     }, [brewId]);
-
-    // const renderCommentForm = (commentId) => {
-    //     return (
-    //         <form onSubmit={(event) => {
-    //             API.updateComment(commentId, commentInput);
-    //         }}>
-    //             <TextField
-    //                 id="outlined-multiline-static"
-    //                 multiline
-    //                 rows={4}
-    //                 variant="outlined"
-    //                 placeholder="Add a Comment Here"
-    //                 value={commentInput}
-    //                 onChange={(e) => {
-    //                     setCommentInput(e.target.value)
-    //                 }}
-    //             />
-    //             <Button type="submit" id="submitComment">Edit Comment</Button>
-    //         </form>
-    //     );
-    // }
-
-    // const handleCommentEdit = (commentId, body) => {
-    //     API.updateComment(commentId, body).then(res => {
-    //         setComments([...comments, { id: commentId, body: body, author: authService.getCurrentUser().username, UserId: authService.getCurrentUser().id }]);
-    //     });
-    // }
 
     const handleCommentDelete = (commentId) => {
         API.deleteComment(commentId).then(res => {

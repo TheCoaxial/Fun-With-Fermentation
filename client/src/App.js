@@ -19,7 +19,6 @@ class App extends Component {
         super(props);
 
         this.handleNavbarRender = this.handleNavbarRender.bind(this);
-
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
 
