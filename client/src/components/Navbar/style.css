@@ -5,7 +5,7 @@
 
 .navbar {
   background-color:rgba(47, 61, 48, 1);
-  padding:0.5rem 2rem 0.5rem 1.5rem;
+  padding:0.5rem 0 0.5rem 1.5rem;
   height:5rem;
 }
 
@@ -162,6 +162,7 @@
   box-shadow:none;
   padding-top:0;
   padding-bottom:0;
+  padding-right:0;
   height:100%;
 }
 
