@@ -169,49 +169,37 @@ export default class Profile extends Component {
     return (
         <div id="Profile">
             <Grid container spacing={3}>
-                <Grid item lg={3} sm={12} className="sidebarWrap">
-                      <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
-                  <Typography variant="h2" align="center" id="userName">
-                      {this.state.currentUser.username}
-                  </Typography>
-                  {bioJSX}
+                <Grid item xs={12} sm={6} md={3}>
 
-                  <div className="bioSubheadFlex">
-                    <Typography component="p" align="center" variant="h6">
-                        <span className="br bioSubheadTitle">
-                            Joined
-                        </span>
-                        <span className="br">
-                            {createdAtValue}
-                        </span>
+                  <div id="sidebarWrap">
+                    <Avatar alt="Remy Sharp" src="./sample-avatar.jpg" className="avatar" />
+                    <Typography variant="h2" align="center" id="userName">
+                        {this.state.currentUser.username}
                     </Typography>
+                    {bioJSX}
 
-                    <Typography align="center" component="p" variant="h6">
-                        <span className="br bioSubheadTitle">
-                            Score
-                        </span>
-                        <span className="br">
-                            {this.state.userData.contributionScore}
-                        </span>
-                    </Typography>
-                  </div> 
+                    <div className="bioSubheadFlex">
+                      <Typography component="p" align="center" variant="h6">
+                          <span className="br bioSubheadTitle">
+                              Joined
+                          </span>
+                          <span className="br">
+                              {createdAtValue}
+                          </span>
+                      </Typography>
+
+                      <Typography align="center" component="p" variant="h6">
+                          <span className="br bioSubheadTitle">
+                              Score
+                          </span>
+                          <span className="br">
+                              {this.state.userData.contributionScore}
+                          </span>
+                      </Typography>
+                    </div> 
+                  </div>
+
                   <div className="miniFeedWrap">
-                        <Typography gutterBottom variant="h5" component="h1">
-                            Recently Viewed Profiles:
-                        </Typography>
-                        {this.state.visitedPages[0] ? (LastViewedJSX) 
-                        :
-                        <PlaceHolderCard
-                            mockTitle= "Profiles you've seen"
-                            description="This is where you'll find all the profiles 
-                            you've visited today!"
-                        >
-                        </PlaceHolderCard> }
-                    </div>
-                </Grid>
-
-                <Grid item lg={3} sm={12}>
-                    <div className="miniFeedWrap">
                           <Typography gutterBottom variant="h5" component="h1">
                               Following
                           </Typography>
@@ -224,9 +212,33 @@ export default class Profile extends Component {
                           >
                           </PlaceHolderCard> }
                     </div>
+                  
+                </Grid>
+                
+
+                <Grid item xs={12} sm={6} md={3}>
+
+                <div className="miniFeedWrap">
+                        <Typography gutterBottom variant="h5" component="h1">
+                            My Brews
+                        </Typography>
+                        {this.state.brews[0] ? (BrewsJSX) 
+                        : 
+                        (<PlaceHolderCard
+                          mockTitle= "Uploaded Brews"
+                          description="This is where you'll find all the information
+                          about all the brews that you upload!"
+                        >
+                      </PlaceHolderCard>) }
+                    </div>
+                    
                 </Grid>
 
-                <Grid item lg={3} sm={12}>
+               
+
+                
+
+                <Grid item xs={12} sm={6} md={3}>
                     <div className="miniFeedWrap">
                         <Typography gutterBottom variant="h5" component="h1">
                             Saved Brews
@@ -240,21 +252,26 @@ export default class Profile extends Component {
                          </PlaceHolderCard>) }  
                     </div>
                 </Grid>
-                <Grid item lg={3} sm={12}>
-                    <div className="miniFeedWrap">
+
+                <Grid item xs={12} sm={6} md={3}>
+                <div className="miniFeedWrap">
                         <Typography gutterBottom variant="h5" component="h1">
-                            My Brews
+                            Recently Viewed:
                         </Typography>
-                        {this.state.brews[0] ? (BrewsJSX) 
-                        : 
-                        (<PlaceHolderCard
-                          mockTitle= "Uploaded Brews"
-                          description="This is where you'll find all the information
-                          about all the brews that you upload!"
+                        {this.state.visitedPages[0] ? (LastViewedJSX) 
+                        :
+                        <PlaceHolderCard
+                            mockTitle= "Profiles you've seen"
+                            description="This is where you'll find all the profiles 
+                            you've visited today!"
                         >
-                      </PlaceHolderCard>) }
+                        </PlaceHolderCard> }
                     </div>
                 </Grid>
+                
+
+                
+                
             </Grid>
         </div >
     );

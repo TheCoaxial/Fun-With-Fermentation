@@ -8,6 +8,11 @@
     height:0;
 }
 
+#Profile #sidebarWrap {
+    position:relative;
+    max-width:22em;
+}
+
 #Profile .avatar {
     width:15rem;
     height:15rem;
@@ -118,12 +123,11 @@
     margin-bottom:0;
 }
 
-
-#Profile .userCard .MuiTypography-root.MuiTypography-body2 {
+/* #Profile .userCard .MuiTypography-root.MuiTypography-body2 {
     position: absolute;
     right: 1rem;
     bottom: 0.5rem;
-}
+} */
 
 #Profile .userCard #followerButtonWrapper {
 /*     position: absolute; */
@@ -133,6 +137,28 @@
 
 #Profile .userCard #followerButtonWrapper .MuiButtonBase-root {
     padding:0;
+}
+
+#Profile .userCard .MuiCardContent-root:last-child {
+    padding-bottom:0;
+}
+
+#Profile .userCard .followScoreWrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width:100%;
+}
+
+#Profile .userCard .followScoreWrapper button {
+    padding-left:0;
+}
+
+#Profile .userCard .followScoreWrapper .score {
+    height:inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 #Profile .recipeCard {
