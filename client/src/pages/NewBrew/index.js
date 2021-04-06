@@ -84,6 +84,7 @@ class NewBrew extends Component {
                     label="Enter Ingredient"
                     alt="enter the first ingredient"
                     name="ingredients"
+                    key={`ingredients-${ingredientCount}`}
                     id={`ingredients-${ingredientCount}`}
                     value={ingredient}
                     onChange={this.onChange}
@@ -100,6 +101,7 @@ class NewBrew extends Component {
                     label="Enter Instruction"
                     alt="enter the first instruction"
                     name="instructions"
+                    key={`instructions-${instructionsCount}`}
                     id={`instructions-${instructionsCount}`}
                     value={instruction}
                     onChange={this.onChange}
@@ -173,7 +175,6 @@ class NewBrew extends Component {
                                 type="submit"
                                 id="submit"
                                 variant="contained"
-                                color="primary"
                                 size="large"
                                 startIcon={<LocalDrinkIcon />}
                             >
