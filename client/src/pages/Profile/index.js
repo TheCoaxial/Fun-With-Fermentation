@@ -10,9 +10,6 @@ import UserCard from "../../components/UserCard/UserCard.js";
 import RecipeCard from "../../components/RecipeCard/RecipeCard";
 import "./profile.css";
 
-/* import CurrentBrews from "../../components/CurrentBrews/CurrentBrews";
-import StarIcon from '@material-ui/icons/Star'; */
-
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -78,20 +75,16 @@ export default class Profile extends Component {
 
     let collectedData = [];
     uniqueIds.forEach(Ids => {
-/*       console.log("ids", uniqueIds); */
       API.getUserProfile(Ids)
         .then(res => {
           collectedData.push(res);
-/*           console.log("data", collectedData) */
           this.setState({ visitedPages: collectedData })
         });
     })
   }
 
   render() {
-    //const score = this.state.contributionScore;
     const pages = this.state.visitedPages
-    //const currentUser = this.state.userData;
     const brews = this.state.brews;
     const userFav = this.state.userFav;
     const following = this.state.following;
@@ -133,9 +126,8 @@ export default class Profile extends Component {
       UserId={Brew.UserId}
     />);
 
-    let createdAtValue = this.state.userData.createdAt;
-
-    if (createdAtValue != undefined) {
+    let createdAtValue;
+    if (this.state.userData.createdAt !== undefined) {
       createdAtValue = this.state.userData.createdAt.split("T")[0];
     }
 

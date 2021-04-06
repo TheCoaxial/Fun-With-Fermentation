@@ -153,7 +153,7 @@ export default function SearchBar() {
   } else {
     let prevKey = -1;
     resultsJSX = searchResults.results.map(({ Brew }) => {
-      if (prevKey == Brew.id) {
+      if (prevKey === Brew.id) {
         return;
       }
       prevKey = Brew.id;

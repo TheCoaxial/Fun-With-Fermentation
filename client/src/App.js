@@ -7,14 +7,6 @@ import AuthService from "./services/auth.service";
 import Feed from "./pages/Feed/Feed";
 import Login from "./pages/login";
 import Register from "./pages/register";
-import { Menu, MenuItem } from "@material-ui/core";
-import { withStyles } from '@material-ui/core/styles';
-/* import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'; */
 import Search from "./pages/Search/Search";
 import Profile from "./pages/Profile";
 import NewBrew from "./pages/NewBrew";
@@ -22,43 +14,11 @@ import UserDisplay from "./pages/UserDisplay";
 import BrewDisplay from "./pages/BrewDisplay";
 import Navbar from './components/Navbar/Navbar';
 
-const StyledMenu = withStyles({
-    paper: {
-        border: '1px solid #d3d4d5',
-    },
-})((props) => (
-    <Menu
-        elevation={0}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-        }}
-        transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-        }}
-        {...props}
-    />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-    root: {
-        '&:focus': {
-            backgroundColor: theme.palette.primary.main,
-            '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-                color: theme.palette.common.white,
-            },
-        },
-    },
-}))(MenuItem);
-
 class App extends Component {
     constructor(props) {
         super(props);
 
         this.handleNavbarRender = this.handleNavbarRender.bind(this);
-
         this.handleClick = this.handleClick.bind(this);
         this.handleClose = this.handleClose.bind(this);
 
