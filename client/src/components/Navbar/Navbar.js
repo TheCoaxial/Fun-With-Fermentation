@@ -59,7 +59,7 @@ export default function Navbar({ currentUser }) {
             <div className="navbar-nav ml-auto navbar-loggedIn">
                 <div className="nav-item">
                     <Link to={"/feed"} className="nav-link">
-                        <Avatar alt="Logo" src="/logo.png" alt="beer logo" className="logo" id="logo" />
+                        <Avatar src="/logo.png" alt="beer logo" className="logo" id="logo" />
                     </Link>
                 </div>
 
@@ -72,7 +72,7 @@ export default function Navbar({ currentUser }) {
 
                     <div className="nav-item classicNavButton-wrap">
                         <Link to={"/brew"} className="nav-link newBrew-button">
-                            <Button variant="contained">Create a New Brew</Button>
+                            <Button variant="contained">Create Brew</Button>
                         </Link>
                     </div>
 
@@ -85,7 +85,7 @@ export default function Navbar({ currentUser }) {
                             variant="contained"
                             onClick={handleClick}
                         >
-                            <Avatar alt="Logo" src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
+                            <Avatar src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
                             {currentUser.username}
                         </Button>
 
