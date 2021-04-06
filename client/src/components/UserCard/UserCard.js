@@ -21,7 +21,7 @@ export default function UserCard({ id, username, bio, newBrew, score }) {
     const classes = useStyles();
 
     return (
-        <div>
+        <div className="userCardWrap">
             <Card className={`userCard ${classes.root}`}>
                 <CardMedia
                     className={classes.media}
