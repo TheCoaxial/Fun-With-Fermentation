@@ -104,8 +104,11 @@ class NewBrew extends Component {
                     key={`instructions-${instructionsCount}`}
                     id={`instructions-${instructionsCount}`}
                     value={instruction}
+                    variant="outlined"
+                    multiline
+                    rows={3}
                     onChange={this.onChange}
-                    className="instruction"
+                    className="instruction txtAREA"
                 />
             );
         })
@@ -117,7 +120,8 @@ class NewBrew extends Component {
 
                         <TextField
                             required
-                            id="outlined-required brewName"
+                            id="outlined-required-brewName"
+                            className="brewName"
                             variant="outlined"
                             label="Brew Name"
 /*                             defaultValue="Brew Name" */
@@ -129,7 +133,8 @@ class NewBrew extends Component {
                         />
 
                         <TextField
-                            id="outlined-multiline-static brewDescription"
+                            id="outlined-multiline-static-brewDescription"
+                            className="brewDescription"
                             label="Description"
                             multiline
                             rows={4}
