@@ -5,7 +5,6 @@ import AuthService from '../../services/auth.service.js';
 import ls from 'local-storage';
 import { Grid, Typography, List, TextField, Button, Link } from "@material-ui/core";
 import Timeline from '@material-ui/lab/Timeline';
-import { makeStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import API from '../../utils/api';
 import Comment from '../../components/Comment/comment';
@@ -16,36 +15,14 @@ import TwitterShare from "../../components/ShareButtons/TwitterShare";
 import FavoriteButton from "../../components/FavoriteButton";
 import "./styles.css"
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& .MuiTextField-root': {
-            margin: theme.spacing(1),
-            width: '25ch',
-        },
-    },
-    timelineContent: {
-        padding: '12px 16px',
-    },
-    secondaryTail: {
-        backgroundColor: theme.palette.secondary.main,
-    },
-    verticallyCenterContent: {
-        margin: 'auto 0',
-    },
-}));
-
 export default function BrewDisplay(props) {
-    let history = useHistory();
-    const classes = useStyles();
 
+    let history = useHistory();
     let [brew, setBrew] = useState({});
     let [comments, setComments] = useState([]);
     let [ingredients, setIngredients] = useState([]);
     let [steps, setSteps] = useState([]);
-    const [secondary, setSecondary] = useState(false);
-
     let [commentInput, setCommentInput] = useState("");
-
     let { brewId } = useParams();
     const user = AuthService.getCurrentUser();
 
@@ -58,33 +35,6 @@ export default function BrewDisplay(props) {
                 setSteps(data.data.Steps);
             });
     }, [brewId]);
-
-    // const renderCommentForm = (commentId) => {
-    //     return (
-    //         <form onSubmit={(event) => {
-    //             API.updateComment(commentId, commentInput);
-    //         }}>
-    //             <TextField
-    //                 id="outlined-multiline-static"
-    //                 multiline
-    //                 rows={4}
-    //                 variant="outlined"
-    //                 placeholder="Add a Comment Here"
-    //                 value={commentInput}
-    //                 onChange={(e) => {
-    //                     setCommentInput(e.target.value)
-    //                 }}
-    //             />
-    //             <Button type="submit" id="submitComment">Edit Comment</Button>
-    //         </form>
-    //     );
-    // }
-
-    // const handleCommentEdit = (commentId, body) => {
-    //     API.updateComment(commentId, body).then(res => {
-    //         setComments([...comments, { id: commentId, body: body, author: authService.getCurrentUser().username, UserId: authService.getCurrentUser().id }]);
-    //     });
-    // }
 
     const handleCommentDelete = (commentId) => {
         API.deleteComment(commentId).then(res => {
@@ -111,7 +61,6 @@ export default function BrewDisplay(props) {
                         id="delete"
                         variant="contained"
                         color="secondary"
-                        className={classes.button}
                         startIcon={<DeleteIcon />}
                         onClick={() => handleBrewDelete()}
                     >
@@ -122,7 +71,7 @@ export default function BrewDisplay(props) {
         }
     };
 
-    let userLink = <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="author-header">Created by <Link onClick={() => { history.push(`/user/${brew.UserId}`) }} >{brew.author}</Link></Typography>;
+    let userLink = <Typography sx={{ mt: 4, mb: 2 }} component="div" className="author-header">Created by <Link onClick={() => { history.push(`/user/${brew.UserId}`) }} >{brew.author}</Link></Typography>;
 
     let commentsJSX = comments.map(comment => <Comment
         handleCommentDelete={handleCommentDelete}
@@ -170,11 +119,11 @@ export default function BrewDisplay(props) {
 
                             {userLink}
 
-                            <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
+                            <Typography sx={{ mt: 4, mb: 2 }} component="p" className="description-header">
                                 Difficulty: {brew.difficulty}
                             </Typography>
 
-                            <Typography sx={{ mt: 4, mb: 2 }} variant="p" component="div" className="description-header">
+                            <Typography sx={{ mt: 4, mb: 2 }} component="p" className="description-header">
                                 {brew.description}
                             </Typography>
 

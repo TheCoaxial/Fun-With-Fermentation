@@ -6,11 +6,6 @@ import "../../App.css";
 import { makeStyles } from '@material-ui/core/styles';
 import { Card, CardHeader, CardContent, CardActions, Link, Typography } from "@material-ui/core";
 import { red } from '@material-ui/core/colors';
-/* import clsx from 'clsx';
-import CardMedia from '@material-ui/core/CardMedia';
-import Collapse from '@material-ui/core/Collapse';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert'; */
 import FavoriteButton from "../../components/FavoriteButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,13 +33,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function RecipeCard({ id, UserId, name, description, author, difficulty }) {
   let history = useHistory();
-
   const classes = useStyles();
-/*   const [expanded, setExpanded] = useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  }; */
 
   let brewLink = <Link onClick={() => { history.push(`/brews/${id}`) }}>
     <Typography variant="h5">{name}</Typography>
@@ -63,7 +52,7 @@ export default function RecipeCard({ id, UserId, name, description, author, diff
           <Typography id="desc" variant="body2" color="textSecondary" component="p">
             {description}
           </Typography>
-          <Typography id="diff" variant="body2" color="textSecondary" component="p" class={difficulty}>
+          <Typography id="diff" variant="body2" color="textSecondary" component="p" className={difficulty}>
             {difficulty}
           </Typography>
         </CardContent>

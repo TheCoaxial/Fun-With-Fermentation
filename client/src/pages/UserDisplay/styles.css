@@ -17,6 +17,10 @@
     width:auto;
 }
 
+.brewCard {
+    margin-top:10px;
+}
+
 #userDisplay h6 {
     font-weight:500;
     margin-bottom:0.5em;
