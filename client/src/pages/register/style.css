@@ -8,9 +8,11 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height:65vh;
+    height:auto;
+    margin-top:3em;
     text-align:center;
     overflow: hidden;
+    margin-bottom:10%;
 }
 
 
@@ -61,6 +63,9 @@
   #Register button {
     margin-top:1.5em;
     margin-bottom:1.5em;
+    background-color:rgba(185, 196, 179, 1);
+    font-weight: bold;
+    color:rgba(47, 61, 48, 1);
   }
   
   #Register .MuiOutlinedInput-input {
