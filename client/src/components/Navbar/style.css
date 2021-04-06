@@ -21,8 +21,8 @@
 .navbar #logo {
     width:3.5rem;
     height:3.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     border:1px solid rgba(166, 175, 161, 0.9);;
     border-radius:50%;
     background-color:rgba(166, 175, 161, 0.9);;
@@ -82,7 +82,8 @@
 }
 
 .navbar .classicNavButton-wrap:first-of-type {
-  margin-right:2em;
+  margin-right:1em;
+  margin-left:1em;
 }
 
 .navbar .classicNavButton-wrap {
@@ -173,6 +174,7 @@
   padding-top:0;
   padding-bottom:0;
   padding-right:0;
+  padding-left:0;
   height:100%;
 }
 
@@ -183,7 +185,7 @@
   height:100%;
   color:white;
   text-transform: none;
-  min-width:8em;
+  min-width:7em;
 }
 
 .MuiMenu-list .nav-link {
