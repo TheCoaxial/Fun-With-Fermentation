@@ -5,7 +5,7 @@
 
 .navbar {
   background-color:rgba(47, 61, 48, 1);
-  padding:0.5rem 0 0.5rem 1.5rem;
+  padding:0.5rem 0.5rem 0.5rem 0.5rem;
   height:5rem;
 }
 
@@ -19,8 +19,10 @@
 }
 
 .navbar #logo {
-    width:4rem;
-    height:4rem;
+    width:3.5rem;
+    height:3.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     border:1px solid rgba(166, 175, 161, 0.9);;
     border-radius:50%;
     background-color:rgba(166, 175, 161, 0.9);;
@@ -28,13 +30,12 @@
 }
 
 .navbar .avatar {
-  width: 3rem;
-  height:2.9rem;
+  width: 3.5rem;
+  height:3.5rem;
   border: 0px solid white;
   background-color: white;
   border-radius: 50%;
-  margin:0px auto;
-  margin-bottom:0.25rem;
+  margin:0px;
 }
 
 .navbar li {
@@ -182,7 +183,7 @@
   height:100%;
   color:white;
   text-transform: none;
-  min-width:10em;
+  min-width:8em;
 }
 
 .MuiMenu-list .nav-link {

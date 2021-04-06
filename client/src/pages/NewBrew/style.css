@@ -2,7 +2,7 @@
 #newBrew #newBrewForm {
     background-color:white;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.4);
-    width:60%;
+    width:55%;
     margin:0px auto;
     margin:5%;
     padding:2% 5% 2% 5%;
@@ -124,7 +124,7 @@
 
     #newBrew #newBrewForm {
         width:85%;
-        margin:0px auto;
+        margin:10px auto;
     }
 
     #newBrew #newBrewForm input,
@@ -140,4 +140,3 @@
     }
 
 }
-

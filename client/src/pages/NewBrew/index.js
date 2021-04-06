@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 import ls from 'local-storage';
 import AuthService from "../../services/auth.service.js";
 import { TextField, Button, InputLabel, NativeSelect } from "@material-ui/core";
-import LocalDrinkIcon from '@material-ui/icons/LocalDrink';
 import API from '../../utils/api.js';
 import "./style.css";
 
