@@ -71,9 +71,14 @@
 
 #Profile .bioSubheadFlex .bioSubheadTitle {
     text-transform:uppercase;
-    opacity:0.5;
+    opacity:0.8;
     font-weight:bold;
     font-size:65%;
+    color:#2f3c16;
+}
+
+#Profile .bioSubheadFlex p span:nth-of-type(2) {
+    color:rgba(47, 60, 22, 0.5);
 }
 
 #Profile #bioEditState {

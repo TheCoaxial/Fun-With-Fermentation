@@ -181,9 +181,8 @@ class NewBrew extends Component {
                                 id="submit"
                                 variant="contained"
                                 size="large"
-                                startIcon={<LocalDrinkIcon />}
                             >
-                                Save Brew
+                                save brew
                             </Button>
                         </div>
                     </form>

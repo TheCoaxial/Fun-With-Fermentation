@@ -2,7 +2,7 @@
 /* ----- general styles ----- */
 /* -------------------------- */
 
-#Feed {
+#Search {
     height:100%;
     padding-bottom:7%;
 }
@@ -11,50 +11,50 @@
     padding:2rem !important;
 }
 
-#Feed .makeStyles-root-1,
-#Feed .makeStyles-root-3,
-#Feed .makeStyles-root-9,
-#Feed .MuiPaper-root.MuiCard-root {
+#Search .makeStyles-root-1,
+#Search .makeStyles-root-3,
+#Search .makeStyles-root-9,
+#Search .MuiPaper-root.MuiCard-root {
     max-width:none !important;
 }
 
-#Feed .innerSidebarWrap .makeStyles-root-1,
-#Feed .innerSidebarWrap .makeStyles-root-3 {
+#Search .innerSidebarWrap .makeStyles-root-1,
+#Search .innerSidebarWrap .makeStyles-root-3 {
     max-width:345px;
 }
 
-#Feed .innerSidebarWrap .userCard .bio {
+#Search .innerSidebarWrap .userCard .bio {
     display:none;
 }
 
-#Feed .innerSidebarWrap .userCard h2 {
+#Search .innerSidebarWrap .userCard h2 {
     font-size:1.3rem;
 }
 
-#Feed .recipeCard {
+#Search .recipeCard {
     margin-top:1rem;
 }
 
-#Feed .innerSidebarWrap {
+#Search .innerSidebarWrap {
     margin-top:0;
 }
 
-#Feed .sidebarWrap {
+#Search .sidebarWrap {
     padding-left:5%;
 }
 
-#Feed .userCard,
-#Feed .userCard .MuiPaper-root {
+#Search .userCard,
+#Search .userCard .MuiPaper-root {
     position:relative;
 }
 
-#Feed .userCard #followerButtonWrapper {
+#Search .userCard #followerButtonWrapper {
     position:absolute;
     right:5px;
     bottom:5px;
 }
 
-#Feed .userCard .MuiTypography-body2 {
+#Search .userCard .MuiTypography-body2 {
     position: absolute;
     left:16px;
     bottom:16px;
@@ -62,13 +62,13 @@
     right:auto;
 }
 
-#Feed .userCard .MuiCardContent-root:last-child {
+#Search .userCard .MuiCardContent-root:last-child {
     padding-bottom:30px;
 }
 
 @media only screen and (max-width:900px) {
 
-    #Feed .userCard #followerButtonWrapper {
+    #Search .userCard #followerButtonWrapper {
         position:absolute;
         left:16px;
         top:5px;
@@ -78,7 +78,7 @@
         display:flex;
     }
 
-    #Feed .userCard #followerButtonWrapper button {
+    #Search .userCard #followerButtonWrapper button {
         background-color: #ccc;
         border-radius: 5%;
         height: 2em;
