@@ -36,7 +36,6 @@ class NewBrew extends Component {
             tempArray[id] = e.target.value;
             tempArray.filter(item => item.length > 0);
             this.setState({ [e.target.name]: tempArray });
-/*             console.log(tempArray); */
         } else {
             this.setState({ [e.target.name]: e.target.value });
         }
