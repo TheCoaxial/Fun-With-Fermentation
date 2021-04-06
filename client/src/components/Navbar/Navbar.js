@@ -59,34 +59,33 @@ export default function Navbar({ currentUser }) {
             <div className="navbar-nav ml-auto navbar-loggedIn">
                 <div className="nav-item">
                     <Link to={"/feed"} className="nav-link">
-                        <Avatar src="/logo.png" alt="beer logo" className="logo" id="logo" />
-                    </Link>
-                </div>
-
-                <div className="nav-item classicNavButton-wrap">
-                    <Link to={"/search"} className="nav-link newBrew-button">
-                        <Button variant="contained">Search</Button>
-                    </Link>
-                </div>
-
-                <div className="nav-item classicNavButton-wrap">
-                    <Link to={"/brew"} className="nav-link newBrew-button">
-                        <Button variant="contained">Create Brew</Button>
+                        <Avatar alt="Logo" src="/logo.png" alt="beer logo" className="logo" id="logo" />
                     </Link>
                 </div>
 
                 <div className="userSpecific-navWrap">
+                    <div className="nav-item classicNavButton-wrap">
+                        <Link to={"/search"} className="nav-link newBrew-button">
+                            <Button variant="contained">Search</Button>
+                        </Link>
+                    </div>
+
+                    <div className="nav-item classicNavButton-wrap">
+                        <Link to={"/brew"} className="nav-link newBrew-button">
+                            <Button variant="contained">Create a New Brew</Button>
+                        </Link>
+                    </div>
 
                     <div>
+                        
                         <Button
                             id="profileMenuButton"
                             aria-controls="customized-menu"
                             aria-haspopup="true"
                             variant="contained"
-                            onClick={handleClick}
-                        >
-                            <Avatar src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
-                            {currentUser.username}
+                            onClick={handleClick}>
+                                <Avatar alt="Logo" src="/sample-avatar.jpg" alt="user avatar" className="avatar" id="avatar" />
+                                    {currentUser.username}
                         </Button>
 
                         <StyledMenu
@@ -99,7 +98,7 @@ export default function Navbar({ currentUser }) {
 
                                 <Link to={"/profile"} className="nav-link">
                                     <ListItemIcon>
-                                        <AccountBox fontSize="small" />
+                                        <AccountBoxIcon fontSize="small" />
                                     </ListItemIcon>
                                     <ListItemText primary="Profile" />
                                 </Link>
@@ -108,12 +107,12 @@ export default function Navbar({ currentUser }) {
 
                             <StyledMenuItem>
 
-                                <Link to={"/"} className="nav-link" onClick={() => {
-                                    AuthService.logout();
-                                    history.push("/");
+                                <Link to={"/login"} className="nav-link" onClick={() => {
+                                    authService.logout();
+                                    history.push("/login");
                                 }}>
                                     <ListItemIcon>
-                                        <ExitToApp fontSize="small" />
+                                            <ExitToAppIcon fontSize="small" />
                                     </ListItemIcon>
                                     <ListItemText primary="Log Out" />
                                 </Link>
@@ -128,12 +127,12 @@ export default function Navbar({ currentUser }) {
                 <li className="nav-item classicNavButton-wrap">
                     <Link to={"/login"} className="nav-link classic-button">
                         Login
-                    </Link>
+            </Link>
                 </li>
                 <li className="nav-item classicNavButton-wrap">
                     <Link to={"/register"} className="nav-link classic-button">
                         Sign Up
-                    </Link>
+            </Link>
                 </li>
             </div>
         )}
