@@ -34,8 +34,9 @@ class NewBrew extends Component {
             let id = e.target.id.split("-")[1];
             let tempArray = this.state[e.target.name];
             tempArray[id] = e.target.value;
+            tempArray.filter(item => item.length > 0);
             this.setState({ [e.target.name]: tempArray });
-            console.log(tempArray);
+/*             console.log(tempArray); */
         } else {
             this.setState({ [e.target.name]: e.target.value });
         }
@@ -52,12 +53,18 @@ class NewBrew extends Component {
             .then(data => {
                 let brewId = data.data.id;
 
+                let ingredientNumber = 0;
                 this.state.ingredients.forEach(ingredient => {
-                    API.postIngredient(brewId, ingredient);
+                    ingredientNumber += 1;
+                    API.postIngredient(brewId, ingredient, ingredientNumber);
                 });
 
+                let instructionNumber = 0;
                 this.state.instructions.forEach(instruction => {
-                    API.postStep(brewId, instruction);
+                    if (instruction) {
+                        instructionNumber += 1;
+                    }
+                    API.postStep(brewId, instruction, instructionNumber);
                 });
 
                 this.props.history.push("/feed");
@@ -77,6 +84,7 @@ class NewBrew extends Component {
                     label="Enter Ingredient"
                     alt="enter the first ingredient"
                     name="ingredients"
+                    key={`ingredients-${ingredientCount}`}
                     id={`ingredients-${ingredientCount}`}
                     value={ingredient}
                     onChange={this.onChange}
@@ -93,10 +101,14 @@ class NewBrew extends Component {
                     label="Enter Instruction"
                     alt="enter the first instruction"
                     name="instructions"
+                    key={`instructions-${instructionsCount}`}
                     id={`instructions-${instructionsCount}`}
                     value={instruction}
+                    variant="outlined"
+                    multiline
+                    rows={3}
                     onChange={this.onChange}
-                    className="instruction"
+                    className="instruction txtAREA"
                 />
             );
         })
@@ -108,10 +120,12 @@ class NewBrew extends Component {
 
                         <TextField
                             required
-                            id="outlined-required brewName"
+                            id="outlined-required-brewName"
+                            className="brewName"
                             variant="outlined"
                             label="Brew Name"
-                            defaultValue="Brew Name"
+/*                             defaultValue="Brew Name" */
+                            placeholder="Brew Name"
                             alt="enter the name of your brew"
                             name="title"
                             value={this.state.title}
@@ -119,11 +133,12 @@ class NewBrew extends Component {
                         />
 
                         <TextField
-                            id="outlined-multiline-static brewDescription"
+                            id="outlined-multiline-static-brewDescription"
+                            className="brewDescription"
                             label="Description"
                             multiline
                             rows={4}
-                            defaultValue="Default Value"
+/*                             defaultValue="Default Value" */
                             variant="outlined"
                             placeholder="Enter any additional description about your brew (optional)"
                             name="description"
@@ -165,7 +180,6 @@ class NewBrew extends Component {
                                 type="submit"
                                 id="submit"
                                 variant="contained"
-                                color="primary"
                                 size="large"
                                 startIcon={<LocalDrinkIcon />}
                             >

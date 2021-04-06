@@ -98,6 +98,7 @@ export default class Profile extends Component {
 
     let BrewsJSX = brews.map(brew => <RecipeCard
       key={brew.id}
+      difficulty={brew.difficulty}
       id={brew.id}
       name={brew.name}
       description={brew.description}
@@ -125,6 +126,7 @@ export default class Profile extends Component {
     let FavBrewsJSX = userFav.map(({ Brew }) => <RecipeCard
       key={Brew.id}
       id={Brew.id}
+      difficulty={Brew.difficulty}
       name={Brew.name}
       description={Brew.description}
       author={Brew.author}

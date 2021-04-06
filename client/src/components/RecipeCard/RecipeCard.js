@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeCard({ id, UserId, name, description, author }) {
+export default function RecipeCard({ id, UserId, name, description, author, difficulty }) {
   let history = useHistory();
 
   const classes = useStyles();
@@ -60,8 +60,11 @@ export default function RecipeCard({ id, UserId, name, description, author }) {
           subheader={userLink}
         />
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography id="desc" variant="body2" color="textSecondary" component="p">
             {description}
+          </Typography>
+          <Typography id="diff" variant="body2" color="textSecondary" component="p">
+            Difficulty: {difficulty}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>

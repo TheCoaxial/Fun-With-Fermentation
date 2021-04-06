@@ -8,9 +8,27 @@
     padding:0 5% 2% 5%;
 }
 
-#newBrew .MuiFormControl-root.MuiTextField-root {
+#newBrew .brewName {
+    margin-top:2rem !important;
+}
+
+#newBrew .brewDescription {
+    margin-bottom:1rem !important;
+    margin-top:2rem !important;
+}
+
+#newBrew .txtAREA {
+    margin-top:1em !important;
+    display: block;
+}
+
+#newBrew .MuiFormControl-root.MuiTextareaAutosize-root {
     display:block !important;
     margin-top:2rem !important;
+}
+
+#newBrew .MuiFormControl-root.MuiTextField-root {
+    display:block !important;
 }
 
 #newBrew #newBrewForm .MuiButton-label {
@@ -18,11 +36,12 @@
 }
 
 #newBrew #newBrewForm .addInputButton {
-    margin-top:2em;
+    margin-top:0.5em;
+    margin-bottom:1em;
 }
 
 #newBrew #newBrewForm #selectLabel {
-    margin-top:3em;
+    margin-top:2em;
 }
 
 #newBrew #newBrewForm #formButtonWrap {
