@@ -263,3 +263,15 @@
 #brewDisplay .commentLikeWrapper .MuiLink-root .commentAuthor {
     width:auto;
 }
+
+@media only screen and (max-width:599px) {
+
+    #brewDisplay #mainBrewDisplay .h2-header {
+        margin-right:4rem;
+    }
+
+    #brewDisplay #mainBrewDisplay #shareButtons {
+        flex-direction: column;
+    }
+
+}

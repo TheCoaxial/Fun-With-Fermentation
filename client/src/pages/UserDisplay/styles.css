@@ -1,7 +1,5 @@
-
 #userDisplay {
-    margin-top:3em;
-    margin-left:2em;
+    margin:2em;
 }
 
 #userDisplay h5 {
@@ -54,4 +52,24 @@
 
 #userDisplay .recipeCard .MuiPaper-root {
     background-color:#eee;
+}
+
+@media only screen and (max-width:599px) {
+
+    #userDisplay #positionAbsoluteWrap #score {
+        margin-right:0;
+    }
+
+    #userDisplay #userHeader .title {
+        margin-right:3em;
+    }
+
+    #userDisplay #positionAbsoluteWrap {
+        flex-direction: column-reverse;
+    }
+
+    #userDisplay .recipeCard .MuiCardHeader-title {
+        margin-right:1.5em;
+    }
+
 }

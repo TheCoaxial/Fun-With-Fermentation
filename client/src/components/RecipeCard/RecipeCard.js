@@ -35,6 +35,13 @@ export default function RecipeCard({ id, UserId, name, description, author, diff
   let history = useHistory();
   const classes = useStyles();
 
+  let difUpper;
+  if (difficulty) {
+    difUpper = difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
+  } else {
+    difUpper = "";
+  }
+
   let brewLink = <Link onClick={() => { history.push(`/brews/${id}`) }}>
     <Typography variant="h5">{name}</Typography>
   </Link>;
@@ -53,7 +60,7 @@ export default function RecipeCard({ id, UserId, name, description, author, diff
             {description}
           </Typography>
           <Typography id="diff" variant="body2" color="textSecondary" component="p" className={difficulty}>
-            {difficulty}
+            {difUpper}
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
