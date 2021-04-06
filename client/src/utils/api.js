@@ -114,6 +114,14 @@ class API {
         return this.axios.get(`/api/search/ingredient/${searchString}`);
     }
 
+    difficultBrewSearch(searchString, difficulty) {
+        return this.axios.get(`/api/search/brew/${searchString}/${difficulty}`);
+    }
+    difficultIngredientSearch(searchString, difficulty) {
+        return this.axios.get(`/api/search/ingredient/${searchString}/${difficulty}`);
+    }
+
+
     // POST
 
     postBrew(userID, name, description, username, difficulty) {

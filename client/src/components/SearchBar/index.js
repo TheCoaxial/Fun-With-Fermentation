@@ -4,10 +4,8 @@ import { fade, makeStyles, withStyles } from '@material-ui/core/styles';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import UserCard from '../UserCard/UserCard';
 import { InputBase, Select, MenuItem, Button } from "@material-ui/core";
-/* import InputLabel from '@material-ui/core/InputLabel';
-import FormControl from '@material-ui/core/FormControl'; */
 import SearchIcon from '@material-ui/icons/Search';
-import api from '../../utils/api';
+import API from '../../utils/api';
 
 const BootstrapInput = withStyles((theme) => ({
   root: {
@@ -21,7 +19,7 @@ const BootstrapInput = withStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     border: '1px solid #ced4da',
     fontSize: 16,
-    padding: '10px 26px 10px 12px',
+    padding: '15px 26px 15px 12px',
     transition: theme.transitions.create(['border-color', 'box-shadow']),
     // Use the system font instead of the default Roboto font.
     fontFamily: [
@@ -58,8 +56,6 @@ const useStyles = makeStyles((theme) => ({
     '&:hover': {
       backgroundColor: fade(theme.palette.common.white, 0.25),
     },
-    marginRight: theme.spacing(2),
-    marginLeft: 0,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
@@ -67,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   searchIcon: {
-    padding: theme.spacing(0, 2),
+    padding: theme.spacing(0, 1),
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -80,8 +76,8 @@ const useStyles = makeStyles((theme) => ({
   },
   inputInput: {
     padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    // vertical padding + font size from
+    paddingLeft: `calc(1em + ${theme.spacing(2.5)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
@@ -92,15 +88,35 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchBar() {
   const classes = useStyles();
-
   const [search, setSearch] = useState("");
   const [searchType, setSearchType] = useState("Brew");
   const [searchResults, setSearchResults] = useState({ type: 'brew', results: [] });
-/*   const [difficulty, setDifficulty] = useState("");
+  const [difficulty, setDifficulty] = useState("all");
 
   const handleDifficultyChange = event => {
     setDifficulty(event.target.value);
-  }; */
+  };
+
+  const difficultyButton = (searchType) => {
+    if (searchType === "Brew" || searchType === "Ingredient") {
+      return (
+        <div className="searchDifficultyWrapper">
+          <Select
+            labelId="difficulty-select-label"
+            id="difficulty-select"
+            value={difficulty}
+            onChange={handleDifficultyChange}
+            input={<BootstrapInput />}>
+            <MenuItem value={"all"}>All</MenuItem>
+            <MenuItem value={"beginner"}>Beginner</MenuItem>
+            <MenuItem value={"intermediate"}>Intermediate</MenuItem>
+            <MenuItem value={"expert"}>Expert</MenuItem>
+            <MenuItem value={"unknown"}>Unknown</MenuItem>
+          </Select>
+        </div>
+      )
+    }
+  }
 
   const handleTypeChange = event => {
     setSearchType(event.target.value);
@@ -114,17 +130,29 @@ export default function SearchBar() {
     event.preventDefault();
     switch (searchType) {
       case "Brew":
-        api
-          .searchBrews(search)
-          .then(res => setSearchResults({ type: 'brew', results: res.data }));
+        if (difficulty !== "all") {
+          API
+            .difficultBrewSearch(search, difficulty)
+            .then(res => setSearchResults({ type: 'brew', results: res.data }));
+        } else {
+          API
+            .searchBrews(search, difficulty)
+            .then(res => setSearchResults({ type: 'brew', results: res.data }));
+        }
         break;
       case "Ingredient":
-        api
-          .searchIngredients(search)
-          .then(res => setSearchResults({ type: 'ingredient', results: res.data }));
+        if (difficulty !== "all") {
+          API
+            .difficultIngredientSearch(search, difficulty)
+            .then(res => setSearchResults({ type: 'ingredient', results: res.data }));
+        } else {
+          API
+            .searchIngredients(search)
+            .then(res => setSearchResults({ type: 'ingredient', results: res.data }));
+        }
         break;
       case "User":
-        api
+        API
           .searchUsers(search)
           .then(res => setSearchResults({ type: 'user', results: res.data }));
         break;
@@ -189,7 +217,6 @@ export default function SearchBar() {
           </div>
         </div>
         <div className="searchTypeWrapper">
-          {/* <InputLabel id="type-select-label">Search Type</InputLabel> */}
           <Select
             labelId="type-select-label"
             id="type-select"
@@ -201,6 +228,7 @@ export default function SearchBar() {
             <MenuItem value={"User"}>User</MenuItem>
           </Select>
         </div>
+        {difficultyButton(searchType)}
         <Button type="submit">Search</Button>
       </form>
       <div id="search-results">

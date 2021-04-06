@@ -349,6 +349,24 @@ module.exports = function (app) {
             });
     });
 
+    // difficult brew search
+    app.get("/api/search/brew/:name/:difficulty", (req, res) => {
+        db.Brew
+            .findAll({
+                where: {
+                    name: { [Sequelize.Op.like]: '%' + req.params.name + '%' },
+                    difficulty: req.params.difficulty
+                }
+            })
+            .then(data => res.json(data))
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
     //Search by ingredient
     //returns data brew in recipe cardable format
     app.get("/api/search/ingredient/:name", (req, res) => {
@@ -362,6 +380,25 @@ module.exports = function (app) {
             .then(data => {
                 res.json(data);
             })
+            .catch(err => {
+                if (err) {
+                    res.sendStatus(500);
+                    console.error(err);
+                }
+            });
+    });
+
+    // difficulty ingredient search
+    app.get("/api/search/ingredient/:name/:difficulty", (req, res) => {
+        db.Ingredient
+            .findAll({
+                where: {
+                    name: { [Sequelize.Op.like]: '%' + req.params.name + '%' },
+                    difficulty: req.params.difficulty
+                },
+                include: db.Brew
+            })
+            .then(data => res.json(data))
             .catch(err => {
                 if (err) {
                     res.sendStatus(500);
