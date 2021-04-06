@@ -4,48 +4,48 @@
     text-align: left;
     margin-left:10px;
 }
-#searchInputs {
+#searchWrapper #searchInputs {
     display:flex;
     flex-direction: row;
 }
 
-#searchInputs #searchBox {
+#searchWrapper #searchInputs #searchBox {
     flex:4;
     background-color:white;
     margin-left:10px;
 }
 
-#searchInputs #searchBoxVerticalAlign {
+#searchWrapper #searchInputs #searchBoxVerticalAlign {
     height:100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-#searchInputs .searchTypeWrapper {
+#searchWrapper #searchInputs .searchTypeWrapper {
     flex:1;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
-#searchInputs button {
+#searchWrapper #searchInputs button {
     flex:1;
     margin: 10px;
     border: 1px solid #aaa;
     background-color: white;
 }
 
-#search-results {
+#searchWrapper #search-results {
     margin-left:10px;
     margin-right:10px;
 }
 
-#search-results .userCard .MuiCardMedia-root {
+#searchWrapper #search-results .userCard .MuiCardMedia-root {
     display:none;
 }
 
-#search-results .userCard {
+#searchWrapper #search-results .userCard {
     position:relative;
     overflow:visible;
     margin:0px auto;
@@ -53,14 +53,14 @@
     width:95%;
 }
 
-#search-results .userCard .MuiAvatar-root {
+#searchWrapper #search-results .userCard .MuiAvatar-root {
     width:70px;
     height:70px;
     /* position:absolute;
     left:-20px; */
 }
 
-#search-results .userCard .text-verticalAlign {
+#searchWrapper #search-results .userCard .text-verticalAlign {
     margin-left:5%;
     height:inherit;
     display: flex;
@@ -68,12 +68,12 @@
     justify-content:center;
 }
 
-#search-results .userCard .text-verticalAlign h2 {
+#searchWrapper #search-results .userCard .text-verticalAlign h2 {
     margin-left:0;
     margin-bottom:0;
 }
 
-#Feed #search-results .userCard .MuiTypography-body2 {
+#searchWrapper #search-results .userCard .MuiTypography-body2 {
     position:absolute;
     right:16px;
     top:16px;
@@ -81,6 +81,6 @@
     bottom:auto;
 }
 
-#Feed #search-results .userCard .flexWrap-horizontal {
+#searchWrapper #search-results .userCard .flexWrap-horizontal {
     margin-bottom:0;
 }

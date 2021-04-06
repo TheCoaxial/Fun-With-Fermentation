@@ -1,11 +1,11 @@
 
 #newBrew #newBrewForm {
     background-color:white;
-    border:1px solid black;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.4);
     width:60%;
     margin:0px auto;
     margin:5%;
-    padding:0 5% 2% 5%;
+    padding:2% 5% 2% 5%;
 }
 
 #newBrew .brewName {
@@ -32,12 +32,28 @@
 }
 
 #newBrew #newBrewForm .MuiButton-label {
-    text-transform:capitalize !important;
+    text-transform:capitalize;
+}
+
+#newBrew #newBrewForm .ingredients .ingredient {
+    margin-top:0.35em;
 }
 
 #newBrew #newBrewForm .addInputButton {
-    margin-top:0.5em;
-    margin-bottom:1em;
+    margin-top:1.5em;
+    margin-bottom:2.5em;
+}
+
+#newBrew #newBrewForm #submit .MuiButton-label {
+    text-transform: uppercase;
+    font-weight:bold;
+}
+
+#newBrew #newBrewForm #submit {
+    background-color: rgba(185, 196, 179, 1);
+    font-weight: bold;
+    color: rgba(47, 61, 48, 1);
+    margin-top:5em;
 }
 
 #newBrew #newBrewForm #selectLabel {
@@ -63,15 +79,19 @@
         width:23.5em !important;
     }
 
-    #newBrew #newBrewForm .formGroup input,
+    /* #newBrew #newBrewForm .formGroup input,
     #newBrew #newBrewForm #formButtonWrap {
         width:25em !important;
-    }
+    } */
 
 }
 
 
 @media only screen and (min-width:400px) and (max-width:699px) {
+
+    #newBrew {
+        margin-bottom:10%;
+    }
 
     #newBrew #newBrewForm {
         width:85%;
@@ -84,13 +104,23 @@
         width:18.5em !important;
     }
 
-    #newBrew #newBrewForm .formGroup input,
-    #newBrew #newBrewForm #formButtonWrap {
+    #newBrew #newBrewForm .formGroup input {
         width:20em !important;
     }
+
+    #newBrew #submit {
+        margin-bottom:5%;
+        margin-right:5%;
+    }
+
+    
 }
 
 @media only screen and (max-width:399px) {
+
+    #newBrew {
+        margin-bottom:10%;
+    }
 
     #newBrew #newBrewForm {
         width:85%;
@@ -102,6 +132,11 @@
     #newBrew #newBrewForm select,
     #newBrew #newBrewForm #formButtonWrap  {
         min-width:0 !important;
+    }
+    
+    #newBrew #submit {
+        margin-bottom:5%;
+        margin-right:5%;
     }
 
 }

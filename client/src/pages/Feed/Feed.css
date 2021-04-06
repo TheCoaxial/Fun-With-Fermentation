@@ -31,6 +31,23 @@
     font-size:1.3rem;
 }
 
+#Feed .innerSidebarWrap .userCard .MuiCardContent-root {
+    padding-bottom:10px;
+}
+
+#Feed .innerSidebarWrap .followScoreWrapper {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#Feed .innerSidebarWrap .score {
+    display:flex;
+    flex-direction:column-reverse;
+    justify-content: center;
+    height:inherit;
+}
+
 #Feed .recipeCard {
     margin-top:1rem;
 }
@@ -54,17 +71,9 @@
     bottom:5px;
 }
 
-#Feed .userCard .MuiTypography-body2 {
-    position: absolute;
-    left:16px;
-    bottom:16px;
-    top:auto;
-    right:auto;
-}
-
-#Feed .userCard .MuiCardContent-root:last-child {
+/* #Feed .userCard .MuiCardContent-root:last-child {
     padding-bottom:30px;
-}
+} */
 
 @media only screen and (max-width:959px) {
 

@@ -8,7 +8,7 @@ import "../../App.css";
 export default function Search() {
     if (ls.get('user')) {
         return (
-            <div id="Feed">
+            <div id="Search">
                 <SearchBar />
             </div>
         )

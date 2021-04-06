@@ -36,7 +36,6 @@ class NewBrew extends Component {
             tempArray[id] = e.target.value;
             tempArray.filter(item => item.length > 0);
             this.setState({ [e.target.name]: tempArray });
-/*             console.log(tempArray); */
         } else {
             this.setState({ [e.target.name]: e.target.value });
         }
@@ -44,9 +43,7 @@ class NewBrew extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-
         const { title, description, difficulty } = this.state;
-
         let userData = AuthService.getCurrentUser();
 
         API.postBrew(userData.id, title, description, userData.username, difficulty)
@@ -124,7 +121,6 @@ class NewBrew extends Component {
                             className="brewName"
                             variant="outlined"
                             label="Brew Name"
-/*                             defaultValue="Brew Name" */
                             placeholder="Brew Name"
                             alt="enter the name of your brew"
                             name="title"
@@ -138,7 +134,6 @@ class NewBrew extends Component {
                             label="Description"
                             multiline
                             rows={4}
-/*                             defaultValue="Default Value" */
                             variant="outlined"
                             placeholder="Enter any additional description about your brew (optional)"
                             name="description"
@@ -181,9 +176,8 @@ class NewBrew extends Component {
                                 id="submit"
                                 variant="contained"
                                 size="large"
-                                startIcon={<LocalDrinkIcon />}
                             >
-                                Save Brew
+                                save brew
                             </Button>
                         </div>
                     </form>

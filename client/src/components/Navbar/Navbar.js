@@ -128,12 +128,12 @@ export default function Navbar({ currentUser }) {
             <div className="navbar-nav ml-auto navbar-loggedOut">
                 <li className="nav-item classicNavButton-wrap">
                     <Link to={"/login"} className="nav-link classic-button">
-                        Login
+                        <Button variant="contained">Log In</Button>
                     </Link>
                 </li>
                 <li className="nav-item classicNavButton-wrap">
                     <Link to={"/register"} className="nav-link classic-button">
-                        Sign Up
+                        <Button variant="contained">Sign Up</Button>
                     </Link>
                 </li>
             </div>
